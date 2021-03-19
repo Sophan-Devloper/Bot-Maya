@@ -188,20 +188,20 @@ module.exports = {
             .setURL('https://discord.gg/mx8eMx6')
             .addFields(
                 {
-                    name: 'Veja seus RPoints',
-                    value: "`-balance` \n`-bal` \nAdicione *@user* para ver os RP's de outra pessoa"
+                    name: '<:topreach:766846960569155584> Veja seus RPoints',
+                    value: "`-balance` | `-bal` | `-rp` | `-bal @user`"
                 },
                 {
-                    name: 'Ganhe RPoints!',
-                    value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> todos os dias'
+                    name: '<:topreach:766846960569155584> Ganhe RPoints!',
+                    value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> todos os dias\n`-lotery` Ganhe até 2000*'
                 },
                 {
-                    name: 'Ranking',
-                    value: 'O código do Ranking ainda está sendo escrito.'
+                    name: '<:topreach:766846960569155584> Ranking',
+                    value: '`-rankingrp` O Ranking ainda não está pronto.'
                 },
                 {
-                    name: 'Loteria',
-                    value: '`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> se tiver sorte'
+                    name: ":gear: Developer's Commands",
+                    value: "`-addrp @user` Adiciona RP's\n`-removerp @user` Remove RP's\n`-resetrp @user` Tira todos os RP's\n`-resetall` Reseta o banco de dados Raphy Points."
                 },
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())

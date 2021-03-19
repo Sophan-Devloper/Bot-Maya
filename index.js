@@ -4,7 +4,7 @@ const DisTube = require('distube')
 const ffm = require('ffmpeg-static')
 const opus = require('@discordjs/opus')
 const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })
-const token = 'ODIxNDcxMTkxNTc4NTc0ODg4.YFEMqg.e9cPsH_mk7W-cJf98c6s86hGrRQ'
+const token = 'TOKEN HERE'
 const prefix = '-'
 
 // Ativação Uptime Robot 24/7

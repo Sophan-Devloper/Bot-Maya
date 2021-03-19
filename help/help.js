@@ -33,6 +33,30 @@ module.exports = {
             .setThumbnail('https://imgur.com/mvjbQEF.gif')
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
+        const RPEmbed = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle('<:StarPoint:766794021128765469>Sistema Raphy Points BETA<:StarPoint:766794021128765469>')
+            .setURL('https://discord.gg/mx8eMx6')
+            .addFields(
+                {
+                    name: '<:topreach:766846960569155584> Veja seus RPoints',
+                    value: "`-balance` | `-bal` | `-rp` | `-bal @user`"
+                },
+                {
+                    name: '<:topreach:766846960569155584> Ganhe RPoints!',
+                    value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> todos os dias\n`-lotery` Ganhe até 2000*'
+                },
+                {
+                    name: '<:topreach:766846960569155584> Ranking',
+                    value: '`-rankingrp` O Ranking ainda não está pronto.'
+                },
+                {
+                    name: ":gear: Developer's Commands",
+                    value: "`-addrp @user` Adiciona RP's\n`-removerp @user` Remove RP's\n`-resetrp @user` Tira todos os RP's\n`-resetall` Reseta o banco de dados Raphy Points."
+                },
+            )
+            .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())
+
         const Family = new Discord.MessageEmbed()
             .setColor('#CD853F')
             .setTitle(':ring: Casamento/Family :ring:')
@@ -47,6 +71,124 @@ module.exports = {
                     value: '`-profile` `-perfil`'
                 },
             )
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
+
+        const Music = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle(':gear: Centralzinha de Comandos :gear:')
+            .setThumbnail('https://imgur.com/BJUej6y.gif')
+            .addFields(
+                {
+                    name: 'Comandos Gerais',
+                    value: '`-play` Peça uma música\n`-pause` Pause, né?\n`-resume` Despausa a música\n`-skip` Pule de música\n`-autoplay` Desative ou ative o autoplay\n`-invite` Me convide pro seu servidor\n`-queue` Veja a playlist\n`-volume 0~100` Escolha o volume do bot\n`-stop` Pare tudo\n`-disconnect/-dc` Me tira da call.\n*Mais comandos estão sendo adicionados.*'
+                },
+                {
+                    name: 'Filter Mode',
+                    value: '`-3d`\n`-bassboost`\n`-echo`\n`-karaoke`\n`-nigtcore`\n`-vaporwave`\n`-flanger`\n`-gate`\n`-haas`\n`-reverse`\n`-mcompand`\n`-phaser`\n`-tremolo`\n`-surround`\n`-earwax`'
+                }
+            )
+            .setFooter(message.author.username, message.author.displayAvatarURL())
+
+        const Administrativo = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle('Comandos Administrativos')
+            .setURL('https://discord.gg/mx8eMx6')
+            .addFields(
+                {
+                    name: 'Todos Comandos Disponiveis',
+                    value: '`-addrole` Dê cargos \n`-removerole` Remova Cargos \n`-anunciar` Publique informações de um jeito lindo \n`-clear` Limpe as mensagens! \n`-say` Diga algo atráves de mim \n`-setnick @user` Mude o nickname dos membros \n`-slowmode` Ative o modo lento \n`-dm @user` Mande mensagens no privado através de mim \n`-sorteio` Faça sorteios \n`-kick @user` \n`-ban @user` \n`-unban @user`\n`-mute @user`\n`-unmute @user` \n`-warn` Dê Warns \n`-warns` Confira seus Warns \n`-resetwarns` `-rwarns` Reset warns de membros \n`-createchannel` Crie canais de texto \n`-createvoice` Crie canais de voz \n`-lockdown` Trave o servidor em caso de emergência \n`-setprefix` (Manutenção)'
+                },
+            )
+            .addField('Não se procupe, mais comandos estão sendo adicionados', 'Work, work, work!')
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
+
+        const Thanks = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle(':hearts:Eu só digo OBRIGADA a todos que deram suas ideias!:hearts:')
+            .setURL('https://discord.gg/mx8eMx6')
+            .addFields(
+                {
+                    name: ':gear: Developers',
+                    value: '`Rody#0002` & `Gowther#9233`'
+                },
+                {
+                    name: ':handshake: Colaboradores :handshake:',
+                    value: "𝑅𝑈 𝑀𝑖𝑛𝑒?#2790 | `Comandos de Administração` \nCafézinho#6093 | `-oi` \nLucas - Luquisquiss#4643 | `-frase` \nJoão da Cilada#7041 | `-love` \nGiacometti#4849 | `-feet` \nCoiny#9056 | `New Help Window`"
+                },
+                {
+                    name: ':star2:Especiais:star2:',
+                    value: 'MakolPedro#8508 \n`-Games` & `-Quiz`|30+ Bugs Reportados'
+                },
+            )
+            .setImage('https://imgur.com/DNVIReM.gif')
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
+
+        const Support = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setAuthor("Se você precisa de ajuda com a Raphy, você está no lugar certo.")
+            .setTitle('Central de Suporte')
+            .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
+            .setImage('https://imgur.com/KyjyfRg.gif')
+            .setFooter(message.author.username, message.author.displayAvatarURL())
+
+        const Games = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle('Lista de Games')
+            .setURL('https://discord.gg/mx8eMx6')
+            .addFields(
+                {
+                    name: 'Games',
+                    value: '`-amongus`\n`-brawlhalla`\n`-brawlstars`\n`-clashroyale` `-clash`\n`-counterstrike` `-cs`\n`-ddtank`\n`-freefire` `-ff`\n`-gartic`\n`-genshinimpact` `-genshin`\n`-gta`\n`-habbo`\n`-leagueoflegends` `-lol`\n`-summoners` `-sumwar`\n`-mario`\n`-mobilelegends` `-mbl`\n`-minecraft`\n`-paladins`\n`-rocketleague`\n`-transformice` `-tfm`\n`-uno`\n`-valorant`'
+                },
+                {
+                    name: 'Mande mais games',
+                    value: `[Meu Servidor](${linkgames})`
+                },
+            )
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
+
+        const AnimeEmbed = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle('Comandos de Animes :hearts:')
+            .setURL('https://discord.gg/mx8eMx6')
+            .addFields(
+                {
+                    name: 'Comandos de Animes',
+                    value: '`-animes2020` Lista de novos animes em 2020',
+                },
+                {
+                    name: 'Aceita uma indicação?',
+                    value: '`-ind`'
+                },
+                {
+                    name: 'Fotos de Animes',
+                    value: '`-sao` Sword Art Online'
+                }
+            )
+            .addField('Não se procupe, mais comandos estão sendo adicionados', 'Work, work, work!')
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
+
+        const CommandEmbed = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle('Comandos da Raphy')
+            .setURL('https://discord.gg/mx8eMx6')
+            .addFields(
+                {
+                    name: 'Covid-19',
+                    value: '`-covid` Informações mundiais sobre a COVID'
+                },
+                {
+                    name: 'Servidor',
+                    value: '`-invite` `-inv` Me coloque no seu servidor \n`-ideia` Mande ideias pro seu Servidor \n`-report` Reporte coisas pra Staff do Servidor \n`-serverinfo` Informações do Servidor'
+                },
+                {
+                    name: 'Raphy',
+                    value: '`-clima` Veja o clima da sua cidade \n`-ping` Pong! \n`-uptime` Tempo que eu estou acordada \n`-botinfo` Informações sobre mim'
+                },
+                {
+                    name: 'Usuário',
+                    value: '`-avatar @user` Veja a foto de perfil \n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
+                })
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
         const Reação = new Discord.MessageEmbed()
@@ -74,169 +216,14 @@ module.exports = {
             .addField('Não se procupe, mais comandos estão sendo adicionados', 'Work, work, work!')
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-        const Administrativo = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle('Comandos Administrativos')
-            .setURL('https://discord.gg/mx8eMx6')
-            .addFields(
-                {
-                    name: 'Todos Comandos Disponiveis',
-                    value: '`-addrole` Dê cargos \n`-removerole` Remova Cargos \n`-anunciar` Publique informações de um jeito lindo \n`-clear` Limpe as mensagens! \n`-say` Diga algo atráves de mim \n`-setnick @user` Mude o nickname dos membros \n`-slowmode` Ative o modo lento \n`-dm @user` Mande mensagens no privado através de mim \n`-sorteio` Faça sorteios \n`-kick @user` \n`-ban @user` \n`-unban @user`\n`-mute @user`\n`-unmute @user` \n`-warn` Dê Warns \n`-warns` Confira seus Warns \n`-resetwarns` `-rwarns` Reset warns de membros \n`-createchannel` Crie canais de texto \n`-createvoice` Crie canais de voz \n`-lockdown` Trave o servidor em caso de emergência \n`-setprefix` (Manutenção)'
-                },
-            )
-            .addField('Não se procupe, mais comandos estão sendo adicionados', 'Work, work, work!')
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
-
-        const AnimeEmbed = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle('Comandos de Animes :hearts:')
-            .setURL('https://discord.gg/mx8eMx6')
-            .addFields(
-                {
-                    name: 'Comandos de Animes',
-                    value: '`-animes2020` Lista de novos animes em 2020',
-                },
-                {
-                    name: 'Aceita uma indicação?',
-                    value: '`-ind`'
-                },
-                {
-                    name: 'Fotos de Animes',
-                    value: '`-sao` Sword Art Online'
-                }
-            )
-            .addField('Não se procupe, mais comandos estão sendo adicionados', 'Work, work, work!')
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
-
-        const Support = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setAuthor("Se você precisa de ajuda com a Raphy, você está no lugar certo.")
-            .setTitle('Central de Suporte')
-            .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
-            .setImage('https://imgur.com/KyjyfRg.gif')
-            .setFooter(message.author.username, message.author.displayAvatarURL())
-
-        const Games = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle('Lista de Games')
-            .setURL('https://discord.gg/mx8eMx6')
-            .addFields(
-                {
-                    name: 'Games',
-                    value: '`-amongus`\n`-brawlhalla`\n`-brawlstars`\n`-clashroyale` `-clash`\n`-counterstrike` `-cs`\n`-ddtank`\n`-freefire` `-ff`\n`-gartic`\n`-genshinimpact` `-genshin`\n`-gta`\n`-habbo`\n`-leagueoflegends` `-lol`\n`-summoners` `-sumwar`\n`-mario`\n`-mobilelegends` `-mbl`\n`-minecraft`\n`-paladins`\n`-rocketleague`\n`-transformice` `-tfm`\n`-uno`\n`-valorant`'
-                },
-                {
-                    name: 'Mande mais games',
-                    value: `[Meu Servidor](${linkgames})`
-                },
-            )
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
-
-        const Random = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle('Comandos de Categoria Random')
-            .setURL('https://discord.gg/mx8eMx6')
-            .addFields(
-                {
-                    name: 'Comandos Divertidos',
-                    value: '`-quiz` Você é inteligente? \n`-quiznaruto` Você sabe tudo sobre Naruto? \n`-ascii` Escreva de uma forma diferenciada \n`-ecchi` Que ousadia... \n`-boom` Exploda tudo \n`-cat` Foto de um gatinho fofo \n`-clima Sua Cidade` Olhar o clima é importante \n`-coinflip cara/coroa` Você tem sorte? \n`-explosion` Exploooosion \n`-feet` Pézinho \n`-frase` Frases lindas \n`-jokenpo` Você é bom? \n`-loli` Loli? \n`-puppy` Filhotinhooos \n`-run` Cooorree \n`-stonks` `-notstonks`'
-                },
-            )
-            .addField('Mais e mais comandos estão sendo adicionados', 'Work, work, work!')
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
-
-        const Thanks = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle(':hearts:Eu só digo OBRIGADA a todos que deram suas ideias!:hearts:')
-            .setURL('https://discord.gg/mx8eMx6')
-            .addFields(
-                {
-                    name: ':gear: Developers',
-                    value: '`Rody#0002` & `Gowther#9233`'
-                },
-                {
-                    name: ':handshake: Colaboradores :handshake:',
-                    value: "𝑅𝑈 𝑀𝑖𝑛𝑒?#2790 | `Comandos de Administração` \nCafézinho#6093 | `-oi` \nLucas - Luquisquiss#4643 | `-frase` \nJoão da Cilada#7041 | `-love` \nGiacometti#4849 | `-feet` \nCoiny#9056 | `New Help Window`"
-                },
-                {
-                    name: ':star2:Especiais:star2:',
-                    value: 'MakolPedro#8508 \n`-Games` & `-Quiz`|30+ Bugs Reportados'
-                },
-            )
-            .setImage('https://imgur.com/DNVIReM.gif')
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
-
-        const Music = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle(':gear: Centralzinha de Comandos :gear:')
-            .setThumbnail('https://imgur.com/BJUej6y.gif')
-            .addFields(
-                {
-                    name: 'Comandos Gerais',
-                    value: '`-play` Peça uma música\n`-pause` Pause, né?\n`-resume` Despausa a música\n`-skip` Pule de música\n`-autoplay` Desative ou ative o autoplay\n`-invite` Me convide pro seu servidor\n`-queue` Veja a playlist\n`-volume 0~100` Escolha o volume do bot\n`-stop` Pare tudo\n`-disconnect/-dc` Me tira da call.\n*Mais comandos estão sendo adicionados.*'
-                },
-                {
-                    name: 'Filter Mode',
-                    value: '`-3d`\n`-bassboost`\n`-echo`\n`-karaoke`\n`-nigtcore`\n`-vaporwave`\n`-flanger`\n`-gate`\n`-haas`\n`-reverse`\n`-mcompand`\n`-phaser`\n`-tremolo`\n`-surround`\n`-earwax`'
-                }
-            )
-            .setFooter(message.author.username, message.author.displayAvatarURL())
-
-        const RPEmbed = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle('<:StarPoint:766794021128765469>Sistema Raphy Points BETA<:StarPoint:766794021128765469>')
-            .setURL('https://discord.gg/mx8eMx6')
-            .addFields(
-                {
-                    name: '<:topreach:766846960569155584> Veja seus RPoints',
-                    value: "`-balance` | `-bal` | `-rp` | `-bal @user`"
-                },
-                {
-                    name: '<:topreach:766846960569155584> Ganhe RPoints!',
-                    value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> todos os dias\n`-lotery` Ganhe até 2000*'
-                },
-                {
-                    name: '<:topreach:766846960569155584> Ranking',
-                    value: '`-rankingrp` O Ranking ainda não está pronto.'
-                },
-                {
-                    name: ":gear: Developer's Commands",
-                    value: "`-addrp @user` Adiciona RP's\n`-removerp @user` Remove RP's\n`-resetrp @user` Tira todos os RP's\n`-resetall` Reseta o banco de dados Raphy Points."
-                },
-            )
-            .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())
-
-        const CommandEmbed = new Discord.MessageEmbed()
-            .setColor('#CD853F')
-            .setTitle('Comandos da Raphy')
-            .setURL('https://discord.gg/mx8eMx6')
-            .addFields(
-                {
-                    name: 'Covid-19',
-                    value: '`-covid` Informações mundiais sobre a COVID'
-                },
-                {
-                    name: 'Servidor',
-                    value: '`-invite` `-inv` Me coloque no seu servidor \n`-ideia` Mande ideias pro seu Servidor \n`-report` Reporte coisas pra Staff do Servidor \n`-serverinfo` Informações do Servidor'
-                },
-                {
-                    name: 'Raphy',
-                    value: '`-clima` Veja o clima da sua cidade \n`-ping` Pong! \n`-uptime` Tempo que eu estou acordada \n`-botinfo` Informações sobre mim'
-                },
-                {
-                    name: 'Usuário',
-                    value: '`-avatar @user` Veja a foto de perfil \n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
-                })
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
-
         const Quiz = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setTitle('📝 Quiz Game 📝')
+            .setTitle('📝 Quiz Game | Quiz Naruto 📝 ')
             .setURL('https://discord.gg/mx8eMx6')
             .addFields(
                 {
                     name: 'Como jogar? E siiimples.',
-                    value: 'Digte `-quiz`, você terá apenas 15 segundos para responder a pergunta.\nSe alguém responder primeiro que você, você perde 😅'
+                    value: 'Digte `-quiz` ou `-quiznaruto`, você terá apenas 15 segundos para responder a pergunta.\nSe alguém responder primeiro que você, você perde 😅'
                 },
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())

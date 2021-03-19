@@ -260,13 +260,14 @@ module.exports = {
             msg.react('🧤') // commandEmbed 10
             msg.react('🪅') // Reação 11
             msg.react('👥') // interação 12
-            msg.react('📝') // quiz 14
-            msg.react('📃') // botinfo 15
-            msg.react('❌') // Delete 16
-            //  msg.react('❌') // 17
-            //  msg.react('❌') // 18
-            //  msg.react('❌') // 19
-            //  msg.react('❌') // 20 // LIMITE
+            msg.react('📝') // quiz 13
+            msg.react('📃') // botinfo 14
+            msg.react('❌') // Delete 15
+            //  msg.react('') // 16
+            //  msg.react('') // 17
+            //  msg.react('') // 18
+            //  msg.react('') // 19
+            // msg.react('') // 20 // Limite Reaction Discord
 
             msg.awaitReactions((reaction, user) => {
                 if (message.author.id !== user.id) return;

@@ -22,7 +22,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Emojis da Centralzinha',
-                    value: '🏛️  Esta Página \n⭐  Raphy Points \n💍  Casamento/Family \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n🖲️  Alguns comandos Random \n❌  Apague o canal Ajuda\n⠀'
+                    value: '🏛️  Esta Página \n⭐  Raphy Points \n💍  Casamento/Family \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n⠀'
                 },
                 {
                     name: '**NEW** | Quiz Game & Botinfo',
@@ -241,6 +241,25 @@ module.exports = {
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
+        const supportembed = new Discord.MessageEmbed()
+            .setColor('#DCDCDC')
+            .setTitle('💬 Clique aqui para acessar a Central de Suporte 💬')
+            .addFields(
+                {
+                    name: 'Discord Server',
+                    value: 'https://discord.gg/mx8eMx6',
+                    inline: true
+                },
+                {
+                    name: 'Desenvolvedor',
+                    value: 'Rody#3756',
+                    inline: true
+                }
+            )
+            .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
+            .setImage('https://imgur.com/KyjyfRg.gif')
+            .setFooter(message.author.username, message.author.displayAvatarURL())
+
         await message.channel.send(HelpEmbed).then(msg => {
             msg.react('🏛️') // home  1
             msg.react('⭐') // rpsystem 2
@@ -254,7 +273,6 @@ module.exports = {
             msg.react('🧤') // commandEmbed 10
             msg.react('🪅') // Reação 11
             msg.react('👥') // interação 12
-            msg.react('🖲️') // Random 13
             msg.react('📝') // quiz 14
             msg.react('📃') // botinfo 15
             msg.react('❌') // Delete 16
@@ -290,7 +308,7 @@ module.exports = {
                     reaction.users.remove(user)
                     msg.edit(Thanks)
                 }
-                if (reaction.emoji.name === '💢') { // support
+                if (reaction.emoji.name === '💬') { // support
                     reaction.users.remove(user)
                     msg.edit(Support)
                 }
@@ -371,25 +389,6 @@ module.exports = {
                         .setImage('https://imgur.com/DNVIReM.gif')
                         .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-                    const embed4 = new Discord.MessageEmbed()
-                        .setColor('#DCDCDC')
-                        .setTitle('💬 Clique aqui para acessar a Central de Suporte 💬')
-                        .addFields(
-                            {
-                                name: 'Discord Server',
-                                value: 'https://discord.gg/mx8eMx6',
-                                inline: true
-                            },
-                            {
-                                name: 'Desenvolvedor',
-                                value: 'Rody#3756',
-                                inline: true
-                            }
-                        )
-                        .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
-                        .setImage('https://imgur.com/KyjyfRg.gif')
-                        .setFooter(message.author.username, message.author.displayAvatarURL())
-
                     message.channel.send(botinfo).then(msg => {
                         msg.react('🏛️') // Home
                         msg.react('📃') // 1º Embed
@@ -416,13 +415,12 @@ module.exports = {
                                     msg.react('🧤') // commandEmbed 10
                                     msg.react('🪅') // Reação 11
                                     msg.react('👥') // interação 12
-                                    msg.react('🖲️') // Random 13
-                                    msg.react('📝') // quiz 14
-                                    msg.react('❌') // Delete 16
+                                    msg.react('📝') // quiz 13
+                                    msg.react('❌') // Delete 14
 
                                     msg.awaitReactions((reaction, user) => {
                                         if (message.author.id !== user.id) return;
-                        
+
                                         if (reaction.emoji.name === '🏛️') { // home
                                             reaction.users.remove(user)
                                             msg.edit(HelpEmbed)
@@ -479,7 +477,7 @@ module.exports = {
                                             msg.delete()
                                         }
                                     })
-                                    
+
                                 })
                             }
                             if (reaction.emoji.name === '📃') { // 1º Embed - Principal
@@ -496,7 +494,7 @@ module.exports = {
                             }
                             if (reaction.emoji.name === '💬') { // 3º Embed - Thanks
                                 reaction.users.remove(user)
-                                msg.edit(embed4)
+                                msg.edit(supportembed)
                             }
                             if (reaction.emoji.name === '❌') { // Delete
                                 msg.delete()

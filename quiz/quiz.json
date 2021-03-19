@@ -1,0 +1,110 @@
+[
+	{
+		"question": "Qual a cor do céu?",
+		"answers": ["blue", "azul"]
+	},
+	{
+		"question": "How many letters are there in the alphabet?",
+		"answers": ["26", "twenty-six", "twenty six", "twentysix"]
+	},
+	{
+		"question": "Qual filme é conhecido por causa de um Navio que afundou?",
+		"answers": ["titanic"]
+	  },
+	  {
+		"question": "Qual a composição química da água?",
+		"answers": ["h2o"]
+	  },
+	  {
+		"question": "De qual Anime o nome Uchiha Sasuke, é utilizado?",
+		"answers": ["naruto"]
+	  },
+	  {
+		"question": "Qual o serviço de streaming de música usado atualmente?",
+		"answers": ["spotify"]
+	  },
+	  {
+		"question": "Sei lá, fala um número aí. 0~100",
+		"answers": ["7"]
+	  },
+	  {
+		"question": "Em inglês, o que significa (Cloud)?",
+		"answers": ["nuvem"]
+	  },
+	  {
+		"question": "De quem é a famosa frase 'Penso, logo existo'?",
+		"answers": ["descartes"]
+	  },
+	  {
+		"question": "Qual país inventou o chuveiro elétrico?",
+		"answers": ["brasil", "brazil", "br"]
+	  },
+	  {
+		"question": "Quais o menor país do mundo?",
+		"answers": ["vaticano"]
+	  },
+	  {
+		"question": "Qual o livro mais vendido no mundo? Exceto a biblía.",
+		"answers": ["dom quixote"]
+	  },
+	  {
+		"question": "Quantas casas decimais tem o número PI?",
+		"answers": ["infinitas"]
+	  },
+	  {
+		"question": "Atualmente, quantos elementos químicos a tabela periódica possui?",
+		"answers": ["118"]
+	  },
+	  {
+		"question": "O que a palavra *LEGEND* significa em português?",
+		"answers": ["lenda"]
+	  },
+	  {
+		"question": "Qual o número mínimo de jogadores numa partida de futebol?",
+		"answers": ["7"]
+	  },
+	  {
+		"question": "Qual o evento de compras mais esperado em novembro?",
+		"answers": ["black friday"]
+	  },
+	  {
+		"question": "Qual o principal feriado comemorado em Dezembro?",
+		"answers": ["natal"]
+	  },
+	  {
+		"question": "Quantos minutos a luz do Sol demora para chegar à Terra?",
+		"answers": ["8", "oito"]
+	  },
+	  {
+		"question" : "Qual a tradução da Frase: 'Make it simple'",
+		"answers": ["faça isso simples"]
+	  },
+	  {
+		"question": "Tubarões nunca param de nadar.\nV - Verdadeiro\nF - Falso",
+		"answers": ["v", "verdade", "verdadeiro"]
+	  },
+	  {
+		"question": "Após a Abelha ferroar, ela morre nos próximos 5 Minutos.\nV - Verdadeiro\nF - Falso",
+		"answers": ["v", "verdade", "verdadeiro"]
+	  },
+	  {
+		"question": "Em que período da pré-história o fogo foi descoberto?",
+		"answers": ["neolítico", "periodo neolítico", "neolitico", "período neolítico", "período neolitico", "periodo neolitico"]
+	  },
+	  {
+		"question": "Em qual local da Ásia o português é língua oficial?",
+		"answers": ["macau"]
+	  },
+	  {
+		"question": "'Twenty past six'. Que horas são em inglês?",
+		"answers": ["06:20", "seis e vinte", "6:20"]
+	  },
+	  {
+		"question": "Como é a conjugação do verbo caber na 1.ª pessoa do singular do presente do indicativo?",
+		"answers": ["eu caibo"]
+	  },
+	  {
+		"question": "Qual é o maior país transcontinental?",
+		"answers": ["rússia", "russia"]
+	  }	
+]

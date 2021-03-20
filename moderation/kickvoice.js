@@ -1,4 +1,5 @@
 module.exports.run = (client, message, args) => {
+    message.delete()
 
     if (!message.guild.me.hasPermission('MOVE_MEMBERS'))
         return message.reply('Eu não tenho permissão para mover membros em chamada.').then(msg => msg.delete({ timeout: 5000 }))

@@ -9,10 +9,10 @@ module.exports = {
         message.delete()
 
         const embed = new Discord.MessageEmbed()
-            .setThumbnail(client.user.displayAvatarURL())
             .setTitle('📃 Centralzinha de Informações 📃')
             .setColor('#DCDCDC')
             .setDescription('Meu nome é Raphy. Eu fui criada para ser uma bot de diversão e admnistração. Porém tenho alguns recursos além disso. Sou capaz de substituir vááários bots. Minha missão é ser a bot mais completa de todas.')
+            .setThumbnail(client.user.displayAvatarURL())
             .addFields(
                 {
                     name: 'Páginas da Centralzinha',

@@ -4,7 +4,7 @@ const DisTube = require('distube')
 const ffm = require('ffmpeg-static')
 const opus = require('@discordjs/opus')
 const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })
-const token = 'TOKEN HERE'
+const config = require("./config.json")
 const prefix = '-'
 
 // Ativação Uptime Robot 24/7
@@ -268,6 +268,19 @@ distube
     })
 
 client.on("ready", () => {
-    console.log('Estou online e pronta pro trabalho Oni-chan!')
+    console.log('Ok.')
 })
-client.login(token)
+
+client.on("ready", () => {
+    console.log("Status ON");
+    var s = [
+        { name: "Messagem", type: 'WATCHING', url: 'https://www.netflix.com/' },
+    ];
+    function st() {
+        let rs = s[Math.floor(Math.random() * s.length)];
+        client.user.setPresence({ game: rs });
+    }
+    st()
+    setInterval(() => st(), 20000)  //10000 = 10Ms = 10 segundos
+  })
+client.login(config.token)

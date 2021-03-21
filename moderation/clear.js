@@ -8,6 +8,9 @@ exports.run = async (client, message, args) => {
 
   const deleteCount = parseInt(args[0], 10)
   if (!deleteCount)
+    return message.channel.send('Poxa... Me fala um número').then(msg => msg.delete({ timeout: 5000 }))
+
+  if (isNaN(deleteCount))
     return message.channel.send('Me fala um número entre 1~99, tá bom?').then(msg => msg.delete({ timeout: 6000 }))
 
   if (deleteCount < 1 || deleteCount > 99)
@@ -17,5 +20,5 @@ exports.run = async (client, message, args) => {
 
   message.channel.bulkDelete(fetched)
 
-  message.channel.send(`Prontinho, eu limpei ${args[0]} mensagens.`).then(msg => msg.delete({ timeout: 5000 }))
+  message.channel.send(`Prontinho, eu limpei ${deleteCount} mensagens.`).then(msg => msg.delete({ timeout: 5000 }))
 }

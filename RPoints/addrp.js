@@ -6,7 +6,7 @@ message.delete()
     
     const rody = message.author.id === ("451619591320371213")
     if (!rody)
-        return message.channel.send('Apenas meus criadores podem adicionar <:StarPoint:766794021128765469>RPoints.').then(msg => msg.delete({timeout: 5000}))
+        return message.channel.send('⚠️ Este comando é um comando restrito.').then(msg => msg.delete({timeout: 5000}))
     
     let user = message.mentions.members.first()
     if (!user)

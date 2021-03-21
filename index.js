@@ -1,11 +1,24 @@
 const Discord = require("discord.js")
-const client = new Discord.Client()
+const client = new Discord.Client({
+    partials: ['MESSAGE', 'CHANNEL'],
+    fetchAllMembers: true,
+    disableEveryone: true,
+})
 const DisTube = require('distube')
 const ffm = require('ffmpeg-static')
 const opus = require('@discordjs/opus')
 const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })
 const config = require("./config.json")
 const prefix = '-'
+const fs = require('fs')
+let cooldown = new Set()
+const Enmap = require('enmap')
+client.commands = new Discord.Collection()
+client.profile = new Enmap({ name: "profile", fetchAll: true })
+client.settings = new Enmap({ name: "settings", fetchAll: true })
+client.reactionroles = new Enmap({ name: "reactionroles", fetchAll: true })
+client.blacklisted = new Enmap({ name: "blacklisted" })
+client.applications = new Enmap({ name: "applications", fetchAll: true })
 
 // Ativação Uptime Robot 24/7
 const express = require('express')
@@ -23,27 +36,72 @@ app.get('/', (request, response) => {
 // Ativação da Bot Raphy - Começo
 client.on("message", async (message, queue, song) => {
     if (message.author.bot) return
+    if (message.channel.type == "dm") return
     if (!message.content.startsWith(prefix)) return
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
-    //const command = args.shift()
 
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
         const bot = message.guild.members.cache.get(client.user.id)
         const embedperm = new Discord.MessageEmbed()
             .setColor('#DCDCDC')
             .setTitle('Dicas da Raphy')
-            .setDescription('Para meu perfeito funcionamento, é necessário que eu tenha a permissão "Administrador"')
+            .setDescription('Para meu perfeito funcionamento, é necessário que eu tenha a permissão "Administrador" ativado.')
             .addFields(
                 {
-                    name: 'Ative a função Administrador',
+                    name: 'Como ativar a função Administrador',
                     value: '1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Raphy"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.'
                 },
             )
             .setFooter(`Raphy Dicas`, message.client.user.displayAvatarURL())
-        return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => msg.channel.send(embedperm))
+        return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => message.channel.send(embedperm))
     }
 
+    client.settings.ensure(message.guild.id, {
+        roles: [],
+        prefix: "-",
+        messageroles: [],
+        levelsystem: true,
+        message: 'Not set',
+        channel: 0,
+        xpgain: [{ first: 0, second: 30 }],
+        noxproles: [],
+        noxpchannels: [],
+        userchannels: [],
+        userchannelcreate: { category: 'none', channel: 'none' },
+        antiinvite: false,
+        roleschannel: "none",
+        imagechannel: [],
+        doublexproles: [],
+        welcomeroles: [],
+        welcomechannel: "none",
+        welcomemessage: [{ message: "none" }, { title: "none", description: "none", image: "none", footer: "none", color: "none", embed: false }],
+    })
+
+    //const command = args.shift()
+    let regex = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/
+    if (regex.test(message.content) && client.settings.get(message.guild.id, "antiinvite")) {
+        if (message.member.permissions.has("ADMINISTRATOR")) return;
+        message.channel.send(`***${message.author.tag}***, invite links are not allowed!`).then(m => m.delete({ timeout: 10000 }))
+        message.delete()
+    }
+
+    client.applications.ensure(message.guild.id, {
+        applications: [],
+        application: [],
+        message: "none",
+    })
+    client.reactionroles.ensure(message.guild.id, {
+        roles: [],
+    })
+
+    client.profile.ensure(`${message.guild.id}-${message.author.id}`, {
+        id: message.author.id,
+        guild: message.guild.id,
+        level: 0,
+        levelpoints: 0,
+        lastMessage: "none",
+    })
     // Acesso as pastas de comandos
     try {
         const commandFile = require(`./commands/${command}.js`)
@@ -157,14 +215,13 @@ client.on("message", async (message, queue, song) => {
         let queue = distube.getQueue(message)
         if (!queue) return message.channel.send('Não tem nada tocando no momento.')
         distube.setVolume(message, args[0])
-        if(args[0] > 100) return message.channel.send('O limite do volume é 100%')
         message.channel.send(`Volume definido em ${args[0]}%`)
     }
 
     if (["shuffle", "aleatorio"].includes(command)) {
         let queue = distube.getQueue(message)
         if (!queue) return message.channel.send('Não tem nada tocando no momento.')
-        distube.shuffle(message)
+        distube.shuffle(message);
         message.channel.send(`${message.author.username} colocou a playlist em modo aleatório`)
     }
 

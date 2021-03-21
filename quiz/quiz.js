@@ -38,7 +38,7 @@ module.exports = {
                             .setTitle(`Ninguém acertou!`)
                             .setDescription('Que pena, o tempo acabou e ninguém acertou.')
                             .setImage('https://imgur.com/gPcvv1S.gif')
-                        message.channel.send(timeover).then(msg => msg.delete({ timeout: 6000 }))
+                        message.channel.send(timeover).then(msg => msg.delete({timeout: 6000}))
                     })
             })
     }

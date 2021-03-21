@@ -9,10 +9,10 @@ module.exports = {
         message.delete()
 
         const embed = new Discord.MessageEmbed()
+            .setThumbnail(client.user.displayAvatarURL())
             .setTitle('📃 Centralzinha de Informações 📃')
             .setColor('#DCDCDC')
             .setDescription('Meu nome é Raphy. Eu fui criada para ser uma bot de diversão e admnistração. Porém tenho alguns recursos além disso. Sou capaz de substituir vááários bots. Minha missão é ser a bot mais completa de todas.')
-            .setThumbnail(client.user.displayAvatarURL())
             .addFields(
                 {
                     name: 'Páginas da Centralzinha',
@@ -40,16 +40,12 @@ module.exports = {
             .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
             .addFields(
                 {
-                    name: ':gear: Developers :gear:',
+                    name: ':gear: Developers',
                     value: '`Rody#3756` & `Gowther#9233`'
                 },
                 {
-                    name: '🖌️ Designers 🖌️',
-                    value: '`Rody#3756` | `Gowther#9233` | `Rafaella#????`'
-                },
-                {
                     name: ':handshake: Colaboradores :handshake:',
-                    value: "𝑅𝑈 𝑀𝑖𝑛𝑒?#2790 | Comandos de Administração\nLucas - Luquisquiss#4643 | `-frase`\nJoão da Cilada#7041 | `-love`\nGiacometti#4849 | `-feet`\nCoiny#9056 | Ideias no Painel Interativo\nCALORIES#2822 | Music System Helper"
+                    value: "𝑅𝑈 𝑀𝑖𝑛𝑒?#2790 | `Comandos de Administração`\nLucas - Luquisquiss#4643 | `-frase`\nJoão da Cilada#7041 | `-love`\nGiacometti#4849 | `-feet`\nCALORIES#2822 | Music System Help"
                 },
                 {
                     name: ':star2:Especiais:star2:',

@@ -1,24 +1,123 @@
-const Discord = require("discord.js");
+const Discord = require("discord.js")
 
-exports.run = async (client, message, args) => {
-  message.delete()
+exports.run = async (client, msg, args) => {
+  msg.delete()
 
-  if (!message.member.permissions.has("MANAGE_MESSAGES"))
-    return message.channel.send(`Hey ${message.author.username}, você não tem todo esse poder :v`).then(msg => msg.delete({ timeout: 5000 }))
+  if (!msg.member.permissions.has("MANAGE_MESSAGES"))
+    return msg.channel.send(`Hey, ${msg.author.username}! Você não tem todo esse poder :v`).then(msg => msg.delete({ timeout: 5000 }))
 
-  const deleteCount = parseInt(args[0], 10)
-  if (!deleteCount)
-    return message.channel.send('Poxa... Me fala um número').then(msg => msg.delete({ timeout: 5000 }))
+  const clearembed = new Discord.MessageEmbed()
+    .setColor("#DCDCDC")
+    .setTitle("🧹 Comando Clear 🧹")
+    .setDescription("Use o comando clear para fazer aquela limpa nas mensagens")
+    .addFields(
+      {
+        name: 'Comandos do Clear',
+        value: '`clear all` Apaga todo o chat\n`clear 1~99` Apague até 99 mensagens\n`clear images` Apague imagens\n`clear bots` Apague mensagens de bots\n`clear @user` Apague mensagens de alguém'
+      }
+    )
+    .setFooter(msg.author.tag, msg.author.displayAvatarURL())
 
-  if (isNaN(deleteCount))
-    return message.channel.send('Me fala um número entre 1~99, tá bom?').then(msg => msg.delete({ timeout: 6000 }))
+  if (!args[0]) {
+    msg.channel.send(clearembed)
+    return
+  }
 
-  if (deleteCount < 1 || deleteCount > 99)
-    return message.channel.send("Ei, o limite que o Discord permite excluir é entre 1~99 mensagens.").then(msg => msg.delete({ timeout: 6000 }))
+  if (msg.mentions.users.size > 0) {
+    let amountToDelete = args[1]
 
-  const fetched = await message.channel.messages.fetch({ limit: deleteCount + 1 })
+    if (!args[1]) amountToDelete = 50
 
-  message.channel.bulkDelete(fetched)
+    console.log(amountToDelete)
+    if (parseInt(amountToDelete) > 100) return msg.channel.send('Me fala um número até 99, ok?')
+    let userMessages = await msg.channel.messages.fetch({ limit: parseInt(amountToDelete) })
+    let userFilter = userMessages.filter(obj => obj.author.id === msg.mentions.users.first().id)
 
-  message.channel.send(`Prontinho, eu limpei ${deleteCount} mensagens.`).then(msg => msg.delete({ timeout: 5000 }))
+    msg.channel.bulkDelete(userFilter).catch(err => {
+      if (err)
+        return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 }))
+    })
+    msg.channel.send('Feito.').then(m => m.delete({ timeout: 3000 }))
+    return
+  }
+
+  if (msg.mentions.users.size > 0) {
+    let amountToDelete = args[1]
+    if (!args[1]) amountToDelete = 50
+    console.log(amountToDelete)
+    if (parseInt(amountToDelete) > 100)
+      return msg.channel.send('Me fala um número até 99, ok?').then(m => m.delete({ timeout: 3000 }))
+    let userMessages = await msg.channel.messages.fetch({ limit: parseInt(amountToDelete) })
+    let userFilter = userMessages.filter(obj => obj.author.id === msg.mentions.users.first().id)
+
+    msg.channel.bulkDelete(userFilter).catch(err => {
+      if (err)
+        return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 }))
+    })
+    msg.channel.send('Feito.').then(m => m.delete({ timeout: 3000 }))
+    return
+  }
+
+  if (args[0] === "bots") {
+    let awaitBotMessages = await msg.channel.messages.fetch({ limit: 100 })
+    let botFilter = awaitBotMessages.filter(obj => obj.author.bot)
+
+    msg.channel.bulkDelete(botFilter).catch(err => {
+      if (err)
+        return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 }))
+    })
+    msg.channel.send('Feito.').then(m => m.delete({ timeout: 5000 }))
+
+    return
+  }
+
+  const imagens = [
+    "images",
+    "imagens",
+    "fotos"
+  ]
+  if (args[0] === imagens) {
+    let awaitImageMessages = await msg.channel.messages.fetch({ limit: 100 })
+    let imageFilter = awaitImageMessages.filter(obj => obj.attachments.size > 0)
+
+    msg.channel.bulkDelete(imageFilter).catch(err => {
+      if (err)
+        return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 }))
+    })
+    msg.channel.send('Feito.').then(m => m.delete({ timeout: 5000 }))
+    return
+  }
+
+  if (args[0] === "all") {
+    let messages = 0
+    let i = true
+    while (i) {
+      let deleteAble = await msg.channel.messages.fetch({ limit: 100 })
+      if (deleteAble.size < 100) {
+        await msg.channel.bulkDelete(deleteAble).catch(err => {
+          if (err)
+            return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 }))
+        })
+        messages += deleteAble.size;
+        i = false;
+        msg.channel.send('Deletei um total de ' + messages + ' mensagens.').then(m => m.delete({ timeout: 5000 }))
+        messages = 0;
+        return;
+      }
+      await msg.channel.bulkDelete(deleteAble)
+      messages += deleteAble.size
+    }
+  } else if (typeof (parseInt(args[0])) == "number") {
+    if (parseInt(args[0]) > 100) return msg.channel.send('Me fala um número até 99, ok? Se quiser pagar TUDO, use o comando `clear all`')
+    let messages = await msg.channel.messages.fetch({ limit: parseInt(args[0]) })
+    msg.channel.bulkDelete(messages).catch(err => {
+      if (err)
+        return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 }))
+    })
+    msg.channel.send('Deletei ' + m.size + ' mensagens.').then(msg => m.delete({ timeout: 5000 }))
+  }
+}
+module.exports.help = {
+  name: "clear",
+  usage: "clear all | clear <quantia> | clear images | clear bots | clear @user"
 }

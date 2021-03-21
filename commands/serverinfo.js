@@ -4,6 +4,7 @@ module.exports = {
     name: "server-info",
     category: "extra",
     run: async (client, message, args) => {
+      message.delete()
         let region;
         switch (message.guild.region) {
             case "europe":
@@ -48,12 +49,12 @@ module.exports = {
                     value: `${message.guild.members.cache.filter(m => m.user.bot).size} bots`
                 },
                 {
-                    name: "Data de Criação: MM/DD/AAAA",
+                    name: "Data de Criação:\nMM/DD/AAAA",
                     value: message.guild.createdAt.toLocaleDateString()
                 },
                 {
                     name: "Cargos: ",
-                    value: `${message.guild.roles.cache.size} Cargos.`
+                    value: `${message.guild.roles.cache.size} Cargos`
                 },
                 {
                     name: `🗺 Região: `,
@@ -69,7 +70,7 @@ module.exports = {
                 },
                 {
                     name: "Emojis: ",
-                    value: message.guild.emojis.cache.size >= 1 ? `${message.guild.emojis.cache.size} emojis!` : 'Não há emojis.'
+                    value: message.guild.emojis.cache.size >= 1 ? `${message.guild.emojis.cache.size} emojis!` : 'Não há emojis'
                 })
         await message.channel.send(embed).then(msg => msg.delete({timeout: 20000}))
     }}

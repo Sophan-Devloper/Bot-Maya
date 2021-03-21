@@ -95,9 +95,10 @@ module.exports = {
  
 run: async (bot, message, args) => {
     message.delete()
+    
+    let avatar = message.author.displayAvatarURL({format: 'png'})
     let q = questions[Math.floor(Math.random() * questions.length)]
     let i = 0
-    let avatar = message.author.displayAvatarURL({format: 'png'})
     
 const QuizEmbed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, avatar)
@@ -116,6 +117,7 @@ const QuizEmbed = new Discord.MessageEmbed()
         {max: 1, errors: ["time"]}
         )
       if (parseInt(msgs.first().content) == q.correct){
+        message.delete()
         return message.channel.send(`${message.author}, você acertou! Parabéns.`).then(msg => msg.delete({timeout: 5000}))
       } else {
         return message.channel.send(`${message.author}, você errou! Que peninha...`).then(msg => msg.delete({timeout: 5000}))

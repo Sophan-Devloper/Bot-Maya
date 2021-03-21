@@ -110,11 +110,14 @@ exports.run = async (client, msg, args) => {
   } else if (typeof (parseInt(args[0])) == "number") {
     if (parseInt(args[0]) > 100) return msg.channel.send('Me fala um número até 99, ok? Se quiser pagar TUDO, use o comando `clear all`')
     let messages = await msg.channel.messages.fetch({ limit: parseInt(args[0]) })
-    msg.channel.bulkDelete(messages).catch(err => {
+    msg.channel.bulkDelete(messages).then(m => {
+      msg.channel.send('Deletei ' + m.size + ' mensagens.').then(m => setTimeout(() => {
+        m.delete()
+      }, 4000))
+    }).catch(err => {
       if (err)
         return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 }))
     })
-    msg.channel.send('Deletei ' + m.size + ' mensagens.').then(msg => m.delete({ timeout: 5000 }))
   }
 }
 module.exports.help = {

@@ -1,50 +1,48 @@
 const Discord = require('discord.js')
+const ms = require("ms")
+const confirm = require('./confirm.json')
+
 
 module.exports = {
-  name: "ban",
-  category: "moderation",
-  run: async (client, message, args) => {
+  name: "Quiz",
+  description: "Teste seu conhecimento!",
+  category: "fun",
+
+  run: async (bot, message, args) => {
+    //module.exports.run = async (bot, client, message, args) => {
     message.delete()
 
-    let reason = args.slice(1).join(" ")
-    let member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+    var reason = args.slice(1).join(" ")
+    var member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
     let logchannel = message.guild.channels.cache.find(ch => ch.name === "log")
+    let perms = message.member.hasPermission("BAN_MEMBERS")
 
-    try {
-      (!message.guild.me.hasPermission("BAN_MEMBERS"))
-      return message.channel.send('Hey! Eu não tenho permissão para banir ninguém.').catch(e)//.then(msg => msg.delete({ timeout: 5000 }))
-    } catch (e) {
-      console.log(e)
-    }
+    if (!perms)
+      return message.channel.send(`Você não pode banir membros, que ousadia da sua parte.`).then(msg => msg.delete({ timeout: 4000 }))
 
     if (!logchannel)
-      return message.channel.send('Eu não achei nenhum canal com o nome `log` \n⠀\nCopie e cole isso para eu criar um pra você \n`-createchannel log`').then(msg => msg.delete({ timeout: 10000 }))
+      return message.channel.send('Eu não achei nenhum canal com o nome `log` \n⠀\nQuer que eu crie um?\n`-createchannel log`').then(msg => msg.delete({ timeout: 10000 }))
 
-    if (!message.member.hasPermission('BAN_MEMBERS'))
-      return message.channel.send(`Você não pode banir membros, que ousadia da sua parte. Você não tem as permissões necessárias`).then(msg => msg.delete({ timeout: 4000 }))
-
-    if (!args[0])
-      return message.channel.send('Você não mencionou ninguém, tenta assim -> `-ban @user razão`.').then(msg => msg.delete({ timeout: 5000 }))
+    if (!member)
+      return message.channel.send('Você não mencionou ninguém.\n\n`-ban @user razão`').then(msg => msg.delete({ timeout: 5000 }))
 
     if (member.id === '451619591320371213') // Rodrigo Couto
       return message.channel.send('Eu **JAMAIS** baniria meu criador!!!').then(msg => msg.delete({ timeout: 5000 }))
 
     if (member.id === '516026271529173004') // Rafael Couto
-      return message.channel.send('Ele é o irmão do meu criador, eu não posso banir ele O-O').then(msg => msg.delete({ timeout: 5000 }))
+      return message.channel.send('Ele é o irmãozinho do meu criador, eu não posso banir ele O-O').then(msg => msg.delete({ timeout: 5000 }))
 
-    if (member.id === '763072871597604874') // Raphy
+    if (member.id === '821471191578574888') // Raphy
       return message.channel.send('Você não quer me banir, pensa duas vezes po :cry:').then(msg => msg.delete({ timeout: 5000 }))
 
     if (member.id === message.author.id)
-      return message.channel.send("É sério que você quer banir você mesmo? -_-").then(msg => msg.delete({ timeout: 5000 }))
+      return message.channel.send("É sério que você quer banir você mesmo? 😮").then(msg => msg.delete({ timeout: 5000 }))
 
     if (member.id === message.guild.owner.id)
-      return message.channel.send("É sério que você quer banir o dono do servidor? -_-''").then(msg => msg.delete({ timeout: 5000 }))
+      return message.channel.send("É sério que você quer banir o dono do servidor? 😱").then(msg => msg.delete({ timeout: 5000 }))
 
     if (!reason)
-      return message.channel.send("Você esqueceu da Razão -> `-ban @user razão`").then(msg => msg.delete({ timeout: 5000 }))
-
-    let avatar = member.user.displayAvatarURL({ format: 'png' })
+      reason = `${message.author.username} não especificou nenhuma razão.`
 
     const banEmbed = new Discord.MessageEmbed()
       .setTitle(`Sistema de Banimento - ${message.guild.name}`)
@@ -75,12 +73,61 @@ module.exports = {
       .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
       .setFooter('Data:')
 
-    try {
-      await member.ban()
-      await message.channel.send(`O Ban foi um sucesso! Estou mandando mais informações no ${logchannel}`).then(msg => msg.delete({ timeout: 5000 })).then(msg => logchannel.send(banEmbed))
+    const item = confirm[Math.floor(Math.random() * confirm.length)]
+    const filter = response => {
+      return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase())
     }
-    catch (e) {
-      return message.channel.send(`Eu não achei ninguém com esse nome que você mencionou.`).then(msg => msg.delete({ timeout: 4000 }))
-    }
+
+    
+    const startban = new Discord.MessageEmbed()
+      .setColor('#ff0000')
+      .setTitle(`‼️ Sistema de Banimento - ALERTA ‼️`)
+      .setDescription(`⠀`)
+      .addFields(
+        {
+          name: `${message.author.username}, você está banindo ${member.user.username} do servidor.`,
+          value: `⠀`
+        }
+      )
+      .setFooter(`Você confirma este comando?`)
+  
+    message.channel.send(startban).then(() => {
+      message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ['time'] }).then(collected => {
+
+        function f1() {
+          message.channel.send(`Banindo usuário...`).then(msg => msg.delete({ timeout: 4000 }))
+          member.ban()
+        }
+
+        function f2() {
+          message.channel.send(`Banimento efetuado com sucesso.`).then(msg => msg.delete({ timeout: 3000 }))
+        }
+
+        function f3() {
+          message.channel.send(`Enviando relatório no canal ${logchannel}...`).then(msg => msg.delete({ timeout: 7500 }))
+
+        }
+
+        function f4() {
+          logchannel.send(banEmbed)
+        }
+
+        function f5() {
+          message.channel.send(`Relatório enviado.`).then(msg => msg.delete({ timeout: 10000 }))
+        }
+
+        setTimeout(f1, 1000 * 0,5)
+        setTimeout(f2, 1000 * 4.5)
+        setTimeout(f3, 1000 * 7.5)
+        setTimeout(f4, 1000 * 14)
+        setTimeout(f5, 1000 * 15)
+      }).catch(collected => {
+        const andban = new Discord.MessageEmbed()
+          .setColor('#DCDCDC')
+          .setAuthor(`Banimento Cancelado.`)
+          .setFooter(`Nenhuma resposta de ${message.author.username}`)
+        message.channel.send(andban).then(msg => msg.delete({ timeout: 6000 }))
+      })
+    })
   }
 }

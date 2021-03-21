@@ -11,7 +11,7 @@ let money = db.fetch(`money_${message.guild.id}_${user.id}`)
 if(money === null) {money = 0}
 
 if (!rody)
-    return message.channel.send('Apenas os meus criadores podem remover RPoints. Desculpe.').then(msg => msg.delete({timeout: 5000}))
+return message.channel.send('⚠️ Este comando é um comando restrito.').then(msg => msg.delete({ timeout: 5000 }))
 
 if(!user)
     return message.channel.send('Você não me disse pra quem é pra remover o dinheiro, marque alguém por favor.').then(msg => msg.delete({timeout: 6000}))

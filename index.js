@@ -158,14 +158,16 @@ client.on("message", async (message, queue, song) => {
         let queue = distube.getQueue(message)
         if (!queue) return message.channel.send('Não tem nada tocando no momento.')
         distube.setVolume(message, args[0])
+
         message.channel.send(`Volume definido em ${args[0]}%`)
     }
 
     if (["shuffle", "aleatorio"].includes(command)) {
         let queue = distube.getQueue(message)
         if (!queue) return message.channel.send('Não tem nada tocando no momento.')
-        distube.shuffle(message);
-        message.channel.send(`${message.author.username} colocou a playlist em modo aleatório`)
+if(args[0] > 100) return message.channel.send('O limite do volume é 100%')
+       distube.shuffle(message)
+ message.channel.send(`${message.author.username} colocou a playlist em modo aleatório`)
     }
 
     if (command == "autoplay") {

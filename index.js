@@ -208,7 +208,7 @@ client.on("message", async (message, queue, song) => {
         distube.pause(message)
         message.channel.send(`${message.author.username} pausou a música. Use *-despause* para despausar.`)
     } // Fim da sessão música
-    
+
 }) // Final da sessão de ativação de comandos
 
 const status = (queue) => `Volume: ${queue.volume}% | Filter: ${queue.filter || "Off"} | Loop: ${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"} | Autoplay: ${queue.autoplay ? "On" : "Off"}`
@@ -272,15 +272,16 @@ client.on("ready", () => {
 })
 
 client.on("ready", () => {
-    console.log("Status ON");
-    var s = [
-        { name: "Messagem", type: 'WATCHING', url: 'https://www.netflix.com/' },
-    ];
-    function st() {
-        let rs = s[Math.floor(Math.random() * s.length)];
-        client.user.setPresence({ game: rs });
-    }
-    st()
-    setInterval(() => st(), 20000)  //10000 = 10Ms = 10 segundos
-  })
+    let activities = [
+        `Netflix!`
+    ],
+        i = 0;
+    setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
+        type: "WATCHING"
+    }), 1000 * 60)
+    client.user
+        .setStatus("dnd")
+        .catch(console.error)
+    console.log("System Status - ON")
+})
 client.login(config.token)

@@ -33,18 +33,17 @@ client.on("message", async (message, queue, song) => {
         const embedperm = new Discord.MessageEmbed()
             .setColor('#DCDCDC')
             .setTitle('Dicas da Raphy')
-            .setDescription('Para meu perfeito funcionamento, é necessário que eu tenha a permissão "Administrador" ativado.')
+            .setDescription('Para meu perfeito funcionamento, é necessário que eu tenha a permissão "Administrador"')
             .addFields(
                 {
-                    name: 'Como ativar a função Administrador',
+                    name: 'Ative a função Administrador',
                     value: '1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Raphy"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.'
                 },
             )
             .setFooter(`Raphy Dicas`, message.client.user.displayAvatarURL())
         return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => msg.channel.send(embedperm))
-
-        //\n2. Cargos\n3. Cargo Raphy\n4. A última opção é a função de ADMINISTRADOR. Basta ativar, salvar as alterações e TADÃÃN, eu vou poder funcionar perfeitamente.')
     }
+
     // Acesso as pastas de comandos
     try {
         const commandFile = require(`./commands/${command}.js`)
@@ -158,16 +157,15 @@ client.on("message", async (message, queue, song) => {
         let queue = distube.getQueue(message)
         if (!queue) return message.channel.send('Não tem nada tocando no momento.')
         distube.setVolume(message, args[0])
-
+        if(args[0] > 100) return message.channel.send('O limite do volume é 100%')
         message.channel.send(`Volume definido em ${args[0]}%`)
     }
 
     if (["shuffle", "aleatorio"].includes(command)) {
         let queue = distube.getQueue(message)
         if (!queue) return message.channel.send('Não tem nada tocando no momento.')
-if(args[0] > 100) return message.channel.send('O limite do volume é 100%')
-       distube.shuffle(message)
- message.channel.send(`${message.author.username} colocou a playlist em modo aleatório`)
+        distube.shuffle(message)
+        message.channel.send(`${message.author.username} colocou a playlist em modo aleatório`)
     }
 
     if (command == "autoplay") {

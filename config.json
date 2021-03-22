@@ -1,3 +1,5 @@
 {
-  "token": "SEU TOKEN AQUI / YOUR TOKEN HERE"
+  "token": "SEU TOKEN AQUI / YOUR TOKEN HERE",
+  "default_prefix": "-",
+  "ownerID": "451619591320371213"
 }

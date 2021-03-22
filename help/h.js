@@ -304,7 +304,7 @@ module.exports = {
             //  msg.react('') // 17
             //  msg.react('') // 18
             //  msg.react('') // 19
-            // msg.react('') // 20 // Limite Reaction Discord
+            //  msg.react('') // 20 // Limite Reaction Discord
 
             msg.awaitReactions((reaction, user) => {
                 if (message.author.id !== user.id) return;

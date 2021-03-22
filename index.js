@@ -1,24 +1,13 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({
-    partials: ['MESSAGE', 'CHANNEL'],
-    fetchAllMembers: true,
-    disableEveryone: true,
+    disableEveryone: true
 })
 const DisTube = require('distube')
 const ffm = require('ffmpeg-static')
 const opus = require('@discordjs/opus')
 const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })
-const config = require("./config.json")
-const prefix = '-'
-const fs = require('fs')
-let cooldown = new Set()
-const Enmap = require('enmap')
-client.commands = new Discord.Collection()
-client.profile = new Enmap({ name: "profile", fetchAll: true })
-client.settings = new Enmap({ name: "settings", fetchAll: true })
-client.reactionroles = new Enmap({ name: "reactionroles", fetchAll: true })
-client.blacklisted = new Enmap({ name: "blacklisted" })
-client.applications = new Enmap({ name: "applications", fetchAll: true })
+const { token, default_prefix } = require("./config.json")
+const db = require('quick.db')
 
 // Ativação Uptime Robot 24/7
 const express = require('express')
@@ -36,9 +25,15 @@ app.get('/', (request, response) => {
 // Ativação da Bot Raphy - Começo
 client.on("message", async (message, queue, song) => {
     if (message.author.bot) return
-    if (message.channel.type == "dm") return
-    if (!message.content.startsWith(prefix)) return
-    const args = message.content.slice(prefix.length).trim().split(/ +/g)
+    if (!message.guild) return
+    if (message.channel.type == "dm")
+        return message.channel.send("Eu sou uma bot, eu não consigo conversar no privado ainda.")
+
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) 
+        prefix = default_prefix
+        if (!message.content.startsWith(prefix)) return
+        const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
 
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
@@ -56,54 +51,7 @@ client.on("message", async (message, queue, song) => {
             .setFooter(`Raphy Dicas`, message.client.user.displayAvatarURL())
         return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => message.channel.send(embedperm))
     }
-    
 
-    client.settings.ensure(message.guild.id, {
-        roles: [],
-        prefix: "-",
-        messageroles: [],
-        levelsystem: true,
-        message: 'Not set',
-        channel: 0,
-        xpgain: [{ first: 0, second: 30 }],
-        noxproles: [],
-        noxpchannels: [],
-        userchannels: [],
-        userchannelcreate: { category: 'none', channel: 'none' },
-        antiinvite: false,
-        roleschannel: "none",
-        imagechannel: [],
-        doublexproles: [],
-        welcomeroles: [],
-        welcomechannel: "none",
-        welcomemessage: [{ message: "none" }, { title: "none", description: "none", image: "none", footer: "none", color: "none", embed: false }],
-    })
-
-    //const command = args.shift()
-    let regex = /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/
-    if (regex.test(message.content) && client.settings.get(message.guild.id, "antiinvite")) {
-        if (message.member.permissions.has("ADMINISTRATOR")) return;
-        message.channel.send(`***${message.author.tag}***, invite links are not allowed!`).then(m => m.delete({ timeout: 10000 }))
-        message.delete()
-    }
-
-    client.applications.ensure(message.guild.id, {
-        applications: [],
-        application: [],
-        message: "none",
-    })
-    client.reactionroles.ensure(message.guild.id, {
-        roles: [],
-    })
-
-    client.profile.ensure(`${message.guild.id}-${message.author.id}`, {
-        id: message.author.id,
-        guild: message.guild.id,
-        level: 0,
-        levelpoints: 0,
-        lastMessage: "none",
-    })
-    // Acesso as pastas de comandos
     try {
         const commandFile = require(`./commands/${command}.js`)
         commandFile.run(client, message, args)
@@ -115,12 +63,18 @@ client.on("message", async (message, queue, song) => {
     } catch (err) { }
 
     try {
+        const commandFile = require(`./owner/${command}.js`)
+        commandFile.run(client, message, args)
+    } catch (err) { }
+
+    try {
         const commandFile = require(`./RPoints/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./quiz/${command}.js`)
+        commandFile.run(client, message, args)
         commandFile.run(client, message, args)
     } catch (err) { }
 
@@ -158,9 +112,7 @@ client.on("message", async (message, queue, song) => {
         const commandFile = require(`./moderation/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
-    // Fim do acesso as pastas de comandos
 
-    // Inicio da sessão música
     if (["play", "p", "tocar", "m", "musica", "msc"].includes(command)) {
         message.delete()
         if (!message.member.voice.channel) return message.channel.send("Você tem que estar em um canal de voz para pedir alguma música")
@@ -265,8 +217,7 @@ client.on("message", async (message, queue, song) => {
         if (!message.member.voice.channel) return message.channel.send("Você tem que estar em um canal de voz para pausar a música")
         distube.pause(message)
         message.channel.send(`${message.author.username} pausou a música. Use *-despause* para despausar.`)
-    } // Fim da sessão música
-
+    }
 }) // Final da sessão de ativação de comandos
 
 const status = (queue) => `Volume: ${queue.volume}% | Filter: ${queue.filter || "Off"} | Loop: ${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"} | Autoplay: ${queue.autoplay ? "On" : "Off"}`
@@ -326,20 +277,19 @@ distube
     })
 
 client.on("ready", () => {
-    console.log('Ok.')
+    let activities =[
+            `Estou em ${client.guilds.cache.size} servidores!`,
+            `Estou atendendo ${client.channels.cache.size} canais!`,
+            `Estou conectada a ${client.users.cache.size} usuários!`
+        ],
+        i = 0;
+        setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
+            type: "WATCHING"
+        }), 1000 * 20)
+    client.user
+        .setStatus("idle")
+        .catch(console.error)
+    console.log("Online!")
 })
 
-client.on("ready", () => {
-    let activities = [
-        `Netflix!`
-    ],
-        i = 0;
-    setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
-        type: "WATCHING"
-    }), 1000 * 60)
-    client.user
-        .setStatus("dnd")
-        .catch(console.error)
-    console.log("System Status - ON")
-})
-client.login(config.token)
+client.login(token)

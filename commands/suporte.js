@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-exports.run = async (client, message, args) => {
-message.delete()
+exports.run = async (client, msg, args) => {
+msg.delete()
 
 const Embed = new Discord.MessageEmbed()
           .setColor('#FF0000')
@@ -8,6 +8,6 @@ const Embed = new Discord.MessageEmbed()
           .setTitle('Clique aqui para acessar a Central de Suporte')
           .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
           .setImage('https://imgur.com/U4PkdDo.gif')
-          .setFooter(message.author.username, message.author.displayAvatarURL())
-    await message.channel.send(Embed)
+          .setFooter(msg.author.username, msg.author.displayAvatarURL())
+    await msg.channel.send(Embed)
 }

@@ -1,49 +1,49 @@
-exports.run = (client, msg, args) => {
+exports.run = (client, message, args) => {
 
-    if (!msg.member.hasPermission("MANAGE_CHANNELS")) {
+    if (!message.member.hasPermission("MANAGE_CHANNELS")) {
     
-      msg.reply('You do not have the required permissions to use this.')
+      message.reply('You do not have the required permissions to use this.')
       return;
     
     }
     
     if(args[0] === "all") {
-      msg.guild.channels.filter(channel => channel.type !== "category") .forEach(channel => {
-      let check = channel.permissionsFor(msg.guild.id)
+      message.guild.channels.filter(channel => channel.type !== "category") .forEach(channel => {
+      let check = channel.permissionsFor(message.guild.id)
     if(!check.has("SEND_MESSAGES")) {
-    channel.updateOverwrite(msg.guild.id, {
+    channel.updateOverwrite(message.guild.id, {
       SEND_MESSAGES: false,
     })
       
     }
     })
-      msg.reply('Locked everything! :thumbsup:')
+      message.reply('Locked everything! :thumbsup:')
       return;
     }
-      let channel = msg.guild.channels.cache.find(c => c.name === args[0]) || msg.guild.channels.cache.get(args[0]) || msg.mentions.channels.first()
-      if (!channel) channel = msg.channel;
+      let channel = message.guild.channels.cache.find(c => c.name === args[0]) || message.guild.channels.cache.get(args[0]) || message.mentions.channels.first()
+      if (!channel) channel = message.channel;
     
     
     
-    let check = channel.permissionsFor(msg.guild.id)
+    let check = channel.permissionsFor(message.guild.id)
     if(!check.has("SEND_MESSAGES")) {
-      channel.updateOverwrite(msg.guild.id, {
+      channel.updateOverwrite(message.guild.id, {
         SEND_MESSAGES: true,
       }).then(() => {
-            msg.reply('Locked! :thumbsup:')
+            message.reply('Locked! :thumbsup:')
         }).then(() => {
-    msg.reply('Unlocked! :thumbsup:')  
+    message.reply('Unlocked! :thumbsup:')  
     }) 
      
      return;
     }
     
-    if (channel.type === "voice" || channel.type === "category") return msg.reply("That was a category / voice channel, could not proceed.")
+    if (channel.type === "voice" || channel.type === "category") return message.reply("That was a category / voice channel, could not proceed.")
     
-    channel.updateOverwrite(msg.guild.id, {
+    channel.updateOverwrite(message.guild.id, {
       SEND_MESSAGES: false,
     }).then(() => {
-          msg.reply('Locked! :thumbsup:')
+          message.reply('Locked! :thumbsup:')
       })
      
     

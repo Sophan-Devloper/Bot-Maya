@@ -1,41 +1,43 @@
-const Discord = require("discord.js")
-const client = new Discord.Client({
-    disableEveryone: true
-})
-const DisTube = require('distube')
-const ffm = require('ffmpeg-static')
-const opus = require('@discordjs/opus')
-const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })
-const { token, default_prefix } = require("./config.json")
-const db = require('quick.db')
+// -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST //
+const Discord = require("discord.js")                                                                    //
+const client = new Discord.Client()                                                                      //
+const DisTube = require('distube')                                                                       //
+const ffm = require('ffmpeg-static')                                                                     //
+const opus = require('@discordjs/opus')                                                                  //
+const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })                        //
+const { token, default_prefix } = require("./config.json")                                               //
+const db = require('quick.db')                                                                           //
+// -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST //
 
-// Ativação Uptime Robot 24/7
-const express = require('express')
-const { measureMemory } = require("vm")
-const app = express()
-app.listen(process.env.PORT)
-app.get('/', (request, response) => {
-    const ping = new Date()
-    ping.setHours(ping.getHours() - 3)
-    console.log(`Ping! ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`)
-    response.sendStatus(200)
-})
-// ----------------------------
+// -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 //
+const express = require('express')                                                              //
+const { measureMemory } = require("vm")                                                         //
+const app = express()                                                                           //
+app.listen(process.env.PORT)                                                                    //
+app.get('/', (request, response) => {                                                           //
+    const ping = new Date()                                                                     //
+    ping.setHours(ping.getHours() - 3)                                                          //
+    console.log(`Ping! ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`)  //
+    response.sendStatus(200)                                                                    //
+})                                                                                              //
+// -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 //
 
-// Ativação da Bot Raphy - Começo
+// -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE --
 client.on("message", async (message, queue, song) => {
-    if (message.author.bot) return
-    if (!message.guild) return
-    if (message.channel.type == "dm")
+    if (message.author.bot) return // no bots commands
+    if (message.channel.type == "dm") // no dm's commands
         return message.channel.send("Eu sou uma bot, eu não consigo conversar no privado ainda.")
 
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) 
-        prefix = default_prefix
-        if (!message.content.startsWith(prefix)) return
-        const args = message.content.slice(prefix.length).trim().split(/ +/g)
-    const command = args.shift().toLowerCase()
+// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
+    let prefix = db.get(`prefix_${message.guild.id}`)                       //
+    if (prefix === null)                                                    //
+        prefix = default_prefix                                             //
+    if (!message.content.startsWith(prefix)) return                         //
+    const args = message.content.slice(prefix.length).trim().split(/ +/g)   //
+    const command = args.shift().toLowerCase()                              //
+// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
 
+// -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
         const bot = message.guild.members.cache.get(client.user.id)
         const embedperm = new Discord.MessageEmbed()
@@ -51,7 +53,9 @@ client.on("message", async (message, queue, song) => {
             .setFooter(`Raphy Dicas`, message.client.user.displayAvatarURL())
         return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => message.channel.send(embedperm))
     }
+// -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
 
+// -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
     try {
         const commandFile = require(`./commands/${command}.js`)
         commandFile.run(client, message, args)
@@ -112,7 +116,9 @@ client.on("message", async (message, queue, song) => {
         const commandFile = require(`./moderation/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
+// -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
 
+// -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --
     if (["play", "p", "tocar", "m", "musica", "msc"].includes(command)) {
         message.delete()
         if (!message.member.voice.channel) return message.channel.send("Você tem que estar em um canal de voz para pedir alguma música")
@@ -138,7 +144,6 @@ client.on("message", async (message, queue, song) => {
             .setDescription(queue.songs.map((song, id) => `**${id + 1}** - [${song.name}](${song.url}) - \`${song.formattedDuration}\``).join("\n"))
             .setFooter(message.author.username, message.author.displayAvatarURL())
         message.channel.send(playlistembed)
-        // message.channel.send('Playlist atual:\n' + queue.songs.map((song, id) => `**${id + 1}**. [${song.name}](${song.url}) - \`${song.formattedDuration}\``).join("\n"))
     }
 
     if (["s", "skip", "prox", "próximo", "proximo", "proxima", "próxima"].includes(command)) {
@@ -218,8 +223,11 @@ client.on("message", async (message, queue, song) => {
         distube.pause(message)
         message.channel.send(`${message.author.username} pausou a música. Use *-despause* para despausar.`)
     }
-}) // Final da sessão de ativação de comandos
+// -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --    
+})
+// -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE --
 
+// -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC --
 const status = (queue) => `Volume: ${queue.volume}% | Filter: ${queue.filter || "Off"} | Loop: ${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"} | Autoplay: ${queue.autoplay ? "On" : "Off"}`
 distube
     .on("playSong", (message, queue, song) => {
@@ -238,7 +246,6 @@ distube
             .setFooter(`${message.author.username} | Duração: ${song.formattedDuration}`, message.author.displayAvatarURL())
         message.channel.send(tocando)
     })
-    // `Tocando \`${song.name}\` - \`${song.formattedDuration}\`\nPedido por: ${song.user}\n${status(queue)}`)
     .on("addSong", (message, queue, song) => {
         var addsongembed = new Discord.MessageEmbed()
             .setColor('#DCDCDC')
@@ -263,7 +270,6 @@ distube
             )
             .setFooter(message.author.username, message.author.displayAvatarURL())
         message.channel.send(plembed)
-        // message.channel.send(`Tocando \`${playlist.name}\` playlist (${playlist.songs.length} músicas).\nPedido por: ${song.user}\nTocando agora \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`)
     })
     .on("addList", (message, queue, playlist) => message.channel.send(`Adicionou \`${playlist.name}\` playlist (${playlist.songs.length} música/s) para a playlist \n${status(queue)}`))
     .on("searchResult", (message, result) => {
@@ -275,21 +281,24 @@ distube
         console.error(e)
         message.channel.send("**ASSIONE O SUPORTE!** `-bug`\n \nUm erro foi encontrado: " + e)
     })
+// -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC --    
 
-client.on("ready", () => {
-    let activities =[
-            `Estou em ${client.guilds.cache.size} servidores!`,
-            `Estou atendendo ${client.channels.cache.size} canais!`,
-            `Estou conectada a ${client.users.cache.size} usuários!`
-        ],
-        i = 0;
-        setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
-            type: "WATCHING"
-        }), 1000 * 20)
-    client.user
-        .setStatus("idle")
-        .catch(console.error)
-    console.log("Online!")
-})
+// -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile //
+client.on("ready", () => {                                                                                //
+    let activities = [                                                                                    //
+        `Estou em ${client.guilds.cache.size} servidores!`,                                               //
+        `Estou atendendo ${client.channels.cache.size} canais!`,                                          //
+        `Estou conectada a ${client.users.cache.size} usuários!`                                          //
+    ],                                                                                                    //
+        i = 0;                                                                                            //
+    setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {                 //
+        type: "WATCHING"                                                                                  //
+    }), 1000 * 20)                                                                                        //
+    client.user                                                                                           //
+        .setStatus("idle")                                                                                //
+        .catch(console.error)                                                                             //
+    console.log("Online!")                                                                                //
+})                                                                                                        //
+// -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile //
 
 client.login(token)

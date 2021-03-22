@@ -56,6 +56,7 @@ client.on("message", async (message, queue, song) => {
             .setFooter(`Raphy Dicas`, message.client.user.displayAvatarURL())
         return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => message.channel.send(embedperm))
     }
+    
 
     client.settings.ensure(message.guild.id, {
         roles: [],

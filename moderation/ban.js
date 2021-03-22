@@ -25,9 +25,6 @@ module.exports = {
     if (!member)
       return message.channel.send('Você não mencionou ninguém.\n\n`-ban @user razão`').then(msg => msg.delete({ timeout: 5000 }))
 
-    if (member.hasPermission('KICK_MEMBERS', 'BAN_MEMBERS'))
-      return message.channel.send(`${member.user.username} é forte nesse servidor, eu não posso banir.`).then(msg => msg.delete({ timeout: 5000 }))
-
     if (member.id === '451619591320371213') // Rodrigo Couto
       return message.channel.send('Eu **JAMAIS** baniria meu criador!!!').then(msg => msg.delete({ timeout: 5000 }))
 
@@ -42,6 +39,9 @@ module.exports = {
 
     if (member.id === message.guild.owner.id)
       return message.channel.send("É sério que você quer banir o dono do servidor? 😱").then(msg => msg.delete({ timeout: 5000 }))
+
+    if (member.hasPermission('KICK_MEMBERS', 'BAN_MEMBERS'))
+      return message.channel.send(`${member.user.username} é forte nesse servidor, eu não posso banir.`).then(msg => msg.delete({ timeout: 5000 }))
 
     if (!reason)
       reason = `${message.author.username} não especificou nenhuma razão.`

@@ -28,16 +28,77 @@ client.on("message", async (message, queue, song) => {
     if (message.channel.type == "dm") // no dm's commands
         return message.channel.send("Eu sou uma bot, eu não consigo conversar no privado ainda.")
 
-// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
+    var r = 'maya'
+    var r1 = 'Maya'
+    var r2 = 'MAYA'
+
+    var list = [
+        'ooi',
+        'euzinha',
+        'to aqui',
+        'oláá',
+        'Estou aqui, o que quieres?',
+        `Como posso te ajudar? Qualquer coisa só chamar o help`,
+        'Alguém me chamou?',
+        'Porquê me chamas?',
+        'Aaaah, eu to com sono:sleeping:',
+        'ooooi, eu estou tomando sorvete agora, no que posso ajudar?',
+        'Eu estava dormindo... O que você precisa?',
+        'Estou aqui, como posso ajudar?',
+        'Oiii, parece que eu ouvi meu nome',
+        'oooi, estou aqui',
+        'Ouvi meu nome c.c',
+        'Olááá, estou aqui para ajudar, quem me chamas?'
+    ]
+
+    var msgraphy = list[Math.floor(Math.random() * list.length)]
+
+    if (message.content.includes(r)) {
+        message.react('♥️')
+        message.channel.send(msgraphy)
+    }
+
+    if (message.content.includes(r1)) {
+        message.react('♥️')
+        message.channel.send(msgraphy)
+    }
+
+    if (message.content.includes(r2)) {
+        message.react('♥️')
+        message.channel.send(msgraphy)
+    }
+
+    if (message.content === '-dream') {
+        message.delete()
+        message.channel.send('Meu sonho é ser uma bot com todos os comandos existentes :hearts:').then(msg => msg.delete({ timeout: 3000 }))
+    }
+
+    if (message.content === '-script') {
+        message.delete()
+        message.channel.send('Olá Mundo').then(msg => msg.delete({ timeout: 3000 }))
+    }
+
+    if (message.content.includes("loli")) {
+        message.channel.send("Eu li Loli? Ligando 190...").then(msg => msg.delete({ timeout: 3000 })).then(msg => msg.channel.send('Prisão aos Lolicons!!!')).then(msg => msg.delete({ timeout: 3000 }))
+    }
+
+    if (message.content.includes("bom dia")) { message.channel.send("Bom diiia") }
+    if (message.content.includes("boa tarde")) { message.channel.send("Boa taarde") }
+    if (message.content.includes("boa noite")) { message.channel.send("Boa noitee") }
+    if (message.content.includes("oi")) { message.channel.send("oooii") }
+    if (message.content.includes("ooi")) { message.channel.send("oláá") }
+    if (message.content.includes("oii")) { message.channel.send("oiii") }
+
+    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
     let prefix = db.get(`prefix_${message.guild.id}`)                       //
     if (prefix === null)                                                    //
         prefix = default_prefix                                             //
     if (!message.content.startsWith(prefix)) return                         //
     const args = message.content.slice(prefix.length).trim().split(/ +/g)   //
     const command = args.shift().toLowerCase()                              //
-// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
+    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
 
-// -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
+    // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
         const bot = message.guild.members.cache.get(client.user.id)
         const embedperm = new Discord.MessageEmbed()
@@ -53,9 +114,9 @@ client.on("message", async (message, queue, song) => {
             .setFooter(`Raphy Dicas`, message.client.user.displayAvatarURL())
         return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => message.channel.send(embedperm))
     }
-// -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
+    // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
 
-// -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
+    // -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
     try {
         const commandFile = require(`./commands/${command}.js`)
         commandFile.run(client, message, args)
@@ -116,9 +177,9 @@ client.on("message", async (message, queue, song) => {
         const commandFile = require(`./moderation/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
-// -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
+    // -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
 
-// -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --
+    // -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --
     if (["play", "p", "tocar", "m", "musica", "msc"].includes(command)) {
         message.delete()
         if (!message.member.voice.channel) return message.channel.send("Você tem que estar em um canal de voz para pedir alguma música")
@@ -223,7 +284,7 @@ client.on("message", async (message, queue, song) => {
         distube.pause(message)
         message.channel.send(`${message.author.username} pausou a música. Use *-despause* para despausar.`)
     }
-// -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --    
+    // -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --    
 })
 // -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE --
 
@@ -274,12 +335,18 @@ distube
     .on("addList", (message, queue, playlist) => message.channel.send(`Adicionou \`${playlist.name}\` playlist (${playlist.songs.length} música/s) para a playlist \n${status(queue)}`))
     .on("searchResult", (message, result) => {
         let i = 0
-        message.channel.send(`** ${message.author.username},  escolha uma das opções abaixo**\n \n${result.map(song => `**${++i}** - ${song.name} | \`${song.formattedDuration}\``).join("\n")}\n \n*Envie qualquer das opções dentro de 60 segundos.*`).then(msg => msg.delete({ timeout: 60000 }))
+        var resultsearch = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('Escolha uma das opções abaixo...')
+            .setDescription(`${result.map(song => `**${++i}** - ${song.name} | \`${song.formattedDuration}\``).join("\n")}`)
+            .setFooter('Você tem apenas 60 segundos para escolher sua música.', message.author.displayAvatarURL())
+        message.channel.send(resultsearch)
+        // message.channel.send(`** ${message.author.username},  escolha uma das opções abaixo**\n \n${result.map(song => `**${++i}** - ${song.name} | \`${song.formattedDuration}\``).join("\n")}\n \n*Envie qualquer das opções dentro de 60 segundos.*`).then(msg => msg.delete({ timeout: 60000 }))
     })
     .on("searchCancel", (message) => message.channel.send(`A resposta não é um número da playlist, pesquisa cancelada.`).then(msg => msg.delete({ timeout: 5000 })))
     .on("error", (message, e) => {
         console.error(e)
-        message.channel.send("**ASSIONE O SUPORTE!** `-bug`\n \nUm erro foi encontrado: " + e)
+        message.channel.send("**ASSIONE O SUPORTE!** `-sup`\n \nUm erro foi encontrado: " + e)
     })
 // -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC --    
 

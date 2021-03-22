@@ -25,7 +25,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Emojis da Centralzinha',
-                    value: '🏛️  Esta Página \n⭐  Raphy Points \n💍  Casamento/Family \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n⠀⠀'
+                    value: '🏛️  Esta Página \n⭐  Raphy Points \n💍  Casamento/Family \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands⠀⠀'
                 },
             )
             .addField(`Previna-se contra a COVID-19, use máscara!`, `[Saiba mais](${linkcovid})`)
@@ -103,15 +103,15 @@ module.exports = {
             .addFields(
                 {
                     name: 'Administração',
-                    value: '\n`-unban` Desban algúm membro\n`-createchannel` Crie canais de texto \n`-createvoice` Crie canais de voz \n`-lockdown` Trave o servidor em caso de emergência \n`-setprefix` (Em Breve)'
+                    value: '\n`-unban` Desban algúm membro\n`-createchannel` Crie canais de texto \n`-createvoice` Crie canais de voz \n`-lockdown` Trave o servidor em caso de emergência \n`-setprefix / prefix` Escolha meu prefix'
                 },
                 {
                     name: 'Moderação',
-                    value: '`-addrole` Dê cargos \n`-removerole` Tire Cargos\n`-setnick @user` Mude o nickname de alguém\n`-kick` Chute alguém do servidor\n`-ban` Banir membros\n`-tempban` (Em Breve)\n`-mute` Mute alguém (tempmute)\n`-unmute` Desmuta alguém\n`-warn` Dê Warns \n`-warns` Confira seus Warns \n`-resetwarns` `-rwarns` Reset warns de membros '
+                    value: '`-addrole` Dê cargos \n`-removerole` Tire Cargos\n`-setnick @user` Mude o nickname de alguém\n`-kick` Chute alguém do servidor\n`-ban` Banir membros\n`-mute` Mute alguém (tempmute)\n`-unmute` Desmuta alguém\n`-warn` Dê Warns \n`-warns` Confira seus Warns \n`-resetwarns` `-rwarns` Reset warns de membros '
                 },
                 {
                     name: 'Chat',
-                    value: '`-lockchannel` (Em Breve)\n`-anunciar` Publique informações\n`-clear` Limpe o chat\n`-say` Diga algo atráves de mim\n`-slowmode` Ative o modo lento\n`-dm @user` Mande mensagens no privado através de mim'
+                    value: '`-lockchannel` Trave um canal especifico\n`-anunciar` Publique informações\n`-clear` Limpe o chat\n`-say` Diga algo atráves de mim\n`-slowmode` Ative o modo lento\n`-dm @user` Mande mensagens no privado através de mim'
                 },
                 {
                     name: 'Interação',
@@ -284,6 +284,27 @@ module.exports = {
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
+        const owner = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle('<:hehe:741819620931010639> Comandos Exclusivos do meu Criador <:hehe:741819620931010639>')
+            .setURL('https://discord.gg/mx8eMx6')
+            .setDescription('Comandos especificos com poder de mudar muita coisa. Então, este comandos estão privados.')
+            .addFields(
+                {
+                    name: 'Comandos Emergênciais',
+                    value: '`-reboot` Me reinicia\n`-turnoff` Me desliga\n`-recall command` Reinicia comandos\n`-setdefaultprefix` Muda o prefix padrão\n`-reloadserver` Reinicia meu servidor'
+                },
+                {
+                    name: 'Comandos Exclusivos',
+                    value: '`-status` Muda meu status no prefil\n`-addrp @user` Dá RPs pra alguém\n`resetrp @user` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center'
+                },
+                {
+                    name: 'Comandos Black',
+                    value: '`-block @user` Bloqueia um usuário de usar meus comandos\n`unblock` Inverso de block\n`-leaveall` Me tira de todos os servidores\n`delraphy` Me deleta :cry:'
+                }
+            )
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
+
         await message.channel.send(HelpEmbed).then(msg => {
             msg.react('🏛️') // home  1
             msg.react('⭐') // rpsystem 2
@@ -299,8 +320,8 @@ module.exports = {
             msg.react('👥') // interação 12
             msg.react('📝') // quiz 13
             msg.react('📃') // botinfo 14
-            msg.react('❌') // Delete 15
-            //  msg.react('') // 16
+            msg.react('📁') // owner 15
+            msg.react('❌') // delete 16
             //  msg.react('') // 17
             //  msg.react('') // 18
             //  msg.react('') // 19
@@ -312,6 +333,10 @@ module.exports = {
                 if (reaction.emoji.name === '🏛️') { // home
                     reaction.users.remove(user)
                     msg.edit(HelpEmbed)
+                }
+                if (reaction.emoji.name === '📁') { // home
+                    reaction.users.remove(user)
+                    msg.edit(owner)
                 }
                 if (reaction.emoji.name === '⭐') { // RPEmbed
                     reaction.users.remove(user)
@@ -520,6 +545,10 @@ module.exports = {
                                         if (reaction.emoji.name === '📝') { // quiz
                                             reaction.users.remove(user)
                                             msg.edit(Quiz)
+                                        }
+                                        if (reaction.emoji.name === '📁') { // home
+                                            reaction.users.remove(user)
+                                            msg.edit(owner)
                                         }
                                         if (reaction.emoji.name === '❌') { // Delete
                                             msg.delete()

@@ -1,4 +1,4 @@
-const discord = require('discord.js')
+const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
 
 		if (marry === null) {
 			let gif = 'https://imgur.com/Ush7ZDy.gif'
-			let casar = new discord.MessageEmbed()
+			let casar = new Discord.MessageEmbed()
 				.setColor('BLUE')
 				.setTitle('💍Novo Pedido de Casamento💍')
 				.setDescription(`${message.author.username} está pedindo a mão de ${member.username} em casamento.\n\n${member}, você aceita se casar com ${message.author}?`)
@@ -45,7 +45,7 @@ module.exports = {
 					db.set(`marry_${message.author.id}`, member.id)
 					db.set(`marry_${member.id}`, message.author.id)
 
-					let casados = new discord.MessageEmbed()
+					let casados = new Discord.MessageEmbed()
 						.setColor('BLUE')
 						.setTitle(':heart: Um novo casal acaba de se formar :heart:')
 						.setDescription(`${member} aceitou o pedido de casamento de ${message.author}`)

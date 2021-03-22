@@ -1,6 +1,5 @@
 const Discord = require('discord.js')
 const ms = require("ms")
-const confirm = require('./confirm.json')
 
 
 module.exports = {
@@ -26,6 +25,9 @@ module.exports = {
     if (!member)
       return message.channel.send('Você não mencionou ninguém.\n\n`-ban @user razão`').then(msg => msg.delete({ timeout: 5000 }))
 
+    if (member.hasPermission('KICK_MEMBERS', 'BAN_MEMBERS'))
+      return message.channel.send(`${member.user.username} é forte nesse servidor, eu não posso banir.`).then(msg => msg.delete({ timeout: 5000 }))
+
     if (member.id === '451619591320371213') // Rodrigo Couto
       return message.channel.send('Eu **JAMAIS** baniria meu criador!!!').then(msg => msg.delete({ timeout: 5000 }))
 
@@ -50,11 +52,13 @@ module.exports = {
       .addFields(
         {
           name: 'Usuário Banido',
-          value: member.user.username
+          value: member.user,
+          inline: true
         },
         {
           name: 'Nome da Conta',
-          value: member.user.tag
+          value: member.user.tag,
+          inline: true
         },
         {
           name: 'ID do usuário',
@@ -62,7 +66,7 @@ module.exports = {
         },
         {
           name: 'Moderador',
-          value: message.author
+          value: message.author.username
         },
         {
           name: 'Motivo',
@@ -71,62 +75,29 @@ module.exports = {
       )
       .setTimestamp()
       .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-      .setFooter('Data:')
+      .setFooter('Data')
 
-    const item = confirm[Math.floor(Math.random() * confirm.length)]
-    const filter = response => {
-      return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase())
-    }
-
-    
     const startban = new Discord.MessageEmbed()
       .setColor('#ff0000')
-      .setTitle(`‼️ Sistema de Banimento - ALERTA ‼️`)
-      .setDescription(`⠀`)
-      .addFields(
-        {
-          name: `${message.author.username}, você está banindo ${member.user.username} do servidor.`,
-          value: `⠀`
-        }
-      )
-      .setFooter(`Você confirma este comando?`)
-  
-    message.channel.send(startban).then(() => {
-      message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ['time'] }).then(collected => {
+      .setDescription(`Você deseja banir ${member.user.username} do servidor?`)
 
-        function f1() {
-          message.channel.send(`Banindo usuário...`).then(msg => msg.delete({ timeout: 4000 }))
+    await message.channel.send(startban).then(msg => {
+      msg.react('✅') // Check
+      msg.react('❌') // X
+
+      msg.awaitReactions((reaction, user) => {
+        if (message.author.id !== user.id) return
+
+        if (reaction.emoji.name === '✅') { // home
+          msg.delete()
           member.ban()
-        }
-
-        function f2() {
-          message.channel.send(`Banimento efetuado com sucesso.`).then(msg => msg.delete({ timeout: 3000 }))
-        }
-
-        function f3() {
-          message.channel.send(`Enviando relatório no canal ${logchannel}...`).then(msg => msg.delete({ timeout: 7500 }))
-
-        }
-
-        function f4() {
+          message.channel.send(`Enviando relatório em ${logchannel}...`).then(msg => msg.delete({ timeout: 3000 }))
           logchannel.send(banEmbed)
         }
-
-        function f5() {
-          message.channel.send(`Relatório enviado.`).then(msg => msg.delete({ timeout: 10000 }))
+        if (reaction.emoji.name === '❌') { // RPEmbed
+          msg.delete()
+          msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
         }
-
-        setTimeout(f1, 1000 * 0,5)
-        setTimeout(f2, 1000 * 4.5)
-        setTimeout(f3, 1000 * 7.5)
-        setTimeout(f4, 1000 * 14)
-        setTimeout(f5, 1000 * 15)
-      }).catch(collected => {
-        const andban = new Discord.MessageEmbed()
-          .setColor('#DCDCDC')
-          .setAuthor(`Banimento Cancelado.`)
-          .setFooter(`Nenhuma resposta de ${message.author.username}`)
-        message.channel.send(andban).then(msg => msg.delete({ timeout: 6000 }))
       })
     })
   }

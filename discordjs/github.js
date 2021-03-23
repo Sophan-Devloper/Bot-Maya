@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
 
     var gitlink = "https://github.com/rodycouto/Maya-GitHub.git"
     var linksupport = "https://docs.google.com/forms/d/e/1FAIpQLSeEMnYYmlaVv_nG4PBdPD8CA6Q-MdBi-9KW_xVrqjs2MG5AqQ/viewform?usp=sf_link"
-    var gitdance = "https://imgur.com/hd5bqo9.gif"
+    var gitdance = "https://imgur.com/C78LrtY.gif"
     const embed = new Discord.MessageEmbed()
         .setColor('#DCDCDC')
         .setTitle('Repositório Maya no GitHub')

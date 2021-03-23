@@ -85,9 +85,9 @@ client.on("message", async (message, queue, song) => {
     if (message.content.includes("bom dia")) { message.channel.send("Bom diiia") }
     if (message.content.includes("boa tarde")) { message.channel.send("Boa taarde") }
     if (message.content.includes("boa noite")) { message.channel.send("Boa noitee") }
-    if (message.content.includes("oi")) { message.channel.send("oooii") }
-    if (message.content.includes("ooi")) { message.channel.send("oláá") }
-    if (message.content.includes("oii")) { message.channel.send("oiii") }
+    if (message.content.includes("Bom dia")) { message.channel.send("Bom diiia") }
+    if (message.content.includes("Boa tarde")) { message.channel.send("Boa taarde") }
+    if (message.content.includes("Boa noite")) { message.channel.send("Boa noitee") }
 
     // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
     let prefix = db.get(`prefix_${message.guild.id}`)                       //
@@ -155,6 +155,11 @@ client.on("message", async (message, queue, song) => {
 
     try {
         const commandFile = require(`./interação/${command}.js`)
+        commandFile.run(client, message, args)
+    } catch (err) { }
+
+    try {
+        const commandFile = require(`./discordjs/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
 

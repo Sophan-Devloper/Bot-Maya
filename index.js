@@ -88,17 +88,18 @@ client.on("message", async (message, queue, song) => {
     if (message.content.includes("Bom dia")) { message.channel.send("Bom diiia") }
     if (message.content.includes("Boa tarde")) { message.channel.send("Boa taarde") }
     if (message.content.includes("Boa noite")) { message.channel.send("Boa noitee") }
+    if (message.content === 'oi') return message.channel.send(`oooi ${message.author.username}`)
 
-    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
+// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
     let prefix = db.get(`prefix_${message.guild.id}`)                       //
     if (prefix === null)                                                    //
         prefix = default_prefix                                             //
     if (!message.content.startsWith(prefix)) return                         //
     const args = message.content.slice(prefix.length).trim().split(/ +/g)   //
-    const command = args.shift().toLowerCase()                              //
-    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
+    const command = args.shift().toLowerCase()                              //nop
+// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
 
-    // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
+// -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
         const bot = message.guild.members.cache.get(client.user.id)
         const embedperm = new Discord.MessageEmbed()

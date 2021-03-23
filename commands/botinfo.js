@@ -51,26 +51,32 @@ module.exports = {
                     value: 'MakolPedro#8508 | +30 Bugs Reportados'
                 },
             )
-            .setImage('https://imgur.com/DNVIReM.gif')
+            .setImage('https://imgur.com/MkQo0Lh.gif')
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
         const support = new Discord.MessageEmbed()
             .setColor('#DCDCDC')
-            .setTitle('💬 Clique aqui para acessar a Central de Suporte 💬')
+            .setTitle('💬 Centralzinha de Suporte 💬')
+            .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
+            .setDescription('A Central de Suporte consegue atender a qualquer problema ou crítica que você tenha :heart:')
+            .setThumbnail('https://imgur.com/KyjyfRg.gif')
             .addFields(
                 {
                     name: 'Discord Server',
-                    value: 'https://discord.gg/mx8eMx6',
+                    value: `[Clique aqui](${linkservidor})`,
                     inline: true
                 },
                 {
                     name: 'Desenvolvedor',
                     value: 'Rody#3756',
                     inline: true
+                },
+                {
+                    name: 'Central de Suporte',
+                    value: `[Clique aqui](${linksupport})`,
+                    inline: true
                 }
             )
-            .setURL('https://forms.gle/vtJ5qBqFDd9rL5JU8')
-            .setImage('https://imgur.com/KyjyfRg.gif')
             .setFooter(message.author.username, message.author.displayAvatarURL())
 
 

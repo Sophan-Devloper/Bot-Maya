@@ -9,13 +9,13 @@ exports.run = async (client, message, args) => {
     let question = args.join(" ")
 
     if (!language)
-        return message.channel.send("Qual lingua você quer que eu traduza?")
+        return message.channel.send("Coloque a lingua que você deseja traduzir.\n \n`Exemplos`:\nInglês = en\nPortuguês = pt\nFrancês = fr\n...")
 
     if (language.length !== 2)
-        return message.channel.send("Coloque a lingua que você deseja traduzir.\n`Exemplo`: Inglês = en\nPortuguês - pt\nFrancês = fr\netc")
+        return message.channel.send("Coloque a lingua que você deseja traduzir.\n \n`Exemplos`:\nInglês = en\nPortuguês = pt\nFrancês = fr\n...")
 
     if (!text)
-        return message.channel.send('Você não me disse o que é pra eu traduzir :/')
+        return message.channel.send('Você não me disse o que é para eu traduzir :/')
 
     translate(args.slice(1).join(' '), { to: language }).then(res => {
         const translateEmbed = new Discord.MessageEmbed()
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
             .setColor("#6959CD")
         message.channel.send(translateEmbed)
     }).catch(err => {
-        message.channel.send("Eu tive um problema com a tradução.\n`Tente novamente usando o padrão do comando, se o problema persistir, por favor, user o comando de report `-bug`")
+        message.channel.send("Eu tive um problema com a tradução.\n`Tente novamente usando o padrão do comando, se o problema persistir, por favor, user o comando de `-sup`")
         console.log(err)
     })
 }

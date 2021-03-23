@@ -103,7 +103,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Administração',
-                    value: '\n`-unban` Desban algúm membro\n`-createchannel` Crie canais de texto \n`-createvoice` Crie canais de voz \n`-lockdown` Trave o servidor em caso de emergência \n`-setprefix / prefix` Escolha meu prefix'
+                    value: '\n`-unban` Desban algúm membro\n`-createchannel` Crie canais de texto \n`-createvoice` Crie canais de voz \n`-lockdown` Trave o servidor em caso de emergência'
                 },
                 {
                     name: 'Moderação',
@@ -111,7 +111,11 @@ module.exports = {
                 },
                 {
                     name: 'Chat',
-                    value: '`-lockchannel` Trave um canal especifico\n`-anunciar` Publique informações\n`-clear` Limpe o chat\n`-say` Diga algo atráves de mim\n`-slowmode` Ative o modo lento\n`-dm/-pv @user` Mande mensagens no privado através de mim'
+                    value: '`-lockchannel` Trave um canal especifico\n`-anunciar` Publique informações\n`-clear` Limpe o chat\n`-slowmode` Ative o modo lento'
+                },
+                {
+                    name: 'Maya',
+                    value: '`-setprefix` `-prefix` Informações sobre o meu prefix\n`-say` Diga algo atráves de mim\n`-dm` `-pv` Mensagem no privado para alguém'
                 },
                 {
                     name: 'Interação',
@@ -144,7 +148,7 @@ module.exports = {
                     value: 'MakolPedro#8508 | +30 Bugs Reportados'
                 },
             )
-            .setImage('https://imgur.com/DNVIReM.gif')
+            .setImage('https://imgur.com/MkQo0Lh.gif')
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
         const Support = new Discord.MessageEmbed()
@@ -317,7 +321,7 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-status` Muda meu status no prefil\n`-addrp @user` Dá RPs pra alguém\n`-resetrp @user` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center'
+                    value: '`-status` Muda meu status no perfil\n`-addrp @user` Dá RPs pra alguém\n`-resetrp @user` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center'
                 },
                 {
                     name: 'Comandos Black',
@@ -460,7 +464,7 @@ module.exports = {
                                 value: 'MakolPedro#8508 | +30 Bugs Reportados'
                             },
                         )
-                        .setImage('https://imgur.com/DNVIReM.gif')
+                        .setImage('https://imgur.com/MkQo0Lh.gif')
                         .setFooter(message.author.tag, message.author.displayAvatarURL())
 
                     message.channel.send(botinfo).then(msg => {

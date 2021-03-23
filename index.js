@@ -51,21 +51,21 @@ client.on("message", async (message, queue, song) => {
         'Olááá, estou aqui para ajudar, quem me chamas?'
     ]
 
-    var msgraphy = list[Math.floor(Math.random() * list.length)]
+    var msgmaya = list[Math.floor(Math.random() * list.length)]
 
     if (message.content.includes(r)) {
         message.react('♥️')
-        message.channel.send(msgraphy)
+        message.channel.send(msgmaya)
     }
 
     if (message.content.includes(r1)) {
         message.react('♥️')
-        message.channel.send(msgraphy)
+        message.channel.send(msgmaya)
     }
 
     if (message.content.includes(r2)) {
         message.react('♥️')
-        message.channel.send(msgraphy)
+        message.channel.send(msgmaya)
     }
 
     if (message.content === '-dream') {
@@ -103,15 +103,15 @@ client.on("message", async (message, queue, song) => {
         const bot = message.guild.members.cache.get(client.user.id)
         const embedperm = new Discord.MessageEmbed()
             .setColor('#DCDCDC')
-            .setTitle('Dicas da Raphy')
+            .setTitle('Dicas da Maya')
             .setDescription('Para meu perfeito funcionamento, é necessário que eu tenha a permissão "Administrador" ativado.')
             .addFields(
                 {
                     name: 'Como ativar a função Administrador',
-                    value: '1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Raphy"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.'
+                    value: '1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Maya"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.'
                 },
             )
-            .setFooter(`Raphy Dicas`, message.client.user.displayAvatarURL())
+            .setFooter(`Maya Dicas`, message.client.user.displayAvatarURL())
         return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => message.channel.send(embedperm))
     }
     // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
@@ -339,6 +339,7 @@ distube
             .setColor('BLUE')
             .setTitle('Escolha uma das opções abaixo...')
             .setDescription(`${result.map(song => `**${++i}** - ${song.name} | \`${song.formattedDuration}\``).join("\n")}`)
+            .setThumbnail('https://imgur.com/mZJiaJ8.gif')
             .setFooter('Você tem apenas 60 segundos para escolher sua música.', message.author.displayAvatarURL())
         message.channel.send(resultsearch)
         // message.channel.send(`** ${message.author.username},  escolha uma das opções abaixo**\n \n${result.map(song => `**${++i}** - ${song.name} | \`${song.formattedDuration}\``).join("\n")}\n \n*Envie qualquer das opções dentro de 60 segundos.*`).then(msg => msg.delete({ timeout: 60000 }))
@@ -349,6 +350,42 @@ distube
         message.channel.send("**ASSIONE O SUPORTE!** `-sup`\n \nUm erro foi encontrado: " + e)
     })
 // -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC -- -- STATUS MUSIC --    
+// -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- 
+client.on("guildMemberRemove", async member => {
+    let leavechannel = member.guild.channels.cache.find(channel => channel.name === "saidas")
+    if (!leavechannel) {
+        return member.guild.owner.send('Hey, eu não consigo mandar boas-vindas no seu servidor. Crie um chat com o nome `welcome` e um com o nome `saidas`, por favor. \n\nEu posso te ajudar com isso \n`-createchannel welcome`\n`-createchannel saidas` \n\nSe você já tiver algum sistema de boas-vindas, só criar o canal e deixar privado só pros Adms, sem problemas')
+    }
+    if (leavechannel) {
+        let leaveembed = await new Discord.MessageEmbed() // Embed Saída
+            .setColor("#FF0000")
+            .setAuthor(member.user.tag, member.user.displayAvatarURL())
+            .setImage("https://imgur.com/BGeYfY4.gif")
+            .setDescription(`**${member.user.username}**, saiu do servidor! <:fzoq2:746361736935768085> \nPoxa, nem me deu tchau :cry:`)
+            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }))
+        await leavechannel.send(leaveembed)
+    }
+})
+
+client.on("guildMemberAdd", async member => {
+    let channel = member.guild.channels.cache.find(channel => channel.name === "welcome")
+    if (!channel) {
+        return member.guild.owner.send('Hey, eu não consigo mandar boas-vindas no seu servidor. Por favor, crie um chat com o nome `welcome` e um com o nome `saidas`. \n\nEu posso te ajudar com isso, coloque isso em qualquer canal do seu servidor: \n`-createchannel welcome`\n`-createchannel saidas` \n\nSe você já tiver algum sistema de boas-vindas, só criar o canal e deixar privado só pros Adms, sem problemas')
+    }
+
+    if (channel) {
+        let welcomeembed = await new Discord.MessageEmbed() // Embed boas-vindas	
+            .setColor("#00FF00")
+            .setAuthor(member.user.tag, member.user.displayAvatarURL())
+            .setTitle(`<:hugheart:746361738940645406> Boas-vindas <:hugheart:746361738940645406>`)
+            .setImage("https://imgur.com/Ap4PVxo.gif")
+            .setDescription(`**${member.user}**, seja muito bem-vindo(a) ao Servidor **${member.guild.name}**! Divirta-se :heart:`)
+            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }))
+            .setFooter("Viva! Viva!")
+        await channel.send(welcomeembed).then(msg => member.send(`Oláá, seja muito bem-vindo ao servidor ${member.guild.name}. \n\nQualquer coisa, é só digitar *-help* lá no servidor que eu te mando todos os meus comandos.`));
+    }
+})
+// -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- 
 
 // -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile //
 client.on("ready", () => {                                                                                //

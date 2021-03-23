@@ -31,7 +31,7 @@ module.exports = {
     if (member.id === '516026271529173004') // Rafael Couto
       return message.channel.send('Ele é o irmãozinho do meu criador, eu não posso banir ele O-O').then(msg => msg.delete({ timeout: 5000 }))
 
-    if (member.id === '821471191578574888') // Raphy
+    if (member.id === '821471191578574888') // Maya
       return message.channel.send('Você não quer me banir, pensa duas vezes po :cry:').then(msg => msg.delete({ timeout: 5000 }))
 
     if (member.id === message.author.id)

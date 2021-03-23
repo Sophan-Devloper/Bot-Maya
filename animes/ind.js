@@ -345,7 +345,7 @@ const IndEmbed = new Discord.MessageEmbed()
         .setColor('#DCDCDC')
         .addFields(
             {
-              name: 'Raphy Indica :hearts:',
+              name: 'Maya Indica :hearts:',
               value: `Nome: ${rand}`
             })
   await message.channel.send(IndEmbed).then(msg => msg.delete({timeout: 10000}))

@@ -25,7 +25,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Emojis da Centralzinha',
-                    value: '🏛️  Esta Página \n⭐  Raphy Points \n💍  Casamento/Family \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n⠀⠀'
+                    value: '🏛️  Esta Página \n⭐  Maya Points \n💍  Casamento/Family \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands⠀⠀'
                 },
             )
             .addField(`Previna-se contra a COVID-19, use máscara!`, `[Saiba mais](${linkcovid})`)
@@ -34,7 +34,7 @@ module.exports = {
 
         const RPEmbed = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setTitle('<:StarPoint:766794021128765469> Sistema Raphy Points <:StarPoint:766794021128765469> BETA')
+            .setTitle('<:StarPoint:766794021128765469> Sistema Maya Points <:StarPoint:766794021128765469> BETA')
             .setURL('https://discord.gg/mx8eMx6')
             .setDescription('Ainda na versão beta, este é meu sistema de economia atual. Consiga dinheiro por enquanto, em breve a nossa lojinha vai estar acessível para todo mundo')
             .addFields(
@@ -56,7 +56,7 @@ module.exports = {
                 },
                 {
                     name: ":gear: Developer's Commands",
-                    value: "`-addrp @user` Adiciona RP's\n`-removerp @user` Remove RP's\n`-resetrp @user` Tira todos os RP's\n`-resetall` Reseta o banco de dados Raphy Points."
+                    value: "`-addrp @user` Adiciona RP's\n`-removerp @user` Remove RP's\n`-resetrp @user` Tira todos os RP's\n`-resetall` Reseta o banco de dados Maya Points."
                 },
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -184,7 +184,7 @@ module.exports = {
                 },
                 {
                     name: 'Mande mais games pra gente',
-                    value: `[Suporte Raphy](${linksupport})`
+                    value: `[Suporte Maya](${linksupport})`
                 },
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -212,7 +212,7 @@ module.exports = {
 
         const CommandEmbed = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setTitle('Comandos da Raphy')
+            .setTitle('Comandos da Maya')
             .setURL('https://discord.gg/mx8eMx6')
             .setDescription('Aqui você pode encontrar vários comandos úteis e que podem ajudar bastante.')
             .addFields(
@@ -225,7 +225,7 @@ module.exports = {
                     value: '`-invite` `-inv` Me coloque no seu servidor \n`-ideia` Mande ideias pro seu Servidor \n`-report` Reporte coisas pra Staff do Servidor \n`-serverinfo` Informações do Servidor'
                 },
                 {
-                    name: 'Raphy',
+                    name: 'Maya',
                     value: '`-clima` Veja o clima da sua cidade \n`-ping` Pong! \n`-uptime` Tempo que eu estou acordada \n`-botinfo` Informações sobre mim'
                 },
                 {
@@ -265,9 +265,9 @@ module.exports = {
 
         const Quiz = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setTitle('📝 Raphy Quiz 📝 BETA')
+            .setTitle('📝 Maya Quiz 📝 BETA')
             .setURL('https://discord.gg/mx8eMx6')
-            .setDescription('O Raphy Quiz é um jogo simples e divertido de brincar. Tendo 2 modos, o *Normal* com perguntas genéricas e *Naruto*, para os otakus de plantão.\nJogar com os amigos é ainda mais divertido!!!')
+            .setDescription('O Maya Quiz é um jogo simples e divertido de brincar. Tendo 2 modos, o *Normal* com perguntas genéricas e *Naruto*, para os otakus de plantão.\nJogar com os amigos é ainda mais divertido!!!')
             .addFields(
                 {
                     name: 'Comando de Ativação',
@@ -278,7 +278,7 @@ module.exports = {
                     value: 'Digite o comando e espere a pergunta, o primeiro a responder ganha.'
                 },
                 {
-                    name: 'Raphy Quiz Informações',
+                    name: 'Maya Quiz Informações',
                     value: '`Quiz: 27 Perguntas`\n`Quiznaruto: 17 Perguntas`'
                 }
             )
@@ -300,7 +300,7 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Black',
-                    value: '`-block @user` Bloqueia um usuário de usar meus comandos\n`unblock` Inverso de block\n`-leaveall` Me tira de todos os servidores\n`delraphy` Me deleta :cry:'
+                    value: '`-block @user` Bloqueia um usuário de usar meus comandos\n`unblock` Inverso de block\n`-leaveall` Me tira de todos os servidores\n`delmaya` Me deleta :cry:'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -320,7 +320,7 @@ module.exports = {
             msg.react('👥') // interação 12
             msg.react('📝') // quiz 13
             msg.react('📃') // botinfo 14
-            msg.react('<:hehe:741819620931010639>') // owner 15
+            msg.react('📁') // owner 15
             msg.react('❌') // delete 16
             //  msg.react('') // 17
             //  msg.react('') // 18
@@ -334,7 +334,7 @@ module.exports = {
                     reaction.users.remove(user)
                     msg.edit(HelpEmbed)
                 }
-                if (reaction.emoji.name === '<:hehe:741819620931010639>') { // home
+                if (reaction.emoji.name === '📁') { // home
                     reaction.users.remove(user)
                     msg.edit(owner)
                 }
@@ -395,7 +395,7 @@ module.exports = {
                         .setThumbnail(client.user.displayAvatarURL())
                         .setTitle('📃 Centralzinha de Informações 📃')
                         .setColor('#DCDCDC')
-                        .setDescription('Meu nome é Raphy. Eu fui criada para ser uma bot de diversão e admnistração. Porém tenho alguns recursos além disso. Sou capaz de substituir vááários bots. Minha missão é ser a bot mais completa de todas.')
+                        .setDescription('Meu nome é Maya. Eu fui criada para ser uma bot de diversão e admnistração. Porém tenho alguns recursos além disso. Sou capaz de substituir vááários bots. Minha missão é ser a bot mais completa de todas.')
                         .addFields(
                             {
                                 name: 'Páginas da Centralzinha',
@@ -411,7 +411,7 @@ module.exports = {
                         .addFields(
                             {
                                 name: 'Informações Técinas',
-                                value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/10/2020\n💡 Idealizada por: Rafaella#???? \n:gear: Criada por: Rody#3756\n🖌️ Design: Rody & Rafaella\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Raphy Version: 2.1.1`)
+                                value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/10/2020\n💡 Idealizada por: Rafaella#???? \n:gear: Criada por: Rody#3756\n🖌️ Design: Rody & Rafaella\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1`)
                             }
                         )
                         .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -545,6 +545,10 @@ module.exports = {
                                         if (reaction.emoji.name === '📝') { // quiz
                                             reaction.users.remove(user)
                                             msg.edit(Quiz)
+                                        }
+                                        if (reaction.emoji.name === '📁') { // home
+                                            reaction.users.remove(user)
+                                            msg.edit(owner)
                                         }
                                         if (reaction.emoji.name === '❌') { // Delete
                                             msg.delete()

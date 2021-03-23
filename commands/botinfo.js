@@ -1,6 +1,5 @@
 const Discord = require('discord.js')
 const os = require('os')
-const { isNullOrUndefined } = require('util')
 
 module.exports = {
     name: "bot-info",
@@ -12,7 +11,7 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL())
             .setTitle('📃 Centralzinha de Informações 📃')
             .setColor('#DCDCDC')
-            .setDescription('Meu nome é Raphy. Eu fui criada para ser uma bot de diversão e admnistração. Porém tenho alguns recursos além disso. Sou capaz de substituir vááários bots. Minha missão é ser a bot mais completa de todas.')
+            .setDescription('Meu nome é Maya. Eu fui criada para ser uma bot de diversão e admnistração. Porém tenho alguns recursos além disso. Sou capaz de substituir vááários bots. Minha missão é ser a bot mais completa de todas.')
             .addFields(
                 {
                     name: 'Páginas da Centralzinha',
@@ -28,7 +27,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Informações Técinas',
-                    value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/10/2020\n💡 Idealizada por: Rafaella#???? \n:gear: Criada por: Rody#3756\n🖌️ Design: Rody & Rafaella\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Raphy Version: 2.1.1`)
+                    value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/03/2021\n💡 Idealizada por: Rafaella#???? \n:gear: Criada por: Rody#3756\n🖌️ Design: Rody & Rafaella\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1`)
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())

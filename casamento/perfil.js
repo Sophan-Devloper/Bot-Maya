@@ -43,6 +43,6 @@ message.delete()
             },
             )
         .setThumbnail(user.user.displayAvatarURL({dynamic : true}))
-        .setFooter('Raphy Family')
+        .setFooter('Maya Family')
     message.channel.send(casamento).then(msg => msg.delete({timeout: 10000}))
         }

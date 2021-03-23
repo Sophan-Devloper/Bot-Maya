@@ -20,7 +20,7 @@ module.exports = {
 
         const quiztime = new Discord.MessageEmbed()
             .setColor('#DCDCDC')
-            .setTitle(`RAPHY QUIZ TIME!`)
+            .setTitle(`MAYA QUIZ TIME!`)
             .setDescription('Prepare-se! Você tem apenas 15 segundos.')
 
         message.channel.send(quiztime).then(

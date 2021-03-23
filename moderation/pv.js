@@ -12,8 +12,8 @@ module.exports = {
     if (!user)
        return message.channel.send('Você não marcou ninguém, para quem eu devo enviar a mensagem? `-pv @user Mensagem`').then(msg => msg.delete({timeout: 5000}));
 
-    let Raphy = user.id === '763072871597604874'
-    if (Raphy)
+    let Maya = user.id === '763072871597604874'
+    if (Maya)
        return message.channel.send('Não mande mensagens para mim mesma kkkkk').then(msg => msg.delete({timeout: 5000}))
 
     if (!args.slice(1).join(" "))

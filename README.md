@@ -1,4 +1,4 @@
-# Raphy™
+# Maya™
 
 EN: A Discord Bot made by me, a simple test on JavaScript with Discord.js
 

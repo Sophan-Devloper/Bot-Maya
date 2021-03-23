@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
 
     let user = message.mentions.members.first() || message.author
     let amount = args.slice(1).join(" ")
-    let money = db.fetch(`money_${message.guild.id}_${user.id}`)
+    let money = db.fetch(`money_${message.author.id}_${user.id}`)
     if (money === null) { money = 0 }
 
     const rody = message.author.id === ("451619591320371213")
@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
     if (isNaN(amount))
         return message.channel.send('Eu acho que o valor que você me informou não é um número.').then(msg => msg.delete({ timeout: 5000 }))
 
-    db.subtract(`money_${message.guild.id}_${user.id}`, amount)
+    db.subtract(`money_${message.author.id}_${user.id}`, amount)
     message.channel.send(`Foi removido ${amount}RPoints de ${user} com sucesso`)
-    user.send(`Foi removido um total de ${amount} dos seus RPoints em ${user.guild.name}`)
+    user.send(`Foi removido um total de ${amount} dos seus RPoints em ${user.author.name}`)
 }

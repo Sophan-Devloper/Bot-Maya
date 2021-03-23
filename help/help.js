@@ -36,15 +36,15 @@ module.exports = {
             .setColor('#CD853F')
             .setTitle('<:StarPoint:766794021128765469> Sistema Maya Points <:StarPoint:766794021128765469> BETA')
             .setURL('https://discord.gg/mx8eMx6')
-            .setDescription('Ainda na versão beta, este é meu sistema de economia atual. Consiga dinheiro por enquanto, em breve a nossa lojinha vai estar acessível para todo mundo')
+            .setDescription('Ainda na versão beta, este é meu sistema interservidores de economia atual. Consiga dinheiro por enquanto, em breve a nossa lojinha vai estar acessível para todo mundo')
             .addFields(
                 {
                     name: '<:topreach:766846960569155584> Veja seus RPoints',
-                    value: "`-balance` | `-bal` | `-rp` | `-bal @user`"
+                    value: "`-balance` | `-bal` | `-rp` | `-bal @user` | `-perfil @user` | `-profile`"
                 },
                 {
                     name: '<:topreach:766846960569155584> Ganhe RPoints!',
-                    value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> todos os dias\n`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)'
+                    value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n`-slut` Ganhe ou perca até 2000<:StarPoint:766794021128765469>'
                 },
                 {
                     name: '<:topreach:766846960569155584> Loja',
@@ -107,11 +107,11 @@ module.exports = {
                 },
                 {
                     name: 'Moderação',
-                    value: '`-addrole` Dê cargos \n`-removerole` Tire Cargos\n`-setnick @user` Mude o nickname de alguém\n`-kick` Chute alguém do servidor\n`-ban` Banir membros\n`-mute` Mute alguém (tempmute)\n`-unmute` Desmuta alguém\n`-warn` Dê Warns \n`-warns` Confira seus Warns \n`-resetwarns` `-rwarns` Reset warns de membros '
+                    value: '`-addrole` Dê cargos \n`-removerole` Tire Cargos\n`-setnick @user` Mude o nickname de alguém\n`-kick` Chute alguém do servidor\n`-ban` Banir membros\n`-muteinfo` Info do meu Mute System\n`-mute` Mute alguém (tempmute)\n`-unmute` Desmuta alguém\n`-warn` Dê Warns \n`-warns` Confira seus Warns \n`-resetwarns` `-rwarns` Reset warns de membros\n`-kickvoice` Tire alguém da call '
                 },
                 {
                     name: 'Chat',
-                    value: '`-lockchannel` Trave um canal especifico\n`-anunciar` Publique informações\n`-clear` Limpe o chat\n`-say` Diga algo atráves de mim\n`-slowmode` Ative o modo lento\n`-dm @user` Mande mensagens no privado através de mim'
+                    value: '`-lockchannel` Trave um canal especifico\n`-anunciar` Publique informações\n`-clear` Limpe o chat\n`-say` Diga algo atráves de mim\n`-slowmode` Ative o modo lento\n`-dm/-pv @user` Mande mensagens no privado através de mim'
                 },
                 {
                     name: 'Interação',
@@ -196,6 +196,10 @@ module.exports = {
             .setDescription('Aaaaaaa anime é muito boooom! :heart:')
             .addFields(
                 {
+                    name: 'Comandinhos de animes',
+                    value: '`-anime` listinha pequena de comandos'
+                },
+                {
                     name: 'Indicação de Animes (+2000 Animes)',
                     value: '`-ind`'
                 },
@@ -222,16 +226,29 @@ module.exports = {
                 },
                 {
                     name: 'Servidor',
-                    value: '`-invite` `-inv` Me coloque no seu servidor \n`-ideia` Mande ideias pro seu Servidor \n`-report` Reporte coisas pra Staff do Servidor \n`-serverinfo` Informações do Servidor'
+                    value: '`-invite` `-inv` Me coloque no seu servidor \n`-ideia` Mande ideias pro seu Servidor \n`-report` Reporte coisas pra Staff do Servidor \n`-serverinfo` Informações do Servidor\n`-channel` Info do canal\n`-dono/-owner` Veja quem é o dono do server'
                 },
                 {
                     name: 'Maya',
-                    value: '`-clima` Veja o clima da sua cidade \n`-ping` Pong! \n`-uptime` Tempo que eu estou acordada \n`-botinfo` Informações sobre mim'
+                    value: '`-ping` Pong! \n`-uptime` Tempo que eu estou acordada \n`-botinfo` Informações sobre mim\n`-sup` `-support` `-suporte` Minha central de Suporte'
                 },
                 {
                     name: 'Usuário',
                     value: '`-avatar @user` Veja a foto de perfil \n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
-                })
+                },
+                {
+                    name: 'Fun',
+                    value: '`-Jokenpo/-j` Jokeeenpo\n`-coinflip` Cara ou coroa?\n`-ascii` Muito doido\n`-frase` Filosofia pura'
+                },
+                {
+                    name: 'Util',
+                    value: '`-clima` Veja o clima da sua cidade\n`-translate` `-t` Traduza com o Google Tradutor\n`-invisible` Escreva nada\n`-piada` kkkkkk'
+                },
+                {
+                    name: 'Exclusive Server',
+                    value: '`-mk` `-akat` `-akatsuki` Link\n`-ninja666` `-nocu`\n`-livia`'
+                }
+            )
             .addField('Estamos adicionando mais comandos úteis, tá bom?', `Tem algúma ideia de comando legal? [Clique aqui](${linksupport})`)
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
@@ -271,7 +288,11 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comando de Ativação',
-                    value: 'Ativos: `-quiz` | `-quiznaruto`\nEm criação: `-quizanimes` | `-quizcinema` | `-quizhistoria` | `-quizch (corpo humano)`'
+                    value: 'Ativos: `-quiz` | `-quiznaruto` (reformando)'
+                },
+                {
+                    name: 'Em criação',
+                    value: '\nEm criação: `-quizanimes` | `-quizcinema` | `-quizhistoria` | `-quizch` corpo humano'
                 },
                 {
                     name: 'Como jogar',
@@ -296,11 +317,11 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-status` Muda meu status no prefil\n`-addrp @user` Dá RPs pra alguém\n`resetrp @user` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center'
+                    value: '`-status` Muda meu status no prefil\n`-addrp @user` Dá RPs pra alguém\n`-resetrp @user` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center'
                 },
                 {
                     name: 'Comandos Black',
-                    value: '`-block @user` Bloqueia um usuário de usar meus comandos\n`unblock` Inverso de block\n`-leaveall` Me tira de todos os servidores\n`delmaya` Me deleta :cry:'
+                    value: '`-block @user` Bloqueia um usuário de usar meus comandos\n`-unblock` Inverso de block\n`-leaveall` Me tira de todos os servidores\n`-delmaya` Me deleta :cry:'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -399,7 +420,7 @@ module.exports = {
                         .addFields(
                             {
                                 name: 'Páginas da Centralzinha',
-                                value: '🏛️ Página Princial\n📃 Essa página aqui\n⚙️ Informações Técnicas\n❤️ Colaboradores\n💬 Suporte\n❌ Apaga tudo'
+                                value: '🏛️ Página Principal\n📃 Essa página aqui\n⚙️ Informações Técnicas\n❤️ Colaboradores\n💬 Suporte\n❌ Apaga tudo'
                             }
                         )
                         .setFooter(message.author.tag, message.author.displayAvatarURL())

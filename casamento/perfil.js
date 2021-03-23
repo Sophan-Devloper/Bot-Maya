@@ -6,7 +6,7 @@ message.delete()
 
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
 
-    let bal = await db.fetch(`money_${message.guild.id}_${user.id}`)
+    let bal = await db.fetch(`money_${message.author.id}_${user.id}`)
     if(bal === null) bal = 0
 
     let marry = await `<@${db.get(`marry_${user.id}`)}>`

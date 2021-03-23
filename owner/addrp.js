@@ -16,12 +16,12 @@ module.exports.run = async (bot, message, args) => {
     if (!amount)
         return message.channel.send('`-addrp @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
 
-    let money = db.fetch(`money_${message.guild.id}_${user.id}`)
+    let money = db.fetch(`money_${message.author.id}_${user.id}`)
     if (money === null) { money = 0 }
     if (isNaN(amount))
         return message.channel.send('Eu acho que o valor que você me informou não é um número.').then(msg => msg.delete({ timeout: 5000 }))
 
-    db.add(`money_${message.guild.id}_${user.id}`, amount)
+    db.add(`money_${message.author.id}_${user.id}`, amount)
     user.send(`Rody te enviou **${amount}<:StarPoint:766794021128765469>RPoints**.`)
     message.channel.send('Prontinho, chefe.').then(msg => msg.delete({ timeout: 5000 }))
 }

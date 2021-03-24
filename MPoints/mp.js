@@ -26,7 +26,8 @@ module.exports = {
           name: '<:StarPoint:766794021128765469>Maya Points',
           value: `${bal}<:StarPoint:766794021128765469>MPoints`,
           inline: true
-        })
+        }
+      )
       .setFooter('Maya Points BETA')
     message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
   }

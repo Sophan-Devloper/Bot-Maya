@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const db = require('../MPoints/node_modules/quick.db')
+const db = require('quick.db')
 
 module.exports.run = async (bot, message, args) => {
   message.delete()

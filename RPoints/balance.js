@@ -9,7 +9,7 @@ module.exports = {
     message.delete()
 
     let user = message.mentions.members.first() || message.member || message.mentions.users.first() || message.author
-    let bal = await db.fetch(`money_${message.author.id}_${user.id}`);
+    let bal = await db.get(`money_${message.author.id}_${user.id}`);
     if (bal === null) bal = 0
 
     const embed = new Discord.MessageEmbed()

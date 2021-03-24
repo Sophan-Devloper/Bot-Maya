@@ -20,7 +20,6 @@ if (!user)
         .setColor('#000000')
         .setDescription(`${message.author} está mostrando o dedo para ${user}`)
         .setImage(rand)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
   
   await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
 }

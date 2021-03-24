@@ -6,7 +6,7 @@ message.delete()
     if (!db.get(`family_${message.author.id}`))
     return message.channel.send("Você não tem familia...").then(msg => msg.delete({timeout: 6000}))
 
-    await message.channel.send(`Você acaba de se separar da sua familia.`)
+    await message.channel.send(`Você acaba de se separar da sua familia. Você não tem mais parentesco com <@${db.get(`family_${message.author.id}`)}`)
     await db.delete(`family_${db.get(`family_${message.author.id}`)}`)
     await db.delete(`family_${message.author.id}`)
 }

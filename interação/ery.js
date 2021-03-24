@@ -17,7 +17,6 @@ const embed = new Discord.MessageEmbed()
         .setColor('#000000')
         .setDescription(`${message.author} debochou de ${user}`)
         .setImage(rand)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
         
    await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
 }

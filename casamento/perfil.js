@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const db = require('quick.db')
+const moment = require('moment')
 
 exports.run = async (client, message, args) => {
 message.delete()
@@ -13,12 +14,21 @@ message.delete()
     if(marry === `<@null>`)
     marry = "Solteiro(a)"
 
-    let adote = await `<@${db.get(`adote_${user.id}`)}>`
-    if(adote === `<@null>`)
-    adote = "Não está em nenhuma familia"
+    let family = await `<@${db.get(`family_${user.id}`)}>`
+    if(family === `<@null>`)
+    family = "Vago"
 
-    let level = await db.fetch(`level_${message.author.id}_${user.id}`)
+    let family2 = await `<@${db.get(`family2_${user.id}`)}>`
+    if(family2 === `<@null>`) family2 = "Vago"
+    let family3 = await `<@${db.get(`family3_${user.id}`)}>`
+    if(family3 === `<@null>`) family3 = "Vago"
+
+    let level = await db.fetch(`level_${user.id}`)
     if(level === null) level = 0
+
+    let status = await db.get(`status_${message.author.id}`)
+    if(status === null) status = "Sem frase por aqui"
+
 
     const casamento = new Discord.MessageEmbed()
         .setTitle(`:hearts: Perfil Pessoal de ${user.user.username}:hearts:`)
@@ -30,7 +40,7 @@ message.delete()
             },
             {
                 name: '❤️Familia❤️',
-                value: adote
+                value: `${family}, ${family2}, ${family3}`
             },
             {
                 name: '💸 Dinheiro Intersevidor',
@@ -42,8 +52,12 @@ message.delete()
             },
             {
                 name: '🛡️Membro Desde',
-                value: user.joinedAt.toLocaleDateString("pt-br")
+                value: moment(user.joinedAt).format('DD/MM/YY')
             },
+            {
+                name: 'Status',
+                value: status
+            }
             )
         .setThumbnail(user.user.displayAvatarURL({dynamic : true}))
         .setFooter('Maya Family')

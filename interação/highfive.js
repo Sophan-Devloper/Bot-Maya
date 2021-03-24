@@ -27,7 +27,6 @@ let avatar = message.author.displayAvatarURL({format: 'png'});
         .setColor('#000000')
         .setDescription(`${message.author} mandou um Toca Aqui para  ${user}`)
         .setImage(rand)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL()) 
    
     await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
 }

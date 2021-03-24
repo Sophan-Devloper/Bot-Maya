@@ -25,7 +25,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Emojis da Centralzinha',
-                    value: '🏛️  Esta Página \n⭐  Maya Points \n💍  Casamento/Family \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands⠀⠀'
+                    value: '🏛️  Esta Página \n⭐  Maya System \n💾  GitHub Repository \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands⠀⠀'
                 },
             )
             .addField(`Previna-se contra a COVID-19, use máscara!`, `[Saiba mais](${linkcovid})`)
@@ -34,9 +34,9 @@ module.exports = {
 
         const RPEmbed = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setTitle('<:StarPoint:766794021128765469> Sistema Maya Points <:StarPoint:766794021128765469> BETA')
+            .setTitle('<:StarPoint:766794021128765469> Central Maya System <:StarPoint:766794021128765469> BETA')
             .setURL('https://discord.gg/mx8eMx6')
-            .setDescription('Ainda na versão beta, este é meu sistema interservidores de economia atual. Consiga dinheiro por enquanto, em breve a nossa lojinha vai estar acessível para todo mundo')
+            .setDescription('Ainda na versão beta, este é meu *sistema interservidores*, ou seja, seu xp, dinheiro e tudo vinculado a mim, você também terá em todos os outros servidores.')
             .addFields(
                 {
                     name: '<:topreach:766846960569155584> Veja seus RPoints',
@@ -47,33 +47,37 @@ module.exports = {
                     value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n`-slut` Ganhe ou perca até 2000<:StarPoint:766794021128765469>'
                 },
                 {
-                    name: '<:topreach:766846960569155584> Loja',
-                    value: '`-loja` | `-store` Em construção'
+                    name: '<:topreach:766846960569155584> Em Breve',
+                    value: '`-loja` `-store` `-rankingrp\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `aposta` `-giverp`'
                 },
                 {
-                    name: '<:topreach:766846960569155584> Ranking',
-                    value: '`-rankingrp` Em Construção'
+                    name: "<:topreach:766846960569155584> Level System",
+                    value: "`-level` Seu level\n`-rank` Ranking"
                 },
                 {
-                    name: ":gear: Developer's Commands",
-                    value: "`-addrp @user` Adiciona RP's\n`-removerp @user` Remove RP's\n`-resetrp @user` Tira todos os RP's\n`-resetall` Reseta o banco de dados Maya Points."
+                    name: '<:topreach:766846960569155584> Family System',
+                    value: '`-marry @user` Se case com alguém\n`-divorce` Se divorcie\n`-family` `2...5` Adicione até 5 pessoas a sua familia\n`-nofamily` `2...5` Tire alguém da sua familia'
                 },
+                {
+                    name: '<:topreach:766846960569155584> Perfil',
+                    value: '`-setstatus` Defina seu status no seu perfil\n`-profile` `-perfil` Veja seu perfil\n`-perfil @user` Perfil de alguém'
+                }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())
 
-        const Family = new Discord.MessageEmbed()
+        const Github = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setTitle(':ring: Casamento/Family :ring: BETA')
+            .setTitle('💾 Github Acess')
             .setURL('https://discord.gg/mx8eMx6')
-            .setDescription('Não fique sozinho no mundo, case-se com alguém ou entre/crie uma familia.')
+            .setDescription('Não fique sozinho no mundo da programação, se junte e venha dar aquele upgrade no seu bot.')
             .addFields(
                 {
-                    name: 'Comandos de Ativação',
-                    value: '`-marry @user` Se case com alguém\n`-divorce` Se divorcie \n`-adote @user` Adote alguém \n`-noadote` Quebre a adoção '
+                    name: 'Comandos do Github System',
+                    value: '`-github` Link do Repositório Maya'
                 },
                 {
-                    name: 'Sistema de Perfil',
-                    value: '`-profile` | `-perfil` | `-perfil @user`'
+                    name: 'Comandos Prontos',
+                    value: '`-commandFile` Código de Acesso a Folders'
                 },
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -115,7 +119,7 @@ module.exports = {
                 },
                 {
                     name: 'Maya',
-                    value: '`-setprefix` `-prefix` Informações sobre o meu prefix\n`-say` Diga algo atráves de mim\n`-dm` `-pv` Mensagem no privado para alguém'
+                    value: '`-setprefix` `-prefix` Informações sobre o meu prefix\n`-say` Diga algo atráves de mim\n`-dm` `-pv` Mensagem no privado para alguém\n`-criarcomando` Crie um comando pro seu server\n`-deletecomando` Delete um comando do server\n`-backup` Backup dos meus dados do seu server'
                 },
                 {
                     name: 'Interação',
@@ -242,15 +246,19 @@ module.exports = {
                 },
                 {
                     name: 'Fun',
-                    value: '`-Jokenpo/-j` Jokeeenpo\n`-coinflip` Cara ou coroa?\n`-ascii` Muito doido\n`-frase` Filosofia pura'
+                    value: '`-trig` TRIGGEEEEER\n`-Jokenpo/-j` Jokeeenpo\n`-coinflip` Cara ou coroa?\n`-ascii` Muito doido\n`-frase` Filosofia pura\n`-changemymind` Changemymind\n'
                 },
                 {
                     name: 'Util',
-                    value: '`-clima` Veja o clima da sua cidade\n`-translate` `-t` Traduza com o Google Tradutor\n`-invisible` Escreva nada\n`-piada` kkkkkk'
+                    value: '`-cat` Gatinhos são úteis, tá bom? ;-;\n`-clima` Veja o clima da sua cidade\n`-translate` `-t` Traduza com o Google Tradutor\n`-invisible` Escreva nada\n`-piada` kkkkkk\n`-imc` Veja seu imc'
                 },
                 {
                     name: 'Exclusive Server',
                     value: '`-mk` `-akat` `-akatsuki` Link\n`-ninja666` `-nocu`\n`-livia`'
+                },
+                {
+                    name: 'Random',
+                    value: '`-advice` This command is completelly in english\n`-boom` Só faz boom\n`-ecchi` Não recomendo usar isso\n`-explosion` Megumiiin\n`-feet` Pézin\n`-livia` Gay\n`-loli` Lolicon`\n`-stonks` `-notstonks` Stonks esse\n`-puppy` Fofiiiinho'
                 }
             )
             .addField('Estamos adicionando mais comandos úteis, tá bom?', `Tem algúma ideia de comando legal? [Clique aqui](${linksupport})`)
@@ -278,7 +286,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comandos Disponiveis',
-                    value: '`-baka @user` Chame de Baka! \n`-bite @user` Mordidinha \n`-dedo @user` Educação \n`-greet @user` Comprimento \n`-hit @user` Briga, briga, briga! \n`-hug @user` Abraçar é tão boom \n`-kill @user` Mate! \n`-kiss @user` Hmmm, beijo é? \n`-onegai @user` Porfavoor \n`-pat @user` Cariiiinho \n`-rob @user` Roubar é tão feio... \n`-slap @user` Tapããão \n`-love @user` Mande seu amor secretamente \n`-ery @user` Deboche \n`-lick @user` Peroriin \n`-suck @user` Chupada \n`-highfive @user` Toca Aqui \n`-poke @user` Cutucadinha \n`-shoot @user` Atire para matar \n`-shrug @user` Fazer oque ne  \n`-stare @user` Olhar fixo \n`-stomp @user` Pise em alguem'
+                    value: '`-baka @user` Chame de Baka! \n`-bite @user` Mordidinha \n`-dedo @user` Educação\n`-shit` Pisei na mer#@\n`-greet @user` Comprimento \n`-hit @user` Briga, briga, briga! \n`-hug @user` Abraçar é tão boom \n`-kill @user` Mate! \n`-kiss @user` Hmmm, beijo é? \n`-onegai @user` Porfavoor \n`-pat @user` Cariiiinho \n`-rob @user` Roubar é tão feio... \n`-slap @user` Tapããão\n`-slaap` Tapão em foto\n`-love @user` Mande seu amor secretamente \n`-ery @user` Deboche \n`-lick @user` Peroriin \n`-suck @user` Chupada \n`-highfive @user` Toca Aqui \n`-poke @user` Cutucadinha \n`-shoot @user` Atire para matar \n`-shrug @user` Fazer oque ne  \n`-stare @user` Olhar fixo \n`-stomp @user` Pise em alguem\n`-affect @user` Isso não afeta o bebê'
                 },
             )
             .addField('Não se procupe, mais comandos estão sendo adicionados', `Você tem alguma ideia? [Clique aqui](${linksupport})`,)
@@ -333,7 +341,7 @@ module.exports = {
         await message.channel.send(HelpEmbed).then(msg => {
             msg.react('🏛️') // home  1
             msg.react('⭐') // rpsystem 2
-            msg.react('💍') // Family 3
+            msg.react('💾') // Github 3
             msg.react('💿') // music 4
             msg.react('⚙️') // Admins 5
             msg.react('💞') // thanks 6 
@@ -367,9 +375,9 @@ module.exports = {
                     reaction.users.remove(user)
                     msg.edit(RPEmbed)
                 }
-                if (reaction.emoji.name === '💍') { // family
+                if (reaction.emoji.name === '💾') { // Github
                     reaction.users.remove(user)
-                    msg.edit(Family)
+                    msg.edit(Github)
                 }
                 if (reaction.emoji.name === '💿') { // msc
                     reaction.users.remove(user)
@@ -436,7 +444,7 @@ module.exports = {
                         .addFields(
                             {
                                 name: 'Informações Técinas',
-                                value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/10/2020\n💡 Idealizada por: Rafaella#???? \n:gear: Criada por: Rody#3756\n🖌️ Design: Rody & Rafaella\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1`)
+                                value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/10/2020\n💡 Idealizada por: Rafaella#???? \n:gear: Criada por: Rody#3756\n🖌️ Design: Rody & Rafaella\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.16.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1`)
                             }
                         )
                         .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -503,7 +511,7 @@ module.exports = {
                                 message.channel.send(HelpEmbed).then(msg => {
                                     msg.react('🏛️') // home  1
                                     msg.react('⭐') // rpsystem 2
-                                    msg.react('💍') // Family 3
+                                    msg.react('💾') // Github 3
                                     msg.react('💿') // music 4
                                     msg.react('⚙️') // Adminis 5
                                     msg.react('💞') // thanks 6 
@@ -527,9 +535,9 @@ module.exports = {
                                             reaction.users.remove(user)
                                             msg.edit(RPEmbed)
                                         }
-                                        if (reaction.emoji.name === '💍') { // family
+                                        if (reaction.emoji.name === '💾') { // Github
                                             reaction.users.remove(user)
-                                            msg.edit(Family)
+                                            msg.edit(Github)
                                         }
                                         if (reaction.emoji.name === '💿') { // msc
                                             reaction.users.remove(user)

@@ -28,7 +28,7 @@ module.exports = {
     if (action == "create") {
       try {
         const m = await message.channel.send(
-          ":arrows_counterclockwise: Making a Backup. Please Wait."
+          ":arrows_counterclockwise: Criando um Backup. Por favor, aguarde."
         );
         backup
           .create(message.guild, {
@@ -38,27 +38,26 @@ module.exports = {
           .then((backups) => {
             message.channel.send(
               `Backup has been created! Backup ID has been sent to ${message.member}`
-            );
+            )
             message.member.send(
               `Backup for ${message.guild.name} has been created. \n\n Backup ID: \`${backups.id}\` \n Make sure to copy and save this somewhere.`
-            );
-            m.delete();
-          });
+            )
+            m.delete()
+          })
       } catch (err) {
-        console.log(err);
+        console.log(err)
         message.channel.send(
           "There was an unexpected error while creating a backup"
-        );
+        )
       }
     }
 
     if (action == "load") {
-      const Id = args[1];
+      const Id = args[1]
       if(!Id) return message.channel.send('Please provide a Backup ID')
       if(isNaN(Id)) return message.channel.send('Invalid ID')
     
-      backup.load(Id, message.guild).then(backup.remove(args[1]));
+      backup.load(Id, message.guild).then(backup.remove(args[1]))
     }
-    
-  },
-};
+  }
+}

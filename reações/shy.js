@@ -24,8 +24,7 @@ let user = client.users.cache.get(args[0])
 
 const ShyEmbed = new Discord.MessageEmbed()
     .setColor('#000000')
-    .setDescription(`${message.author} está com vergonha...`)
+    .setDescription(`${message.author.username} está com vergonha...`)
     .setImage(gifs)
-    .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
  await message.channel.send(ShyEmbed).then(msg => msg.delete({timeout: 5000}))
 }

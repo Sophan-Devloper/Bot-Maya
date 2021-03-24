@@ -22,8 +22,7 @@ let user = client.users.cache.get(args[0])
 
 const ClapEmbed = new Discord.MessageEmbed()
         .setColor('#FF0000')
-        .setDescription(`${message.author} aplaudiu isso!`)
+        .setDescription(`${message.author.username} aplaudiu isso!`)
         .setImage(gif)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
     await message.channel.send(ClapEmbed).then(msg => msg.delete({timeout: 5000}))
 }

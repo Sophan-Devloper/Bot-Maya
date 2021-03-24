@@ -33,8 +33,7 @@ let user = client.users.cache.get(args[0]);
 let avatar = message.author.displayAvatarURL({format: 'png'});
   const embed = new Discord.MessageEmbed()
         .setColor('#000000')
-        .setDescription(`${message.author} Esta Fazendo Biquinho.`)
+        .setDescription(`${message.author.username} Esta Fazendo Biquinho.`)
         .setImage(rand)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
   await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}));
 }

@@ -37,6 +37,5 @@ let user = client.users.cache.get(args[0])
         .setColor('#000000')
         .setDescription(`Run, run, RUUUN!!!!`)
         .setImage(rand)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
   await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
 }

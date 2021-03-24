@@ -18,8 +18,7 @@ let user = client.users.cache.get(args[0])
 
 const embed = new Discord.MessageEmbed()
         .setColor('#F4A460')
-        .setDescription(`${message.author} ficou chocado!`)
+        .setDescription(`${message.author.username} ficou chocado!`)
         .setImage(gifs)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
 await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
 }

@@ -6,7 +6,10 @@ const ffm = require('ffmpeg-static')                                            
 const opus = require('@discordjs/opus')                                                                  //
 const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })                        //
 const { token, default_prefix } = require("./config.json")                                               //
-const db = require('quick.db')                                                                           //
+const db = require('quick.db')
+const canvacord = require('canvacord')
+client.commands = new Discord.Collection()
+client.aliases = new Discord.Collection()                                             //
 // -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST //
 
 // -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 //
@@ -24,9 +27,11 @@ app.get('/', (request, response) => {                                           
 
 // -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE --
 client.on("message", async (message, queue, song) => {
+    // const xp = require('./events&functions/xp')
     if (message.author.bot) return // no bots commands
     if (message.channel.type == "dm") // no dm's commands
         return message.channel.send("Eu sou uma bot, eu não consigo conversar no privado ainda.")
+    xp(message)
 
     var r = 'maya'
     var r1 = 'Maya'
@@ -53,17 +58,17 @@ client.on("message", async (message, queue, song) => {
 
     var msgmaya = list[Math.floor(Math.random() * list.length)]
 
-    if (message.content.includes(r)) {
+    if (message.content.includes === 'maya') {
         message.react('♥️')
         message.channel.send(msgmaya)
     }
 
-    if (message.content.includes(r1)) {
+    if (message.content.includes === 'Maya') {
         message.react('♥️')
         message.channel.send(msgmaya)
     }
 
-    if (message.content.includes(r2)) {
+    if (message.content.includes === 'MAYA') {
         message.react('♥️')
         message.channel.send(msgmaya)
     }
@@ -90,16 +95,16 @@ client.on("message", async (message, queue, song) => {
     if (message.content.includes("Boa noite")) { message.channel.send("Boa noitee") }
     if (message.content === 'oi') return message.channel.send(`oooi ${message.author.username}`)
 
-// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
+    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
     let prefix = db.get(`prefix_${message.guild.id}`)                       //
     if (prefix === null)                                                    //
         prefix = default_prefix                                             //
     if (!message.content.startsWith(prefix)) return                         //
     const args = message.content.slice(prefix.length).trim().split(/ +/g)   //
     const command = args.shift().toLowerCase()                              //nop
-// -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
+    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS //
 
-// -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
+    // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
         const bot = message.guild.members.cache.get(client.user.id)
         const embedperm = new Discord.MessageEmbed()
@@ -117,9 +122,48 @@ client.on("message", async (message, queue, song) => {
     }
     // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
 
+    function xp(message) {
+        if (message) {
+            let xp = db.add(`xp_${message.author.id}`, 2)
+            let level = Math.floor(0.5 * Math.sqrt(xp))
+            let lvl = db.get(`level_${message.author.id}`) || db.set(`level_${message.author.id}`, 1)
+            if (level > lvl) {
+                let newLevel = db.set(`level_${message.author.id}`, level);
+                message.channel.send(`:tada: ${message.author.username}, você subiu para o level ${newLevel}!`).then(m => m.delete({ timeout: 5000 }))
+            }
+        }
+    }
+
     // -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
+    const cmd =
+        client.commands.get(command) ||
+        client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command));
+    if (cmd) cmd.run(client, message, args);
+    let customCommands = db.get(`guildConfigurations_${message.guild.id}.commands`)
+    if (customCommands) {
+        let customCommandsName = customCommands.find(x => x.name === command)
+        if (customCommandsName) return message.channel.send(customCommandsName.response)
+    }
+
+    if (message.content.startsWith(`${prefix}check`)) {
+        message.react("✅")
+    }
+
     try {
         const commandFile = require(`./commands/${command}.js`)
+        commandFile.run(client, message, args)
+    } catch (err) { }
+
+    if (["triggered", "trig"].includes(command)) {
+        let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author
+        let avatar = user.displayAvatarURL({ dynamic: false, format: 'png' });
+        let image = await canvacord.Canvas.trigger(avatar);
+        let attachment = new Discord.MessageAttachment(image, "triggered.gif");
+        return message.channel.send("Carregando...").then(m => m.delete({ timeout: 5000 })).then(m => m.channel.send(attachment))
+    }
+
+    try {
+        const commandFile = require(`./levelsystem/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
 
@@ -140,7 +184,6 @@ client.on("message", async (message, queue, song) => {
 
     try {
         const commandFile = require(`./quiz/${command}.js`)
-        commandFile.run(client, message, args)
         commandFile.run(client, message, args)
     } catch (err) { }
 
@@ -186,6 +229,7 @@ client.on("message", async (message, queue, song) => {
     // -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
 
     // -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --
+
     if (["play", "p", "tocar", "m", "musica", "msc"].includes(command)) {
         message.delete()
         if (!message.member.voice.channel) return message.channel.send("Você tem que estar em um canal de voz para pedir alguma música")
@@ -374,7 +418,7 @@ client.on("guildMemberRemove", async member => {
 })
 
 client.on("guildMemberAdd", async member => {
-    let channel = member.guild.channels.cache.find(channel => channel.name === "welcome")
+    let channel = member.guild.channels.cache.find(channel => channel.name === "welcome" || "🤙🏻【bem-vindo】")
     if (!channel) {
         return member.guild.owner.send('Hey, eu não consigo mandar boas-vindas no seu servidor. Por favor, crie um chat com o nome `welcome` e um com o nome `saidas`. \n\nEu posso te ajudar com isso, coloque isso em qualquer canal do seu servidor: \n`-createchannel welcome`\n`-createchannel saidas` \n\nSe você já tiver algum sistema de boas-vindas, só criar o canal e deixar privado só pros Adms, sem problemas')
     }

@@ -1,71 +1,57 @@
 const Discord = require('discord.js')
+const moment = require('moment')
 
-module.exports = {  
+module.exports = {
     name: "user-info",
     category: "extra",
     run: async (client, message, args) => {
-    message.delete()
+        message.delete()
 
         let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
-        let status;        
-        switch (user.presence.status) {
-            case "online":
-                status = "<:green_circle:729181184193462285> online";
-                break;
-            case "dnd":
-                status = "<:no_entry:729181212530442311> Não Perturbe";
-                break;
-            case "idle":
-                status = "<:black_circle:729181121933475931> Invisivel";
-                break;
-            case "offline":
-                status = "<:red_circle:729181162182017051> offline";
-                break;
-        }       
+ 
+        const flags = {
+            DISCORD_EMPLOYEE: 'Discord Employee',
+            DISCORD_PARTNER: 'Discord Partner',
+            BUGHUNTER_LEVEL_1: 'Bug Hunter (Level 1)',
+            BUGHUNTER_LEVEL_2: 'Bug Hunter (Level 2)',
+            HYPESQUAD_EVENTS: 'HypeSquad Events',
+            HOUSE_BRAVERY: 'House of Bravery',
+            HOUSE_BRILLIANCE: 'House of Brilliance',
+            HOUSE_BALANCE: 'House of Balance',
+            EARLY_SUPPORTER: 'Early Supporter',
+            TEAM_USER: 'Team User',
+            SYSTEM: 'System',
+            VERIFIED_BOT: 'Verified Bot',
+            VERIFIED_DEVELOPER: 'Verified Bot Developer'
+        }
+
+        const roles = user.roles.cache
+            .sort((a, b) => b.position - a.position)
+            .map(role => role.toString())
+            .slice(0, -1)
+
+        const userFlags = user.user.flags.toArray()
 
         const embed = new Discord.MessageEmbed()
             .setTitle(`Informações sobre ${user.user.username}`)
             .setColor(`#f3f3f3`)
-            .setThumbnail(user.user.displayAvatarURL({dynamic : true}))
-            .addFields(
-                {
-                    name: "Nome Original",
-                    value: user.user.tag,
-                    inline: true
-                },
-                {
-                    name: "Nome no Servidor",
-                    value: user.user.username,
-                    inline: true
-                },
-                {
-                    name: "🆔 ID",
-                    value: user.user.id
-                },
-                {
-                    name: "Status Atual",
-                    value: status
-                },
-                {
-                    name: "Atividade (Status)",
-                    value: user.presence.activities[0] ? user.presence.activities[0].name : `Nenhuma atividade no momento`
-                },
-                {
-                    name: 'Link da foto de perfil',
-                    value: `[Link da foto](${user.user.displayAvatarURL()})`
-                },
-                {
-                    name: 'Idade da Conta | Mês/Dia/Ano',
-                    value: user.user.createdAt.toLocaleDateString("pt-br")
-                },
-                {
-                    name: 'Entrou no Server | Mês/Dia/Ano',
-                    value: user.joinedAt.toLocaleDateString("pt-br")
-                },
-                {
-                    name: 'Cargos no Servidor',
-                    value: user.roles.cache.map(role => role.toString()).join(" ,")
-                })
+            .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+            .addField('Usuário', [
+                `❯ Nome Original: ${user.user.tag}`,
+                `❯ ID: ${user.user.id}`,
+                `❯ Status Atual: ${user.presence.status}`,
+                `❯ Bandeira: ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'Nenhuma'}`,
+                `❯ Foto de perfil: [Link da foto](${user.user.displayAvatarURL()})`,
+                `❯ Criou a conta em: ${moment(user.user.createdTimestamp).format('DD/MM/YY')} | ${moment(user.user.createdTimestamp).fromNow()}`,
+                `❯ Jogando: ${user.user.presence.game || 'Nada no momento'}`
+            ])
+            .addField('Servidor', [
+                `❯ Nome no Servidor: ${user.user.username}`,
+                `❯ Entrou no Server em: ${moment(user.joinedAt).format('DD/MM/YY')}`,
+                `❯ Maior cargo: ${user.roles.highest.id === message.guild.id ? 'Nenhum' : user.roles.highest.name}`,
+                `❯ Cargos no Servidor [${roles.length}]: ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'Nenhum'}`,
+            ])
 
         await message.channel.send(embed)
-    }}
+    }
+}

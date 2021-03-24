@@ -17,6 +17,9 @@ message.delete()
     if(adote === `<@null>`)
     adote = "Não está em nenhuma familia"
 
+    let level = await db.fetch(`level_${message.author.id}_${user.id}`)
+    if(level === null) level = 0
+
     const casamento = new Discord.MessageEmbed()
         .setTitle(`:hearts: Perfil Pessoal de ${user.user.username}:hearts:`)
         .setColor('#bf3bfc')
@@ -30,12 +33,12 @@ message.delete()
                 value: adote
             },
             {
-                name: '💸Dinheiro no Servidor',
+                name: '💸 Dinheiro Intersevidor',
                 value: `${bal}<:StarPoint:766794021128765469>RPoints`
             },
             {
-                name: '<:level:766847577416138772>Level',
-                value: 'Sistema de Level em Reforma'
+                name: '🌐 Level Interservidor',
+                value: `${level}<:level:766847577416138772>`
             },
             {
                 name: '🛡️Membro Desde',

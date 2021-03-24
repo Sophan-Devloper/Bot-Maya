@@ -7,7 +7,10 @@ module.exports = {
     category: "fun",
 
     run: async (bot, message, args) => {
-        message.delete()
+
+      if(!args[213])
+      return message.channel.send('O Quiz está bugado. Já já ele volta a pegar').then(msg => msg.delete({ timeout: 3000 }))
+
         const item = quiz[Math.floor(Math.random() * quiz.length)]
         const filter = response => {
             return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase())
@@ -23,8 +26,7 @@ module.exports = {
             .setTitle(`MAYA QUIZ TIME!`)
             .setDescription('Prepare-se! Você tem apenas 15 segundos.')
 
-        message.channel.send(quiztime).then(
-            msg => msg.delete({ timeout: 5000 })).then(msg => message.channel.send(pergunta)).then(() => {
+       message.channel.send(quiztime).then(msg => msg.delete({ timeout: 5000 })).then(msg => message.channel.send(pergunta)).then(() => {
                 message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ['time'] })
                     .then(collected => {
                         const resposta = new Discord.MessageEmbed()

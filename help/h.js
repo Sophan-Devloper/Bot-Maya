@@ -40,7 +40,7 @@ module.exports = {
             .addFields(
                 {
                     name: '<:topreach:766846960569155584> Veja seus MPoints',
-                    value: "`-balance` | `-bal` | `-rp` | `-bal @user` | `-perfil @user` | `-profile`"
+                    value: "`-balance` | `-bal` | `-mp` | `-bal @user` | `-perfil @user` | `-profile`"
                 },
                 {
                     name: '<:topreach:766846960569155584> Ganhe MPoints!',
@@ -48,7 +48,7 @@ module.exports = {
                 },
                 {
                     name: '<:topreach:766846960569155584> Em Breve',
-                    value: '`-loja` `-store` `-rankingrp`\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `aposta` `-giverp`'
+                    value: '`-loja` `-store` `-rankingmp`\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `aposta` `-givemp`'
                 },
                 {
                     name: "<:topreach:766846960569155584> Level System",
@@ -304,7 +304,7 @@ module.exports = {
                 },
                 {
                     name: 'Em criação',
-                    value: '\nEm criação: `-quizanimes` | `-quizcinema` | `-quizhistoria` | `-quizch` corpo humano'
+                    value: '\nEm criação: `-quizanimes` | `-quizcinema` | `-quizhistoria` | `-quizch` compo humano'
                 },
                 {
                     name: 'Como jogar',
@@ -329,7 +329,7 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-status` Muda meu status no perfil\n`-addrp` Dá MPs pra alguém\n`-removerp` Tira MPs\n`-resetrp` Reseta MP de alguem\n`-resetallrp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
+                    value: '`-status` Muda meu status no perfil\n`-addmp` Dá MPs pra alguém\n`-removemp` Tira MPs\n`-resetmp` Reseta MP de alguem\n`-resetallmp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
                 },
                 {
                     name: 'Comandos Black',
@@ -340,7 +340,7 @@ module.exports = {
 
         await message.channel.send(HelpEmbed).then(msg => {
             msg.react('🏛️') // home  1
-            msg.react('⭐') // rpsystem 2
+            msg.react('⭐') // mpsystem 2
             msg.react('💾') // Github 3
             msg.react('💿') // music 4
             msg.react('⚙️') // Admins 5
@@ -510,7 +510,7 @@ module.exports = {
                                 msg.delete()
                                 message.channel.send(HelpEmbed).then(msg => {
                                     msg.react('🏛️') // home  1
-                                    msg.react('⭐') // rpsystem 2
+                                    msg.react('⭐') // mpsystem 2
                                     msg.react('💾') // Github 3
                                     msg.react('💿') // music 4
                                     msg.react('⚙️') // Adminis 5

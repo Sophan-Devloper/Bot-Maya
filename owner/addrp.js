@@ -10,11 +10,11 @@ module.exports.run = async (bot, message, args) => {
 
     let user = message.mentions.members.first()
     if (!user)
-        return message.channel.send('`-addrp @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
+        return message.channel.send('`-addmp @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
 
     let amount = args.slice(1).join(" ")
     if (!amount)
-        return message.channel.send('`-addrp @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
+        return message.channel.send('`-addmp @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
 
     let money = db.fetch(`money_${message.author.id}_${user.id}`)
     if (money === null) { money = 0 }

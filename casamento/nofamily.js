@@ -1,16 +1,24 @@
-const Discord = require("discord.js")
-const db = require("quick.db")
-module.exports.run = async (Client, message, args) => {
-message.delete()
+const discord = require('discord.js')
+const db = require('quick.db')
 
-    if (!db.get(`family_${message.author.id}`))
-    return message.channel.send("Você não tem familia...").then(msg => msg.delete({timeout: 6000}))
+module.exports = {
+    name: 'family',
+    run: async (client, message, args) => {
 
-    await message.channel.send(`Você acaba de se separar da sua familia. Você não tem mais parentesco com <@${db.get(`family_${message.author.id}`)}`)
-    await db.delete(`family_${db.get(`family_${message.author.id}`)}`)
-    await db.delete(`family_${message.author.id}`)
+        const embed = new Discord.MessageEmbed()
+            .setColor("#DCDCDC")
+            .setTitle('💖 Maya Family System')
+            .setDescription('Você pode aumentar a sua familia, graça ao meu sistema interserver, você pode ter uma em vários servidores.')
+            .addFields(
+                {
+                    name: 'Comandos',
+                    value: '\n`-family1` `-family2` `-family3` `-family4` `-family5` Um para cada vaga no seu perfil.\n \n`-nofamily1` `-nofamily2` `-nofamily3` `-nofamily4` `-nofamily5` Um para cada vaga no perfil.'
+                }
+            )
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
+    }
 }
 
 module.exports.help = {
-    name: "nofamily"
+    name: "family5"
 }

@@ -25,7 +25,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Emojis da Centralzinha',
-                    value: '🏛️  Esta Página \n⭐  Maya System \n💾  GitHub Repository \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands⠀⠀'
+                    value: '🏛️  Esta Página \n⭐  Maya System \n💾  GitHub Repository \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands\n❌  Apague o canal Ajuda'
                 },
             )
             .addField(`Previna-se contra a COVID-19, use máscara!`, `[Saiba mais](${linkcovid})`)
@@ -242,7 +242,7 @@ module.exports = {
                 },
                 {
                     name: 'Usuário',
-                    value: '`-avatar @user` Veja a foto de perfil \n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
+                    value: '`-avatar @user` Veja a foto de perfil\n`-id @user` Veja o ID\n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
                 },
                 {
                     name: 'Fun',

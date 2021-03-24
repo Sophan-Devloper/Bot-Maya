@@ -94,7 +94,7 @@ module.exports = {
           message.channel.send(`Enviando relatório em ${logchannel}...`).then(msg => msg.delete({ timeout: 3000 }))
           logchannel.send(banEmbed)
         }
-        if (reaction.emoji.name === '❌') { // RPEmbed
+        if (reaction.emoji.name === '❌') { // MPEmbed
           msg.delete()
           msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
         }

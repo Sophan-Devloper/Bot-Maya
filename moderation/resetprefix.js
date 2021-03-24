@@ -24,7 +24,7 @@ module.exports = {
                     db.delete(`prefix_${message.guild.id}`)
                     message.channel.send(message.author.username + ", resetou o meu prefixo! ✅")
                 }
-                if (reaction.emoji.name === '❌') { // RPEmbed
+                if (reaction.emoji.name === '❌') { // MPEmbed
                     msg.delete()
                     msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
                 }

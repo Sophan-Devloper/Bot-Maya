@@ -6,7 +6,7 @@ const ffm = require('ffmpeg-static')                                            
 const opus = require('@discordjs/opus')                                                                  //
 const distube = new DisTube(client, { searchSongs: true, emitNewSongOnly: true })                        //
 const { token, default_prefix } = require("./config.json")                                               //
-const db = require('quick.db')
+const db = require('./MPoints/node_modules/quick.db')
 const canvacord = require('canvacord')
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()                                             //
@@ -178,7 +178,7 @@ client.on("message", async (message, queue, song) => {
     } catch (err) { }
 
     try {
-        const commandFile = require(`./RPoints/${command}.js`)
+        const commandFile = require(`./MPoints/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
 

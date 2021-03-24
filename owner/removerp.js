@@ -23,6 +23,6 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send('Eu acho que o valor que você me informou não é um número.').then(msg => msg.delete({ timeout: 5000 }))
 
     db.subtract(`money_${message.author.id}_${user.id}`, amount)
-    message.channel.send(`Foi removido ${amount}RPoints de ${user} com sucesso`)
-    user.send(`Foi removido um total de ${amount} dos seus RPoints em ${user.author.name}`)
+    message.channel.send(`Foi removido ${amount}MPoints de ${user} com sucesso`)
+    user.send(`Foi removido um total de ${amount} dos seus MPoints em ${user.author.name}`)
 }

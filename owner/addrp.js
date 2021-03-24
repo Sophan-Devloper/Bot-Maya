@@ -22,6 +22,6 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send('Eu acho que o valor que você me informou não é um número.').then(msg => msg.delete({ timeout: 5000 }))
     
     db.add(`money_${message.author.id}_${user.id}`, amount)
-    user.send(`Rody te enviou **${amount}<:StarPoint:766794021128765469>RPoints**.`)
+    user.send(`Rody te enviou **${amount}<:StarPoint:766794021128765469>MPoints**.`)
     message.channel.send('Prontinho, chefe.').then(msg => msg.delete({ timeout: 5000 }))
 }

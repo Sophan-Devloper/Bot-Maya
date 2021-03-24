@@ -20,7 +20,7 @@ module.exports = {
             db.add(`money_${message.author.id}_${user.id}`, amount)
             db.set(`worked_${message.author.id}_${user.id}`, Date.now())
 
-            message.channel.send(`${user}, você trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>RPoints`).then(msg => msg.delete({ timeout: 6000 }))
+            message.channel.send(`${user}, você trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints`).then(msg => msg.delete({ timeout: 6000 }))
         }
     }
 }

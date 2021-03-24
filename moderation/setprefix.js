@@ -36,7 +36,7 @@ module.exports = {
                     db.set(`prefix_${message.guild.id}`, args[0])
                     message.channel.send(`Prefix alterado para: ${args[0]}`).then(msg => msg.delete({ timeout: 4000 }))         
                 }
-                if (reaction.emoji.name === '❌') { // RPEmbed
+                if (reaction.emoji.name === '❌') { // MPEmbed
                     msg.delete()
                     msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
                 }

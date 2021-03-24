@@ -49,7 +49,7 @@ message.delete()
             },
             {
                 name: '💸 Dinheiro Intersevidor',
-                value: `${bal}<:StarPoint:766794021128765469>RPoints`
+                value: `${bal}<:StarPoint:766794021128765469>MPoints`
             },
             {
                 name: '🌐 Level Interservidor',

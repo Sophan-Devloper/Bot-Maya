@@ -32,18 +32,18 @@ module.exports = {
             .setThumbnail('https://imgur.com/mvjbQEF.gif')
             .setFooter(`${message.author.tag} Navegue através dos emojis`, message.author.displayAvatarURL())
 
-        const RPEmbed = new Discord.MessageEmbed()
+        const MPEmbed = new Discord.MessageEmbed()
             .setColor('#CD853F')
             .setTitle('<:StarPoint:766794021128765469> Central Maya System <:StarPoint:766794021128765469> BETA')
             .setURL('https://discord.gg/mx8eMx6')
             .setDescription('Ainda na versão beta, este é meu *sistema interservidores*, ou seja, seu xp, dinheiro e tudo vinculado a mim, você também terá em todos os outros servidores.')
             .addFields(
                 {
-                    name: '<:topreach:766846960569155584> Veja seus RPoints',
+                    name: '<:topreach:766846960569155584> Veja seus MPoints',
                     value: "`-balance` | `-bal` | `-rp` | `-bal @user` | `-perfil @user` | `-profile`"
                 },
                 {
-                    name: '<:topreach:766846960569155584> Ganhe RPoints!',
+                    name: '<:topreach:766846960569155584> Ganhe MPoints!',
                     value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n`-slut` Ganhe ou perca até 2000<:StarPoint:766794021128765469>'
                 },
                 {
@@ -329,7 +329,7 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-status` Muda meu status no perfil\n`-addrp` Dá RPs pra alguém\n`-removerp` Tira RPs\n`-resetrp` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
+                    value: '`-status` Muda meu status no perfil\n`-addrp` Dá MPs pra alguém\n`-removerp` Tira MPs\n`-resetrp` Reseta MP de alguem\n`-resetallrp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
                 },
                 {
                     name: 'Comandos Black',
@@ -371,9 +371,9 @@ module.exports = {
                     reaction.users.remove(user)
                     msg.edit(owner)
                 }
-                if (reaction.emoji.name === '⭐') { // RPEmbed
+                if (reaction.emoji.name === '⭐') { // MPEmbed
                     reaction.users.remove(user)
-                    msg.edit(RPEmbed)
+                    msg.edit(MPEmbed)
                 }
                 if (reaction.emoji.name === '💾') { // Github
                     reaction.users.remove(user)
@@ -531,9 +531,9 @@ module.exports = {
                                             reaction.users.remove(user)
                                             msg.edit(HelpEmbed)
                                         }
-                                        if (reaction.emoji.name === '⭐') { // RPEmbed
+                                        if (reaction.emoji.name === '⭐') { // MPEmbed
                                             reaction.users.remove(user)
-                                            msg.edit(RPEmbed)
+                                            msg.edit(MPEmbed)
                                         }
                                         if (reaction.emoji.name === '💾') { // Github
                                             reaction.users.remove(user)

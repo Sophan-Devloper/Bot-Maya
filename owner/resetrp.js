@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const db = require('quick.db')
+const db = require('../MPoints/node_modules/quick.db')
 
 module.exports.run = async (bot, message, args) => {
   message.delete()
@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
     return message.channel.send('⚠️ Este comando é restrito.').then(msg => msg.delete({ timeout: 5000 }))
 
   if (!user)
-    return message.channel.send('Você não me disse pra quem é pra dar reset no RPoints, marque alguém por favor.').then(msg => msg.delete({ timeout: 6000 }))
+    return message.channel.send('Você não me disse pra quem é pra dar reset no MPoints, marque alguém por favor.').then(msg => msg.delete({ timeout: 6000 }))
 
   if (!amount)
     return message.channel.send('Hey, você não me disse a quantidade').then(msg => msg.delete({ timeout: 6000 }))
@@ -23,6 +23,6 @@ module.exports.run = async (bot, message, args) => {
     return message.channel.send('Eu acho que o valor que você me informou não é um número.').then(msg => msg.delete({ timeout: 5000 }))
 
   db.delete(`money_${message.guild.id}_${user.id}`, amount)
-  message.channel.send(`Os RPoints de ${user} foi resetado com sucesso`)
-  user.dm(`Todos os seus RPoints em ${user.guild.name} foram resetados.`)
+  message.channel.send(`Os MPoints de ${user} foi resetado com sucesso`)
+  user.dm(`Todos os seus MPoints em ${user.guild.name} foram resetados.`)
 }

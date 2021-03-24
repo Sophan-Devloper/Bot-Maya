@@ -27,12 +27,12 @@ module.exports = {
                 let amount = (Math.floor(Math.random() * 2000) + 1)
                 db.add(`money_${message.author.id}_${user.id}`, amount)
                 db.set(`slut_${message.author.id}_${user.id}`, Date.now())
-                message.channel.send(`${user}, você se prostituiu e obteve ${amount} <:StarPoint:766794021128765469>RPoints`).then(msg => msg.delete({ timeout: 6000 }))
+                message.channel.send(`${user}, você se prostituiu e obteve ${amount} <:StarPoint:766794021128765469>MPoints`).then(msg => msg.delete({ timeout: 6000 }))
             } else if (result === "lose") {
                 let amount = (Math.floor(Math.random() * -2000) + 1)
                 db.subtract(`money_${message.author.id}_${user.id}`, amount)
                 db.set(`slut_${message.author.id}_${user.id}`, Date.now())
-                message.channel.send(`${user}, você se prostituiu e perdeu ${amount} <:StarPoint:766794021128765469>RPoints`).then(msg => msg.delete({ timeout: 6000 }))
+                message.channel.send(`${user}, você se prostituiu e perdeu ${amount} <:StarPoint:766794021128765469>MPoints`).then(msg => msg.delete({ timeout: 6000 }))
             }
         }
     }

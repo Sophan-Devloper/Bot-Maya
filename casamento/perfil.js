@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const db = require('quick.db')
+const db = require('../MPoints/node_modules/quick.db')
 const moment = require('moment')
 
 exports.run = async (client, message, args) => {
@@ -49,7 +49,7 @@ message.delete()
             },
             {
                 name: '💸 Dinheiro Intersevidor',
-                value: `${bal}<:StarPoint:766794021128765469>RPoints`
+                value: `${bal}<:StarPoint:766794021128765469>MPoints`
             },
             {
                 name: '🌐 Level Interservidor',

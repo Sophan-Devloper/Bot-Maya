@@ -25,7 +25,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Emojis da Centralzinha',
-                    value: '🏛️  Esta Página \n⭐  Maya System \n💾  GitHub Repository \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n❌  Apague o canal Ajuda\n**NEW FEATURES**\n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands⠀⠀'
+                    value: '🏛️  Esta Página \n⭐  Maya System \n💾  GitHub Repository \n💿  Sistema de Música\n⚙️  Comandos Adminitrativos \n💞  Thank You \n💬  Central de Suporte \n🎮  Link de Games \n📺  Animes \n🧤  Comandos Genéricos \n🪅  Comandos Emocionais \n👥  Interações \n📝 Game Quiz\n 📃 Minhas Informações\n📁 Owner Commands\n❌  Apague o canal Ajuda'
                 },
             )
             .addField(`Previna-se contra a COVID-19, use máscara!`, `[Saiba mais](${linkcovid})`)
@@ -48,7 +48,7 @@ module.exports = {
                 },
                 {
                     name: '<:topreach:766846960569155584> Em Breve',
-                    value: '`-loja` `-store` `-rankingrp\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `aposta` `-giverp`'
+                    value: '`-loja` `-store` `-rankingrp`\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `aposta` `-giverp`'
                 },
                 {
                     name: "<:topreach:766846960569155584> Level System",
@@ -76,7 +76,7 @@ module.exports = {
                     value: '`-github` Link do Repositório Maya'
                 },
                 {
-                    name: 'Comandos Prontos',
+                    name: 'Comandos Prontos - *Adicionando mais um monte*',
                     value: '`-commandFile` Código de Acesso a Folders'
                 },
             )
@@ -242,7 +242,7 @@ module.exports = {
                 },
                 {
                     name: 'Usuário',
-                    value: '`-avatar @user` Veja a foto de perfil \n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
+                    value: '`-avatar @user` Veja a foto de perfil\n`-id @user` Veja o ID\n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
                 },
                 {
                     name: 'Fun',
@@ -258,7 +258,7 @@ module.exports = {
                 },
                 {
                     name: 'Random',
-                    value: '`-advice` This command is completelly in english\n`-boom` Só faz boom\n`-ecchi` Não recomendo usar isso\n`-explosion` Megumiiin\n`-feet` Pézin\n`-livia` Gay\n`-loli` Lolicon`\n`-stonks` `-notstonks` Stonks esse\n`-puppy` Fofiiiinho'
+                    value: '`-advice` This command is completelly in english\n`-boom` Só faz boom\n`-ecchi` Não recomendo usar isso\n`-explosion` Megumiiin\n`-feet` Pézin\n`-livia` Gay\n`-loli` Lolicon\n`-stonks` `-notstonks` Stonks esse\n`-puppy` Fofiiiinho'
                 }
             )
             .addField('Estamos adicionando mais comandos úteis, tá bom?', `Tem algúma ideia de comando legal? [Clique aqui](${linksupport})`)
@@ -329,7 +329,7 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-status` Muda meu status no perfil\n`-addrp @user` Dá RPs pra alguém\n`-resetrp @user` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center'
+                    value: '`-status` Muda meu status no perfil\n`-addrp` Dá RPs pra alguém\n`-removerp` Tira RPs\n`-resetrp` Reseta RP de alguem\n`-resetallrp` Reseta o RP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
                 },
                 {
                     name: 'Comandos Black',
@@ -587,7 +587,6 @@ module.exports = {
                                             msg.delete()
                                         }
                                     })
-
                                 })
                             }
                         })

@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
     }
 
     const embed = new MessageEmbed()
-        .setTitle("👑 Ranking Interserver - TOP 10")
+        .setTitle("👑 Ranking Interserver Global")
         .setColor("YELLOW")
     lb.forEach(d => {
         embed.addField(`${d.rank}. ${d.user.tag}`, `Level - ${d.level}\nXP - ${d.xp} / ${d.xpreq}`);

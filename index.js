@@ -27,11 +27,14 @@ app.get('/', (request, response) => {                                           
 
 // -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE --
 client.on("message", async (message, queue, song) => {
+
     // const xp = require('./events&functions/xp')
     if (message.author.bot) return // no bots commands
     if (message.channel.type == "dm") // no dm's commands
         return message.channel.send("Eu sou uma bot, eu não consigo conversar no privado ainda.")
     xp(message)
+
+
 
     var r = 'maya'
     var r1 = 'Maya'
@@ -418,7 +421,7 @@ client.on("guildMemberRemove", async member => {
 })
 
 client.on("guildMemberAdd", async member => {
-    let channel = member.guild.channels.cache.find(channel => channel.name === "welcome" || "🤙🏻【bem-vindo】")
+    let channel = member.guild.channels.cache.find(channel => channel.name === "welcome")
     if (!channel) {
         return member.guild.owner.send('Hey, eu não consigo mandar boas-vindas no seu servidor. Por favor, crie um chat com o nome `welcome` e um com o nome `saidas`. \n\nEu posso te ajudar com isso, coloque isso em qualquer canal do seu servidor: \n`-createchannel welcome`\n`-createchannel saidas` \n\nSe você já tiver algum sistema de boas-vindas, só criar o canal e deixar privado só pros Adms, sem problemas')
     }
@@ -454,5 +457,13 @@ client.on("ready", () => {                                                      
     console.log("Online!")                                                                                //
 })                                                                                                        //
 // -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile //
+
+client.on("message", message => {
+    if (message.author.bot) return false
+    if (message.content.includes("@here") || message.content.includes("@everyone")) return false
+    if (message.mentions.has(client.user.id)) {
+        message.channel.send(`-help ou -setprefix`).then(msg => msg.delete({ timeout: 3000 }))
+    }
+})
 
 client.login(token)

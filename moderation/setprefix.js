@@ -7,6 +7,7 @@ module.exports = {
     usage: "setprefix newprefix",
     description: "Mudar o prefix do server",
     run: async (client, message, args) => {
+        message.delete()
 
         if (!message.member.hasPermission("ADMINISTRATOR")) {
             return message.channel.send("Você não pode mudar meu prefix, mas pode pedir pra algúm administrador fazer isso.").then(m => m.delete({ timeout: 5000 }))
@@ -34,7 +35,7 @@ module.exports = {
                 if (reaction.emoji.name === '✅') { // home
                     msg.delete()
                     db.set(`prefix_${message.guild.id}`, args[0])
-                    message.channel.send(`Prefix alterado para: ${args[0]}`).then(msg => msg.delete({ timeout: 4000 }))         
+                    message.channel.send(`Prefix alterado para: ${args[0]}`).then(msg => msg.delete({ timeout: 4000 }))
                 }
                 if (reaction.emoji.name === '❌') { // MPEmbed
                     msg.delete()

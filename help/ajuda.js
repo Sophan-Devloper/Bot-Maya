@@ -56,7 +56,7 @@ module.exports = {
                 },
                 {
                     name: "<:topreach:766846960569155584> Level System",
-                    value: "`-level` Seu level\n`-rank` Ranking"
+                    value: "`-level` Seu level\n`-dailyxp` 150xp diariamente\n`-rank` Ranking"
                 },
                 {
                     name: '<:topreach:766846960569155584> Family System',
@@ -333,7 +333,7 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-setrp` Define o RP de alguém\n`-deltimeoutrp` Tira o timeout\n`-addmp` Dá MPs pra alguém\n`-removemp` Tira MPs\n`-resetmp` Reseta MP de alguem\n`-resetallmp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
+                    value: '`-resetlevel` Reseta level de alguém\n`-setrp` Define o RP de alguém\n`-deltimeoutxp` Tira o timeout do dailyxp de alguém\n`-deltimeoutrp` Tira o timeout\n`-addmp` Dá MPs pra alguém\n`-removemp` Tira MPs\n`-resetmp` Reseta MP de alguem\n`-resetallmp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
                 },
                 {
                     name: 'Comandos Black',

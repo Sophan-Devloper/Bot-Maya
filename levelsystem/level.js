@@ -6,8 +6,8 @@ module.exports.run = async (client, message, args) => {
   message.delete()
   let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
 
-  let level = db.fetch(`level_${user.id}`) || 0;
-  let exp = db.fetch(`xp_${user.id}`) || 0;
+  let level = db.fetch(`level_${user.id}`) || 0
+  let exp = db.fetch(`xp_${user.id}`) || 0
   let neededXP = Math.floor(Math.pow(level / 0.1, 2));
 
   let every = db.all().filter(i => i.ID.startsWith("xp_")).sort((a, b) => b.data - a.data);

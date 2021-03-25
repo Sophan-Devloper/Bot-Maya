@@ -17,7 +17,7 @@ module.exports = {
         }
         
         if (member.id === message.author.id) {
-            return message.channel.send('Você não pode dar reputação para você mesmo').then(msg => msg.delete({ timeout: 6000 }))
+            return message.channel.send('Você não pode dar reputação para você mesmo.').then(msg => msg.delete({ timeout: 6000 }))
         }
 
         if (rp !== null && timeout - (Date.now() - rp) > 0) {
@@ -25,10 +25,10 @@ module.exports = {
             return message.channel.send(`Você já deu reputação hoje. Volte em ${time.days}d, ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`).then(msg => msg.delete({ timeout: 6000 }))
         } else {
 
-            db.add(`rp${member.id}`, amount)
+            db.add(`rp_${member.id}`, amount)
             db.set(`rptimeout_${message.author.id}`, Date.now())
 
-            message.channel.send(`Você deu 1 reputação para ${member}`).then(msg => msg.delete({ timeout: 6000 }))
+            message.channel.send(`Você deu reputação para ${member}`).then(msg => msg.delete({ timeout: 6000 }))
             return member.send(`${message.author.username} te deu reputação.`)
         }
     }

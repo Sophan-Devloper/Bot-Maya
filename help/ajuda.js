@@ -17,6 +17,10 @@ module.exports = {
         var linkservidor = 'https://discord.gg/mx8eMx6'
         var linkcovid = 'https://www.google.com/search?q=coronavirus&oq=coronavirus&aqs=chrome..69i64j0i433j0i131i433l3j69i60l3.3560j0j9&sourceid=chrome&ie=UTF-8#wptab=s:H4sIAAAAAAAAAONgVuLVT9c3NMwySk6OL8zJecTozS3w8sc9YSmnSWtOXmO04eIKzsgvd80rySypFNLjYoOyVLgEpVB1ajBI8XOhCvHsYuL2SE3MKckILkksKV7EKptaDGQcXltckpmcWKyQkq-QnF-Un5dYdnhtUWkxAPmw1DmNAAAA'
 
+        const loading = new Discord.MessageEmbed()
+            .setColor('#CD853F')
+            .setTitle('🔄 Obtendo informações...')
+
         const HelpEmbed = new Discord.MessageEmbed()
             .setColor('#CD853F')
             .setTitle('📃 Centralzinha de Ajuda Interativa 📃')
@@ -48,7 +52,7 @@ module.exports = {
                 },
                 {
                     name: '<:topreach:766846960569155584> Em Breve',
-                    value: '`-loja` `-store` `-rankingmp`\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `aposta` `-givemp`'
+                    value: '`-loja` `-store` `-rankingmp`\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `-aposta` `-givemp`'
                 },
                 {
                     name: "<:topreach:766846960569155584> Level System",
@@ -56,11 +60,11 @@ module.exports = {
                 },
                 {
                     name: '<:topreach:766846960569155584> Family System',
-                    value: '`-marry @user` Se case com alguém\n`-divorce` Se divorcie\n`-family` `2...5` Adicione até 5 pessoas a sua familia\n`-nofamily` `2...5` Tire alguém da sua familia'
+                    value: '`-marry @user` Se case com alguém\n`-divorce` Se divorcie\n`-family` `1...5` Adicione até 5 pessoas a sua familia\n`-nofamily` `1...5` Tire alguém da sua familia'
                 },
                 {
                     name: '<:topreach:766846960569155584> Perfil',
-                    value: '`-setstatus` Defina seu status no seu perfil\n`-profile` `-perfil` Veja seu perfil\n`-perfil @user` Perfil de alguém'
+                    value: '`-rp` Dê reputação\n`-setstatus` Defina seu status no seu perfil\n`-profile` `-perfil` Veja seu perfil\n`-perfil @user` Perfil de alguém'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -304,7 +308,7 @@ module.exports = {
                 },
                 {
                     name: 'Em criação',
-                    value: '\nEm criação: `-quizanimes` | `-quizcinema` | `-quizhistoria` | `-quizch` corpo humano'
+                    value: '\nEm criação: `-quizanimes` | `-quizcinema` | `-quizhistoria` | `-quizch` compo humano'
                 },
                 {
                     name: 'Como jogar',
@@ -329,7 +333,7 @@ module.exports = {
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-status` Muda meu status no perfil\n`-addmp` Dá MPs pra alguém\n`-removemp` Tira MPs\n`-resetmp` Reseta MP de alguem\n`-resetallmp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
+                    value: '`-setrp` Define o RP de alguém\n`-deltimeoutrp` Tira o timeout\n`-addmp` Dá MPs pra alguém\n`-removemp` Tira MPs\n`-resetmp` Reseta MP de alguem\n`-resetallmp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
                 },
                 {
                     name: 'Comandos Black',
@@ -338,7 +342,7 @@ module.exports = {
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-        await message.channel.send(HelpEmbed).then(msg => {
+        await message.channel.send(loading).then(msg => msg.delete({ timeout: 2000 })).then(msg => message.channel.send(HelpEmbed)).then(msg => {
             msg.react('🏛️') // home  1
             msg.react('⭐') // mpsystem 2
             msg.react('💾') // Github 3
@@ -361,11 +365,11 @@ module.exports = {
             // msg.react('') // 20 // Limite Reaction Discord
 
             msg.awaitReactions((reaction, user) => {
-                if (message.author.id !== user.id) return;
+                if (message.author.id !== user.id) return
 
                 if (reaction.emoji.name === '🏛️') { // home
                     reaction.users.remove(user)
-                    msg.edit(HelpEmbed)
+                    msg.edit(HelpEmbed), 1500
                 }
                 if (reaction.emoji.name === '📁') { // home
                     reaction.users.remove(user)

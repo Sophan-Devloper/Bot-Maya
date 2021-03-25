@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const moment = require('moment')
 
 exports.run = async (client, message, args) => {
     message.delete()
@@ -6,6 +7,18 @@ exports.run = async (client, message, args) => {
     var gitlink = "https://github.com/rodycouto/Maya-GitHub.git"
     var linksupport = "https://docs.google.com/forms/d/e/1FAIpQLSeEMnYYmlaVv_nG4PBdPD8CA6Q-MdBi-9KW_xVrqjs2MG5AqQ/viewform?usp=sf_link"
     var gitdance = "https://imgur.com/C78LrtY.gif"
+    
+
+    let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
+    const db = require('quick.db')
+    var level = await db.fetch(`level_${user.id}`)
+    if (level < 50) {
+        const block = new Discord.MessageEmbed()
+            .setColor('RED')
+            .setTitle('🚫  Libere no level 50')
+        return message.channel.send(block).then(msg => msg.delete({ timeout: 4000 }))
+    }
+
     const embed = new Discord.MessageEmbed()
         .setColor('#DCDCDC')
         .setTitle('Repositório Maya no GitHub')

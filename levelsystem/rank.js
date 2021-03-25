@@ -29,8 +29,8 @@ module.exports.run = async (client, message, args) => {
         .setTitle("👑 Ranking Interserver Global")
         .setColor("YELLOW")
     lb.forEach(d => {
-        embed.addField(`${d.rank}. ${d.user.tag}`, `Level - ${d.level}\nXP - ${d.xp} / ${d.xpreq}`);
-    });
+        embed.addField(`${d.rank}. ${d.user.tag}`, `Level - ${d.level}\nXP - ${d.xp} / ${d.xpreq}`)
+    })
     embed.setFooter(`Seu ranking: ${myrank}`)
     return message.channel.send(embed).then(msg => msg.delete({ timeout: 15000 }))
 }

@@ -63,7 +63,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Discord Server',
-                    value: `[Clique aqui](${linkservidor})`,
+                    value: `[Clique aqui](https://discord.gg/mx8eMx6)`,
                     inline: true
                 },
                 {
@@ -73,7 +73,7 @@ module.exports = {
                 },
                 {
                     name: 'Central de Suporte',
-                    value: `[Clique aqui](${linksupport})`,
+                    value: `[Clique aqui](https://forms.gle/vtJ5qBqFDd9rL5JU8)`,
                     inline: true
                 }
             )

@@ -286,6 +286,7 @@ client.on("message", async (message, queue, song) => {
     if (["v", "vol", "volume"].includes(command)) {
         let queue = distube.getQueue(message)
         if (!queue) return message.channel.send('Não tem nada tocando no momento.')
+        if (args[0] > 100) return message.channel.send('O volume máximo é 100%').then(msg => msg.delete({ timeout: 4000}))
         distube.setVolume(message, args[0])
         message.channel.send(`Volume definido em ${args[0]}%`)
     }
@@ -443,9 +444,7 @@ client.on("guildMemberAdd", async member => {
 // -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile //
 client.on("ready", () => {                                                                                //
     let activities = [                                                                                    //
-        `Estou em ${client.guilds.cache.size} servidores!`,                                               //
-        `Estou atendendo ${client.channels.cache.size} canais!`,                                          //
-        `Estou conectada a ${client.users.cache.size} usuários!`                                          //
+        `-help`                                          //
     ],                                                                                                    //
         i = 0;                                                                                            //
     setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {                 //

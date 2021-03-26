@@ -66,7 +66,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: 'Status',
-                value: status
+                value: '`' + status + '`'
             }
         )
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))

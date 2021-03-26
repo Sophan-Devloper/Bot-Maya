@@ -40,8 +40,8 @@ module.exports = {
 
 				coletor.on('collect', cp => {
 
-					db.set(`family4_${message.author.id}`, member.id)
-					db.set(`family4_${member.id}`, message.author.id)
+					db.set(`family4_${message.author.id}`, member.tag)
+					db.set(`family4_${member.id}`, message.author.tag)
 
 					let family4embed = new discord.MessageEmbed()
 						.setColor('BLUE')

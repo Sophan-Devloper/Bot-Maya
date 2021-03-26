@@ -10,23 +10,23 @@ exports.run = async (client, message, args) => {
     let bal = await db.get(`money_${user.id}`)
     if (bal === null) bal = 0
 
-    let marry = await `<@${db.get(`marry_${user.id}`)}>`
-    if (marry === `<@null>`) marry = "Solteiro(a)"
+    let marry = await `${db.get(`marry_${user.id}`)}`
+    if (marry === `null`) marry = "Solteiro(a)"
 
-    let family = await `<@${db.get(`family_${user.id}`)}>`
-    if (family === `<@null>`) family = "1. Vago"
+    let family = await `${db.get(`family1_${user.id}`)}`
+    if (family === `null`) family = "Vago"
 
-    let family2 = await `<@${db.get(`family2_${user.id}`)}>`
-    if (family2 === `<@null>`) family2 = "2. Vago"
+    let family2 = await `${db.get(`family2_${user.id}`)}`
+    if (family2 === `null`) family2 = "Vago"
 
-    let family3 = await `<@${db.get(`family3_${user.id}`)}>`
-    if (family3 === `<@null>`) family3 = "3. Vago"
+    let family3 = await `${db.get(`family3_${user.id}`)}`
+    if (family3 === `null`) family3 = "Vago"
 
-    let family4 = await `<@${db.get(`family4_${user.id}`)}>`
-    if (family4 === `<@null>`) family4 = "4. Vago"
+    let family4 = await `${db.get(`family4_${user.id}`)}`
+    if (family4 === `null`) family4 = "Vago"
 
-    let family5 = await `<@${db.get(`family5_${user.id}`)}>`
-    if (family5 === `<@null>`) family5 = "5. Vago"
+    let family5 = await `${db.get(`family5_${user.id}`)}`
+    if (family5 === `null`) family5 = "Vago"
 
     let level = await db.fetch(`level_${user.id}`)
     if (level === null) level = 0
@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: '❤️ Familia',
-                value: `${family}\n${family2}\n${family3}\n${family4}\n${family5}`
+                value: '1. ' + family + '\n2. ' + family2 + '\n3. ' + family3 + '\n4. ' + family4 + '\n5. ' + family5 + ''
             },
             {
                 name: '💸 Dinheiro Intersevidor',

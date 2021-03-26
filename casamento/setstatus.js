@@ -49,7 +49,7 @@ module.exports = {
             msg.awaitReactions((reaction, user) => {
                 if (message.author.id !== user.id) return
 
-                if (reaction.emoji.name === '✅') { // home
+                if (reaction.emoji.name === '✅') { // Check
                     msg.delete()
                     db.set(`status_${message.author.id}`, status)
                     const embednewstatus = new Discord.MessageEmbed()

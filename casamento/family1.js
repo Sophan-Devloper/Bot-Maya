@@ -12,14 +12,22 @@ module.exports = {
 		if (!member)
 			return message.channel.send('Ei, me fala quem você quer convidar para sua familia.').then(msg => msg.delete({ timeout: 5000 }))
 
+		if (db.get(`family1_${message.author.id}`)) {
+			return message.channel.send('Nesta posição, ' + db.get(`family1_${message.author.id}`) + ' é seu familiar.').then(msg => msg.delete({ timeout: 6000 }))
+		}
+
+		if (db.get(`family1_${member.id}`)) {
+			return message.channel.send(member.username + ' já tem um familiar nesta posição.').then(msg => msg.delete({ timeout: 6000 }))
+		}
+
 		if (member.id === client.user.id)
 			return message.channel.send('É... Não sei se meu pai deixaria eu entrar para sua familia. Acho melhor nós ficarmos apenas na amizade.').then(msg => msg.delete({ timeout: 5000 }))
 
 		if (member.id === message.author.id)
 			return message.channel.send('Você quer entrar na sua familia? Não entendi...').then(msg => msg.delete({ timeout: 5000 }))
 
-		let family = await db.fetch(`family_${message.author.id}`)
-		let family2 = await db.fetch(`family_${member.id}`)
+		let family = await db.fetch(`family1_${message.author.id}`)
+		let family2 = await db.fetch(`family1_${member.id}`)
 
 		if (family === null) {
 			let gif = 'https://imgur.com/xmaQyK4.gif'
@@ -34,19 +42,18 @@ module.exports = {
 
 				let reactions = (reaction, user) =>
 					reaction.emoji.name === '❤️' && user.id === member.id
-					message.delete()
 
 				let coletor = msg.createReactionCollector(reactions)
 
 				coletor.on('collect', cp => {
 
-					db.set(`family_${message.author.id}`, member.id)
-					db.set(`family_${member.id}`, message.author.id)
+					db.set(`family1_${message.author.id}`, member.tag)
+					db.set(`family1_${member.id}`, message.author.tag)
 
 					let familyembed = new discord.MessageEmbed()
 						.setColor('BLUE')
 						.setTitle(':heart: A familia aumentou! :heart:')
-						.setDescription(`${member} aceitou o pedido family de ${message.author}`)
+						.setDescription(`${member} aceitou o pedido family de ${message.author.username}`)
 					message.channel.send(familyembed)
 				})
 			})

@@ -5,9 +5,9 @@ const moment = require('moment')
 exports.run = async (client, message, args) => {
     message.delete()
 
-    let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
+    let user = message.mentions.members.first() || message.member
 
-    let bal = await db.fetch(`money_${message.author.id}_${user.id}`)
+    let bal = await db.get(`money_${user.id}`)
     if (bal === null) bal = 0
 
     let marry = await `<@${db.get(`marry_${user.id}`)}>`
@@ -31,10 +31,10 @@ exports.run = async (client, message, args) => {
     let level = await db.fetch(`level_${user.id}`)
     if (level === null) level = 0
 
-    let rp = await db.fetch(`rp${user.id}`)
+    let rp = await db.fetch(`rp_${user.id}`)
     if (rp === null) rp = 0
 
-    let status = await db.get(`status_${message.author.id}`)
+    let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não escreveu nada ainda.`
 
 

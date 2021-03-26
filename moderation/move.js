@@ -24,6 +24,5 @@ module.exports = {
 
         member.voice.setChannel(message.member.voice.channel)
         message.react('✅')
-        message.channel.send('Feito.')
     }
 }

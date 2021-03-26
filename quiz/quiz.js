@@ -8,9 +8,6 @@ module.exports = {
 
     run: async (bot, message, args) => {
 
-      if(!args[213])
-      return message.channel.send('O Quiz está bugado. Já já ele volta a pegar').then(msg => msg.delete({ timeout: 3000 }))
-
         const item = quiz[Math.floor(Math.random() * quiz.length)]
         const filter = response => {
             return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase())

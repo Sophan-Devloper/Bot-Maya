@@ -72,5 +72,5 @@ module.exports = {
 }
 
 module.exports.help = {
-	name: "marry"
+	name: "casamento"
 }

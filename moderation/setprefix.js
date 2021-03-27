@@ -16,9 +16,8 @@ module.exports = {
             return message.channel.send("Me fala o prefix que você quer, tenta assim:\n \nExemplo: `-setprefix !`").then(m => m.delete({ timeout: 7000 }))
         }
 
-        const default_prefix = require("../../config.json")
         let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = default_prefix
+        if (prefix === null) prefix = "-"
         if (args[0] === prefix) {
             const atual = new Discord.MessageEmbed()
                 .setColor('#FF0000')

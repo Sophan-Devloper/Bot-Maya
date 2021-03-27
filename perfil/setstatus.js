@@ -7,24 +7,25 @@ module.exports = {
     run: async (client, message, args) => {
         message.delete()
 
-        const default_prefix = require("../../config.json")
         let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = default_prefix
+        if (prefix === null) prefix = "-"
 
-        if (!args[0])
-            return message.channel.send('Você precisa me dizer qual status você quer no seu perfil.\n \n`' + prefix + 'status`' + 'Um peixinho nadando no mar azul').then(msg => msg.delete({ timeout: 9000 }))
+        if (!args[0]) {
+            const embed1 = new Discord.MessageEmbed()
+                .setColor('#FF0000') // RED 
+                .setTitle('Siga o formato correto')
+                .setDescription('`' + prefix + 'status Um peixinho nadando no mar azul`')
+            return message.channel.send(embed1).then(msg => msg.delete({ timeout: 10000 }))
+        }
 
-
-            
-        if (args[15]) {
+        if (args[20]) {
             const embed15 = new Discord.MessageEmbed()
                 .setColor('RED')
-                .setTitle('É permito até 15 palavras no status.')
-            return message.channel.send(embed15).then(msg => msg.delete({ timeout: 5000 }))
+                .setTitle('É permito até 20 palavras no status.')
+            return message.channel.send(embed15).then(msg => msg.delete({ timeout: 6000 }))
         }
 
         const status = args.join(' ')
-
         var stat = db.get(`status_${message.author.id}`)
         if (status === stat) {
             const iqualstats = new Discord.MessageEmbed()
@@ -59,7 +60,10 @@ module.exports = {
                 }
                 if (reaction.emoji.name === '❌') { // MPEmbed
                     msg.delete()
-                    msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
+                    const cancel = new Discord.MessageEmbed()
+                        .setColor("GREEN")
+                        .setTitle('Comando cancelado.')
+                    msg.channel.send(cancel).then(msg => msg.delete({ timeout: 4000 }))
                 }
             })
         })

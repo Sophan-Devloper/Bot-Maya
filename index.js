@@ -213,40 +213,12 @@ client.on("message", async (message, queue, song) => {
         const commandFile = require(`./moderation/${command}.js`)
         commandFile.run(client, message, args)
     } catch (err) { }
-
-    // -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
-
-    // -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM -- -- MUSIC SYSTEM --
-    
-    const mayazinha = client.users.cache.find(user => user.id === '822490782329733150')
-    if (!mayazinha) {
-        if (["pause", "resume", "unpause", "despause", "r", "repeat", "again", "autoplay", "shuffle", "aleatorio", "v", "vol", "volume", 'flanger', 'gate', 'hass', 'reverse', 'mcompand', 'phaser', 'tremolo', 'surround', 'earwax', `3d`, `bassboost`, `echo`, `karaoke`, `nightcore`, `vaporwave`, "loop", "repeat", "repetir", "dnv", "de novo", "s", "skip", "prox", "próximo", "proximo", "proxima", "próxima", "play", "p", "tocar", "m", "musica", "msc", "stop", "dc", "parar", "para", "disconectar", "disconnect", "q", "queue", "playlist"].includes(command)) {
-            message.delete()
-            const mayazinha = new Discord.MessageEmbed()
-                .setColor('BLUE')
-                .setThumbnail('https://imgur.com/oIuGoh9.gif')
-                .addFields(
-                    {
-                        name: 'Adiciona minha irmã',
-                        value: '[Mayazinha Music™](https://discord.com/api/oauth2/authorize?client_id=822490782329733150&permissions=8&scope=bot)',
-                    },
-                    {
-                        name: 'Adicione com QR Code',
-                        value: '`' + prefix + 'qrmusic`',
-                    }
-                )
-            return message.channel.send(mayazinha)
-        }
-    }
 })
 
-// -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE --
-
-// -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- 
-client.on("guildMemberRemove", async member => {
+client.on("guildMemberRemove", async (member, message) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null)
-        prefix = default_prefix
+        prefix = "-"
     let leavechannel = member.guild.channels.cache.find(channel => channel.name === "saidas")
     if (!leavechannel) {
         return member.guild.owner.send('Hey, eu não consigo mandar boas-vindas no seu servidor. Por favor, crie um chat com o nome `welcome` e um com o nome `saidas`. \n\nEu posso te ajudar com isso, coloque isso em qualquer canal do seu servidor: \n`' + prefix + 'createchannel welcome`\n`' + prefix + 'createchannel saidas` \n\n *Sistema setwelcomechannel em breve*')
@@ -262,30 +234,26 @@ client.on("guildMemberRemove", async member => {
     }
 })
 
-client.on("guildMemberAdd", async member => {
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null)
-        prefix = default_prefix
-    let channel = member.guild.channels.cache.find(channel => channel.name === "welcome")
-    if (!channel) {
-        return member.guild.owner.send('Hey, eu não consigo mandar boas-vindas no seu servidor. Por favor, crie um chat com o nome `welcome` e um com o nome `saidas`. \n\nEu posso te ajudar com isso, coloque isso em qualquer canal do seu servidor: \n`' + prefix + 'createchannel welcome`\n`' + prefix + 'createchannel saidas` \n\n *Sistema setwelcomechannel em breve*')
-    }
+client.on("guildMemberAdd", (member) => {
+    var canal = db.get(`welcomechannel_${member.guild.id}`)
+    if (canal === null) {return false}
 
-    if (channel) {
-        let welcomeembed = await new Discord.MessageEmbed() // Embed boas-vindas	
-            .setColor("#00FF00")
-            .setAuthor(member.user.tag, member.user.displayAvatarURL())
-            .setTitle(`<:hugheart:746361738940645406> Boas-vindas <:hugheart:746361738940645406>`)
-            .setImage("https://imgur.com/Ap4PVxo.gif")
-            .setDescription(`**${member.user}**, seja muito bem-vindo(a) ao Servidor **${member.guild.name}**! Divirta-se :heart:`)
-            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }))
-        await channel.send(welcomeembed).then(msg => member.send(`Oláá, seja muito bem-vindo ao servidor ${member.guild.name}. \n\nQualquer coisa, é só digitar *` + prefix + `help* lá no servidor que eu te mando todos os meus comandos.`));
+    var msgwelcome = db.get(`msgwelcome_${member.guild.id}`)
+    if (msgwelcome === null) { msgwelcome = '`Os administradores são preguiçosos e não escreveram nada aqui`' }
+
+    if (canal) {
+        const newembed = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setAuthor(member.user.tag + ' entrou no servidor', member.user.displayAvatarURL())
+            .setDescription('' + msgwelcome)
+
+        client.channels.cache.get(canal).send(newembed)
     }
 })
 // -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- 
 
 // -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile 
-client.on("message", async (message, args) => {
+client.on("message", async message => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null)
         prefix = default_prefix
@@ -313,8 +281,6 @@ client.on("message", async (message, args) => {
     }
 })
 
-client.on("ready", async (message, args) => {
-    console.log("Ok.")
-})
+client.on("ready", () => { console.log("Ok.") })
 
 client.login(token)

@@ -107,7 +107,10 @@ exports.run = async (client, msg, args) => {
         messages = 0;
         return;
       }
-      await msg.channel.bulkDelete(deleteAble)
+      await msg.channel.bulkDelete(deleteAble).catch(err => {
+        if (err)
+          return msg.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(msg => msg.delete({ timeout: 15000 })).catch(err => {return})
+      })
       messages += deleteAble.size
     }
   } else if (typeof (parseInt(args[0])) == "number") {

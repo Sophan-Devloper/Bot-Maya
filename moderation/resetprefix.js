@@ -1,5 +1,4 @@
 const db = require('quick.db')
-const { default_prefix } = require("../../config.json")
 
 module.exports = {
     name: "prefix",

@@ -88,18 +88,20 @@ module.exports = {
 
         const Music = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setThumbnail('https://imgur.com/oIuGoh9.gif')
+            .setTitle('🎶: Centralzinha de Comandos 🎶')
+            .setThumbnail('https://imgur.com/BJUej6y.gif')
+            .setDescription('A vida sem música é completamente sem graça!')
             .addFields(
                 {
-                    name: 'Adiciona minha irmãzinha',
-                    value: '[Mayazinha Music™](https://discord.com/api/oauth2/authorize?client_id=822490782329733150&permissions=8&scope=bot)',
+                    name: 'Comandos Gerais',
+                    value: '`-play` Peça uma música\n`-pause` Pause, né?\n`-resume` Despausa a música\n`-skip` Pule de música\n`-autoplay` Desative ou ative o autoplay\n`-queue` Veja a playlist\n`-volume 0~100` Escolha o volume do bot\n`-disconnect` | `-dc` | `-stop` Me tira da call.\n*Mais comandos estão sendo adicionados.*'
                 },
                 {
-                    name: 'Adicione com QR Code',
-                    value: '`-qrmusic`',
+                    name: 'Filter Mode',
+                    value: '`-3d` | `-bassboost` | `-echo`\n `-karaoke` | `-nigtcore` | `-vaporwave`\n`-flanger` | `-gate` | `-haas`\n`-reverse` | `-mcompand` | `-phaser`\n`-tremolo` | `-surround` | `-earwax`'
                 }
             )
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
+            .setFooter(message.author.username, message.author.displayAvatarURL())
 
         const Administrativo = new Discord.MessageEmbed()
             .setColor('#CD853F')

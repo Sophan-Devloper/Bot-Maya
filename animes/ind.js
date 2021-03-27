@@ -1,38 +1,38 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-message.delete()
+  message.delete()
 
-var i = 'Isekai'
-var h = 'Hentai'
-var ms = 'Mahou Shoujo'
-var y = 'Yuri'
-var f = 'Fantasia'
-var r = 'RPG'
-var c = 'Comédia'
-var s = 'Sobre Natural'
-var e = 'Esporte'
-var j = 'Jogo'
-var a = 'Aventura'
-var aç = 'Ação'
-var am = 'Ação/Militar'
-var p = 'Psicológico'
-var d = 'Drama'
-var sv = 'Simulador de Vida'
-var mi = 'Mistério'
-var ve = 'Vida Escolar'
-var vc = 'Vida Cotidiana'
-var dm = 'Demônio'
-var vg = 'Vários Gêneros'
-var rm = 'Românce'
-var hr = 'Harém'
-var m = 'Musical'
-var ma = 'Magia'
-var ec = 'Ecchi'
-var cr = 'Comédia Romântica'
-var s = 'Suspense'
+  var i = 'Isekai'
+  var h = 'Hentai'
+  var ms = 'Mahou Shoujo'
+  var y = 'Yuri'
+  var f = 'Fantasia'
+  var r = 'RPG'
+  var c = 'Comédia'
+  var s = 'Sobre Natural'
+  var e = 'Esporte'
+  var j = 'Jogo'
+  var a = 'Aventura'
+  var aç = 'Ação'
+  var am = 'Ação/Militar'
+  var p = 'Psicológico'
+  var d = 'Drama'
+  var sv = 'Simulador de Vida'
+  var mi = 'Mistério'
+  var ve = 'Vida Escolar'
+  var vc = 'Vida Cotidiana'
+  var dm = 'Demônio'
+  var vg = 'Vários Gêneros'
+  var rm = 'Românce'
+  var hr = 'Harém'
+  var m = 'Musical'
+  var ma = 'Magia'
+  var ec = 'Ecchi'
+  var cr = 'Comédia Romântica'
+  var s = 'Suspense'
 
-var list = [
+  var list = [
     `100man no Inochi no Ue ni Ore wa Tatteiru \nGênero: ${f}`,
     `Adachi to Shimamura \nGênero: ${y}`,
     `Akudama Drive \nGênero: ${s}`,
@@ -168,7 +168,7 @@ var list = [
     `Ano Hana \nGênero: ${d}`,
     `Ano Natsu De Matteru \nGênero: ${rm}`,
     `Another \nGênero: ${mi}`,
-    `Ansatsu Kyoushitsu \nGênero: ${c}`, 
+    `Ansatsu Kyoushitsu \nGênero: ${c}`,
     `Antique Bakery \nGênero: ${c}`,
     `Ao Haru Ride \nGênero: ${rm}`,
     `Ao No Exorcist \nGênero: ${dm}`,
@@ -209,7 +209,7 @@ var list = [
     `Avatar A Lenda De Korra \nGênero: ${f}`,
     `Avenger \nGênero: ${a}`,
     `Ayakashi \nGênero: ${aç}`,
-    `Ayakashi – Japanese Classic Horror \nGênero: ${a}`, 
+    `Ayakashi – Japanese Classic Horror \nGênero: ${a}`,
     `Ayashi No Ceres \nGênero: ${d}`,
     `Azumanga Daioh \nGênero: ${c}`,
     `B Gata H Kei \nGênero: ${cr}`,
@@ -336,17 +336,17 @@ var list = [
     `Busou Shinki \nGênero: ${aç}`,
     `Busou Shoujo Machiavellianism \nGênero: ${ec}`,
     `Butlers: Chitose Momotose Monogatari \nGênero: ${c}`
-        ]
+  ]
 
-var rand = list[Math.floor(Math.random() * list.length)]
-let user = client.users.cache.get(args[0])
+  var rand = list[Math.floor(Math.random() * list.length)]
+  let user = client.users.cache.get(args[0])
 
-const IndEmbed = new Discord.MessageEmbed()
-        .setColor('#DCDCDC')
-        .addFields(
-            {
-              name: 'Maya Indica :hearts:',
-              value: `Nome: ${rand}`
-            })
-  await message.channel.send(IndEmbed).then(msg => msg.delete({timeout: 10000}))
+  const IndEmbed = new Discord.MessageEmbed()
+    .setColor('#DCDCDC')
+    .addFields(
+      {
+        name: 'Maya Indica :hearts:',
+        value: `Nome: ${rand}`
+      })
+  await message.channel.send(IndEmbed).then(msg => msg.delete({ timeout: 10000 }))
 }

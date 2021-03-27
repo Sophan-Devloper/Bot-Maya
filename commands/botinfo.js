@@ -27,7 +27,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Informações Técinas',
-                    value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/03/2021\n💡 Idealizada por: Rody#3756 \n:gear: Criada por: Rody#3756\n🖌️ Design: yma?#5175\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1`)
+                    value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/03/2021\n💡 Idealizada por: Rody#3756 \n:gear: Criada por: Rody#3756\n🖌️ Design: yma?#5175\n🖊️ Coop: Gowther#9233\n📡 Host: Replit.com\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1\n⌨️ 359 Comandos (287 Liberados)`)
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())

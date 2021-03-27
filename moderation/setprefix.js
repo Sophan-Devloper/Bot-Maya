@@ -63,6 +63,6 @@ module.exports = {
                     msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
                 }
             })
-        })
+        }) // aqui
     }
 }

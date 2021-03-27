@@ -1,4 +1,3 @@
-// -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST 
 const Discord = require("discord.js")
 const client = new Discord.Client()
 const { token, default_prefix } = require("./config.json")
@@ -6,9 +5,7 @@ const db = require('quick.db')
 const canvacord = require('canvacord')
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
-// -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST -- -- RIQUERES CONST 
 
-// -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7
 const express = require('express')
 const { measureMemory } = require("vm")
 const app = express()
@@ -19,12 +16,9 @@ app.get('/', (request, response) => {
     console.log(`Ping! ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`)
     response.sendStatus(200)
 })
-// -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7 -- -- UPTIME ROBOT 24/7
 
-// -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE -- -- CLIENT.ON MAIN FILE --
-client.on("message", async (message, queue, song) => {
+client.on("message", async (message) => {
 
-    // const xp = require('./events&functions/xp')
     if (message.author.bot) return // no bots commands
     if (message.channel.type == "dm") // no dm's commands
         return message.channel.send("Eu sou uma bot, eu não consigo conversar no privado ainda.")
@@ -216,43 +210,39 @@ client.on("message", async (message, queue, song) => {
 })
 
 client.on("guildMemberRemove", async (member, message) => {
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null)
-        prefix = "-"
-    let leavechannel = member.guild.channels.cache.find(channel => channel.name === "saidas")
-    if (!leavechannel) {
-        return member.guild.owner.send('Hey, eu não consigo mandar boas-vindas no seu servidor. Por favor, crie um chat com o nome `welcome` e um com o nome `saidas`. \n\nEu posso te ajudar com isso, coloque isso em qualquer canal do seu servidor: \n`' + prefix + 'createchannel welcome`\n`' + prefix + 'createchannel saidas` \n\n *Sistema setwelcomechannel em breve*')
-    }
-    if (leavechannel) {
-        let leaveembed = await new Discord.MessageEmbed() // Embed Saída
-            .setColor("#FF0000")
-            .setAuthor(member.user.tag, member.user.displayAvatarURL())
-            .setImage("https://imgur.com/BGeYfY4.gif")
-            .setDescription(`**${member.user.username}**, saiu do servidor! <:fzoq2:746361736935768085> \nPoxa, nem me deu tchau :cry:`)
-            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }))
-        await leavechannel.send(leaveembed)
+    var canal = db.get(`leavechannel_${member.guild.id}`)
+    if (canal === null) { return false }
+
+    var msgleave = db.get(`msgleave_${member.guild.id}`)
+    if (msgleave === null) { msgleave = '`Os Adms não escreveram nada aqui`' }
+
+    if (canal) {
+        const leaveembed = new Discord.MessageEmbed()
+            .setColor('GRAY')
+            .setAuthor(member.user.tag + ' saiu do servidor', member.user.displayAvatarURL())
+            .setDescription('' + msgleave)
+
+        client.channels.cache.get(canal).send(leaveembed)
     }
 })
 
 client.on("guildMemberAdd", (member) => {
     var canal = db.get(`welcomechannel_${member.guild.id}`)
-    if (canal === null) {return false}
+    if (canal === null) { return false }
 
     var msgwelcome = db.get(`msgwelcome_${member.guild.id}`)
     if (msgwelcome === null) { msgwelcome = '`Os administradores são preguiçosos e não escreveram nada aqui`' }
 
     if (canal) {
-        const newembed = new Discord.MessageEmbed()
+        const joinembed = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setAuthor(member.user.tag + ' entrou no servidor', member.user.displayAvatarURL())
             .setDescription('' + msgwelcome)
 
-        client.channels.cache.get(canal).send(newembed)
+        client.channels.cache.get(canal).send(joinembed)
     }
 })
-// -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- -- LEAVE AND WELCOME SYSTEM -- 
 
-// -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile 
 client.on("message", async message => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null)
@@ -268,7 +258,6 @@ client.on("message", async message => {
         .setStatus("idle")
         .catch(console.error)
 })
-// -- Status Profile --  -- Status Profile -- -- Status Profile -- -- Status Profile -- -- Status Profile //
 
 client.on("message", async (message, args) => {
     let prefi = db.get(`prefix_${message.guild.id}`)

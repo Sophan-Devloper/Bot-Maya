@@ -1,16 +1,46 @@
-   const Discord = require("discord.js")
-   const ms = require("ms")
+const Discord = require("discord.js")
+const ms = require("ms")
+const db = require('quick.db')
 
-   module.exports.run = async (client, message, args) => {
+module.exports = {
+   name: "mute",
+   category: "mute",
+   run: async (client, message, args) => {
       message.delete()
 
-      let perms = message.member.hasPermission("MANAGE_ROLES")
-      if (!perms)
-         return message.channel.send("Você não tem permissão suficiente pra esse comando, que tal chamar um Mod ou Adm?").then(msg => msg.delete({ timeout: 3000 }))
+      let prefix = db.get(`prefix_${message.guild.id}`)
+      if (prefix === null) prefix = "-"
 
-      let logchannel = message.guild.channels.cache.find(ch => ch.name === "log")
-      if (!logchannel)
-         return message.channel.send('Eu não achei nenhum canal com o nome `log` \n⠀\nCopie e cole isso para eu criar um pra você \n⠀\n`-createchannel log`').then(msg => msg.delete({ timeout: 8000 }))
+      let perms = message.member.hasPermission("MANAGE_ROLES")
+      if (!perms) {
+         const noperms = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Permissão necessária: Manusear Roles (cargos)')
+         return message.channel.send(noperms).then(msg => msg.delete({ timeout: 3000 }))
+      }
+
+      const logchannel = db.get(`logchannel_${message.guild.id}`)
+      if (logchannel === null) {
+         let prefix = db.get(`prefix_${message.guild.id}`)
+         if (prefix === null) prefix = "-"
+
+         const nolog = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Não há Canal Log registrado.')
+            .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
+         return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 }))
+      }
+
+      if (!client.channels.cache.get(logchannel)) {
+         let prefix = db.get(`prefix_${message.guild.id}`)
+         if (prefix === null) prefix = "-"
+
+         const nolog = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Parece que o canal log foi excluido.')
+            .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
+         return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 }))
+      }
 
       const role = message.guild.roles.cache.find(role => role.name === 'Muted')
       if (!role) {
@@ -39,154 +69,135 @@
          try {
             const role7 = message.guild.roles.cache.find(role => role.name === 'Muted')
 
-            const roleembedcreate = new Discord.MessageEmbed()
-               .setColor('#DCDCDC')
-               .setTitle('Detalhes Especificos')
-               .setDescription(`Enviando detalhes mais especificos para ${message.author} e para o dono do servidor...`)
+            const criando = new Discord.MessageEmbed()
+               .setColor('BLUE')
+               .setTitle('🔄 Criando e configurando cargo, espere...')
 
-            message.channel.send('Eu não encontrei nenhum cargo de Mute eficiente.').then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.channel.send(
-               'Criando cargo...'
-            )).then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.channel.send(
-               `O cargo ${role7} foi criado com sucesso!`
-            )).then(msg => msg.delete({ timeout: 3000 })).then(msg => msg.channel.send(
-               'Configurando o cargo no servidor...'
-            )).then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.channel.send(
-               `Negando permissões do cargo ${role7}...`
-            )).then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.channel.send(
-               'Permissões Negadas:'
-            )).then(msg => msg.delete({ timeout: 1000 })).then(msg => msg.channel.send(
-               'Permissões Negadas:\n`Enviar mensagens de texto`'
-            )).then(msg => msg.delete({ timeout: 1000 })).then(msg => msg.channel.send(
-               'Permissões Negadas:\n`Enviar mensagens de texto`\n`Enviar mensagem TTS`'
-            )).then(msg => msg.delete({ timeout: 1000 })).then(msg => msg.channel.send(
-               'Permissões Negadas:\n`Enviar mensagens de texto`\n`Enviar mensagem TTS`\n`Conectar e falar em canais de voz`'
-            )).then(msg => msg.delete({ timeout: 1000 })).then(msg => msg.channel.send(
-               'Permissões Negadas:\n`Enviar mensagens de texto`\n`Enviar mensagem TTS`\n`Conectar e falar em canais de voz`\n`Reagir em mensagens com emojis`'
-            )).then(msg => msg.delete({ timeout: 1000 })).then(msg => msg.channel.send(
-               'Permissões Negadas:\n`Enviar mensagens de texto`\n`Enviar mensagem TTS`\n`Conectar e falar em canais de voz`\n`Reagir em mensagens com emojis`\n`Manusear mensagens e cargos`'
-            )).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(
-               'Verificando erros na configuranção...'
-            )).then(msg => msg.delete({ timeout: 2000 })).then(msg => msg.channel.send(
-               'Nenhum erro encontrado.'
-            )).then(msg => msg.delete({ timeout: 1500 })).then(msg => msg.channel.send(
-               roleembedcreate
-            )).then(msg => msg.delete({ timeout: 8000 })).then(msg => msg.channel.send(
-               `Cargo criado e configurado com sucesso!`
-            ))
+            const roleembedcreate = new Discord.MessageEmbed()
+               .setColor('BLUE')
+               .setDescription(`🔄 Buscando erros...`)
+
+            const criado = new Discord.MessageEmbed()
+               .setColor('GREEN')
+               .setTitle('Cargo criado e configurado com sucesso!')
+
+            message.channel.send(criando).then(msg => msg.delete({ timeout: 8000 })).then(msg => message.channel.send(roleembedcreate)).then(msg => msg.delete({ timeout: 4000 })).then(msg => message.channel.send(criado))
          } catch (error) {
             console.log(error)
          }
-
-         function msgembed() {
-            const embeddetail = new Discord.MessageEmbed()
-               .setColor("#DCDCDC")
-               .setTitle('Comando Mute - Detalhes')
-               .addFields(
-                  {
-                     name: ':gear: Desenvolvedor da Maya :gear:',
-                     value: 'Olá, meu nome é Rodrigo, desenvolvedor da Maya. O sistema de Mute da Maya utiliza o sistema de Permissões liberada pelo Discord da biblioteca Discord.js.\nNo resumo... Quem for mutado pela Maya, não vai conseguir falar em nenhum canal de texto e de voz no servidor inteiro.\nCom a otimização da Maya, você não precisa configurar um cargo Mute em cada canal de texto/voz manualmente, a Maya faz isso sozinha pra você.'
-                  },
-                  {
-                     name: '🔄 Atualize o Mute System',
-                     value: '1 - `-delrole @Muted` Delete o cargo.\n2 - `-mute` Ativa a configuração do cargo Mute.'
-                  },
-                  {
-                     name: '🆕 Novos canais de texto/voz',
-                     value: 'O Discord ainda não permite a auto atualização de roles.\nSempre que você criar um canal de texto/voz, atualize o mute da Maya para perfeito funcionamento.'
-                  },
-                  {
-                     name: '📑 Canal Log',
-                     value: 'Neste canal, mandarei todos os detalhes do mute. Você pode deixar este canal público ou privado alterando as permissões dele.\nClaro, não vá me privar dele, né?.'
-                  },
-                  {
-                     name: '⬆️ Maya Role',
-                     value: 'É extremamente importe que o meu cargo, "Maya" esteja acima de todas as outras roles, para que eu possa efetuar meus comandos com maestria.'
-                  },
-               )
-
-            if (message.guild.owner.id === message.author.id) {
-               message.author.send(embeddetail)
-            }
-            if (message.guild.owner.id != message.author.id) {
-               message.author.send(embeddetail)
-               message.guild.owner.send(embeddetail)
-            }
-         }
-         setTimeout(msgembed, 44000)
       }
       if (!role) return
 
-      const mutebotton = 'https://imgur.com/jdFJK4b.gif'
-      const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-
-      const nomember = new Discord.MessageEmbed()
-         .setColor('#DCDCDC')
-         .setTitle('🔇 Comando Mute')
-         .setDescription('Mute um usuário por um tempo determinado.')
-         .setThumbnail(mutebotton)
-         .addFields(
-            {
-               name: '📜 Detalhes',
-               value: '`-mute` Comando de ativação\n`@user` Marque a pessoa que será mutada\n`1, 2, 3...` Tempo (s - segundo | m - minutos | h - horas)\n`razão` Escreva o motivo do mute, se quiser.'
-            },
-            {
-               name: '❕ Comando',
-               value: '`-mute @user 10s/m/h razão`'
-            },
-            {
-               name: 'ℹ️ Mais informações',
-               value: '`-muteinfo` Se quer mais informações'
-            }
-         )
-         .setFooter(message.author.tag, message.author.displayAvatarURL())
-      if (!member)
+      const member = message.mentions.members.first()
+      args[0] = member
+      if (!args[0]) {
+         const nomember = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Favor, mencione o usuário.')
+            .setDescription('`' + prefix + 'mute @user 10s/m/h Razão`')
          return message.channel.send(nomember).then(msg => msg.delete({ timeout: 60000 }))
+      }
 
-      const Maya = member.id === '821471191578574888'
-      if (Maya)
-         return message.channel.send("Eu não vou mutar eu mesma, que ousadia da sua parte!").then(msg => msg.delete({ timeout: 5000 }))
+      if (member.id === '821471191578574888') {// Maya ID
+         const nomutemaya = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setTitle(member.user.username + ' está na Whitelist.')
+         return message.channel.send(nomutemaya).then(msg => msg.delete({ timeout: 5000 }))
+      }
 
-      function soberole() {
+
+      if (!role.editable) {
          const soberol = new Discord.MessageEmbed()
-            .setColor('#DCDCDC')
-            .setTitle(`Meu cargo é menor que o cargo Muted`)
+            .setColor('BLUE')
+            .setTitle('Meu cargo não é alto o suficiente.')
             .addFields(
                {
                   name: 'Suba meu cargo',
-                  value: '1 - Configurações do Servidor\n2 - Cargos\n3 - Procure meu cargo "Maya"\n4 - Arraste meu cargo para um dos primeiros\n5 - Salve as alterações e pronto.'
-               },
-               {
-                  name: 'Crie um novo cargo',
-                  value: 'Se preferir, delete o cargo "Muted" e escreva `-mute` no chat que eu faço o resto'
+                  value: '1 - Configurações do Servidor\n2 - Cargos\n3 - Procure meu cargo "Maya"\n4 - Arraste meu cargo para um dos primeiros\n5 - Salve as alterações e tente novamente.'
                }
             )
-         message.author.send(soberol)
-      }
-      if (!role.editable)
-         return message.channel.send(`O cargo ${role} está acima do meu. Você pode subir meu cargo?\nVou te enviar umas dicas no privado :p`).then(msg => (setTimeout(soberole, 4000)))
 
-      if (member.id === message.guild.owner.id)
-         return message.channel.send('Queeee??? Você quer mutar o dono do servidor? O-O').then(msg => msg.delete({ timeout: 5000 }))
+         const sobcarg = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('🔄 Um erro foi encontrado. Buscando solução...')
 
-      if (!member.bannable)
-         return message.channel.send('Essa pessoa tem algum cargo maior que o meu :cry:').then(msg => msg.delete({ timeout: 5000 }))
+         setTimeout(function () {
+            message.channel.send(soberol)
+         }, 6000)
+         return message.channel.send(sobcarg)
 
-      if (member.id === message.author.id)
-         return message.channel.send('Queeee??? Você tentou mutar você mesmo? Não faça isso!').then(msg => msg.delete({ timeout: 5000 }))
-
-      if (member.roles.cache.has(role.id)) {
-         return message.channel.send(`${member.user.username} já está mutado. Mas se você quiser atualizar o mute, você pode usar o comando ` + '`-remute @user`').then(msg => msg.delete({ timeout: 8000 }))
       }
 
-      let time = args[1]
-      if (!time)
-         return message.channel.send('Você não me disse quanto tempo é o mute.\nEscolha o número e coloque na frente do número (s/m/h)\n \n`-muteinfo`').then(msg => msg.delete({ timeout: 8000 }))
+      if (member.id === message.guild.owner.id) {
+         const dono = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Mutar o dono do servidor não é uma opção.')
+         return message.channel.send(dono).then(msg => msg.delete({ timeout: 5000 }))
+      }
+
+      if (member.hasPermission('ADMINISTRATOR')) {
+         const unbannable = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Esta pessoa tem um cargo maior que o meu.')
+         return message.channel.send(unbannable).then(msg => msg.delete({ timeout: 5000 }))
+      }
+
+      var time = args[1]
+      if (!time) {
+         const notime = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Siga o padrão do comando!')
+            .setDescription('`' + prefix + 'mute @user 5s/m/h Razão`')
+            .setFooter('Deseja o ' + prefix + 'muteinfo' + '?')
+
+         const embeddetail = new Discord.MessageEmbed()
+            .setColor("BLUE")
+            .setTitle('Comando Mute - Detalhes')
+            .addFields(
+               {
+                  name: '⌨️ Formato',
+                  value: '`' + prefix + 'mute @user 5s/m/h Razão`'
+               },
+               {
+                  name: '🔄 Atualize o Mute System',
+                  value: '1 - `' + prefix + 'delrole @Muted` Delete o cargo.\n2 - `' + prefix + 'mute` Ativa a configuração do cargo Mute.'
+               },
+               {
+                  name: '🆕 Novos canais de texto/voz',
+                  value: 'O Discord ainda não permite a auto atualização de roles.\nSempre que você criar um canal de texto/voz, atualize o mute da Maya para perfeito funcionamento.'
+               },
+               {
+                  name: '📑 Canal Log',
+                  value: 'Neste canal, mandarei todos os detalhes do mute. Você pode deixar este canal público ou privado alterando as permissões dele.\nClaro, não vá me privar dele, né?.'
+               },
+               {
+                  name: '⬆️ Maya Role',
+                  value: 'É extremamente importe que o meu cargo, "Maya" esteja acima de todas as outras roles, para que eu possa efetuar meus comandos com maestria.'
+               }
+            )
+            .setTimestamp()
+
+         return message.channel.send(notime).then(msg => {
+            msg.react('✅') // Check
+            msg.react('❌') // X
+
+            msg.awaitReactions((reaction, user) => {
+               if (message.author.id !== user.id) return
+
+               if (reaction.emoji.name === '✅') { // home
+                  msg.delete()
+                  message.channel.send(embeddetail)
+               }
+               if (reaction.emoji.name === '❌') { // MPEmbed
+                  msg.delete()
+               }
+            })
+         })
+      }
 
       let reason = args.slice(2).join(" ")
       if (!reason)
-         reason = 'Razão não especificada pelo Moderador.'
-
-      let avatar = member.user.displayAvatarURL({ format: 'png' })
+         reason = `Razão não especificada por ${message.author.username}.`
 
       const muteembed = new Discord.MessageEmbed()
          .setAuthor(`Sistema de Mute - ${member.guild.name}`)
@@ -194,16 +205,16 @@
          .addFields(
             {
                name: 'Usuário',
-               value: `${member.user}`,
-               inline: `true`
+               value: member.user,
+               inline: true
             },
             {
-               name: 'Nome do usuário original',
-               value: `${member.user.tag}`
+               name: 'Nome Original',
+               value: member.user.tag
             },
             {
                name: 'ID do usuário',
-               value: member.id
+               value: member.user.id
             },
             {
                name: 'Moderador',
@@ -236,15 +247,114 @@
          .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
          .setTimestamp()
 
-      member.roles.add(role) // Ação Mute
-      member.send(`Você foi mutado no servidor ${member.guild.name}.\n⠀\nVeja mais informações do mute no ${logchannel}`).then(msg => message.channel.send(
-         `O Mute foi um sucesso! Estou enviando mais informações no ${logchannel}`
-      )).then(msg => msg.delete({ timeout: 4000 })).then(msg => logchannel.send(muteembed))
+      if (member.id === message.author.id) {
+         const muteproprio = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('Tem certeza que deseja mutar você mesmo?')
 
-      setTimeout(function () {
-         member.roles.remove(role) //Ação Desmute
-         logchannel.send(unmuteembed).then(msg => member.send(`Seu mute chegou ao fim no servidor ${member.guild.name}`))
-      }, ms(time))
+         message.channel.send(muteproprio).then(msg => {
+            msg.react('✅') // Check
+            msg.react('❌') // X
+
+            msg.awaitReactions((reaction, user) => {
+               if (message.author.id !== user.id) return
+
+               const troll = new Discord.MessageEmbed()
+                  .setColor('GREEN')
+                  .setTitle('Se você tem cargo para usar este comando, você não pode mutar você mesmo. 😗')
+
+               if (reaction.emoji.name === '✅') { // home
+                  msg.delete()
+                  return message.channel.send(troll).then(msg => msg.delete({ timeout: 5000 }))
+               }
+               if (reaction.emoji.name === '❌') { // MPEmbed
+                  msg.delete()
+               }
+            })
+         })
+      }
+
+      if (member.roles.cache.has(role.id)) {
+         const unbannable = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle(`Esta pessoa já está mutada. Deseja mutar ${member.user.username} novamente?`)
+
+         message.channel.send(unbannable).then(msg => {
+            msg.react('✅') // Check
+            msg.react('❌') // X
+
+            msg.awaitReactions((reaction, user) => {
+               const logchannel = db.get(`logchannel_${member.guild.id}`)
+               if (message.author.id !== user.id) return
+               if (reaction.emoji.name === '✅') { // home
+                  msg.delete()
+
+                  member.roles.remove(role)
+                  member.roles.add(role) // Ação Mute
+
+                  setTimeout(function () {
+                     member.roles.remove(role) //Ação Desmute
+                     client.channels.cache.get(logchannel).send(unmuteembed)
+                  }, ms(time))
+
+                  const rela = new Discord.MessageEmbed()
+                     .setColor('GREEN')
+                     .setTitle(`${member.user.username} foi remutado com sucesso.`)
+                     .setDescription(`Mais informações em ${client.channels.cache.get(logchannel).name}`)
+
+
+                  setTimeout(function () {
+                     client.channels.cache.get(logchannel).send(muteembed).catch(err => {
+                        message.channel.send(err)
+                     })
+                  }, 3500)
+                  return message.channel.send(rela)
+               }
+               if (reaction.emoji.name === '❌') { // MPEmbed
+                  msg.delete()
+               }
+            })
+         })
+      }
+
+      const muteq = new Discord.MessageEmbed()
+         .setColor('BLUE')
+         .setDescription(`Mutar ${member.user} por ${time}?`)
+
+      if (!member.roles.cache.has(role.id)) {
+         const logchannel = db.get(`logchannel_${member.guild.id}`)
+         await message.channel.send(muteq).then(msg => {
+            msg.react('✅') // Check
+            msg.react('❌') // X
+
+            msg.awaitReactions((reaction, user) => {
+               if (message.author.id !== user.id) return
+
+               if (reaction.emoji.name === '✅') { // Sim
+                  msg.delete()
+
+                  member.roles.add(role) // Ação Mute
+                  setTimeout(function () {
+                     member.roles.remove(role) //Ação Desmute
+                     client.channels.cache.get(logchannel).send(unmuteembed)
+                  }, ms(time))
+
+                  const rela = new Discord.MessageEmbed()
+                     .setColor('GREEN')
+                     .setTitle(`${member.user.username} foi mutado com sucesso.`)
+                     .setDescription(`Mais informações em ${client.channels.cache.get(logchannel).name}`)
+
+                  message.channel.send(rela)
+                  setTimeout(function () {
+                     client.channels.cache.get(logchannel).send(muteembed)
+                  }, 6500)
+               }
+               if (reaction.emoji.name === '❌') { // MPEmbed
+                  msg.delete()
+               }
+            })
+         })
+      }
 
       module.exports.help = {
          name: "tempmute",
@@ -254,3 +364,4 @@
          category: "moderator your server"
       }
    }
+}

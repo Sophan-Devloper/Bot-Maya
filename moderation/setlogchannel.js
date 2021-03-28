@@ -33,8 +33,8 @@ module.exports = {
 
             const semcanal = new Discord.MessageEmbed()
                 .setColor('#ff0000')
-                .setTitle('O sistema log não pode ser desativado.')
-                .setDescription('Caso deseje trocar de canal, use o comando novamente.\n`' + prefix + 'setlogchannel #CanalLog`')
+                .setTitle('O logchannel não pode ser desativado.')
+                .setDescription('Caso queira trocar de canal, use o comando \n`' + prefix + 'setlogchannel #CanalLog`')
 
             return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 }))
 

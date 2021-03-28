@@ -4,11 +4,11 @@ const db = require('quick.db')
 module.exports.run = (client, message, args) => {
     message.delete()
 
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
+    if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms).then(msg => msg.delete({ timeout: 5000 }))
+        return message.channel.send(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
     }
 
     if (!args[0]) {
@@ -19,7 +19,7 @@ module.exports.run = (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Use o formato correto')
             .setDescription('`' + prefix + 'createchannel NomeDoCanal`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 9000 }))
+        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 9000 })).catch(err => {return})
     }
 
     message.guild.channels.create(args.slice(0).join(" "), { type: 'text' })
@@ -27,5 +27,5 @@ module.exports.run = (client, message, args) => {
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setTitle('Canal criado com sucesso.')
-    message.channel.send(sucess).then(msg => msg.delete({ timeout: 10000 }))
+    message.channel.send(sucess).then(msg => msg.delete({ timeout: 10000 })).catch(err => {return})
 }

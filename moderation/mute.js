@@ -24,11 +24,11 @@ module.exports = {
          let prefix = db.get(`prefix_${message.guild.id}`)
          if (prefix === null) prefix = "-"
 
-         const nolog = new Discord.MessageEmbed()
+         const nolog1 = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Não há Canal Log registrado.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-         return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 }))
+         return message.channel.send(nolog1).then(msg => msg.delete({ timeout: 120000 }))
       }
 
       if (!client.channels.cache.get(logchannel)) {

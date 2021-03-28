@@ -6,7 +6,7 @@ module.exports = {
   run: async (bot, message, args) => {
   message.delete()
 
-  if(!message.member.hasPermission("MENAGE_CHANNELS"))
+  if(!message.member.hasPermission("MANAGE_CHANNELS"))
     return message.channel.send('Calma, este comando é restrito pra Staff do Servidor.').then(msg => msg.delete({timeout: 5000}))
 
   if (!args[0])

@@ -20,54 +20,24 @@ app.get('/', (request, response) => {
 client.on("message", async (message) => {
 
     if (message.author.bot) return // no bots commands
-    if (message.channel.type == "dm") // no dm's commands
-        return message.channel.send("Eu sou uma bot, eu não consigo conversar no privado ainda.")
+    if (message.channel.type == "dm") {// no dm's commands
+        const dmembed = new Discord.MessageEmbed()
+            .set('#FF000')
+            .setTitle('Eu não posso responder mensagens no privado.')
+        return message.channel.send(dmembed)
+    }
     xp(message)
 
     var r = 'maya'
     var r1 = 'Maya'
     var r2 = 'MAYA'
-
-    var list = [
-        'ooi',
-        'euzinha',
-        'to aqui',
-        'oláá',
-        'Estou aqui, o que quieres?',
-        `Como posso te ajudar? Qualquer coisa só chamar o help`,
-        'Alguém me chamou?',
-        'Porquê me chamas?',
-        'Aaaah, eu to com sono:sleeping:',
-        'ooooi, eu estou tomando sorvete agora, no que posso ajudar?',
-        'Eu estava dormindo... O que você precisa?',
-        'Estou aqui, como posso ajudar?',
-        'Oiii, parece que eu ouvi meu nome',
-        'oooi, estou aqui',
-        'Ouvi meu nome c.c',
-        'Olááá, estou aqui para ajudar, quem me chamas?'
-    ]
-
+    var list = ['ooi', 'euzinha', 'to aqui', 'oláá', 'Estou aqui, o que quieres?', `Como posso te ajudar? Qualquer coisa só chamar o help`, 'Alguém me chamou?', 'Porquê me chamas?', 'Aaaah, eu to com sono:sleeping:', 'ooooi, eu estou tomando sorvete agora, no que posso ajudar?', 'Eu estava dormindo... O que você precisa?', 'Estou aqui, como posso ajudar?', 'Oiii, parece que eu ouvi meu nome', 'oooi, estou aqui', 'Ouvi meu nome c.c', 'Olááá, estou aqui para ajudar, quem me chamas?']
     var msgmaya = list[Math.floor(Math.random() * list.length)]
 
-    if (message.content.includes === 'maya') {
-        message.react('♥️')
-        message.channel.send(msgmaya)
-    }
-
-    if (message.content.includes === 'Maya') {
-        message.react('♥️')
-        message.channel.send(msgmaya)
-    }
-
-    if (message.content.includes === 'MAYA') {
-        message.react('♥️')
-        message.channel.send(msgmaya)
-    }
-
-    if (message.content.includes("loli")) {
-        message.channel.send("Eu li Loli? Ligando 190...").then(msg => msg.delete({ timeout: 2000 })).catch(err => { return })
-    }
-
+    if (message.content.includes === 'maya') { message.react('♥️').then(msg => msg.channel.send(msgmaya)) }
+    if (message.content.includes === 'Maya') { message.react('♥️').then(msg => msg.channel.send(msgmaya)) }
+    if (message.content.includes === 'MAYA') { message.react('♥️').then(msg => msg.channel.send(msgmaya)) }
+    if (message.content.includes("loli")) { message.channel.send("Eu li Loli? Ligando 190...").then(msg => msg.delete({ timeout: 2000 })).catch(err => { return }) }
     if (message.content.includes("bom dia")) { message.channel.send("Bom diiia") }
     if (message.content.includes("boa tarde")) { message.channel.send("Boa taarde") }
     if (message.content.includes("boa noite")) { message.channel.send("Boa noitee") }
@@ -76,15 +46,12 @@ client.on("message", async (message) => {
     if (message.content.includes("Boa noite")) { message.channel.send("Boa noitee") }
     if (message.content === 'oi') return message.channel.send(`oooi ${message.author.username}`)
 
-    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = default_prefix
     if (!message.content.startsWith(prefix)) return
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
-    // -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS -- -- PREFIX ACESS
 
-    // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
         const bot = message.guild.members.cache.get(client.user.id)
 
@@ -114,28 +81,23 @@ client.on("message", async (message) => {
         }
     }
 
-    // -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS -- -- COMMAND FILE TO FOLDERS --
-    const cmd =
-        client.commands.get(command) ||
-        client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command));
-    if (cmd) cmd.run(client, message, args);
+    const cmd = client.commands.get(command) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command))
+    if (cmd) cmd.run(client, message, args)
     let customCommands = db.get(`guildConfigurations_${message.guild.id}.commands`)
     if (customCommands) {
         let customCommandsName = customCommands.find(x => x.name === command)
         if (customCommandsName) return message.channel.send(customCommandsName.response)
     }
 
-    if (message.content.startsWith(`${prefix}check`)) {
-        message.react("✅")
-    }
+    if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
 
     if (["triggered", "trig"].includes(command)) {
         message.delete()
         let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author
-        let avatar = user.displayAvatarURL({ dynamic: false, format: 'png' });
-        let image = await canvacord.Canvas.trigger(avatar);
-        let attachment = new Discord.MessageAttachment(image, "triggered.gif");
-        return message.channel.send("Carregando...").then(m => m.delete({ timeout: 5000 })).catch(err => { return }).then(m => m.channel.send(attachment))
+        let avatar = user.displayAvatarURL({ dynamic: false, format: 'png' })
+        let image = await canvacord.Canvas.trigger(avatar)
+        let attachment = new Discord.MessageAttachment(image, "triggered.gif")
+        return message.channel.send("Carregando...").then(m => m.delete({ timeout: 4000 })).catch(err => { return }).then(m => m.channel.send(attachment))
     }
 
     try {

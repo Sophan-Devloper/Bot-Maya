@@ -4,13 +4,8 @@ const db = require('quick.db')
 module.exports = {
     run: async (client, message, args) => {
 
-        if (!message.member.hasPermission("ADMINISTRATOR")) {
-            return message.channel.send("Você não pode mudar meu prefix, mas pode pedir pra algúm administrador fazer isso.").then(m => m.delete({ timeout: 5000 }))
-        }
-
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
-
 
         const prefixembed = new Discord.MessageEmbed()
             .setColor('#DCDCDC')

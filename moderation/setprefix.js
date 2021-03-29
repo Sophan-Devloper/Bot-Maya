@@ -7,6 +7,7 @@ module.exports = {
     usage: "setprefix newprefix",
     description: "Mudar o prefix do server",
     run: async (client, message, args) => {
+        message.delete()
 
         if (!message.member.hasPermission("ADMINISTRATOR")) {
             return message.channel.send("Você não pode mudar meu prefix, mas pode pedir pra algúm administrador fazer isso.").then(m => m.delete({ timeout: 5000 }))
@@ -41,7 +42,7 @@ module.exports = {
 
         const newprefix = new Discord.MessageEmbed()
             .setColor('BLUE')
-            .setDescription('Deseja alterar meu prefixo para: `' + args[0] + '`?')
+            .setTitle('Deseja alterar meu prefixo para: `' + args[0] + '`?')
         await message.channel.send(newprefix).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
@@ -54,7 +55,7 @@ module.exports = {
                     db.set(`prefix_${message.guild.id}`, args[0])
                     const alterado = new Discord.MessageEmbed()
                         .setColor('GREEN')
-                        .setTitle('Prefixo alterado com sucesso!')
+                        .setTitle(message.author.username + ' alterou meu prefixo para `' + args[0] + '`')
                     message.channel.send(alterado).then(msg => msg.delete({ timeout: 4000 }))
                 }
                 if (reaction.emoji.name === '❌') { // MPEmbed

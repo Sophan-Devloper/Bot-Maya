@@ -1,31 +1,54 @@
+const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports = {
-    name: "prefix",
-    category: "moderation",
-    usage: "setprefix newprefix",
-    description: "Mudar o prefix do server",
     run: async (client, message, args) => {
+        message.delete()
 
-        if (!message.member.hasPermission("ADMINISTRATOR")) {
-            return message.channel.send("Você não pode mudar meu prefix, mas pode pedir pra algúm administrador fazer isso.").then(m => m.delete({ timeout: 5000 }))
+        let prefix = db.get(`prefix_${message.guild.id}`)
+        if (prefix === null) prefix = "-"
+
+        let perms = message.member.hasPermission("ADMINISTRATOR")
+        if (!perms) {
+            const noperms = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle('Permissão necessária: Administrador')
+            return message.channel.send(noperms).then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
         }
 
-        await message.channel.send("Você deseja resetar meu prefix para `-`?").then(msg => {
+        if (prefix === "-") {
+            const iqual = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle('O meu prefixo definido já é o padrão.')
+            return message.channel.send(iqual)
+        }
+
+        const resprefix = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('Você deseja resetar meu prefix para `-`?')
+
+        await message.channel.send(resprefix).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
 
             msg.awaitReactions((reaction, user) => {
                 if (message.author.id !== user.id) return
 
-                if (reaction.emoji.name === '✅') { // home
+                if (reaction.emoji.name === '✅') { // Sim
                     msg.delete()
                     db.delete(`prefix_${message.guild.id}`)
-                    message.channel.send(message.author.username + ", resetou o meu prefixo! ✅")
+
+                    const resetprefix = new Discord.MessageEmbed()
+                        .setColor('GREEN')
+                        .setTitle("✅ " + message.author.username + ' resetou meu prefixo para `-`')
+                    message.channel.send(resetprefix)
                 }
-                if (reaction.emoji.name === '❌') { // MPEmbed
+                if (reaction.emoji.name === '❌') { // Não
                     msg.delete()
-                    msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
+                    const cancelado = new Discord.MessageEmbed()
+                        .setColor('GREEN')
+                        .setTitle('Comando cancelado')
+                    msg.channel.send(cancelado).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
                 }
             })
         })

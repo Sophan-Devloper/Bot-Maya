@@ -1,4 +1,4 @@
-const discord = require('discord.js')
+const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports = {
@@ -16,6 +16,8 @@ module.exports = {
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
+
+            message.channel.send(embed)
     }
 }
 

@@ -1,23 +1,16 @@
-module.exports = {  
-  name: "privado",
-  description: "Mande uma mensagem privada para alguém",
-  category: "fun",
-  run: async (bot, message, args) => {
-    message.delete()
+const Discord = require('discord.js')
 
-    if (!message.member.permissions.has("MANAGE_MESSAGES"))
-       return message.channel.send("Pare! Você não pode me usar para isso, sorry.").then(msg => msg.delete({timeout: 5000}))
+module.exports = {
+    run: async (client, message, args) => {
+        message.delete()
 
-    let user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-    if (!user)
-       return message.channel.send('Você não marcou ninguém, para quem eu devo enviar a mensagem? `-pv @user Mensagem`').then(msg => msg.delete({timeout: 5000}));
+        const embed = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Este comando está bloqueado sem previsão de volta')
+            .setDescription('A equipe de proteção ao usuário do Discord pune os bots e os criadores por mensagens que não são rastreadas.\n \nUsuários costumam usar os bots com esses comandos para ofender e difamar pessoas anonimamente, sendo assim, o Discord desliga o bot e a conta do criador para sempre. \n \n> Por questão de segurança da Maya, este comando está bloqueado.')
+            .setFooter('O comando correio está quase pronto.')
 
-    let Maya = user.id === '763072871597604874'
-    if (Maya)
-       return message.channel.send('Não mande mensagens para mim mesma kkkkk').then(msg => msg.delete({timeout: 5000}))
+        message.channel.send(embed)
 
-    if (!args.slice(1).join(" "))
-       return message.channel.send("Você não me disse qual é a mensagem.").then(msg => msg.delete({timeout: 5000}))
-   
-     user.user.send(args.slice(1).join(" ")).catch(() => message.channel.send("Essa pessoa não pode receber Dm")).then(() => message.author.send(`Eu mandei a mensagem para ${user.user.tag} com sucesso!`))
-  }}    
+    }
+}

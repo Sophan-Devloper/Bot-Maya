@@ -6,7 +6,7 @@ message.delete()
     if (!db.get(`marry_${message.author.id}`))
     return message.channel.send("Você não esta casado...").then(msg => msg.delete({timeout: 6000}))
 
-    await message.channel.send(`Você se divorciou! Você não está mais casado com <@${db.get(`marry_${message.author.id}`)}>.`)
+    await message.channel.send(`Você se divorciou! Você não está mais casado com ${db.get(`marry_${message.author.id}`)}.`)
     await db.delete(`marry_${db.get(`marry_${message.author.id}`)}`)
     await db.delete(`marry_${message.author.id}`)
 }

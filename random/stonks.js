@@ -12,9 +12,8 @@ var rand = list[Math.floor(Math.random() * list.length)]
 let user = client.users.cache.get(args[0])
 
 const embed = new Discord.MessageEmbed()
-        .setColor('RANDOM')
+        .setColor('BLUE')
         .setImage(rand)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
 
-await message.channel.send(embed).then(msg => msg.delete({timeout: 5000}))
+await message.channel.send(embed).then(msg => msg.delete({timeout: 6000}))
 }

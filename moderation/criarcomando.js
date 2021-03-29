@@ -14,7 +14,6 @@ module.exports = {
                 .setColor('#FF0000')
                 .setTitle('Permissão Necessária: ADMINISTRATOR')
             return message.channel.send(permss).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
-
         }
 
         if (!args[0]) {

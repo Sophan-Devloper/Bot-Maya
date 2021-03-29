@@ -51,7 +51,7 @@ module.exports.run = async (bot, message, args) => {
                 .addFields(
                     {
                         name: 'Missing Permissions',
-                        value: 'O cargo requisitado é maior que o da Maya.',
+                        value: `Algum cargo de ${user} é maior que o meu.`,
                         inline: true
                     },
                     {
@@ -60,16 +60,17 @@ module.exports.run = async (bot, message, args) => {
                         inline: true
                     },
                     {
-                        name: 'Outro tipo de erro?',
+                        name: 'Algum outro erro?',
                         value: `[Support Maya](${linksupport})`
                     }
                 )
+
             message.channel.send(erro)
-        } else {
-            const sucess = new Discord.MessageEmbed()
-                .setColor('GREEN')
-                .setDescription(`O cargo ${role} foi removido de ${user.user.username} com sucesso.`)
-            return message.channel.send(sucess).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
         }
     })
+
+    const sucess = new Discord.MessageEmbed()
+        .setColor('GREEN')
+        .setDescription(`O cargo ${role} foi removido de ${user.user.username} com sucesso.`)
+    return message.channel.send(sucess).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
 }

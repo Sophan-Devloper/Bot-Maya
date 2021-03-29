@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports.run = (client, message, args) => {
-    message.delete()
+    message.delete().catch(err => { return })
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
@@ -46,7 +46,7 @@ module.exports.run = (client, message, args) => {
             if (message.author.id !== user.id) return
 
             if (reaction.emoji.name === '✅') { // sim
-                msg.delete()
+                msg.delete().catch(err => { return })
 
                 const confirm2 = new Discord.MessageEmbed()
                     .setColor('BLUE')
@@ -60,7 +60,7 @@ module.exports.run = (client, message, args) => {
                         if (message.author.id !== user.id) return
 
                         if (reaction.emoji.name === '✅') { // sim
-                            msg.delete()
+                            msg.delete().catch(err => { return })
 
                             const confirm3 = new Discord.MessageEmbed()
                                 .setColor('BLUE')
@@ -74,7 +74,7 @@ module.exports.run = (client, message, args) => {
                                     if (message.author.id !== user.id) return
 
                                     if (reaction.emoji.name === '✅') { // sim
-                                        msg.delete()
+                                        msg.delete().catch(err => { return })
 
                                         const sucess = new Discord.MessageEmbed()
                                             .setColor('GREEN')
@@ -90,7 +90,7 @@ module.exports.run = (client, message, args) => {
                                     }
 
                                     if (reaction.emoji.name === '❌') { // MPEmbed
-                                        msg.delete()
+                                        msg.delete().catch(err => { return })
 
                                         const canceled3 = new Discord.MessageEmbed()
                                             .setColor('GREEN')
@@ -101,7 +101,7 @@ module.exports.run = (client, message, args) => {
                             })
                         }
                         if (reaction.emoji.name === '❌') { // MPEmbed
-                            msg.delete()
+                            msg.delete().catch(err => { return })
 
                             const canceled2 = new Discord.MessageEmbed()
                                 .setColor('GREEN')
@@ -112,7 +112,7 @@ module.exports.run = (client, message, args) => {
                 })
             }
             if (reaction.emoji.name === '❌') { // MPEmbed
-                msg.delete()
+                msg.delete().catch(err => { return })
                 const canceled = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('Comando cancelado.')

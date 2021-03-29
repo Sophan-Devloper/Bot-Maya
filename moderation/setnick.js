@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
   message.delete()
@@ -32,47 +33,38 @@ exports.run = async (client, message, args) => {
     return message.channel.send(format).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
   }
 
+  let linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
   let member = message.guild.members.cache.get(user.id)
   member.setNickname(nick).catch(err => {
-    const erro = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Um erro foi encontrado')
-      .setDescription('\n \n`' + err + '`')
-      .addFields(
-        {
-          name: 'Missing Permissions',
-          value: 'O cargo requisitado é maior que o da Maya.',
-          inline: true
-        },
-        {
-          name: 'API Connect Problem Ask',
-          value: 'Tente novamente, o servidor reconectou.',
-          inline: true
-        },
-        {
-          name: 'Outro tipo de erro?',
-          value: `[Support Maya](${linksupport})`
-        }
-      )
 
-    message.channel.send(erro)
+    if (err) {
+      const erro = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('Um erro foi encontrado')
+        .setDescription('\n \n`' + err + '`')
+        .addFields(
+          {
+            name: 'Missing Permissions',
+            value: `Algum cargo de ${member} é maior que o meu.`,
+            inline: true
+          },
+          {
+            name: 'API Connect Problem Ask',
+            value: 'Tente novamente, o servidor reconectou.',
+            inline: true
+          },
+          {
+            name: 'Algum outro erro?',
+            value: `[Support Maya](${linksupport})`
+          }
+        )
+
+      message.channel.send(erro)
+    }
   })
 
   const sucess = new Discord.MessageEmbed()
-  .setColor(#)
-
-  return message.channel.send(`O nome foi alterado de **${user.tag}** para **${nick}** com sucesso!`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-
-}
-
-exports.help = {
-  name: "setnickname",
-  description: "Set a user nickname.",
-  usage: "/setnickname <@user> <nick>",
-  example: "/setnickname @ray#9999 hoisted"
-}
-
-exports.conf = {
-  aliases: ["setnick"],
-  cooldown: 5
+    .setColor('GREEN')
+    .setDescription(`O nickname de ${user.tag} foi alterado para ${nick}`)
+  return message.channel.send(sucess).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
 }

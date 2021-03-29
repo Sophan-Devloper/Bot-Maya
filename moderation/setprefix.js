@@ -9,12 +9,22 @@ module.exports = {
     run: async (client, message, args) => {
         message.delete()
 
-        if (!message.member.hasPermission("ADMINISTRATOR")) {
-            return message.channel.send("Você não pode mudar meu prefix, mas pode pedir pra algúm administrador fazer isso.").then(m => m.delete({ timeout: 5000 })).catch(err => { return })
+        if (!message.member.hasPermission('ADMINISTRATOR')) {
+            const permss = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle('Permissão Necessária: ADMINISTRATOR')
+            return message.channel.send(permss).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
         }
 
         if (!args[0]) {
-            return message.channel.send("Me fala o prefix que você quer, tenta assim:\n \nExemplo: `-setprefix !`").then(m => m.delete({ timeout: 7000 })).catch(err => { return })
+            let prefix = db.get(`prefix_${message.guild.id}`)
+            if (prefix === null) prefix = "-"
+
+            const format = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle('Siga o formato correto')
+                .setDescription('`' + prefix + 'setprefix NovoPrefixo`\n \nExemplo: `' + prefix + 'setprefix !`')
+            return message.channel.send(format).then(m => m.delete({ timeout: 7000 })).catch(err => { return })
         }
 
         let prefix = db.get(`prefix_${message.guild.id}`)
@@ -50,7 +60,7 @@ module.exports = {
             msg.awaitReactions((reaction, user) => {
                 if (message.author.id !== user.id) return
 
-                if (reaction.emoji.name === '✅') { // home
+                if (reaction.emoji.name === '✅') { // Sim
                     msg.delete()
                     db.set(`prefix_${message.guild.id}`, args[0])
                     const alterado = new Discord.MessageEmbed()
@@ -58,7 +68,7 @@ module.exports = {
                         .setTitle(message.author.username + ' alterou meu prefixo para `' + args[0] + '`')
                     message.channel.send(alterado).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
                 }
-                if (reaction.emoji.name === '❌') { // MPEmbed
+                if (reaction.emoji.name === '❌') { // Não
                     msg.delete()
                     msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
                 }

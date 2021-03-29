@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // red
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'setautorole #Cargo`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 }))
+        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
     }
 
     if (args[0] === 'off') {

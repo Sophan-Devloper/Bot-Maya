@@ -26,5 +26,5 @@ module.exports.run = (client, message, args) => {
         .setTimestamp()
         .setFooter('Está mensagem será excluida em 1 minuto...')
 
-    message.channel.send(embeddetail).then(msg => msg.delete({timeout: 120000}))
+    message.channel.send(embeddetail).then(msg => msg.delete({timeout: 120000})).catch(err => {return})
 }

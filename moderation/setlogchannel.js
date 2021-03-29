@@ -14,7 +14,7 @@ module.exports = {
                 .setColor('#FF0000')
                 .setTitle('Permissão Necessária: Administrador')
 
-            return message.channel.send(noperm).then(msg => msg.delete({ timeout: 7000 }))
+            return message.channel.send(noperm).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
         }
 
         if (!args[0]) {
@@ -24,7 +24,7 @@ module.exports = {
             const noargs = new Discord.MessageEmbed()
                 .setColor('#FF0000') // red
                 .setTitle('`' + prefix + 'setlogchannel #CanalLog`')
-            return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 }))
+            return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
         }
 
         if (args[0] === 'off') {
@@ -36,7 +36,7 @@ module.exports = {
                 .setTitle('O logchannel não pode ser desativado.')
                 .setDescription('Caso queira trocar de canal, use o comando \n`' + prefix + 'setlogchannel #CanalLog`')
 
-            return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 }))
+            return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
 
         }
 
@@ -48,7 +48,7 @@ module.exports = {
                 .setColor('#FF0000') // red
                 .setTitle('' + prefix + 'setlogchannel #Canallogs')
 
-            return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 10000 }))
+            return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
         }
 
         var atual = db.get(`logchannel_${message.guild.id}`)

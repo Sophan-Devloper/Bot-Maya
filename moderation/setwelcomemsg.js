@@ -11,7 +11,7 @@ module.exports = {
                 .setColor('#FF0000')
                 .setTitle('Permissão Necessária: Administrador')
 
-            return message.channel.send(noperm).then(msg => msg.delete({ timeout: 7000 }))
+            return message.channel.send(noperm).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
         }
 
         if (args[0] === 'off') {
@@ -21,7 +21,7 @@ module.exports = {
                     .setColor('#ff0000')
                     .setTitle(message.guild.name + ' não tem nenhuma mensagem definida.')
 
-                return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 }))
+                return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
             } else if (canal) {
                 db.delete(`msgwelcome_${message.guild.id}`)
                 const comcanal = new Discord.MessageEmbed()
@@ -52,7 +52,7 @@ module.exports = {
                 .setColor('#FF0000') // red
                 .setTitle('Siga o formato abaixo')
                 .setDescription('`' + prefix + 'setwelcomemsg Sua mensagem de boas vindas`')
-            return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 }))
+            return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
         }
 
         if (mensagem) {

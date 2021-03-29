@@ -2,24 +2,67 @@ const Discord = require("discord.js")
 
 exports.run = async (client, message, args) => {
   message.delete()
-  
-  if (!message.member.hasPermission(["MANAGE_ROLES"])) 
-    return message.channel.send("Espera um pouco, você não pode usar esse comando!").then(msg => msg.delete({timeout: 5000}))
-    
-  let user = message.mentions.users.first()
-  if (!user)
-    return message.channel.send("Você esqueceu de marcar a pessoa, tenta assim:\n\n`-setnick @user Novo Nome`").then(msg => msg.delete({timeout: 8000}))
-    
-  let nick = args.slice(1).join(" ")
-  if (!nick) 
-      return message.channel.send("Você precisa me dizer qual é o novo nome.").then(msg => msg.delete({timeout: 5000}))
-  
-  let member = message.guild.members.cache.get(user.id)
-  
-  await member.setNickname(nick).catch(err => message.channel.send(`Houve algum erro. Eu acho que pode ser falta de permissão ou o cargo da pessoal que foi solicitado é maior que o meu.\n \nInformações do Erro:\n${err}`))
 
-  return message.channel.send(`O nome foi alterado de **${user.tag}** para **${nick}** com sucesso!`).then(msg => msg.delete({timeout: 5000}))
-  
+  let prefix = db.get(`prefix_${message.guild.id}`)
+  if (prefix === null) prefix = "-"
+
+  let perms = message.member.hasPermission("MANAGE_NICKNAMES")
+  if (!perms) {
+    const noperms = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Permissão necessária: Manusear Nicknames (Nomes/Apelidos)')
+    return message.channel.send(noperms).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+  }
+
+  let user = message.mentions.users.first()
+  if (!user) {
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'setnick @user NovoNome`')
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+  }
+
+  let nick = args.slice(1).join(" ")
+  if (!nick) {
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'setnick @user NovoNome`')
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+  }
+
+  let member = message.guild.members.cache.get(user.id)
+  member.setNickname(nick).catch(err => {
+    const erro = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Um erro foi encontrado')
+      .setDescription('\n \n`' + err + '`')
+      .addFields(
+        {
+          name: 'Missing Permissions',
+          value: 'O cargo requisitado é maior que o da Maya.',
+          inline: true
+        },
+        {
+          name: 'API Connect Problem Ask',
+          value: 'Tente novamente, o servidor reconectou.',
+          inline: true
+        },
+        {
+          name: 'Outro tipo de erro?',
+          value: `[Support Maya](${linksupport})`
+        }
+      )
+
+    message.channel.send(erro)
+  })
+
+  const sucess = new Discord.MessageEmbed()
+  .setColor(#)
+
+  return message.channel.send(`O nome foi alterado de **${user.tag}** para **${nick}** com sucesso!`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+
 }
 
 exports.help = {

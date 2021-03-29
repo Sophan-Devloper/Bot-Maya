@@ -14,7 +14,7 @@ module.exports = {
                 .setColor('#FF0000')
                 .setTitle('Permissão Necessária: Administrador')
 
-            return message.channel.send(noperm).then(msg => msg.delete({ timeout: 7000 }))
+            return message.channel.send(noperm).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
         }
 
         if (!args[0]) {
@@ -24,7 +24,7 @@ module.exports = {
             const noargs = new Discord.MessageEmbed()
                 .setColor('#FF0000') // red
                 .setTitle('' + prefix + 'setwelcome #CanalDeBoasVindas')
-            return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 }))
+            return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
         }
 
         if (args[0] === 'off') {
@@ -34,7 +34,7 @@ module.exports = {
                     .setColor('#ff0000')
                     .setTitle('O Welcome System já está desativado.')
 
-                return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 }))
+                return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
             } else if (canal) {
                 db.delete(`welcomechannel_${message.guild.id}`)
                 const comcanal = new Discord.MessageEmbed()
@@ -52,7 +52,7 @@ module.exports = {
                 .setColor('#FF0000') // red
                 .setTitle('' + prefix + 'setwelcome #CanalDeBoasVindas')
 
-            return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 10000 }))
+            return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
         }
 
         var atual = db.get(`welcomechannel_${message.guild.id}`)

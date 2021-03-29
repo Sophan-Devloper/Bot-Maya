@@ -16,7 +16,7 @@ module.exports = {
          const noperms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão necessária: Manusear Roles (cargos)')
-         return message.channel.send(noperms).then(msg => msg.delete({ timeout: 3000 }))
+         return message.channel.send(noperms).then(msg => msg.delete({ timeout: 3000 })).catch(err => {return})
       }
 
       const logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -28,7 +28,7 @@ module.exports = {
             .setColor('#FF0000')
             .setTitle('Não há Canal Log registrado.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-         return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 }))
+         return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 })).catch(err => {return})
       }
 
       if (!client.channels.cache.get(logchannel)) {
@@ -39,7 +39,7 @@ module.exports = {
             .setColor('#FF0000')
             .setTitle('Parece que o canal log foi excluido.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-         return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 }))
+         return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 })).catch(err => {return})
       }
 
       const role = message.guild.roles.cache.find(role => role.name === 'Muted')
@@ -81,7 +81,7 @@ module.exports = {
                .setColor('GREEN')
                .setTitle('Cargo criado e configurado com sucesso!')
 
-            message.channel.send(criando).then(msg => msg.delete({ timeout: 8000 })).then(msg => message.channel.send(roleembedcreate)).then(msg => msg.delete({ timeout: 4000 })).then(msg => message.channel.send(criado))
+            message.channel.send(criando).then(msg => msg.delete({ timeout: 8000 })).catch(err => {return}).then(msg => message.channel.send(roleembedcreate)).then(msg => msg.delete({ timeout: 4000 })).catch(err => {return}).then(msg => message.channel.send(criado))
          } catch (error) {
             console.log(error)
          }
@@ -95,21 +95,21 @@ module.exports = {
             .setColor('#FF0000')
             .setTitle('Favor, mencione o usuário.')
             .setDescription('`' + prefix + 'mute @user 10s/m/h Razão`')
-         return message.channel.send(nomember).then(msg => msg.delete({ timeout: 60000 }))
+         return message.channel.send(nomember).then(msg => msg.delete({ timeout: 60000 })).catch(err => {return})
       }
 
       if (member.id === '821471191578574888') {// Maya ID
          const nomutemaya = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle(member.user.username + ' está na Whitelist.')
-         return message.channel.send(nomutemaya).then(msg => msg.delete({ timeout: 5000 }))
+         return message.channel.send(nomutemaya).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
       }
 
       if (member.id === '451619591320371213') {// Rody ID
          const nomutemaya = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle(member.user.username + ' está na Whitelist.')
-         return message.channel.send(nomutemaya).then(msg => msg.delete({ timeout: 5000 }))
+         return message.channel.send(nomutemaya).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
       }
 
 
@@ -139,14 +139,14 @@ module.exports = {
          const dono = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Mutar o dono do servidor não é uma opção.')
-         return message.channel.send(dono).then(msg => msg.delete({ timeout: 5000 }))
+         return message.channel.send(dono).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
       }
 
       if (member.hasPermission('ADMINISTRATOR')) {
          const unbannable = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Esta pessoa tem um cargo maior que o meu.')
-         return message.channel.send(unbannable).then(msg => msg.delete({ timeout: 5000 }))
+         return message.channel.send(unbannable).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
       }
 
       var time = args[1]
@@ -272,7 +272,7 @@ module.exports = {
 
                if (reaction.emoji.name === '✅') { // home
                   msg.delete()
-                  return message.channel.send(troll).then(msg => msg.delete({ timeout: 5000 }))
+                  return message.channel.send(troll).then(msg => msg.delete({ timeout: 5000 })).catch(err => {return})
                }
                if (reaction.emoji.name === '❌') { // MPEmbed
                   msg.delete()

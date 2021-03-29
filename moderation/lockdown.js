@@ -15,7 +15,7 @@ module.exports = {
             const noperms = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Permissão Necessária: Administrador')
-            return message.channel.send(noperms).then(message => message.delete({ timeout: 5000 }))
+            return message.channel.send(noperms).then(message => message.delete({ timeout: 5000 })).catch(err => {return})
         }
 
         if (!args[0]) {
@@ -38,7 +38,7 @@ module.exports = {
                         inline: true
                     }
                 )
-            return message.channel.send(alert).then(message => message.delete({ timeout: 25000 }))
+            return message.channel.send(alert).then(message => message.delete({ timeout: 25000 })).catch(err => {return})
         }
 
         if (args[0] === 'on') {

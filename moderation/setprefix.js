@@ -10,11 +10,11 @@ module.exports = {
         message.delete()
 
         if (!message.member.hasPermission("ADMINISTRATOR")) {
-            return message.channel.send("Você não pode mudar meu prefix, mas pode pedir pra algúm administrador fazer isso.").then(m => m.delete({ timeout: 5000 }))
+            return message.channel.send("Você não pode mudar meu prefix, mas pode pedir pra algúm administrador fazer isso.").then(m => m.delete({ timeout: 5000 })).catch(err => { return })
         }
 
         if (!args[0]) {
-            return message.channel.send("Me fala o prefix que você quer, tenta assim:\n \nExemplo: `-setprefix !`").then(m => m.delete({ timeout: 7000 }))
+            return message.channel.send("Me fala o prefix que você quer, tenta assim:\n \nExemplo: `-setprefix !`").then(m => m.delete({ timeout: 7000 })).catch(err => { return })
         }
 
         let prefix = db.get(`prefix_${message.guild.id}`)
@@ -23,21 +23,21 @@ module.exports = {
             const atual = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Este já é meu prefixo atual.')
-            return message.channel.send(atual).then(msg => msg.delete({ timeout: 4000 }))
+            return message.channel.send(atual).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
         }
 
         if (args[1]) {
             const space = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('O prefixo não pode ter espaços.')
-            return message.channel.send(space).then(m => m.delete({ timeout: 4000 }))
+            return message.channel.send(space).then(m => m.delete({ timeout: 4000 })).catch(err => { return })
         }
 
         if (args[0].length > 2) {
             const caracter = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('O prefixo não pode ter mais de 2 caracteres.')
-            return message.channel.send(caracter).then(m => m.delete({ timeout: 4000 }))
+            return message.channel.send(caracter).then(m => m.delete({ timeout: 4000 })).catch(err => { return })
         }
 
         const newprefix = new Discord.MessageEmbed()
@@ -56,11 +56,11 @@ module.exports = {
                     const alterado = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle(message.author.username + ' alterou meu prefixo para `' + args[0] + '`')
-                    message.channel.send(alterado).then(msg => msg.delete({ timeout: 4000 }))
+                    message.channel.send(alterado).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
                 }
                 if (reaction.emoji.name === '❌') { // MPEmbed
                     msg.delete()
-                    msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 }))
+                    msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
                 }
             })
         }) // aqui

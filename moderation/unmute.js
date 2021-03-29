@@ -1,10 +1,6 @@
 const { Message } = require('discord.js')
 
 module.exports=  {
-    name : 'unmute', 
-    /**
-     * @param {Message} message
-     */
     run : async(client, message, args) => {
         const Member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 

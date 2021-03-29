@@ -1,85 +1,141 @@
 const Discord = require("discord.js")
+const db = require('quick.db')
 const ms = require("ms")
 
-module.exports = {
-  name: "giveaway",
-  description: "Create a simple giveaway",
-  usage: "<time> <channel> <prize>",
-  category: "fun",
+module.exports.run = async (client, message, args) => {
+  message.delete()
 
-  run: async (bot, message, args) => {
-    message.delete()
+  if (!message.member.permissions.has("MANAGE_CHANNELS")) {
+    const perms = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Permissão necessária: Manusear Canais')
+    return message.reply(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+  }
 
-    if (!message.member.permissions.has("MANAGE_CHANNELS"))
-      return message.reply("Ooops, apenas a Staff do Servidor pode fazer sorteios.").then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+  if (!args[0]) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
-    if (!args[0])
-      return message.channel.send('Comando Sorteio `-sorteio 1s/m/h/d #CanalDoSorteio Prêmio`\n\nSegundos/Minutos/Horas/Dias').then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
-
-    if (
-      !args[0].endsWith("s") &&
-      !args[0].endsWith("m") &&
-      !args[0].endsWith("h") &&
-      !args[0].endsWith("d")
-    )
-      return message.channel.send(`Me diga qual o tempo do sorteio, por favor. Ex: 10s/m/h/d \n\nSegundos/Minutos/Horas/Dias`).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
-
-    if (isNaN(args[0][0]))
-      return message.channel.send('Isso não é um número! Digite `-sorteio`, por favor.').then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
-    let time = isNaN(args[0][0])
-
-    let channel = message.mentions.channels.first();
-    if (!channel)
-      return message.channel.send('Eu não achei o canal do sorteio. Por favor, me diga.').then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
-
-    let prize = args.slice(2).join(" ")
-    if (!prize)
-      return message.channel.send(`Hey, qual é o prêmio?`)
-
-    let Embed = new Discord.MessageEmbed()
-      .setTitle(`Sorteios ${message.guild.name}`)
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
       .addFields(
         {
-          name: 'Prêmio',
-          value: prize,
-        },
-        {
-          name: 'Sorteio por',
-          value: message.author,
-        },
+          name: 'Exemplo',
+          value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
+        }
       )
-      .setThumbnail('https://imgur.com/GYv2cuh.gif')
-      .setTimestamp(Date.now() + ms(args[0]))
-      .setColor(`YELLOW`)
-      .setFooter('Resultado')
-    channel.send(':tada::tada: 🥳Novo Sorteio🥳 :tada::tada:')
-    let m = await channel.send(Embed)
-    m.react("🎉").then(msg => channel.send(`Tempo do Sorteio: ${args[0]}`)).then(msg => message.channel.send(`Eu criei o sorteio no canal: ${channel}, assim como foi pedido.`)).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-
-    setTimeout(() => {
-      if (m.reactions.cache.get("🎉").count <= 1) {
-        message.channel.send(`Reactions: ${m.reactions.cache.get("🎉").count}`)
-        return message.channel.send(`Não teve participantes suficiente. Eu tomei a liberdade de encerrar o sorteio...`)
-      }
-
-      let winner = m.reactions.cache.get("🎉").users.cache.filter((u) => !u.bot).random()
-      let avatar = winner.displayAvatarURL({ format: 'png' })
-
-      var winembed = new Discord.MessageEmbed()
-        .setColor(`YELLOW`)
-        .addFields(
-          {
-            name: 'Vencedor/a',
-            value: winner
-          },
-          {
-            name: 'Prêmio',
-            value: prize
-          },
-        )
-        .setImage('https://imgur.com/DUPKAd1.png')
-        .setThumbnail(avatar)
-      channel.send(winembed).then(msg => channel.send(`Parabéééns ${winner}`)).then(msg => winner.send(`Parabéééééééns!! Você ganhou o sorteio no Servidor **${message.guild.name}**.\n \nVocê ganhou: **${prize}**.`))
-    }, ms(args[0]))
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
   }
+
+  if (!args[0].endsWith("s") && !args[0].endsWith("m") && !args[0].endsWith("h") && !args[0].endsWith("d")) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .addFields(
+        {
+          name: 'Exemplo',
+          value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
+        }
+      )
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+  }
+
+  if (isNaN(args[0][0])) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .addFields(
+        {
+          name: 'Exemplo',
+          value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
+        }
+      )
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+  }
+
+  let time = isNaN(args[0][0])
+  let channel = message.mentions.channels.first()
+  if (!channel) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .addFields(
+        {
+          name: 'Exemplo',
+          value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
+        }
+      )
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+  }
+
+  let prize = args.slice(2).join(" ")
+  if (!prize) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .addFields(
+        {
+          name: 'Exemplo',
+          value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
+        }
+      )
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+  }
+
+  let Embed = new Discord.MessageEmbed()
+    .setTitle(prize)
+    .setDescription(`Reaja ao :tada: para participar do sorteio\nAutor: ${message.author}`)
+    .setThumbnail('https://imgur.com/mNgzqkU.gif')
+    .setTimestamp(Date.now() + ms(args[0]))
+    .setColor(`#067aff`)
+  channel.send(`:tada: **SORTEIO** :tada:`)
+
+  let m = await channel.send(Embed)
+  m.react("🎉")
+
+  const ok = new Discord.MessageEmbed()
+    .setColor('GREEN')
+    .setDescription(`Sorteio criado em ${channel} com sucesso.`)
+  message.channel.send(ok).then(msg => msg.delete({ timeout: 5000 }))
+
+  setTimeout(() => {
+    if (m.reactions.cache.get("🎉").count <= 1) {
+      const cancel = new Discord.MessageEmbed()
+        .setColor('##067aff')
+        .setTitle('Sorteio cancelado por falta de participantes.')
+      return channel.send(cancel)
+    }
+
+    let winner = m.reactions.cache.get("🎉").users.cache.filter((u) => !u.bot).random()
+    let avatar = winner.displayAvatarURL({ format: 'png' })
+
+    var winembed = new Discord.MessageEmbed()
+      .setColor(`#067aff`)
+      .setTitle(`Vencedor/a: ${winner.tag}`)
+      .setDescription(`Parabéns ${winner}, você ganhou!\n \nPrêmio: ${prize}`)
+      .setThumbnail(avatar)
+    channel.send(":tada: ***Sorteio Acabou*** ")
+
+    winner.send(`Parabéééééééns!! Você ganhou o sorteio em **${message.guild.name}**.\n \nVocê ganhou: **${prize}**.`).catch(err => { return })
+    message.author.send(`${winner} foi o ganhador do sorteio em ${message.guild.name}.`).catch(err => { return })
+    channel.send(winembed).catch(err => { return })
+  }, ms(args[0]))
 }

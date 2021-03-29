@@ -33,7 +33,6 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('O Autorole System já está desativado.')
             return message.channel.send(noauto).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-
         }
 
         db.delete(`autorole_${message.guild.id}`)
@@ -47,7 +46,7 @@ exports.run = async (client, message, args) => {
 
         setTimeout(function desativando() {
             message.channel.send(desativado)
-        }, 5600)
+        }, 5400)
 
         return message.channel.send(semrole).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }

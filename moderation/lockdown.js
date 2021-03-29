@@ -17,11 +17,11 @@ module.exports = {
         if (args[0] === 'on') {
             channels.forEach(channel => {
                 channel.updateOverwrite(message.guild.roles.everyone, {
-                    SEND_MESSAGES: false
+                    SEND_MESSAGES: false,
+                    CONNECT: FALSE
                 })
             })
-            return message.channel.send(`${message.author} colocou o servidor em **Lockdown**!`).then(message => message.author.send('Use `-lockdown off` para tirar o servidor do estado Lockdown'))
-
+            return message.channel.send(`${message.author} colocou o servidor em **Lockdown**!`)
         } else if (args[0] === 'off') {
             channels.forEach(channel => {
                 channel.updateOverwrite(message.guild.roles.everyone, {

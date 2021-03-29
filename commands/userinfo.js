@@ -48,8 +48,7 @@ module.exports = {
             .addField('Servidor', [
                 `❯ Nome no Servidor: ${user.user.username}`,
                 `❯ Entrou no Server em: ${moment(user.joinedAt).format('DD/MM/YY')}`,
-                `❯ Maior cargo: ${user.roles.highest.id === message.guild.id ? 'Nenhum' : user.roles.highest.name}`,
-                `❯ Cargos no Servidor [${roles.length}]: ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'Nenhum'}`,
+                `❯ Maior cargo: ${user.roles.highest.id === message.guild.id ? 'Nenhum' : user.roles.highest.name}`
             ])
 
         await message.channel.send(embed)

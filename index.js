@@ -65,7 +65,7 @@ client.on("message", async (message) => {
     }
 
     if (message.content.includes("loli")) {
-        message.channel.send("Eu li Loli? Ligando 190...").then(msg => msg.delete({ timeout: 2000 }))
+        message.channel.send("Eu li Loli? Ligando 190...").then(msg => msg.delete({ timeout: 2000 })).catch(err => { return })
     }
 
     if (message.content.includes("bom dia")) { message.channel.send("Bom diiia") }
@@ -87,18 +87,18 @@ client.on("message", async (message) => {
     // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
         const bot = message.guild.members.cache.get(client.user.id)
+
         const embedperm = new Discord.MessageEmbed()
-            .setColor('#DCDCDC')
-            .setTitle('Dicas da Maya')
-            .setDescription('Para meu perfeito funcionamento, é necessário que eu tenha a permissão "Administrador" ativado.')
-            .addFields(
-                {
-                    name: 'Como ativar a função Administrador',
-                    value: '1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Maya"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.'
-                },
-            )
+            .setColor('BLUE')
+            .setTitle('Como ativar a função Administrador')
+            .setDescription('1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Maya"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.')
             .setFooter(`Maya Dicas`, message.client.user.displayAvatarURL())
-        return message.channel.send('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.').then(msg => message.channel.send(embedperm))
+
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.')
+
+        return message.channel.send(adm).then(msg => message.channel.send(embedperm))
     }
     // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
 
@@ -109,7 +109,7 @@ client.on("message", async (message) => {
             let lvl = db.get(`level_${message.author.id}`) || db.set(`level_${message.author.id}`, 1)
             if (level > lvl) {
                 let newLevel = db.set(`level_${message.author.id}`, level);
-                message.channel.send(`:tada: ${message.author.username}, você subiu para o level ${newLevel}!`).then(m => m.delete({ timeout: 5000 }))
+                message.channel.send(`:tada: ${message.author.username}, você subiu para o level ${newLevel}!`).then(m => m.delete({ timeout: 5000 })).catch(err => { return })
             }
         }
     }
@@ -135,7 +135,7 @@ client.on("message", async (message) => {
         let avatar = user.displayAvatarURL({ dynamic: false, format: 'png' });
         let image = await canvacord.Canvas.trigger(avatar);
         let attachment = new Discord.MessageAttachment(image, "triggered.gif");
-        return message.channel.send("Carregando...").then(m => m.delete({ timeout: 5000 })).then(m => m.channel.send(attachment))
+        return message.channel.send("Carregando...").then(m => m.delete({ timeout: 5000 })).catch(err => { return }).then(m => m.channel.send(attachment))
     }
 
     try {
@@ -213,6 +213,8 @@ client.on("guildMemberRemove", async (member, message) => {
     var canal = db.get(`leavechannel_${member.guild.id}`)
     if (canal === null) { return false }
 
+    if (!client.channels.cache.get(canal)) { return false }
+
     var msgleave = db.get(`msgleave_${member.guild.id}`)
     if (msgleave === null) { msgleave = '`Os Adms não escreveram nada aqui`' }
 
@@ -230,6 +232,8 @@ client.on("guildMemberAdd", (member) => {
     var canal = db.get(`welcomechannel_${member.guild.id}`)
     if (canal === null) { return false }
 
+    if (!client.channels.cache.get(canal)) { return false }
+
     var msgwelcome = db.get(`msgwelcome_${member.guild.id}`)
     if (msgwelcome === null) { msgwelcome = '`Os administradores são preguiçosos e não escreveram nada aqui`' }
 
@@ -245,29 +249,23 @@ client.on("guildMemberAdd", (member) => {
 
 client.on("message", async message => {
     let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null)
-        prefix = default_prefix
+    if (prefix === null) { prefix = "-" }
+
     let activities = [
-        `${prefix}help ou ${prefix}setprefix`
-    ],
-        i = 0;
-    setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
-        type: "WATCHING"
-    }), 1000 * 7)
-    client.user
-        .setStatus("idle")
-        .catch(console.error)
+        `${prefix}help`,
+        `${prefix}setprefix`
+    ]
+    i = 0
+    setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 10000)
+    client.user.setStatus("idle").catch(console.error)
 })
 
 client.on("message", async (message, args) => {
     let prefi = db.get(`prefix_${message.guild.id}`)
-    if (prefi === null)
-        prefi = default_prefix
+    if (prefi === null) { prefi = default_prefix }
     if (message.author.bot) return false
     if (message.content.includes("@here") || message.content.includes("@everyone")) return false
-    if (message.mentions.has(client.user.id)) {
-        message.channel.send('Prefixo atual: `' + prefi + '`').then(msg => msg.delete({ timeout: 3000 }))
-    }
+    if (message.mentions.has(client.user.id)) { message.channel.send('Prefixo atual: `' + prefi + '`').then(msg => msg.delete({ timeout: 3000 })).catch(err => { return }) }
 })
 
 client.on("ready", () => { console.log("Ok.") })

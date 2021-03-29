@@ -15,10 +15,10 @@ module.exports.run = async (client, message, args) => {
     let avatar = message.author.displayAvatarURL({ format: 'png' })
 
     if (!channel)
-        return message.channel.send("Por favor, peça para que um Adm crie um Canal com o nome `reports` \nCopie e cole pra eu criar um pra você \n`-createchannel reports`").then(msg => msg.delete({ timeout: 10000 }))
+        return message.channel.send("Por favor, peça para que um Adm crie um Canal com o nome `reports` \nCopie e cole pra eu criar um pra você \n`-createchannel reports`").then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
 
     if (message.content === '-report')
-        return message.channel.send("Hey, tenta fazer assim -> `-report Seu Reporte.` \nQuer reportar um membro? -> `-report @user Motivo do seu Reporte.`").then(msg => msg.delete({ timeout: 10000 }))
+        return message.channel.send("Hey, tenta fazer assim -> `-report Seu Reporte.` \nQuer reportar um membro? -> `-report @user Motivo do seu Reporte.`").then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
 
     if (!user) {
         const embed = new Discord.MessageEmbed()

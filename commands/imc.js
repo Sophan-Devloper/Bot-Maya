@@ -11,14 +11,14 @@ module.exports = {
         const height = args[1]
 
         if (!args[0])
-            return message.channel.send('Indice de Massa Corporal\n Por favor, me diga seu peso e altura para que eu possa te dizer o seu IMC\n \nExemplo: `imc Peso Altura`').then(msg => msg.delete({ timeout: 7000 }))
+            return message.channel.send('Indice de Massa Corporal\n Por favor, me diga seu peso e altura para que eu possa te dizer o seu IMC\n \nExemplo: `imc Peso Altura`').then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
         if (!args[1]) {
             const imcError = new MessageEmbed()
                 .setDescription('Você tem que colocar seu peso e altura. Siga este formato.\
 \n\n(Format: imc Peso Altura)\n\nObs: Peso é em Kilogramas, exemplo: 75.5, 80\n\nAltura é em centimentros, exemplo: 170, 175')
                 .setColor("BLUE")
 
-            return message.channel.send(imcError).then(msg => msg.delete({ timeout: 7000}))
+            return message.channel.send(imcError).then(msg => msg.delete({ timeout: 7000})).catch(err => { return })
         }
 
         const imc = (weight / ((height * height) / 10000)).toFixed(2);

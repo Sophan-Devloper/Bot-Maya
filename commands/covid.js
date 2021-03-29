@@ -11,7 +11,7 @@ module.exports = {
         let url, response, corona;
 
         try {
-            url = args[0] ? `${baseUrl}/countries/${args[0]}`:`${baseUrl}/all`
+            url = args[0] ? `${baseUrl}/countries/${args[0]}` : `${baseUrl}/all`
             response = await axios.get(url)
             corona = response.data
         } catch (error) {
@@ -38,7 +38,7 @@ module.exports = {
                 {
                     name: '✅ Ativos',
                     value: corona.active.toLocaleString()
-                },               
+                },
                 {
                     name: '🚨 Casos Críticos',
                     value: corona.critical.toLocaleString()
@@ -53,5 +53,6 @@ module.exports = {
                 })
             .setFooter(message.author.username, message.author.displayAvatarURL())
 
-        await message.channel.send(embed).then(msg => message.delete({timeout: 20000})).then(msg => message.channel.send('Lave as mãos para não virar estatística'))
-    }}
+        await message.channel.send(embed).then(msg => message.delete({ timeout: 20000 })).catch(err => {return})
+    }
+}

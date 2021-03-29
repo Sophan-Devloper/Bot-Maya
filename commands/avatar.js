@@ -13,5 +13,5 @@ exports.run = async (client, message, args) => {
     .setImage(avatar)
     .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-  await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
+  await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 })).catch(err => {return})
 }

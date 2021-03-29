@@ -23,5 +23,5 @@ exports.run = async (client, message, args) => {
         )
         .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-    message.channel.send(embed).then(msg => msg.delete({ timeout: 25000 }))
+    message.channel.send(embed).then(msg => msg.delete({ timeout: 25000 })).catch(err => {return})
 }

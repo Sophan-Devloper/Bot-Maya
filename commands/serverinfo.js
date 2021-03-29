@@ -4,7 +4,7 @@ module.exports = {
     name: "server-info",
     category: "extra",
     run: async (client, message, args) => {
-      message.delete()
+        message.delete()
         let region;
         switch (message.guild.region) {
             case "europe":
@@ -28,7 +28,7 @@ module.exports = {
         }
 
         const embed = new MessageEmbed()
-            .setThumbnail(message.guild.iconURL({dynamic : true}))
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setColor('#f3f3f3')
             .setTitle(`${message.guild.name}`)
             .addFields(
@@ -72,5 +72,6 @@ module.exports = {
                     name: "Emojis: ",
                     value: message.guild.emojis.cache.size >= 1 ? `${message.guild.emojis.cache.size} emojis!` : 'Não há emojis'
                 })
-        await message.channel.send(embed).then(msg => msg.delete({timeout: 20000}))
-    }}
+        await message.channel.send(embed).then(msg => msg.delete({ timeout: 20000 })).catch(err => { return })
+    }
+}

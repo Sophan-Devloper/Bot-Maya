@@ -105,6 +105,13 @@ module.exports = {
          return message.channel.send(nomutemaya).then(msg => msg.delete({ timeout: 5000 }))
       }
 
+      if (member.id === '451619591320371213') {// Rody ID
+         const nomutemaya = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setTitle(member.user.username + ' está na Whitelist.')
+         return message.channel.send(nomutemaya).then(msg => msg.delete({ timeout: 5000 }))
+      }
+
 
       if (!role.editable) {
          const soberol = new Discord.MessageEmbed()

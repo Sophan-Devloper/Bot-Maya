@@ -41,7 +41,7 @@ module.exports = {
 
         const newprefix = new Discord.MessageEmbed()
             .setColor('BLUE')
-            .setDescription('Deseja alterar meu prefixo para: `' + args[0] + '`')
+            .setDescription('Deseja alterar meu prefixo para: `' + args[0] + '`?')
         await message.channel.send(newprefix).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X

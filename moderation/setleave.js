@@ -69,7 +69,7 @@ module.exports = {
             const sucess = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setTitle('Leave System Ativado!')
-                .setDescription('`Canal escolhido: ' + channel.name + '`')
+                .setDescription(`Canal escolhido: ${channel}`)
 
             return message.channel.send(sucess)
         }

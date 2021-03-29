@@ -28,24 +28,6 @@ client.on("message", async (message) => {
     }
     xp(message)
 
-    var r = 'maya'
-    var r1 = 'Maya'
-    var r2 = 'MAYA'
-    var list = ['ooi', 'euzinha', 'to aqui', 'oláá', 'Estou aqui, o que quieres?', `Como posso te ajudar? Qualquer coisa só chamar o help`, 'Alguém me chamou?', 'Porquê me chamas?', 'Aaaah, eu to com sono:sleeping:', 'ooooi, eu estou tomando sorvete agora, no que posso ajudar?', 'Eu estava dormindo... O que você precisa?', 'Estou aqui, como posso ajudar?', 'Oiii, parece que eu ouvi meu nome', 'oooi, estou aqui', 'Ouvi meu nome c.c', 'Olááá, estou aqui para ajudar, quem me chamas?']
-    var msgmaya = list[Math.floor(Math.random() * list.length)]
-
-    if (message.content.includes === 'maya') { message.react('♥️').then(msg => msg.channel.send(msgmaya)) }
-    if (message.content.includes === 'Maya') { message.react('♥️').then(msg => msg.channel.send(msgmaya)) }
-    if (message.content.includes === 'MAYA') { message.react('♥️').then(msg => msg.channel.send(msgmaya)) }
-    if (message.content.includes("loli")) { message.channel.send("Eu li Loli? Ligando 190...").then(msg => msg.delete({ timeout: 2000 })).catch(err => { return }) }
-    if (message.content.includes("bom dia")) { message.channel.send("Bom diiia") }
-    if (message.content.includes("boa tarde")) { message.channel.send("Boa taarde") }
-    if (message.content.includes("boa noite")) { message.channel.send("Boa noitee") }
-    if (message.content.includes("Bom dia")) { message.channel.send("Bom diiia") }
-    if (message.content.includes("Boa tarde")) { message.channel.send("Boa taarde") }
-    if (message.content.includes("Boa noite")) { message.channel.send("Boa noitee") }
-    if (message.content === 'oi') return message.channel.send(`oooi ${message.author.username}`)
-
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = default_prefix
     if (!message.content.startsWith(prefix)) return

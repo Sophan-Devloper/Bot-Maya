@@ -61,7 +61,7 @@ module.exports = {
             const sucess = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setTitle('A mensagem foi armazenada com sucesso.')
-                .setDescription(`Mensagem: ` + mensagem)
+                .setDescription('Mensagem: `' + mensagem + '`')
 
             return message.channel.send(sucess)
         }

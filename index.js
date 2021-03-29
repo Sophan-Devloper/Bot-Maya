@@ -209,6 +209,13 @@ client.on("guildMemberAdd", (member) => {
     }
 })
 
+client.on("guildMemberAdd", (member) => {
+    var role = db.get(`autorole_${member.guild.id}`)
+    if (role === null) { return false }
+
+    member.roles.add(role)
+})
+
 client.on("message", async message => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }

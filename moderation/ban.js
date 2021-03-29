@@ -125,7 +125,7 @@ module.exports.run = async (client, message, args) => {
 
   const startban = new Discord.MessageEmbed()
     .setColor('BLUE')
-    .setDescription(`Você realmente deseja banir ${member.user.username} do servidor?`)
+    .setDescription(`Você realmente deseja banir ${member.user} do servidor?`)
 
   await message.channel.send(startban).then(msg => {
     msg.react('✅') // Check

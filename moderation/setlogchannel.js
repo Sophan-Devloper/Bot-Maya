@@ -23,7 +23,7 @@ module.exports = {
 
             const noargs = new Discord.MessageEmbed()
                 .setColor('#FF0000') // red
-                .setTitle('' + prefix + 'setlogchannel #CanalLog')
+                .setTitle('`' + prefix + 'setlogchannel #CanalLog`')
             return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 }))
         }
 
@@ -37,7 +37,6 @@ module.exports = {
                 .setDescription('Caso queira trocar de canal, use o comando \n`' + prefix + 'setlogchannel #CanalLog`')
 
             return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 }))
-
         }
 
         var channel = message.mentions.channels.first()

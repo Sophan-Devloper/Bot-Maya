@@ -9,7 +9,7 @@ module.exports = {
       const perms = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Permissão Necessária: Administrador, Banir Membros, Manusear Roles (cargos)')
-      return message.channel.send("Você não é da Moderação, não use este comando, é perigoso.").then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+      return message.channel.send(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
     let logchannel = db.get(`logchannel_${message.guild.id}`)

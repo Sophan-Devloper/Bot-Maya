@@ -220,5 +220,4 @@ client.on("message", async (message, args) => {
 })
 
 client.on("ready", () => { console.log("Ok.") })
-
 client.login(token)

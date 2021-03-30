@@ -163,7 +163,7 @@ module.exports = {
         .setColor('GREEN')
         .setDescription(`O Warn foi um sucesso! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
 
-      await message.channel.send(sucess).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+      message.channel.send(sucess).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
       client.channels.cache.get(logchannel).send(msg2)
     }
   }

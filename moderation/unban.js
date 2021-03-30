@@ -56,7 +56,7 @@ module.exports.run = async (client, message, args) => {
 
   const UnbanEmbed = new Discord.MessageEmbed()
     .setTitle(`Usuário Desbanido`)
-    .setColor('#GREEN')
+    .setColor('GREEN')
     .addFields(
       {
         name: 'ID Usuário',

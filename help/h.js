@@ -44,11 +44,11 @@ module.exports = {
             .addFields(
                 {
                     name: '<:topreach:766846960569155584> Veja seus MPoints',
-                    value: "`-balance` | `-bal` | `-mp` | `-bal @user` | `-perfil @user` | `-profile`"
+                    value: "🔹`-balance` | `-bal` | `-bal @user` "
                 },
                 {
                     name: '<:topreach:766846960569155584> Ganhe MPoints!',
-                    value: '`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n`-slut` Ganhe ou perca até 2000<:StarPoint:766794021128765469>'
+                    value: '🔹`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n🔸`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n🔹`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n🔸`-slut` Ganhe ou perca até 10000<:StarPoint:766794021128765469>'
                 },
                 {
                     name: '<:topreach:766846960569155584> Em Breve',
@@ -56,15 +56,19 @@ module.exports = {
                 },
                 {
                     name: "<:topreach:766846960569155584> Level System",
-                    value: "`-level` Seu level\n`-dailyxp` 150xp diariamente\n`-rank` Ranking"
+                    value: "🔸`-level` Seu level\n🔸`-dailyxp` 150xp diariamente\n🔸`-rank` Ranking"
                 },
                 {
                     name: '<:topreach:766846960569155584> Family System',
-                    value: '`-marry @user` Se case com alguém\n`-divorce` Se divorcie\n`-family` `1...5` Adicione até 5 pessoas a sua familia\n`-nofamily` `1...5` Tire alguém da sua familia'
+                    value: '🔹`-marry @user` Se case com alguém\n🔹`-divorce` Se divorcie\n🔸`-family` `1...5` Adicione até 5 pessoas a sua familia\n🔸`-nofamily` `1...5` Tire alguém da sua familia'
                 },
                 {
                     name: '<:topreach:766846960569155584> Perfil',
-                    value: '`-rp` Dê reputação\n`-setstatus` Defina seu status no seu perfil\n`-profile` `-perfil` Veja seu perfil\n`-perfil @user` Perfil de alguém'
+                    value: '🔸`-rp` Dê reputação\n🔸`-setstatus` Defina seu status no seu perfil\n🔹`-profile` `-perfil` Veja seu perfil\n🔹`-perfil @user` Perfil de alguém'
+                },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -77,12 +81,16 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comandos do Github System',
-                    value: '`-github` Link do Repositório Maya'
+                    value: '🔸`-github` Link do Repositório Maya'
                 },
                 {
                     name: 'Comandos Prontos - *Adicionando mais um monte*',
-                    value: '`-commandFile` Código de Acesso a Folders'
+                    value: '🔸`-commandFile` Código de Acesso a Folders'
                 },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
+                }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
@@ -96,36 +104,44 @@ module.exports = {
                 },
                 {
                     name: 'Adicione com QR Code',
-                    value: '`-qrmusic`',
+                    value: '🔸`-qrmusic`',
+                },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
         const Administrativo = new Discord.MessageEmbed()
             .setColor('#CD853F')
-            .setTitle('Comandos Administrativos')
+            .setTitle('Comandos Administrativos - Todos Comandos Atualizados')
             .setURL('https://discord.gg/mx8eMx6')
             .setDescription('Estou cheia de funções administrativas, que paraiso para a Staff.')
             .addFields(
                 {
                     name: 'Administração',
-                    value: '\n`-unban` Desban algúm membro\n`-createchannel` Crie canais de texto \n`-createvoice` Crie canais de voz \n`-lockdown` Trave o servidor em caso de emergência'
+                    value: '🔸`-setxpchannel` Canal de mensagem XP Level Up\n🔸`-setautorole @cargo` Autorole System\n🔸`-setleave` Canal de Saída\n🔸`-setwelcome` Canal de boas vinda\n🔸`-setwelcomemsg` Mensagem de boas vindas\n🔸`-setleavemsg` Mensagem de saída\n🔸`-setlogchannel` Canal de Relatório\n🔹`-unban` Desban algúm membro\n🔹`-createchannel` Crie canais de texto \n🔹`-createvoice` Crie canais de voz \n🔹`-lockdown` Trave o servidor em caso de emergência'
                 },
                 {
                     name: 'Moderação',
-                    value: '`-addrole` Dê cargos \n`-removerole` Tire Cargos\n`-setnick @user` Mude o nickname de alguém\n`-kick` Chute alguém do servidor\n`-ban` Banir membros\n`-muteinfo` Info do meu Mute System\n`-mute` Mute alguém (tempmute)\n`-unmute` Desmuta alguém\n`-warn` Dê Warns \n`-warns` Confira seus Warns \n`-resetwarns` `-rwarns` Reset warns de membros\n`-kickvoice` Tire alguém da call '
+                    value: '🔸`-move` Move o mebro pra sua call\n🔹`-addrole` Dê cargos \n🔹`-removerole` Tire Cargos\n🔹`-setnick @user` Mude o nickname de alguém\n🔹`-kick` Chute alguém do servidor\n🔹`-ban` Banir membros\n🔸`-muteinfo` Info do meu Mute System\n🔹`-mute` Mute alguém (tempmute)\n🔹`-unmute` Desmuta alguém\n🔹`-warn` Dê Warns \n🔹`-warns` Confira seus Warns \n🔹`-resetwarns` `-rwarns` Reset warns de membros\n🔸`-kickvoice` Tire alguém da call '
                 },
                 {
                     name: 'Chat',
-                    value: '`-lockchannel` Trave um canal especifico\n`-anunciar` Publique informações\n`-clear` Limpe o chat\n`-slowmode` Ative o modo lento'
+                    value: '🔸`-lockchannel` Trave um canal especifico\n🔹`-anunciar` Publique informações\n🔹`-clear` Limpe o chat\n🔹`-slowmode` Ative o modo lento'
                 },
                 {
                     name: 'Maya',
-                    value: '`-setprefix` `-prefix` Informações sobre o meu prefix\n`-say` Diga algo atráves de mim\n`-dm` `-pv` Mensagem no privado para alguém\n`-criarcomando` Crie um comando pro seu server\n`-deletecomando` Delete um comando do server\n`-backup` Backup dos meus dados do seu server'
+                    value: '🔸`-setprefix` `-prefix` Informações sobre o meu prefix\n🔹`-say` Diga algo atráves de mim\n♦️`-dm` `-pv` Mande mensagem no privado`'
                 },
                 {
                     name: 'Interação',
-                    value: '`-sorteio` Faça sorteios'
+                    value: '🔸`-criarcomando` Cria um comando só pro servidor\n🔸`-deletecomando` Deleta um comando criado\n🔹`-sorteio` Faça sorteios'
+                },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados\n♦️ Comando Exclusivo'
                 }
             )
             .addField('Não se procupe, mais comandos estão sendo adicionados', `Você tem alguma ideia? [Clique aqui](${linksupport})`,)
@@ -143,7 +159,7 @@ module.exports = {
                 },
                 {
                     name: '🖌️ Designers 🖌️',
-                    value: '`Rody#3756` | `Gowther#9233` | `Rafaella#????`'
+                    value: '`Rody#3756` | `Gowther#9233` | `Yma#5175`'
                 },
                 {
                     name: ':handshake: Colaboradores :handshake:',
@@ -196,6 +212,10 @@ module.exports = {
                     name: 'Mande mais games pra gente',
                     value: `[Suporte Maya](${linksupport})`
                 },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
+                }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
 
@@ -207,11 +227,11 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comandinhos de animes',
-                    value: '`-anime` listinha pequena de comandos'
+                    value: '🔸`-anime` listinha pequena de comandos'
                 },
                 {
-                    name: 'Indicação de Animes (+2000 Animes)',
-                    value: '`-ind`'
+                    name: 'Indicação de Animes',
+                    value: '`-ind` (+2000 Animes)'
                 },
                 {
                     name: 'Fotos/Gifs de Animes',
@@ -220,6 +240,10 @@ module.exports = {
                 {
                     name: `Mais animes estão sendo adicionados, tem alguma sugestão?`,
                     value: `[Clique aqui](${linksupport})`
+                },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -232,35 +256,35 @@ module.exports = {
             .addFields(
                 {
                     name: 'Covid-19',
-                    value: '`-covid` Informações mundiais sobre a COVID-19'
+                    value: '🔹`-covid` Informações mundiais sobre a COVID-19'
                 },
                 {
                     name: 'Servidor',
-                    value: '`-invite` `-inv` Me coloque no seu servidor \n`-ideia` Mande ideias pro seu Servidor \n`-report` Reporte coisas pra Staff do Servidor \n`-serverinfo` Informações do Servidor\n`-channel` Info do canal\n`-dono/-owner` Veja quem é o dono do server'
+                    value: '`-invite` `-inv` Me coloque no seu servidor \n🔹`-ideia` Mande ideias pro seu Servidor \n🔹`-report` Reporte coisas pra Staff do Servidor \n🔹`-serverinfo` Informações do Servidor\n🔸`-dono/-owner` Veja quem é o dono do server'
                 },
                 {
                     name: 'Maya',
-                    value: '`-ping` Pong! \n`-uptime` Tempo que eu estou acordada \n`-botinfo` Informações sobre mim\n`-sup` `-support` `-suporte` Minha central de Suporte'
+                    value: '🔹`-ping` Pong! \n`-uptime` Tempo que eu estou acordada \n🔹`-botinfo` Informações sobre mim\n🔸`-sup` `-support` `-suporte` Minha central de Suporte'
                 },
                 {
                     name: 'Usuário',
-                    value: '`-avatar @user` Veja a foto de perfil\n`-id @user` Veja o ID\n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n`-userinfo @user` Veja informações detalhadas de alguém'
+                    value: '🔹`-avatar @user` Veja a foto de perfil\n🔸`-id @user` Veja o ID\n`-spotify @user` `-spot @user` Veja a música que alguém está escutando \n`-user @user` Veja o nome de usúario de alguém \n🔹`-userinfo @user` Veja informações detalhadas de alguém'
                 },
                 {
                     name: 'Fun',
-                    value: '`-trig` TRIGGEEEEER\n`-Jokenpo/-j` Jokeeenpo\n`-coinflip` Cara ou coroa?\n`-ascii` Muito doido\n`-frase` Filosofia pura\n`-changemymind` Changemymind\n'
+                    value: '🔸`-trig` TRIGGEEEEER\n🔸`-Jokenpo/-j` Jokeeenpo\n`-coinflip` Cara ou coroa?\n`-ascii` Muito doido\n`-frase` Filosofia pura\n🔸`-changemymind` Changemymind'
                 },
                 {
                     name: 'Util',
-                    value: '`-cat` Gatinhos são úteis, tá bom? ;-;\n`-clima` Veja o clima da sua cidade\n`-translate` `-t` Traduza com o Google Tradutor\n`-invisible` Escreva nada\n`-piada` kkkkkk\n`-imc` Veja seu imc'
-                },
-                {
-                    name: 'Exclusive Server',
-                    value: '`-mk` `-akat` `-akatsuki` Link\n`-ninja666` `-nocu`\n`-livia`'
+                    value: '`-cat` Gatinhos são úteis, tá bom? ;-;\n🔹`-clima` Veja o clima da sua cidade\n🔸`-translate` `-t` Traduza com o Google Tradutor\n🔸`-invisible` Escreva nada\n🔹`-piada` kkkkkk\n🔸`-imc` Veja seu imc'
                 },
                 {
                     name: 'Random',
-                    value: '`-advice` This command is completelly in english\n`-boom` Só faz boom\n`-ecchi` Não recomendo usar isso\n`-explosion` Megumiiin\n`-feet` Pézin\n`-livia` Gay\n`-loli` Lolicon\n`-stonks` `-notstonks` Stonks esse\n`-puppy` Fofiiiinho'
+                    value: '🔸`-advice` This command is completelly in english\n`-boom` Só faz boom\n`-ecchi` Não recomendo usar isso\n`-explosion` Megumiiin\n`-feet` Pézin\n🔸`-livia` Gay\n`-loli` Lolicon\n`-stonks` `-notstonks` Stonks esse\n`-puppy` Fofiiiinho'
+                },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
                 }
             )
             .addField('Estamos adicionando mais comandos úteis, tá bom?', `Tem algúma ideia de comando legal? [Clique aqui](${linksupport})`)
@@ -288,8 +312,12 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comandos Disponiveis',
-                    value: '`-baka @user` Chame de Baka! \n`-bite @user` Mordidinha \n`-dedo @user` Educação\n`-shit` Pisei na mer#@\n`-greet @user` Comprimento \n`-hit @user` Briga, briga, briga! \n`-hug @user` Abraçar é tão boom \n`-kill @user` Mate! \n`-kiss @user` Hmmm, beijo é? \n`-onegai @user` Porfavoor \n`-pat @user` Cariiiinho \n`-rob @user` Roubar é tão feio... \n`-slap @user` Tapããão\n`-slaap` Tapão em foto\n`-love @user` Mande seu amor secretamente \n`-ery @user` Deboche \n`-lick @user` Peroriin \n`-suck @user` Chupada \n`-highfive @user` Toca Aqui \n`-poke @user` Cutucadinha \n`-shoot @user` Atire para matar \n`-shrug @user` Fazer oque ne  \n`-stare @user` Olhar fixo \n`-stomp @user` Pise em alguem\n`-affect @user` Isso não afeta o bebê'
+                    value: '🔹`-baka @user` Chame de Baka! \n🔹`-bite @user` Mordidinha \n🔹`-dedo @user` Educação\n🔹`-greet @user` Comprimento \n🔹`-hit @user` Briga, briga, briga! \n🔹`-hug @user` Abraçar é tão boom \n🔹`-kill @user` Mate! \n🔹`-kiss @user` Hmmm, beijo é? \n🔹`-onegai @user` Porfavoor \n🔹`-pat @user` Cariiiinho \n🔹`-rob @user` Roubar é tão feio... \n🔹`-slap @user` Tapããão\n🔹`-slaap` Tapão em foto\n🔹`-love @user` Mande seu amor secretamente \n🔹`-ery @user` Deboche \n🔹`-lick @user` Peroriin \n🔹`-suck @user` Chupada \n🔹`-highfive @user` Toca Aqui \n🔹`-poke @user` Cutucadinha \n🔹`-shoot @user` Atire para matar \n🔹`-shrug @user` Fazer oque ne  \n🔹`-stare @user` Olhar fixo \n🔹`-stomp @user` Pise em alguem\n🔹`-affect @user` Isso não afeta o bebê'
                 },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
+                }
             )
             .addField('Não se procupe, mais comandos estão sendo adicionados', `Você tem alguma ideia? [Clique aqui](${linksupport})`,)
             .setFooter(`${message.author.tag} - Comandos em português em breve`, message.author.displayAvatarURL())
@@ -302,7 +330,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comando de Ativação',
-                    value: 'Ativos: `-quiz` | `-quiznaruto` (reformando)'
+                    value: '🔸`-quiz`\n`-quiznaruto` (reformando)'
                 },
                 {
                     name: 'Em criação',
@@ -315,6 +343,10 @@ module.exports = {
                 {
                     name: 'Maya Quiz Informações',
                     value: '`Quiz: 27 Perguntas`\n`Quiznaruto: 17 Perguntas`'
+                },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())
@@ -327,15 +359,19 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comandos Emergênciais',
-                    value: '`-reboot` Me reinicia\n`-turnoff` Me desliga\n`-recall command` Reinicia comandos\n`-setdefaultprefix` Muda o prefix padrão\n`-reloadserver` Reinicia meu servidor'
+                    value: '♦️`-reboot` Me reinicia\n♦️`-turnoff` Me desliga\n♦️`-recall command` Reinicia comandos\n♦️`-setdefaultprefix` Muda o prefix padrão\n♦️`-reloadserver` Reinicia meu servidor'
                 },
                 {
                     name: 'Comandos Exclusivos',
-                    value: '`-resetlevel` Reseta level de alguém\n`-setrp` Define o RP de alguém\n`-deltimeoutxp` Tira o timeout do dailyxp de alguém\n`-deltimeoutrp` Tira o timeout\n`-addmp` Dá MPs pra alguém\n`-removemp` Tira MPs\n`-resetmp` Reseta MP de alguem\n`-resetallmp` Reseta o MP Data Center\n`-addxp` Dá xp\n`-removexp` Tira xp\n`-resetxp` Reseta xp\n`-resetxpall` Reseta XP Data Base\n`-setlevel` Dita o level de alguém'
+                    value: '♦️`-resetlevel` Reseta level de alguém\n♦️`-setrp` Define o RP de alguém\n♦️`-deltimeoutxp` Tira o timeout do dailyxp de alguém\n♦️`-deltimeoutrp` Tira o timeout\n♦️`-addmp` Dá MPs pra alguém\n♦️`-removemp` Tira MPs\n♦️`-resetmp` Reseta MP de alguem\n♦️`-resetallmp` Reseta o MP Data Center\n♦️`-addxp` Dá xp\n♦️`-removexp` Tira xp\n♦️`-resetxp` Reseta xp\n♦️`-resetxpall` Reseta XP Data Base\n♦️`-setlevel` Dita o level de alguém'
                 },
                 {
                     name: 'Comandos Black',
-                    value: '`-block @user` Bloqueia um usuário de usar meus comandos\n`-unblock` Inverso de block\n`-leaveall` Me tira de todos os servidores\n`-delmaya` Me deleta :cry:'
+                    value: '♦️`-addwhitelist` Adiciona alguém na whitelist\n♦️`-removewhite` Tira alguém da whitelist\n♦️`-block @user` Bloqueia um usuário de usar meus comandos\n♦️`-unblock` Inverso de block\n♦️`-leaveall` Me tira de todos os servidores\n♦️`-delmaya` Me deleta :cry:'
+                },
+                {
+                    name: 'Detalhes',
+                    value: '♦️ Acesso restrito'
                 }
             )
             .setFooter(message.author.tag, message.author.displayAvatarURL())

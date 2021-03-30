@@ -49,16 +49,26 @@ client.on("message", async (message) => {
 
         return message.channel.send(adm).then(msg => message.channel.send(embedperm))
     }
-    // -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION -- -- ADMINISTRATION PERMISSION --
 
     function xp(message) {
+
         if (message) {
             let xp = db.add(`xp_${message.author.id}`, 2)
             let level = Math.floor(0.5 * Math.sqrt(xp))
             let lvl = db.get(`level_${message.author.id}`) || db.set(`level_${message.author.id}`, 1)
             if (level > lvl) {
-                let newLevel = db.set(`level_${message.author.id}`, level);
-                message.channel.send(`:tada: ${message.author.username}, você subiu para o level ${newLevel}!`).then(m => m.delete({ timeout: 5000 })).catch(err => { return })
+                let newLevel = db.set(`level_${message.author.id}`, level)
+                let xpchannel = db.get(`xpchannel_${message.guild.id}`)
+                if (xpchannel === null) { return }
+
+                if (!db.get(`xpchannel_${message.guild.id}`)) { return }
+
+                if (client.channels.cache.get(xpchannel)) {
+                    const newlevel = new Discord.MessageEmbed()
+                        .setColor('GREEN')
+                        .setDescription(`:tada: ${message.author}, você subiu para o level ${newLevel}!`)
+                    client.channels.cache.get(xpchannel).send(newlevel)
+                }
             }
         }
     }

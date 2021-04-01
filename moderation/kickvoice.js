@@ -30,6 +30,13 @@ module.exports.run = (client, message, args) => {
         return message.channel.send(novoice).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
+    if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
+        const banrody = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setTitle(member.user.username + ' está na whitelist.')
+        return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    }
+
     if (member.hasPermission(['MOVE_MEMBERS', 'ADMINISTRATOR', 'KICK_MEMBERS', 'BAN_MEMBERS', 'MANEGE_ROLES'])) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
@@ -46,7 +53,7 @@ module.exports.run = (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Um erro foi encontrado')
             .setDescription(`ERROR BY CONSOLE.LOG \n` + err)
-            message.channel.send(error)
+        message.channel.send(error)
     })
 
     return message.channel.send(kicked)

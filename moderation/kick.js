@@ -59,18 +59,11 @@ exports.run = async (client, message, args) => {
         return message.channel.send(noargs1).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
-    if (member.id === '821471191578574888') { // Maya
-        const whitelist = new Discord.MessageEmbed()
+    if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
+        const banrody = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle(member.user.username + ' está na whitelist.')
-        return message.channel.send(whitelist).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
-
-    if (member.id === '451619591320371213') { //Rodrigo
-        const whitelist1 = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setTitle(member.user.username + ' está na whitelist.')
-        return message.channel.send(whitelist1).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
     if (member.hasPermission(['ADMINISTRATOR'])) {

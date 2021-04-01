@@ -14,10 +14,10 @@ module.exports = {
             return message.channel.send('Sem user no comando.')
         }
 
-        db.add(`blacklist_${user.id}`, user.id)
+        db.delete(`whitelist_${user.id}`, user.id)
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setTitle(`${user.user.username} foi adicionado a blacklist com sucesso.`)
+            .setTitle(`${user.user.username} foi removido da whitelist com sucesso.`)
         return message.channel.send(ok)
     }
 }

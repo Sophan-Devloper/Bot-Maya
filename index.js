@@ -20,6 +20,12 @@ app.get('/', (request, response) => {
 client.on("message", async (message) => {
 
     if (message.author.bot) return // no bots commands
+    if (db.get(`blacklist_${message.author.id}`)) {
+        const blocked = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle(`Você está bloqueado e não pode usar nenhum dos meus comandos.`)
+        return message.channel.send(blocked)
+    }
     if (message.channel.type == "dm") {// no dm's commands
         const dmembed = new Discord.MessageEmbed()
             .set('#FF000')
@@ -82,15 +88,6 @@ client.on("message", async (message) => {
     }
 
     if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
-
-    if (["triggered", "trig"].includes(command)) {
-        message.delete()
-        let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author
-        let avatar = user.displayAvatarURL({ dynamic: false, format: 'png' })
-        let image = await canvacord.Canvas.trigger(avatar)
-        let attachment = new Discord.MessageAttachment(image, "triggered.gif")
-        return message.channel.send("Carregando...").then(m => m.delete({ timeout: 4000 })).catch(err => { return }).then(m => m.channel.send(attachment))
-    }
 
     try {
         const commandFile = require(`./commands/${command}.js`)

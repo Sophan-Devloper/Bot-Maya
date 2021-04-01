@@ -3,6 +3,7 @@ const Discord = require("discord.js")
 
 module.exports = {
     run: async (client, message, args) => {
+      message.delete()
 
         const rody = message.author.id === ("451619591320371213")
         if (!rody) {
@@ -11,13 +12,13 @@ module.exports = {
 
         var user = message.mentions.members.first()
         if (!user) {
-            return message.channel.send('Sem user no comando.')
+            return message.channel.send(`-whitelist user`)
         }
 
-        db.add(`blacklist_${user.id}`, user.id)
+        db.add(`whitelist_${user.id}`, user.id)
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setTitle(`${user.user.username} foi adicionado a blacklist com sucesso.`)
+            .setTitle(`${user.user.username} foi adicionado a whitelist com sucesso.`)
         return message.channel.send(ok)
     }
 }

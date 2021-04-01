@@ -47,11 +47,11 @@ module.exports = {
       return message.channel.send(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
-    if (user.id === '451619591320371213') { // Rody
-      const whitelist = new Discord.MessageEmbed()
+    if (db.get(`whitelist_${user.id}`)) {// Rodrigo Couto
+      const banrody = new Discord.MessageEmbed()
         .setColor('GREEN')
-        .setTitle(`${user.user.username} está na Whitelist.`)
-      return message.channel.send(whitelist).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        .setTitle(user.user.username + ' está na whitelist.')
+      return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
     if (message.mentions.users.first().bot) {

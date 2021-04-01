@@ -272,7 +272,7 @@ module.exports = {
                 },
                 {
                     name: 'Fun',
-                    value: '🔸`-trig` TRIGGEEEEER\n🔸`-Jokenpo/-j` Jokeeenpo\n`-coinflip` Cara ou coroa?\n`-ascii` Muito doido\n`-frase` Filosofia pura\n🔸`-changemymind` Changemymind'
+                    value: '🔸`-Jokenpo/-j` Jokeeenpo\n`-coinflip` Cara ou coroa?\n`-ascii` Muito doido\n`-frase` Filosofia pura\n🔸`-changemymind` Changemymind'
                 },
                 {
                     name: 'Util',
@@ -298,8 +298,12 @@ module.exports = {
             .addFields(
                 {
                     name: 'Comandos Disponiveis',
-                    value: '`-cry` Chorar as vezes faz bem. \n`-dance` Dance Dance \n`-fury` Mostre sua furia! \n`-happy` Feliiiz \n`-sleep` que soninhoo \n`-smile` Está feliz? Sorria! \n`-tired` que cansaço! \n`-surprise` Mas o que é isso? \n`-clap` Aplaudir é legal \n`-thin` Oque eu faço \n`-die` Morreu \n`-facepalm` Decepcionado(a) \n`-glare` Olhar Pistola \n`-pout` Fazendo Bico \n`-purr` Gostando \n`-sad` Triste '
+                    value: '`-cry` Chorar as vezes faz bem. \n`-dance` Dance Dance \n`-fury` Mostre sua furia! \n🔸`-trig` TRIGGEEEEER\n`-happy` Feliiiz \n`-sleep` que soninhoo \n`-smile` Está feliz? Sorria! \n`-tired` que cansaço! \n`-surprise` Mas o que é isso? \n`-clap` Aplaudir é legal \n`-thin` Oque eu faço \n`-die` Morreu \n`-facepalm` Decepcionado(a) \n`-glare` Olhar Pistola \n`-pout` Fazendo Bico \n`-purr` Gostando \n`-sad` Triste '
                 },
+                {
+                    name: 'Detalhes',
+                    value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
+                }
             )
             .addField('Não se procupe, mais comandos estão sendo adicionados', `Você tem alguma ideia? [Clique aqui](${linksupport})`,)
             .setFooter(`${message.author.tag} - Em breve, comandos em português`, message.author.displayAvatarURL())

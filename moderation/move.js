@@ -34,6 +34,13 @@ module.exports = {
             return message.channel.send(noform).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
         }
 
+        if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
+            const banrody = new Discord.MessageEmbed()
+                .setColor('GREEN')
+                .setTitle(member.user.username + ' está na whitelist.')
+            return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        }
+
         if (member.permissions.has("MANAGE_CHANNELS", "ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_ROLES")) {
             const perms = new Discord.MessageEmbed()
                 .setColor('#FF0000')

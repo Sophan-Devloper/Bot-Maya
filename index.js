@@ -88,6 +88,11 @@ client.on("message", async (message) => {
     }
 
     if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
+    if (message.content.startsWith(`${prefix}f`)) {
+        message.delete()
+        message.channel.send("f")
+    }
+
 
     try {
         const commandFile = require(`./commands/${command}.js`)
@@ -192,7 +197,7 @@ client.on("guildMemberAdd", (member) => {
         const joinembed = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setAuthor(member.user.tag + ' entrou no servidor', member.user.displayAvatarURL())
-            .setDescription('' + msgwelcome)
+            .setDescription(`${member}, seja bem vindo a ${member.guild.name}\n \n` + msgwelcome)
 
         client.channels.cache.get(canal).send(joinembed)
     }

@@ -34,6 +34,9 @@ exports.run = async (client, message, args) => {
     let rp = await db.fetch(`rp_${user.id}`)
     if (rp === null) rp = 0
 
+    let bank = db.get(`bank_${user.id}`)
+    if (bank === null) bank = 0
+
     let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não escreveu nada ainda.`
 
@@ -56,9 +59,13 @@ exports.run = async (client, message, args) => {
                 inline: true
             },
             {
-                name: '🌐 Level Interservidor',
-                value: `${level}<:level:766847577416138772>`,
+                name: ':bank: Banco',
+                value: `${bank}<:StarPoint:766794021128765469>MPoints`,
                 inline: true
+            },
+            {
+                name: '🌐 Level Interservidor',
+                value: `${level}<:level:766847577416138772>`
             },
             {
                 name: 'Reputação',

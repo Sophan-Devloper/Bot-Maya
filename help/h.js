@@ -7,12 +7,6 @@ module.exports = {
     async run(client, message, args) {
         message.delete()
 
-        var list1 = [
-            'https://imgur.com/KyjyfRg.gif',
-            'https://imgur.com/KyjyfRg.gif'
-        ]
-
-        var rand = list1[Math.floor(Math.random() * list1.length)]
         var linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
         var linkservidor = 'https://discord.gg/mx8eMx6'
         var linkcovid = 'https://www.google.com/search?q=coronavirus&oq=coronavirus&aqs=chrome..69i64j0i433j0i131i433l3j69i60l3.3560j0j9&sourceid=chrome&ie=UTF-8#wptab=s:H4sIAAAAAAAAAONgVuLVT9c3NMwySk6OL8zJecTozS3w8sc9YSmnSWtOXmO04eIKzsgvd80rySypFNLjYoOyVLgEpVB1ajBI8XOhCvHsYuL2SE3MKckILkksKV7EKptaDGQcXltckpmcWKyQkq-QnF-Un5dYdnhtUWkxAPmw1DmNAAAA'
@@ -43,16 +37,12 @@ module.exports = {
             .setDescription('Ainda na versão beta, este é meu *sistema interservidores*, ou seja, seu xp, dinheiro e tudo vinculado a mim, você também terá em todos os outros servidores.')
             .addFields(
                 {
-                    name: '<:topreach:766846960569155584> Veja seus MPoints',
-                    value: "🔹`-balance` | `-bal` | `-bal @user` "
-                },
-                {
-                    name: '<:topreach:766846960569155584> Ganhe MPoints!',
-                    value: '🔹`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n🔸`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n🔹`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n🔸`-slut` Ganhe ou perca até 10000<:StarPoint:766794021128765469>'
+                    name: '<:topreach:766846960569155584> Economy Systen',
+                    value: "🔹`-balance` | `-bal` | `-bal @user`\n🔸`-pay` Pague alguém\n🔸`-dep` Deposite seu dinheiro\n🔸`-roubar` Roube alguém\n🔸`-sacar` Saque dinheiro do banco\n🔹`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n🔸`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n🔹`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n🔸`-slut` Ganhe ou perca até 10000<:StarPoint:766794021128765469>"
                 },
                 {
                     name: '<:topreach:766846960569155584> Em Breve',
-                    value: '`-loja` `-store` `-rankingmp`\n`-activelevelsystem` `-disablelevelsystem` `-setxpchannel` `-noxpchannel`\n`-pay` `-cobrar` `-aposta` `-givemp`'
+                    value: '`-loja` `-store` `-rankingmp`'
                 },
                 {
                     name: "<:topreach:766846960569155584> Level System",

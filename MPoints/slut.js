@@ -17,10 +17,7 @@ module.exports = {
             return message.channel.send(`Você pode se prostituir em ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 6000 }))
         } else {
 
-            var list = [
-                "win",
-                "lose"
-            ]
+            var list = ["win", "lose"]
             var result = list[Math.floor(Math.random() * list.length)]
 
             if (result === "win") {

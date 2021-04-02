@@ -5,17 +5,25 @@ exports.run = async (client, message, args) => {
   message.delete()
 
   var list = [
-    'https://imgur.com/SA5DXP6.gif',
-    'https://imgur.com/szr4sfd.gif',
-    'https://imgur.com/nmHzWIX.gif',
-    'https://imgur.com/145Sc4Z.gif'
+    'https://imgur.com/T1sDMLA.gif',
+    'https://imgur.com/5niochn.gif',
+    'https://imgur.com/GGfSu9s.gif',
+    'https://imgur.com/LygOJ5M.gif',
+    'https://imgur.com/HTlpSAQ.gif',
+    'https://imgur.com/fS4E13N.gif',
+    'https://imgur.com/8vPPdZr.gif',
+    'https://imgur.com/lIZEcOn.gif',
   ]
 
   var list1 = [
-    'https://imgur.com/SA5DXP6.gif',
-    'https://imgur.com/szr4sfd.gif',
-    'https://imgur.com/nmHzWIX.gif',
-    'https://imgur.com/145Sc4Z.gif'
+    'https://imgur.com/T1sDMLA.gif',
+    'https://imgur.com/5niochn.gif',
+    'https://imgur.com/GGfSu9s.gif',
+    'https://imgur.com/LygOJ5M.gif',
+    'https://imgur.com/HTlpSAQ.gif',
+    'https://imgur.com/fS4E13N.gif',
+    'https://imgur.com/8vPPdZr.gif',
+    'https://imgur.com/lIZEcOn.gif',
   ]
 
   var rand = list[Math.floor(Math.random() * list.length)]
@@ -29,25 +37,25 @@ exports.run = async (client, message, args) => {
     const nouser = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Erroooou')
-      .setDescription('`' + prefix + 'dedo @user`')
+      .setDescription('`' + prefix + 'fight @user`')
     return message.reply(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
   }
 
   if (user.id === '821471191578574888') {
-    return message.channel.send('Paaara, não me mostra o dedo :cry:').then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
+    return message.channel.send('Paaaaara! Não é pra me bater!!!! :cry:')
   }
 
   let avatar = message.author.displayAvatarURL({ format: 'png' })
   let avatar1 = user.displayAvatarURL({ format: 'png' })
   const embed = new Discord.MessageEmbed()
     .setColor('BLUE')
-    .setAuthor(message.author.username + ` está mostrando o dedo para ${user.username}`, avatar)
+    .setAuthor(message.author.username + ` está brigando com ${user.username}`, avatar)
     .setImage(rand)
     .setFooter('Clique em 🔁 para retribuir')
 
   const embed2 = new Discord.MessageEmbed()
     .setColor('BLUE')
-    .setAuthor(user.username + ` retribuiu o dedo para ${message.author.username}`, avatar1)
+    .setAuthor(user.username + ` levou a sério a luta com ${message.author.username} `, avatar1)
     .setImage(rand1)
 
   await message.channel.send(embed).then(msg => {
@@ -55,8 +63,7 @@ exports.run = async (client, message, args) => {
     msg.awaitReactions((reaction, user) => {
       if (message.mentions.users.first().id !== user.id) return
 
-      if (reaction.emoji.name === '🔁') { // Retribuiu
-        reaction.users.remove()
+      if (reaction.emoji.name === '🔁') {
         message.channel.send(embed2)
       }
     })

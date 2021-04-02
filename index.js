@@ -88,12 +88,7 @@ client.on("message", async (message) => {
     }
 
     if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
-    if (message.content.startsWith(`${prefix}f`)) {
-        message.delete()
-        message.channel.send("f")
-    }
-
-
+    
     try {
         const commandFile = require(`./commands/${command}.js`)
         commandFile.run(client, message, args)

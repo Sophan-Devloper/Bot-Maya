@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 message.delete()
@@ -30,16 +31,73 @@ var list = [
   'https://imgur.com/N6ilHRG.gif'
     ]
 
-var rand = list[Math.floor(Math.random() * list.length)]
-let user = message.mentions.users.first() || client.users.cache.get(args[0])
+    var list1 = [
+  'https://imgur.com/fm49srQ.gif',
+  'https://imgur.com/4MQkDKm.gif',
+  'https://imgur.com/o2SJYUS.gif',
+  'https://imgur.com/oOCq3Bt.gif',
+  'https://imgur.com/Agwwaj6.gif',
+  'https://imgur.com/tb2uVVV.gif',
+  'https://imgur.com/YA7g7h7.gif',
+  'https://imgur.com/xMttEjS.gif',
+  'https://imgur.com/mIg8erJ.gif',
+  'https://imgur.com/oRsaSyU.gif',
+  'https://imgur.com/kSLODXO.gif',
+  'https://imgur.com/CwbYjBX.gif',
+  'https://imgur.com/orjYBoH.gif',
+  'https://imgur.com/kUNr4vk.gif',
+  'https://imgur.com/T00nSoV.gif',
+  'https://imgur.com/NSeL8jO.gif',
+  'https://imgur.com/NaLhZ8m.gif',
+  'https://imgur.com/8p95SIi.gif',
+  'https://imgur.com/8af2u1Q.gif',
+  'https://imgur.com/wYgsQNc.gif',
+  'https://imgur.com/HT6pXv0.gif',
+  'https://imgur.com/EueJXaU.gif',
+  'https://imgur.com/N6ilHRG.gif',
+  'https://imgur.com/N6ilHRG.gif'
+    ]
 
-if (!user)
-return message.reply('você esqueceu de marcar em quem você que dar um tapa. `-slap @user`').then(msg => msg.delete({timeout: 5000}))
-
-const embed = new Discord.MessageEmbed()
-        .setColor('#000000')
-        .setDescription(`${message.author} deu um tapa em ${user}`)
-        .setImage(rand)
-        .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
-  await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
-}
+    var rand = list[Math.floor(Math.random() * list.length)]
+    var rand1 = list1[Math.floor(Math.random() * list1.length)]
+    let user = message.mentions.users.first()
+ 
+    if (!user) {
+       let prefix = db.get(`prefix_${message.guild.id}`)
+       if (prefix === null) prefix = "-"
+ 
+       const nouser = new Discord.MessageEmbed()
+          .setColor('#FF0000')
+          .setTitle('Erroooou')
+          .setDescription('`' + prefix + 'slap @user`')
+       return message.reply(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    }
+ 
+    if (user.id === '821471191578574888') {
+       return message.channel.send('Saai, eu não gosto que me batam.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+    }
+ 
+    let avatar = message.author.displayAvatarURL({ format: 'png' })
+    let avatar1 = user.displayAvatarURL({ format: 'png' })
+    const embed = new Discord.MessageEmbed()
+       .setColor('BLUE')
+       .setDescription(`${message.author} está te dando tapas ${user}`, avatar)
+       .setImage(rand)
+       .setFooter('Clique em 🔁 para retribuir')
+ 
+    const embed2 = new Discord.MessageEmbed()
+       .setColor('BLUE')
+       .setDescription(`${user} te devolveu os tapas ${message.author} `, avatar1)
+       .setImage(rand1)
+ 
+    await message.channel.send(embed).then(msg => {
+       msg.react('🔁')
+       msg.awaitReactions((reaction, user) => {
+          if (message.mentions.users.first().id !== user.id) return
+ 
+          if (reaction.emoji.name === '🔁') {
+             message.channel.send(embed2)
+          }
+       })
+    })
+ }

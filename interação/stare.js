@@ -1,7 +1,8 @@
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-message.delete()
+  message.delete()
 
   var list = [
     'https://imgur.com/l5xFcJ2.gif',
@@ -13,15 +14,27 @@ message.delete()
     'https://imgur.com/HaPqlac.gif'
   ]
 
-var rand = list[Math.floor(Math.random() * list.length)]
-let user = message.mentions.users.first() || client.users.cache.get(args[0])
+  var rand = list[Math.floor(Math.random() * list.length)]
+  let user = message.mentions.users.first()
 
-if (!user)
-return message.reply('você esqueceu de marca a pessoa que você quer ficar de olho -> `-stare @pessoa`').then(msg => msg.delete({timeout: 5000}))
+  if (!user) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
-const embed = new Discord.MessageEmbed()
-        .setColor('#000000')
-        .setDescription(`${message.author} estou de olho em você ${user}`)
-        .setImage(rand)
-  await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
+    const nouser = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Erroooou')
+      .setDescription('`' + prefix + 'slap @user`')
+    return message.reply(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+  }
+
+  if (user.id === '821471191578574888') {
+    return message.channel.send('O que foi que eu fiz? o-o').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+  }
+
+  const embed = new Discord.MessageEmbed()
+    .setColor('#000000')
+    .setDescription(`${message.author} estou de olho em você ${user}`)
+    .setImage(rand)
+  await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 })).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
 }

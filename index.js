@@ -197,7 +197,7 @@ client.on("guildMemberAdd", (member) => {
         const joinembed = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setAuthor(member.user.tag + ' entrou no servidor', member.user.displayAvatarURL())
-            .setDescription(`${member}, seja bem vindo a ${member.guild.name}\n \n` + msgwelcome)
+            .setDescription(`${member.user}, seja bem vindo a ${member.guild.name}\n \n` + msgwelcome)
 
         client.channels.cache.get(canal).send(joinembed)
     }

@@ -54,13 +54,13 @@ module.exports = {
             let sorte = Math.floor(Math.random() * 4) + 1
 
             if (sorte == 2) {
-                var amount = Math.floor(Math.random() * autor_money) + 1
+                var amount = Math.floor(Math.random() * autormoney) + 1
                 var embed1 = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle("🚨 A polícia te pegou e você foi preso!")
                     .setDescription(`A fiança custou ${amount}<:StarPoint:766794021128765469>`)
                 message.channel.send(embed1)
-                db.substract(`money_${message.author.id}`, amount)
+                db.subtract(`money_${message.author.id}`, amount)
                 db.set(`robtime_${message.author.id}`, Date.now())
             } else {
                 let amount = Math.floor(Math.random() * usermoney) + 1

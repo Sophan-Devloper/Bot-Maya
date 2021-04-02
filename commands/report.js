@@ -25,28 +25,69 @@ exports.run = async (client, message, args) => {
         return message.channel.send(nochanel).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
     }
 
-    if (!user) user = 'Nenhum membro foi reportado'
+    if (!args[0]) {
+        const noargs = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Por favor, siga o formato correto')
+            .setDescription('`' + prefix + 'report @user O motivo da sua denúncia`\n*@user é opcional*')
+        return message.channel.send(noargs)
+    }
 
-    const embed1 = new Discord.MessageEmbed()
-        .setColor("BLUE")
-        .setTitle('Novo Reporte Recebido')
-        .addFields(
-            {
-                name: 'Autor do Reporte',
-                value: message.author,
-                inline: true
-            },
-            {
-                name: 'Membro Reportado',
-                value: user,
-                inline: true
-            },
-            {
-                name: 'Razão do Reporte',
-                value: args.slice(1).join(" ")
-            }
-        )
-        .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
-        .setTimestamp()
-    client.channels.cache.get(channel).send(joinembed).send(embed1).then(msg => message.author.send(`O seu reporte foi enviado para a moderação do *${message.guild.name}* com sucesso.`))
+    if (!user) {
+        const embed1 = new Discord.MessageEmbed()
+            .setColor("BLUE")
+            .setTitle('Novo Reporte Recebido')
+            .addFields(
+                {
+                    name: 'Autor do Reporte',
+                    value: message.author,
+                    inline: true
+                },
+                {
+                    name: 'Membro Reportado',
+                    value: `Nenhum membro foi reportado`,
+                    inline: true
+                },
+                {
+                    name: 'Razão do Reporte',
+                    value: args.join(" ")
+                }
+            )
+            .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+            .setTimestamp()
+        client.channels.cache.get(channel).send(embed1)
+        const ok = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setTitle('O report foi enviado com sucesso!')
+        message.channel.send(ok)
+    }
+
+    if (user) {
+        const embed1 = new Discord.MessageEmbed()
+            .setColor("BLUE")
+            .setTitle('Novo Reporte Recebido')
+            .addFields(
+                {
+                    name: 'Autor do Reporte',
+                    value: message.author,
+                    inline: true
+                },
+                {
+                    name: 'Membro Reportado',
+                    value: `${user}`,
+                    inline: true
+                },
+                {
+                    name: 'Razão do Reporte',
+                    value: args.slice(1).join(" ")
+                }
+            )
+            .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+            .setTimestamp()
+        client.channels.cache.get(channel).send(embed1)
+        const ok = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setTitle('O report foi enviado com sucesso!')
+        message.channel.send(ok)
+    }
 }

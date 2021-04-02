@@ -28,7 +28,7 @@ client.on("message", async (message) => {
     }
     if (message.channel.type == "dm") {// no dm's commands
         const dmembed = new Discord.MessageEmbed()
-            .set('#FF000')
+            .setColor('#FF0000')
             .setTitle('Eu não posso responder mensagens no privado.')
         return message.channel.send(dmembed)
     }

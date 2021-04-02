@@ -12,10 +12,10 @@ exports.run = async (client, message, args) => {
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
     const db = require('quick.db')
     var level = await db.fetch(`level_${user.id}`)
-    if (level < 50) {
+    if (level < 10) {
         const block = new Discord.MessageEmbed()
             .setColor('RED')
-            .setTitle('🚫  Libere no level 50')
+            .setTitle('🚫  Libere no level 10')
         return message.channel.send(block).then(msg => msg.delete({ timeout: 4000 }))
     }
 

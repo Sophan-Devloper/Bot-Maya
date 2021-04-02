@@ -29,7 +29,8 @@ exports.run = async (client, message, args) => {
         const noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Por favor, siga o formato correto')
-            .setDescription('`' + prefix + 'report @user O motivo da sua denúncia`\n*@user é opcional*')
+            .setDescription(`Use o comando abaixo para reportar algo para equipe da ${message.guild.name}. \nO **@user** é opcional, use se quiser reportar algum membro.`)
+            .addField('⠀', '`' + prefix + 'report @user O motivo da sua denúncia`')
         return message.channel.send(noargs)
     }
 

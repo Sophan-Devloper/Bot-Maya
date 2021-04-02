@@ -1,7 +1,7 @@
 const db = require("quick.db")
 const Discord = require("discord.js")
 
-exports.run = async (bot, message, args) => {
+exports.run = async (client, message, args) => {
     message.delete()
 
     let user = message.author
@@ -16,6 +16,16 @@ exports.run = async (bot, message, args) => {
         money = parseInt(args[0])
     }
 
+    if(!args[0]){
+        let prefix = db.get(`prefix_${message.guild.id}`)
+        if (prefix === null) prefix = '-'
+      const noargs = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle(':spades: :hearts: 21 Pontos - Blackjack :clubs: :diamonds:')
+      .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`\n \nComando de aposta: `' + prefix + 'bj Valor`')
+      return message.channel.send(noargs).then(msg => msg.delete({timeout: 8000})).catch(err => { return })
+  }
+
     if (!money || money < 1 || money > moneydb) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = '-'
@@ -28,7 +38,7 @@ exports.run = async (bot, message, args) => {
         return
     }
 
-    if (!moneydb) {
+    if (moneydb === null) {
         const nomumber = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle("Você não tem dinheiro")
@@ -105,56 +115,57 @@ exports.run = async (bot, message, args) => {
         }
         if (outcome === "lose") {
             db.subtract(`money_${message.author.id}`, money)
+            db.add(`bank_${client.user.id}`, money)
         }
     }
 
     function resetGame() {
-        numCardsPulled = 0
-        player.cards = []
-        dealer.cards = []
-        player.score = 0
-        dealer.score = 0
-        deck.initialize()
+        numCardsPulled = 0;
+        player.cards = [];
+        dealer.cards = [];
+        player.score = 0;
+        dealer.score = 0;
+        deck.initialize();
     }
 
     function endMsg(title, msg, dealerC) {
         let cardsMsg = "";
         player.cards.forEach(function (card) {
-            cardsMsg += "[`" + card.rank.toString();
+            cardsMsg += "[" + card.rank.toString();
             if (card.suit == "corações") cardsMsg += "♥"
             if (card.suit == "diamantes") cardsMsg += "♦"
             if (card.suit == "espadas") cardsMsg += "♠"
             if (card.suit == "clubes") cardsMsg += "♣"
-            cardsMsg += "`](https://example.com) "
+            cardsMsg += "](https://example.com) "
         });
-        cardsMsg += " --> " + player.score.toString()
+        cardsMsg += " = " + player.score.toString()
 
         let dealerMsg = ""
         if (!dealerC) {
-            dealerMsg = "[`" + dealer.cards[0].rank.toString();
+            dealerMsg = "[" + dealer.cards[0].rank.toString();
             if (dealer.cards[0].suit == "corações") dealerMsg += "♥"
             if (dealer.cards[0].suit == "diamantes") dealerMsg += "♦"
             if (dealer.cards[0].suit == "espadas") dealerMsg += "♠"
             if (dealer.cards[0].suit == "clubes") dealerMsg += "♣"
-            dealerMsg += " ? ?`](https://dashcord.tech/)"
+            dealerMsg += " ? ?](https://dashcord.tech/)"
         } else {
             dealerMsg = ""
             dealer.cards.forEach(function (card) {
-                dealerMsg += "[`" + card.rank.toString();
+                dealerMsg += "[" + card.rank.toString();
                 if (card.suit == "corações") dealerMsg += "♥"
                 if (card.suit == "diamantes") dealerMsg += "♦"
                 if (card.suit == "espadas") dealerMsg += "♠"
                 if (card.suit == "clubes") dealerMsg += "♣"
-                dealerMsg += "`](https://dashcord.tech/) "
+                dealerMsg += "](https://dashcord.tech/) "
             })
-            dealerMsg += " --> " + dealer.score.toString()
+            dealerMsg += " = " + dealer.score.toString()
         }
 
         const gambleEmbed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setAuthor(`${message.author.username} começou um BlackJack!`, message.author.displayAvatarURL())
-            .addField('Suas Cartas', cardsMsg)
-            .addField('Cartas do Dealer\'s', dealerMsg)
+            .addField('Suas Cartas','**' + cardsMsg + '**')
+            .addField('Cartas da Maya','**' + dealerMsg + '**')
             .addField(title, msg)
             .setFooter('21 Pontos - Blackjack')
 
@@ -163,38 +174,38 @@ exports.run = async (bot, message, args) => {
 
     async function endGame() {
         if (player.score === 21) {
-            bet('win')
-            gameOver = true
+            bet('win');
+            gameOver = true;
             await endMsg("WOOOOOW!", "Você tem 21, você ganhou!", true)
         }
         if (player.score > 21) {
-            bet('lose')
+            bet('lose');
             gameOver = true;
-            await endMsg("VOCÊ PERDEU", "Você passou de 21", true)
+            await endMsg("Eu ganhei, você perdeu!", "Você passou de 21", true)
         }
         if (dealer.score === 21) {
-            bet('lose')
-            gameOver = true
-            await endMsg("VOCÊ PERDEU", "O cafetão obteve 21", true)
+            bet('lose');
+            gameOver = true;
+            await endMsg("Eu ganheeei!", "Eu fiz 21 em cheeeio!", true)
         }
         if (dealer.score > 21) {
-            bet('win')
-            gameOver = true
-            await endMsg("VOCÊ GANHOU", "O apostador foi preso", true)
+            bet('win');
+            gameOver = true;
+            await endMsg("Haaa você ganhou...", "Vou ir tomar sorvete", true)
         }
         if (dealer.score >= 17 && player.score > dealer.score && player.score < 21) {
-            bet('win')
-            gameOver = true
-            await endMsg("VOCÊ GANHOU", "Você matou o Cafetão", true)
+            bet('win');
+            gameOver = true;
+            await endMsg("Quase! Você ganhou", "Você ganhou dessa vez...", true)
         }
         if (dealer.score >= 17 && player.score < dealer.score && dealer.score < 21) {
-            bet('lose')
-            gameOver = true
-            await endMsg("VOCÊ PERDEU", "Cafetão ganhou, que pena", true)
+            bet('lose');
+            gameOver = true;
+            await endMsg("Achei fááácil", "Eu ganhei e você perdeeeeeu", true)
         }
         if (dealer.score >= 17 && player.score === dealer.score && dealer.score < 21) {
-            gameOver = true
-            await endMsg("HO MY GOD!?", "O que foi isso??", true)
+            gameOver = true;
+            await endMsg("HO MY GOD!?", "Empatou, como assim?", true)
         }
     }
 
@@ -206,36 +217,36 @@ exports.run = async (bot, message, args) => {
     }
 
     function newGame() {
-        hit()
-        hit()
-        dealerDraw()
-        endGame()
+        hit();
+        hit();
+        dealerDraw();
+        endGame();
     }
 
     function hit() {
         player.cards.push(deck.deckArray[numCardsPulled]);
         player.score = getCardsValue(player.cards);
 
-        numCardsPulled += 1
+        numCardsPulled += 1;
         if (numCardsPulled > 2) {
-            endGame()
+            endGame();
         }
     }
 
     function stand() {
         while (dealer.score < 17) {
-            dealerDraw()
+            dealerDraw();
         }
-        endGame()
+        endGame();
     }
 
-    newGame();
+    newGame()
     async function loop() {
         if (gameOver) return;
 
-        endMsg("BlackJack", 'Envie ``C`` para comprar\nEnvie ``F`` para finalizar o jogo', false)
+        endMsg("BlackJack", 'Envie `C` para comprar\nEnvie `F` para finalizar o jogo', false)
 
-        let filter = m => m.author.id === message.author.id;
+        let filter = m => m.author.id === message.author.id
         message.channel.awaitMessages(filter, {
             max: 1,
             time: 1200000,
@@ -243,15 +254,15 @@ exports.run = async (bot, message, args) => {
         }).then(message => {
             message = message.first()
             if (message.content.toLowerCase() === "c") {
-                hit()
-                loop()
+                hit();
+                loop();
                 return
             } else if (message.content.toLowerCase() === "f") {
-                stand()
-                loop()
+                stand();
+                loop();
                 return
             } else {
-                bet("perder")
+                bet("perder");
                 return
             }
         }).catch(_ => {
@@ -260,5 +271,6 @@ exports.run = async (bot, message, args) => {
             return
         })
     }
+
     await loop()
 }

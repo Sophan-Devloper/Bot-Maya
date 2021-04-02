@@ -20,7 +20,7 @@ module.exports = {
 
     const embed = new Discord.MessageEmbed()
       .setColor('#efff00')
-      .setAuthor(`Informações Bancárias de ${message.author.tag}`, user.user.displayAvatarURL())
+      .setAuthor(`Informações Bancárias de ${user.user.tag}`, user.user.displayAvatarURL())
       .setDescription(`Tome cuidado com seu dinheiro, atualizações estão vindo rapidamente\n \n💸 Carteira: <:StarPoint:766794021128765469>**${bal}**\n🏦 Banco: <:StarPoint:766794021128765469>**${bank}**`)
     message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
   }

@@ -15,23 +15,13 @@ module.exports = {
     let bal = await db.get(`money_${user.id}`)
     if (bal === null) bal = 0
 
+    let bank = db.get(`bank_${user.id}`)
+    if (bank === null) bank = 0
+
     const embed = new Discord.MessageEmbed()
-      .setTitle('<:StarPoint:766794021128765469>Sistema de Pontos - Balance<:StarPoint:766794021128765469>')
       .setColor('#efff00')
-      .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
-      .addFields(
-        {
-          name: 'Usuário',
-          value: user.user.username,
-          inline: true
-        },
-        {
-          name: '<:StarPoint:766794021128765469>Maya Points',
-          value: `${bal}<:StarPoint:766794021128765469>MPoints`,
-          inline: true
-        }
-      )
-      .setFooter('Maya Points BETA')
+      .setAuthor(`Informações Bancárias de ${user.user.tag}`, user.user.displayAvatarURL())
+      .setDescription(`Tome cuidado com seu dinheiro, atualizações estão vindo rapidamente\n \n💸 Carteira: <:StarPoint:766794021128765469>**${bal}**\n🏦 Banco: <:StarPoint:766794021128765469>**${bank}**`)
     message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
   }
 }

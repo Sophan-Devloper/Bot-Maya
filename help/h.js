@@ -37,8 +37,8 @@ module.exports = {
             .setDescription('Ainda na versão beta, este é meu *sistema interservidores*, ou seja, seu xp, dinheiro e tudo vinculado a mim, você também terá em todos os outros servidores.')
             .addFields(
                 {
-                    name: '<:topreach:766846960569155584> Economy Systen',
-                    value: "🔹`-balance` | `-bal` | `-bal @user`\n🔸`-pay` Pague alguém\n🔸`-dep` Deposite seu dinheiro\n🔸`-roubar` Roube alguém\n🔸`-sacar` Saque dinheiro do banco\n🔹`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n🔸`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n🔹`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n🔸`-slut` Ganhe ou perca até 10000<:StarPoint:766794021128765469>"
+                    name: '<:topreach:766846960569155584> Economy System',
+                    value: "🔹`-balance` | `-bal` | `-bal @user`\n🔸`-pay` Pague alguém\n🔸`-blackjack` `-bj` Game de Cartas\n🔸`-dep` Deposite seu dinheiro\n🔸`-roubar` Roube alguém\n🔸`-sacar` Saque dinheiro do banco\n🔹`-work` Trabalhe e ganhe até 100<:StarPoint:766794021128765469> \n🔸`-daily` Pegue 500<:StarPoint:766794021128765469> diariamente\n🔹`-lotery` Ganhe até 2000<:StarPoint:766794021128765469> (se tiver sorte)\n🔸`-slut` Ganhe ou perca até 10000<:StarPoint:766794021128765469>"
                 },
                 {
                     name: '<:topreach:766846960569155584> Em Breve',
@@ -111,7 +111,7 @@ module.exports = {
             .addFields(
                 {
                     name: 'Administração',
-                    value: '🔸`-setxpchannel` Canal de mensagem XP Level Up\n🔸`-setautorole @cargo` Autorole System\n🔸`-setleave` Canal de Saída\n🔸`-setwelcome` Canal de boas vinda\n🔸`-setwelcomemsg` Mensagem de boas vindas\n🔸`-setleavemsg` Mensagem de saída\n🔸`-setlogchannel` Canal de Relatório\n🔹`-unban` Desban algúm membro\n🔹`-createchannel` Crie canais de texto \n🔹`-createvoice` Crie canais de voz \n🔹`-lockdown` Trave o servidor em caso de emergência'
+                    value: '🔸`-setxpchannel` Canal de mensagem XP Level Up\n🔸`-setreportchannel` Canal pra Receber *-report* dos membros\n🔸`-setautorole @cargo` Autorole System\n🔸`-setleave` Canal de Saída\n🔸`-setwelcome` Canal de boas vinda\n🔸`-setwelcomemsg` Mensagem de boas vindas\n🔸`-setleavemsg` Mensagem de saída\n🔸`-setlogchannel` Canal de Relatório\n🔹`-unban` Desban algúm membro\n🔹`-createchannel` Crie canais de texto \n🔹`-createvoice` Crie canais de voz \n🔹`-lockdown` Trave o servidor em caso de emergência'
                 },
                 {
                     name: 'Moderação',

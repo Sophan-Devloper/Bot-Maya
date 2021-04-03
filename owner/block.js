@@ -14,6 +14,13 @@ module.exports = {
             return message.channel.send('Sem user no comando.')
         }
 
+        if (db.get(`blacklist_${user.id}`)) {
+            const ok = new Discord.MessageEmbed()
+                .setColor('GREEN')
+                .setTitle(`${user.user.username} já está na  blacklist.`)
+            return message.channel.send(ok).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        }
+
         db.add(`blacklist_${user.id}`, user.id)
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')

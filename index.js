@@ -207,7 +207,7 @@ client.on("guildMemberAdd", (member) => {
 })
 
 client.on("message", async message => {
-    let prefix = db.get(`prefix_${message.guild.id}`)
+    let prefix = db.get(`prefix_${client.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
     let activities = [
@@ -223,9 +223,18 @@ client.on("message", async (message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = default_prefix }
     if (message.author.bot) return false
-    if (message.content.startsWith(prefix)) return false
-    if (message.content.includes("@here") || message.content.includes("@everyone")) return false
+    if (!message.content.startsWith('<')) return false
     if (message.mentions.has(client.user.id)) { message.channel.send('Prefixo atual: `' + prefix + '`').then(msg => msg.delete({ timeout: 3000 })).catch(err => { return }) }
+})
+
+client.on('guildCreate', guild => {
+    const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
+        const newguild = new Discord.MessageEmbed()
+        .setColor('BLUE')
+        .setTitle('Obriga por me adicionar!')
+        .setDescription('Meu prefixo padrão é `-`\n \nMeu comandos são fáceis, basta ver no `-help`\nPara mudar meu prefixo é só digitar `-setprefix`')
+    
+    channel.send(newguild)
 })
 
 client.on("ready", () => { console.log("Ok.") })

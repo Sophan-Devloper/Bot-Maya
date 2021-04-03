@@ -20,12 +20,7 @@ app.get('/', (request, response) => {
 client.on("message", async (message) => {
 
     if (message.author.bot) return // no bots commands
-    if (db.get(`blacklist_${message.author.id}`)) {
-        const blocked = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle(`Você está bloqueado e não pode usar nenhum dos meus comandos.`)
-        return message.channel.send(blocked)
-    }
+
     if (message.channel.type == "dm") {// no dm's commands
         const dmembed = new Discord.MessageEmbed()
             .setColor('#FF0000')
@@ -56,8 +51,14 @@ client.on("message", async (message) => {
         return message.channel.send(adm).then(msg => message.channel.send(embedperm))
     }
 
-    function xp(message) {
+    if (db.get(`blacklist_${message.author.id}`)) {
+        const blocked = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle(`Você está bloqueado e não pode usar nenhum dos meus comandos.`)
+        return message.channel.send(blocked)
+    }
 
+    function xp(message) {
         if (message) {
             let xp = db.add(`xp_${message.author.id}`, 2)
             let level = Math.floor(0.5 * Math.sqrt(xp))
@@ -88,7 +89,7 @@ client.on("message", async (message) => {
     }
 
     if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
-    
+
     try {
         const commandFile = require(`./commands/${command}.js`)
         commandFile.run(client, message, args)
@@ -219,11 +220,12 @@ client.on("message", async message => {
 })
 
 client.on("message", async (message, args) => {
-    let prefi = db.get(`prefix_${message.guild.id}`)
-    if (prefi === null) { prefi = default_prefix }
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = default_prefix }
     if (message.author.bot) return false
+    if (message.content.startsWith(prefix)) return false
     if (message.content.includes("@here") || message.content.includes("@everyone")) return false
-    if (message.mentions.has(client.user.id)) { message.channel.send('Prefixo atual: `' + prefi + '`').then(msg => msg.delete({ timeout: 3000 })).catch(err => { return }) }
+    if (message.mentions.has(client.user.id)) { message.channel.send('Prefixo atual: `' + prefix + '`').then(msg => msg.delete({ timeout: 3000 })).catch(err => { return }) }
 })
 
 client.on("ready", () => { console.log("Ok.") })

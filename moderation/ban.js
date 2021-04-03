@@ -125,7 +125,7 @@ module.exports.run = async (client, message, args) => {
 
         const banned = new Discord.MessageEmbed()
           .setColor('GREEN')
-          .setTitle(`Você baniu ${user.user.username} com sucesso.`)
+          .setTitle(`Você baniu ${user.username} com sucesso.`)
           .setDescription(`Relatório enviado ao ${logchannel.name}`)
 
         user.ban()

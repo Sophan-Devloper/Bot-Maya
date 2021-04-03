@@ -142,6 +142,13 @@ module.exports = {
       }
 
       var time = args[1]
+      if (time.length > 4) {
+         const limitover = new Discord.MessageEmbed()
+         .setColor('#FF0000')
+         .setTitle('O tempo não pode passar de 4 digitos.')
+         return message.channel.send(limitover).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+      }
+
       if (!time) {
          const notime = new Discord.MessageEmbed()
             .setColor('#FF0000')
@@ -288,8 +295,7 @@ module.exports = {
                if (reaction.emoji.name === '✅') { // home
                   msg.delete()
 
-                  member.roles.remove(role)
-                  member.roles.add(role) // Ação Mute
+                  member.roles.remove(role).then(x => x.roles.add(role))
 
                   setTimeout(function () {
                      member.roles.remove(role) //Ação Desmute
@@ -300,7 +306,6 @@ module.exports = {
                      .setColor('GREEN')
                      .setTitle(`${member.user.username} foi remutado com sucesso.`)
                      .setDescription(`Mais informações em ${client.channels.cache.get(logchannel).name}`)
-
 
                   setTimeout(function () {
                      client.channels.cache.get(logchannel).send(muteembed).catch(err => {

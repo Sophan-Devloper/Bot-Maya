@@ -2,7 +2,6 @@ const Discord = require("discord.js")
 const client = new Discord.Client()
 const { token, default_prefix } = require("./config.json")
 const db = require('quick.db')
-const canvacord = require('canvacord')
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
 
@@ -36,7 +35,6 @@ client.on("message", async (message) => {
     const command = args.shift().toLowerCase()
 
     if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
-        const bot = message.guild.members.cache.get(client.user.id)
 
         const embedperm = new Discord.MessageEmbed()
             .setColor('BLUE')
@@ -207,7 +205,7 @@ client.on("guildMemberAdd", (member) => {
 })
 
 client.on("message", async message => {
-    let prefix = db.get(`prefix_${client.guild.id}`)
+    let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
     let activities = [
@@ -219,7 +217,7 @@ client.on("message", async message => {
     client.user.setStatus("idle").catch(console.error)
 })
 
-client.on("message", async (message, args) => {
+client.on("message", async (message) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = default_prefix }
     if (message.author.bot) return false
@@ -229,12 +227,11 @@ client.on("message", async (message, args) => {
 
 client.on('guildCreate', guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
-        const newguild = new Discord.MessageEmbed()
+    const newguild = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Obriga por me adicionar!')
         .setDescription('Meu prefixo padrão é `-`\n \nMeu comandos são fáceis, basta ver no `-help`\nPara mudar meu prefixo é só digitar `-setprefix`')
-    
-    channel.send(newguild)
+    return channel.send(newguild)
 })
 
 client.on("ready", () => { console.log("Ok.") })

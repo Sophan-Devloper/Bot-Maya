@@ -38,6 +38,7 @@ module.exports = {
             const nomoney = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle(`${user.user.username} não possui dinheiro.`)
+            return message.channel.send(nomoney)
         }
 
         var timeout = 6040000

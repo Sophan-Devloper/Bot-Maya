@@ -142,13 +142,6 @@ module.exports = {
       }
 
       var time = args[1]
-      if (time.length > 4) {
-         const limitover = new Discord.MessageEmbed()
-         .setColor('#FF0000')
-         .setTitle('O tempo não pode passar de 4 digitos.')
-         return message.channel.send(limitover).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-      }
-
       if (!time) {
          const notime = new Discord.MessageEmbed()
             .setColor('#FF0000')
@@ -199,6 +192,11 @@ module.exports = {
                }
             })
          })
+      } else if (time.length > 4) {
+         const limitover = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('O tempo não pode passar de 4 digitos.')
+         return message.channel.send(limitover).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
       }
 
       let reason = args.slice(2).join(" ")

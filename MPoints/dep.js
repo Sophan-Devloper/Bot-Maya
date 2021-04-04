@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
         const noamout = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'dep Valor`')
+            .setDescription('`' + prefix + 'dep Valor`\n ' + '`' + prefix + 'dep all`\n ')
         return message.channel.send(noamout)
     }
 

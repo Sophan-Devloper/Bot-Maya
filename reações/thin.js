@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-message.delete()
+  message.delete()
 
   var list = [
     'https://imgur.com/CWhbgUi.gif',
@@ -16,14 +16,14 @@ message.delete()
     'https://imgur.com/h42MSIR.gif',
     'https://imgur.com/191ip4V.gif',
     'https://imgur.com/t4oqtRB.gif'
-    ]
+  ]
 
-var rand = list[Math.floor(Math.random() * list.length)]
-let user = client.users.cache.get(args[0])
+  var rand = list[Math.floor(Math.random() * list.length)]
+  let user = client.users.cache.get(args[0])
 
-const embed = new Discord.MessageEmbed()
-    .setColor('#000000')
+  const embed = new Discord.MessageEmbed()
+    .setColor('BLUE')
     .setDescription(`${message.author.username} está pensando...`)
     .setImage(rand)
-  await message.channel.send(embed).then(msg => msg.delete({timeout: 10000}))
+  await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
 }

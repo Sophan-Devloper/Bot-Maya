@@ -1,23 +1,20 @@
 const Canvacord = require("canvacord/src/Canvacord")
-const { MessageAttachment } = require("discord.js")
+const Discord = require("discord.js")
 const db = require('quick.db')
 
-module.exports = {
-    name: 'changemymind',
-    description: "Sends a Customized Change My Mind meme",
-    usage: "?changemymind <text>",
+exports.run = async (client, message, args) => {
+    message.delete()
 
-    run: async (client, message, args) => {
-        message.delete()
-
-        let text = args.join(" ")
-        if (!text)
-            return message.channel.send("Você esqueceu do texto.\n \n`-changemymind` Seu texto logo depois")
-
-        let image = await Canvacord.changemymind(text)
-
-        let ChangeMyMind = new MessageAttachment(image, "cmm.png")
-
-        message.channel.send(ChangeMyMind)
+    let text = args.join(" ")
+    if (!text) {
+        const notext = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Siga o formato correto')
+            .setDescription('`' + prefix + 'changemymind Seu texto em diante`')
+        return message.channel.send(notext)
     }
+
+    let image = await Canvacord.changemymind(text)
+    let ChangeMyMind = new Discord.MessageAttachment(image, "cmm.png")
+    return message.channel.send(ChangeMyMind)
 }

@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
         'Por que o petróleo foi ao psicólogo?\n||Porque estava no fundo do poço||',
         'Por que o vendedor de instrumentos musicais não pode xingar os outros?\n||Porque o que vende baixo não me atinge||',
         'Por que o caminhoneiro não pega mulher no deserto?\n||Porque é muita areia pro seu caminhão||',
-        'Por que a loja de canivete faliu?/n||Porque só vendia afiado||',
+        'Por que a loja de canivete faliu?\n||Porque só vendia afiado||',
         'Por que a faxineira não luta karatê?\n||Porque ela já luta capoeira||',
         'Por que o Gene Simmons criou uma banda?\n||Porque ele Kiss||',
         'Por que o contorcionista está sempre cansado?\n||Porque trabalha dobrado||',
@@ -35,6 +35,10 @@ exports.run = async (client, message, args) => {
         'Por que a mulher bonita foi demitida do trabalho voluntário?\n||Porque ela não dava sopa pra ninguém||',
         'Por que a princesa Isabel usa cosméticos?\n||Pra tirar os escravos||',
         'Por que a mulher que revende cosméticos começou a roubar bancos?\n||Porque o creme não compensa.||',
+        'Era uma vez um gato com 16 vidas...\n||Que foi atropelado por uma 4x4 e morreu.||',
+        'O que é um pontinho vermelho que pula e dança na selva?\n||Um MORANGO-TANGO||',
+        'O Draco Malfoy\n||E já voltou||',
+        'Visitando os EUA fiquei impressionada com o nível da educação pública americana\n||Várias crianças de 3-4 anos já falando inglês||'
     ]
 
     var rand = list[Math.floor(Math.random() * list.length)]
@@ -42,10 +46,11 @@ exports.run = async (client, message, args) => {
 
     const PiadaEmbed = new Discord.MessageEmbed()
         .setColor('#6A5ACD')
+        .setTitle('Piadinha saindo do forno...')
         .addFields(
             {
                 name: 'Piadinha',
                 value: (rand)
             })
-    await message.channel.send(PiadaEmbed).then(msg => msg.delete({ timeout: 12000 }))
+    await message.channel.send(PiadaEmbed).then(msg => msg.delete({ timeout: 12000 })).catch(err => { return })
 }

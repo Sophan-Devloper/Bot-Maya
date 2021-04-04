@@ -8,5 +8,5 @@ module.exports.run = async (client, message, args) => {
     let avatar = user.displayAvatarURL({ dynamic: false, format: 'png' })
     let image = await canvacord.Canvas.trigger(avatar)
     let attachment = new Discord.MessageAttachment(image, "triggered.gif")
-    message.channel.send(attachment)
+    message.channel.send(attachment).then(msg => msg.delete({timeout: 10000})).catch(err => { return })
 }

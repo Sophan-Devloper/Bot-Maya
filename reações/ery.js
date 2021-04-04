@@ -7,6 +7,6 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setImage('https://imgur.com/8ee59mw.gif')
 
-   await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
+   await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
 }
 

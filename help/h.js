@@ -61,7 +61,7 @@ module.exports = {
                     value: '🔸 Novos Comandos\n🔹 Comandos Atualizados'
                 }
             )
-            .setFooter(message.author.tag, message.author.displayAvatarURL()).setFooter(message.author.tag, message.author.displayAvatarURL())
+            .setFooter(message.author.tag, message.author.displayAvatarURL())
 
         const Github = new Discord.MessageEmbed()
             .setColor('#CD853F')

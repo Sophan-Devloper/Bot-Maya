@@ -46,7 +46,7 @@ client.on("message", async (message) => {
             .setColor('#FF0000')
             .setTitle('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.')
 
-        return message.channel.send(adm).then(msg => message.channel.send(embedperm))
+        return message.channel.send(adm).then(msg => msg.channel.send(embedperm))
     }
 
     if (db.get(`blacklist_${message.author.id}`)) {
@@ -66,7 +66,7 @@ client.on("message", async (message) => {
                 let xpchannel = db.get(`xpchannel_${message.guild.id}`)
                 if (xpchannel === null) { return }
 
-                if (!db.get(`xpchannel_${message.guild.id}`)) { return }
+                if (!db.get(`xpchannel_${message.guild.id}`)) { return false }
 
                 if (client.channels.cache.get(xpchannel)) {
                     const newlevel = new Discord.MessageEmbed()
@@ -90,73 +90,81 @@ client.on("message", async (message) => {
 
     try {
         const commandFile = require(`./commands/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./levelsystem/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./games/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./owner/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./mpoints/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./quiz/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./animes/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./help/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./interação/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./discordjs/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./random/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./perfil/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./reações/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
 
     try {
         const commandFile = require(`./moderation/${command}.js`)
-        commandFile.run(client, message, args)
+        return commandFile.run(client, message, args)
     } catch (err) { }
+
+    var linkhelpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
+    const nocomand = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('Comando desconhecido')
+        .setDescription(`Verifique a ortografia ou acesse minha [lista de comandos](${linkhelpgit})`)
+
+    return message.channel.send(nocomand).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
 })
 
 client.on("guildMemberRemove", async (member, message) => {
@@ -193,31 +201,25 @@ client.on("guildMemberAdd", (member) => {
             .setAuthor(member.user.tag + ' entrou no servidor', member.user.displayAvatarURL())
             .setDescription(`${member.user}, seja bem vindo a ${member.guild.name}\n \n` + msgwelcome)
 
-        client.channels.cache.get(canal).send(joinembed)
+        return client.channels.cache.get(canal).send(joinembed)
     }
 })
 
 client.on("guildMemberAdd", (member) => {
     var role = db.get(`autorole_${member.guild.id}`)
     if (role === null) { return false }
-
-    member.roles.add(role)
+    return member.roles.add(role)
 })
 
-client.on("message", async message => {
-    let activities = [
-        `Me marca que eu falo o prefixo`,
-        `@maya`
-    ]
+client.on("message", () => {
+    let activities = [`Me marca que eu falo o prefixo`, `@maya`]
     i = 0
     setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 10000)
-    client.user.setStatus("idle").catch(console.error)
 })
 
 client.on("message", async (message) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = default_prefix }
-    if (message.author.bot) return false
     if (!message.content.startsWith('<')) return false
     if (message.mentions.has(client.user.id)) { message.channel.send('Prefixo atual: `' + prefix + '`').then(msg => msg.delete({ timeout: 3000 })).catch(err => { return }) }
 })
@@ -226,7 +228,7 @@ client.on('guildCreate', guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
     const newguild = new Discord.MessageEmbed()
         .setColor('BLUE')
-        .setTitle('Obriga por me adicionar!')
+        .setTitle('Obrigada por me adicionar!')
         .setDescription('Meu prefixo padrão é `-`\n \nMeu comandos são fáceis, basta ver no `-help`\nPara mudar meu prefixo é só digitar `-setprefix`')
     return channel.send(newguild)
 })

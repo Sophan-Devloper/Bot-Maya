@@ -84,9 +84,6 @@ module.exports.run = (client, message, args) => {
                                         channel.delete().catch(err => {
                                             return message.channel.send('Ocorreu um erro na exclusão do canal.\n \n ' + err)
                                         })
-                                        
-                                        message.channel.send(sucess)
-
                                     }
 
                                     if (reaction.emoji.name === '❌') { // MPEmbed

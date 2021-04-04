@@ -45,7 +45,7 @@ exports.run = async (client, message, args) => {
     let user = client.users.cache.get(args[0])
 
     const PiadaEmbed = new Discord.MessageEmbed()
-        .setColor('#6A5ACD')
+        .setColor('BLUE')
         .setTitle('Piadinha saindo do forno...')
         .addFields(
             {

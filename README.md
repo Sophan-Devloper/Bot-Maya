@@ -1,6 +1,5 @@
-# Maya™
+# Este é o Repositório da Maya™
 
-EN: A Discord Bot made by me, a simple test on JavaScript with Discord.js
+O código é experimental, feito no tempo livre. Pode copiá-lo e usa-lo como bem entender.
 
-
-PT: Um Bot do Discord feito por mim, um simple teste de JavaScript with Discord.js
+Se você está procurando pela lista de comando, [clique aqui](https://github.com/rodycouto/MayaCommands)

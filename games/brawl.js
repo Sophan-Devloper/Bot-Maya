@@ -30,7 +30,6 @@ exports.run = async (client, message, args) => {
         var mc = 'MacOS'
         var ios = 'iOS'
         var an = 'Android'
-
         const GameEmbed = new Discord.MessageEmbed()
           .setColor('BLUE')
           .setTitle(`${game}`)

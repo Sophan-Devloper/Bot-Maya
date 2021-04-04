@@ -1,6 +1,6 @@
 # Este é o Repositório da Maya™
 
-O código é experimental, feito no tempo livre. Pode copiá-lo e usa-lo como bem entender.
+O código é experimental, feito no tempo livre. Pode copiá-lo e usa-lo como você quiser.
 
 [Lista de comandos](https://github.com/rodycouto/MayaCommands)
 

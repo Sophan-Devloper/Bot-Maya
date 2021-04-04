@@ -1,5 +1,4 @@
 {
   "token": "SEU TOKEN AQUI / YOUR TOKEN HERE",
-  "default_prefix": "SEU PREFIX",
-  "ownerID": "SEU ID DO DISCORD AQUI / YOUR DISCORD ID HERE"
+  "default_prefix": "SEU PREFIX"
 }

@@ -205,12 +205,9 @@ client.on("guildMemberAdd", (member) => {
 })
 
 client.on("message", async message => {
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) { prefix = "-" }
-
     let activities = [
-        `${prefix}help`,
-        `${prefix}setprefix`
+        `Me marca que eu falo o prefixo`,
+        `@maya`
     ]
     i = 0
     setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 10000)

@@ -58,10 +58,17 @@ module.exports = {
 
         const role = message.guild.roles.cache.find(role => role.name === 'Muted')
 
+        if (!message.guild.roles.cache.find(role => role.name === 'Muted')) {
+            const norole = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle(`${member.user.username} não está mutado/a ou possui um cargo que eu não reconheço.`)
+            return message.channel.send(norole).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+        }
+
         if (!member.roles.cache.has(role.id)) {
             const norole = new Discord.MessageEmbed()
                 .setColor('#FF0000')
-                .setTitle(`${member.user.username} não está mutado/a.`)
+                .setTitle(`${member.user.username} não está mutado/a ou possui um cargo que eu não reconheço.`)
             return message.channel.send(norole).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
         }
 

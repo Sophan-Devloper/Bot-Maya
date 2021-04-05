@@ -52,8 +52,8 @@ client.on("message", async (message) => {
     if (db.get(`blacklist_${message.author.id}`)) {
         const blocked = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle(`Você está bloqueado e não pode usar nenhum dos meus comandos.`)
-        return message.channel.send(blocked)
+            .setTitle(`${message.author.username}, você está bloqueado e não pode usar nenhum dos meus comandos.`)
+        return message.channel.send(blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
     }
 
     function xp(message) {
@@ -233,5 +233,5 @@ client.on('guildCreate', guild => {
     return channel.send(newguild)
 })
 
-client.on("ready", () => { console.log("Ok.") })
+client.once("ready", () => { console.log("Ok.") })
 client.login(token)

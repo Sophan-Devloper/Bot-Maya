@@ -4,6 +4,7 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
     message.delete()
 
+    var cargo = db.get(`autorole_${message.guild.id}`)
     var perms = message.member.hasPermission('ADMINISTRATOR')
     if (!perms) {
         const noperm = new Discord.MessageEmbed()
@@ -16,16 +17,22 @@ exports.run = async (client, message, args) => {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
+        if (db.get(`autorole_${message.guild.id}`) !== null) {
+            const rolee = new Discord.MessageEmbed()
+                .setColor('BLUE')
+                .setDescription(`O autorole atual é: <@&${db.get(`autorole_${message.guild.id}`)}>`)
+            return message.channel.send(rolee).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        }
+
         const noargs = new Discord.MessageEmbed()
             .setColor('BLUE') // red
-            .setTitle('Autorole System')
+            .setTitle('O Autorole System está desativado')
             .setDescription('Escolha o cargo que todos vão receber assim que entrar no servidor.')
             .addField('Defina o cargo', '`' + prefix + 'setautorole @Cargo`')
             .addField('Desative o Autorole', '`' + prefix + 'setautorole off`')
         return message.channel.send(noargs).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
     }
 
-    var cargo = db.get(`autorole_${message.guild.id}`)
     if (args[0] === 'off') {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"

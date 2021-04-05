@@ -52,7 +52,7 @@ module.exports = {
 
         const newprefix = new Discord.MessageEmbed()
             .setColor('BLUE')
-            .setTitle('Deseja alterar meu prefixo para: `' + args[0] + '`?')
+            .setTitle('Deseja alterar meu prefixo para: `' + args[0] + '` ?')
         await message.channel.send(newprefix).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
@@ -65,8 +65,8 @@ module.exports = {
                     db.set(`prefix_${message.guild.id}`, args[0])
                     const alterado = new Discord.MessageEmbed()
                         .setColor('GREEN')
-                        .setTitle(message.author.username + ' alterou meu prefixo para `' + args[0] + '`')
-                    message.channel.send(alterado).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+                        .setDescription(`${message.author}` + ' alterou meu prefixo para: `' + args[0] + '`')
+                    return message.channel.send(alterado)
                 }
                 if (reaction.emoji.name === '❌') { // Não
                     msg.delete()

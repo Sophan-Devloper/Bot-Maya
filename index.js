@@ -221,16 +221,29 @@ client.on("message", async (message) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = default_prefix }
     if (!message.content.startsWith('<')) return false
-    if (message.mentions.has(client.user.id)) { message.channel.send('Prefixo atual: `' + prefix + '`').then(msg => msg.delete({ timeout: 3000 })).catch(err => { return }) }
+    if (message.mentions.has(client.user.id)) { return message.channel.send('Prefixo atual: `' + prefix + '`') }
 })
 
 client.on('guildCreate', guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
+    var helpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
+
     const newguild = new Discord.MessageEmbed()
         .setColor('BLUE')
-        .setTitle('Obrigada por me adicionar!')
-        .setDescription('Meu prefixo padrão é `-`\n \nMeu comandos são fáceis, basta ver no `-help`\nPara mudar meu prefixo é só digitar `-setprefix`')
-    return channel.send(newguild)
+        .setThumbnail('https://imgur.com/mvjbQEF.gif')
+        .setDescription(`Oooi ${guild.name},` + ' como vocês estão?\n \nMeu nome é Maya. Se tiverem dúvida, podem usar o `-help`')
+        .addFields(
+            {
+                name: 'Deseja mudar o prefixo?',
+                value: '`-setprefix`',
+                inline: true
+            },
+            {
+                name: 'Você pode olhar todos os meus comandos também',
+                value: `[Lista de comandos](${helpgit})`
+            }
+        )
+    return channel.send('**Oooopa, chegueeei!**', newguild)
 })
 
 client.once("ready", () => { console.log("Ok.") })

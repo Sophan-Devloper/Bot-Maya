@@ -1,9 +1,7 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
      message.delete()
-
-     let user = client.users.cache.get(args[0]);
 
      const Thanks = new Discord.MessageEmbed()
           .setColor('#DCDCDC')
@@ -16,8 +14,12 @@ exports.run = async (client, message, args) => {
                     value: '`Rody#3756` & `Gowther#9233`'
                },
                {
+                    name: ':tools: Coop :tools:',
+                    value: '`Gowther#9233`'
+               },
+               {
                     name: '🖌️ Designers 🖌️',
-                    value: '`Rody#3756` | `Gowther#9233` | `Rafaella#????`'
+                    value: '`Rody#3756` | `Gowther#9233` | `Yma#5175`'
                },
                {
                     name: ':handshake: Colaboradores :handshake:',
@@ -30,5 +32,5 @@ exports.run = async (client, message, args) => {
           )
           .setImage('https://imgur.com/MkQo0Lh.gif')
           .setFooter(message.author.tag, message.author.displayAvatarURL())
-     await message.channel.send('Eu estou enviando no seu privado todos os comandos que você pediu.').then(msg => msg.delete({ timeout: 4000 })).then(msg => message.author.send(Thanks)).then(msg => message.channel.send('Eu estou enviando para o seu privado todos os comandos que você pediu.')).then(msg => msg.delete({ timeout: 4000 }))
+     return message.channel.send(Thanks).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
 }

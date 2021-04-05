@@ -4,7 +4,6 @@ const Discord = require("discord.js")
 exports.run = async (client, message, args) => {
     message.delete()
 
-    let user = message.author
     let money = parseInt(args[1])
     let moneydb = await db.get(`money_${message.author.id}`)
     let a = message.author

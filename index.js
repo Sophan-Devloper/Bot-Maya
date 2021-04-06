@@ -19,7 +19,6 @@ app.get('/', (request, response) => {
 client.on("message", async (message) => {
 
     if (message.author.bot) return // no bots commands
-
     if (message.channel.type == "dm") {// no dm's commands
         const dmembed = new Discord.MessageEmbed()
             .setColor('#FF0000')
@@ -38,7 +37,7 @@ client.on("message", async (message) => {
 
         const embedperm = new Discord.MessageEmbed()
             .setColor('BLUE')
-            .setTitle('Como ativar a função Administrador')
+            .setTitle('Ative a função Administrador')
             .setDescription('1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Maya"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.')
             .setFooter(`Maya Dicas`, message.client.user.displayAvatarURL())
 
@@ -52,7 +51,7 @@ client.on("message", async (message) => {
     if (db.get(`blacklist_${message.author.id}`)) {
         const blocked = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle(`${message.author.username}, você está bloqueado e não pode usar nenhum dos meus comandos.`)
+            .setTitle(`${message.author.username}, você está na blacklist.`)
         return message.channel.send(blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
     }
 
@@ -65,9 +64,7 @@ client.on("message", async (message) => {
                 let newLevel = db.set(`level_${message.author.id}`, level)
                 let xpchannel = db.get(`xpchannel_${message.guild.id}`)
                 if (xpchannel === null) { return }
-
                 if (!db.get(`xpchannel_${message.guild.id}`)) { return false }
-
                 if (client.channels.cache.get(xpchannel)) {
                     const newlevel = new Discord.MessageEmbed()
                         .setColor('GREEN')
@@ -211,7 +208,7 @@ client.on("guildMemberAdd", (member) => {
     return member.roles.add(role)
 })
 
-client.on("message", () => {
+client.on("ready", () => {
     let activities = [`Me marca que eu falo o prefixo`, `@maya`]
     i = 0
     setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 10000)
@@ -227,24 +224,14 @@ client.on("message", async (message) => {
 client.on('guildCreate', guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
     var helpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
+    var sup = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
 
     const newguild = new Discord.MessageEmbed()
         .setColor('BLUE')
-        .setThumbnail('https://imgur.com/mvjbQEF.gif')
-        .setDescription(`Oooi ${guild.name},` + ' como vocês estão?\n \nMeu nome é Maya. Se tiverem dúvida, podem usar o `-help`')
-        .addFields(
-            {
-                name: 'Deseja mudar o prefixo?',
-                value: '`-setprefix`',
-                inline: true
-            },
-            {
-                name: 'Você pode olhar todos os meus comandos também',
-                value: `[Lista de comandos](${helpgit})`
-            }
-        )
+        .setTitle('Meu prefixo padrão é `-`')
+        .setDescription(`:tools: [Lista de comandos](${helpgit}) | Comece com -config`)
     return channel.send('**Oooopa, chegueeei!**', newguild)
 })
 
-client.once("ready", () => { console.log("Ok.") })
+client.once("ready", () => { console.log(`${client.user.tag} | OK!.`) })
 client.login(token)

@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 module.exports.run = async (client, message, args) => {
   message.delete()
@@ -19,9 +20,15 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'say Alguma coisa`')
-    return message.channel.send('O que você quer que eu diga?').then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+    return message.channel.send(format).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+  }
+
+  const rody = message.author.id === ("451619591320371213")
+  if (rody) {
+    const sayMessage = args.join(' ')
+    return message.channel.send(sayMessage)
   }
 
   const sayMessage = args.join(' ')
-  message.channel.send(sayMessage + `\n \n- *${message.author.username}*`)
+  message.channel.send(sayMessage + `\n \n- *Mensagem por: ${message.author}*`)
 }

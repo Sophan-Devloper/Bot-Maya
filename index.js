@@ -50,6 +50,11 @@ client.on("message", async (message) => {
         return message.channel.send(blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
     }
 
+    if (db.get(`blockchannel_${message.channel.id}`)) {
+        message.delete()
+        return message.channel.send('Meus comandos foram bloqueados neste canal.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+    }
+
     function xp(message) {
         if (message) {
             let xp = db.add(`xp_${message.author.id}`, 2)

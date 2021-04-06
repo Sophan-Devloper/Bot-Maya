@@ -18,13 +18,8 @@ app.get('/', (request, response) => {
 
 client.on("message", async (message) => {
 
-    if (message.author.bot) return // no bots commands
-    if (message.channel.type == "dm") {// no dm's commands
-        const dmembed = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Eu não posso responder mensagens no privado.')
-        return message.channel.send(dmembed)
-    }
+    if (message.author.bot) return // no bots
+    if (message.channel.type == "dm") return // no pv
     xp(message)
 
     let prefix = db.get(`prefix_${message.guild.id}`)

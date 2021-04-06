@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     if (!db.get(`blockchannel_${channel.id}`)) {
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setDescription(`${channel} já está na desbloqueado.`)
+            .setDescription(`${channel} já está desbloqueado.`)
         return message.channel.send(ok)
     }
 
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                 db.delete(`blockchannel_${channel.id}`, channel.id)
                 const ok = new Discord.MessageEmbed()
                     .setColor('GREEN')
-                    .setDescription(`Meu comandos no canal ${channel} foram desbloqueados.`)
+                    .setDescription(`Meus comandos no canal ${channel} foram desbloqueados.`)
                 return message.channel.send(ok)
             }
             if (reaction.emoji.name === '❌') { // Não

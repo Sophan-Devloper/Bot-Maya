@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     if (db.get(`blockchannel_${channel.id}`)) {
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setDescription(`${channel} já está na bloqueado.`)
+            .setDescription(`${channel} já está bloqueado.`)
         return message.channel.send(ok)
     }
 
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                 db.add(`blockchannel_${channel.id}`, channel.id)
                 const ok = new Discord.MessageEmbed()
                     .setColor('GREEN')
-                    .setDescription(`Meu comandos no canal ${channel} foram bloqueados.`)
+                    .setDescription(`Meus comandos no canal ${channel} foram bloqueados.`)
                 return message.channel.send(ok)
             }
             if (reaction.emoji.name === '❌') { // Não

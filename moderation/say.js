@@ -4,6 +4,12 @@ const db = require('quick.db')
 module.exports.run = async (client, message, args) => {
   message.delete()
 
+  const rody = message.author.id === ("451619591320371213")
+  if (rody) {
+    const sayMessage = args.join(' ')
+    return message.channel.send(sayMessage)
+  }
+
   let perms = message.member.hasPermission("MANAGE_MESSAGES")
   if (!perms) {
     const noperms = new Discord.MessageEmbed()
@@ -21,12 +27,6 @@ module.exports.run = async (client, message, args) => {
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'say Alguma coisa`')
     return message.channel.send(format).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
-  }
-
-  const rody = message.author.id === ("451619591320371213")
-  if (rody) {
-    const sayMessage = args.join(' ')
-    return message.channel.send(sayMessage)
   }
 
   const sayMessage = args.join(' ')

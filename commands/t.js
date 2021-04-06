@@ -6,7 +6,6 @@ exports.run = async (client, message, args) => {
     let googlepng = 'https://i.imgur.com/oZA4FaQ.png'
     let language = args[0]
     let text = args.slice(1).join(" ")
-    let question = args.join(" ")
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
@@ -25,7 +24,7 @@ exports.run = async (client, message, args) => {
     if (!text)
         return message.channel.send(lan)
 
-    translate(args.slice(1).join(' '), { to: language }).then(res => {
+    translate(args.slice(1).join(" "), { to: language }).then(res => {
         const translateEmbed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setAuthor(`Google Tradutor`, googlepng)

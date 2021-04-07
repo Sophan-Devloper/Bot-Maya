@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     if (!db.get(`blockchannel_${channel.id}`)) {
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setDescription(`${channel} já está desbloqueado.`)
+            .setDescription(`${channel} não está desbloqueado.`)
         return message.channel.send(ok)
     }
 

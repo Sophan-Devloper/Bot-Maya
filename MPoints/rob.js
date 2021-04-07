@@ -2,9 +2,15 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 const ms = require('parse-ms')
 
-module.exports = {
-    async run(client, message, args) {
-        message.delete()
+exports.run = async (client, message, args) => {
+
+    let timeout1 = 6140000
+    let author1 = await db.fetch(`pego_${message.author.id}`)
+
+    if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
+        let time = ms(timeout1 - (Date.now() - author1))
+        return message.channel.send(`${message.author}, você está sob prisão máxima! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
+    } else {
 
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"

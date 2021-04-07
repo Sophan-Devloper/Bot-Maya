@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
 
   var i = 'Isekai'
   var h = 'Hentai'
@@ -339,14 +338,13 @@ exports.run = async (client, message, args) => {
   ]
 
   var rand = list[Math.floor(Math.random() * list.length)]
-  let user = client.users.cache.get(args[0])
 
   const IndEmbed = new Discord.MessageEmbed()
-    .setColor('#DCDCDC')
+    .setColor('BLUE')
     .addFields(
       {
         name: 'Maya Indica :hearts:',
         value: `Nome: ${rand}`
       })
-  await message.channel.send(IndEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  await message.channel.send(IndEmbed)
 }

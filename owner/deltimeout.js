@@ -13,9 +13,11 @@ module.exports.run = async (bot, message, args) => {
     db.delete(`dailyxp_${user.id}`)
     db.delete(`rptimeout_${user.id}`)
     db.delete(`robtime_${user.id}`)
-    db.delete(`crimetimeout_${user.id}`)
     db.delete(`lotery_${user.id}`)
     db.delete(`work_${user.id}`)
     db.delete(`slut_${message.author.id}`)
+    db.delete(`preso_${message.author.id}`)
+    db.delete(`pego_${message.author.id}`)
+    db.delete(`procurado_${message.author.id}`)
     message.channel.send(`Timeout resetado.`).then(msg => msg.delete({ timeout: 6000 }))
 }

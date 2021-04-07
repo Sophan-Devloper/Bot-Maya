@@ -1,12 +1,15 @@
 const db = require('quick.db')
 const ms = require('parse-ms')
 
-module.exports = {
-    name: "slut",
-    description: "slluuut",
+exports.run = async (client, message, args) => {
 
-    async run(client, message, args) {
-        message.delete()
+    let timeout1 = 6140000
+    let author1 = await db.fetch(`pego_${message.author.id}`)
+
+    if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
+        let time = ms(timeout1 - (Date.now() - author1))
+        return message.channel.send(`${message.author}, você está sob prisão máxima! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
+    } else {
 
         let user = message.author
         let timeout = 600000

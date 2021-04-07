@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
         const noamout = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'pay @user Valor`')
+            .setDescription('`' + prefix + 'pagar @user Valor`')
         return message.channel.send(noamout)
     }
 
@@ -47,6 +47,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Valor não reconhecido')
             .setDescription('O valor que você digitou não é um número.')
+        return message.channel.send(notnumber)
     }
 
     db.add(`money_${user.id}`, args[1])
@@ -54,6 +55,6 @@ exports.run = async (client, message, args) => {
 
     const embed = new Discord.MessageEmbed()
         .setColor('#efff00')
-        .setDescription(`Você pagou ${args[1]}<:StarPoint:766794021128765469> para ${user.user.username}.`)
-    message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
+        .setDescription(`${message.author} pagou ${args[1]}<:StarPoint:766794021128765469> para ${user.user.username}.`)
+    return message.channel.send(embed)
 }

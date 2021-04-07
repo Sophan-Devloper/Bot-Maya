@@ -24,6 +24,21 @@ client.on("message", async (message) => {
 
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = default_prefix
+
+    if (db.get(`afk_${message.author.id}+${message.guild.id}`)) {
+        db.delete(`afk_${message.author.id}+${message.guild.id}`)
+        message.channel.send(`${message.author}, o modo AFK foi desativado.`)
+    }
+    //checking for mentions
+    if (message.mentions.members.first()) {
+        if (db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)) {
+            const off = new Discord.MessageEmbed()
+                .setColor('BLUE')
+                .addField(`${message.mentions.members.first().user.username} está offline.`, 'Razão: ' + db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`))
+            message.channel.send(`${message.author}`, off)
+        }
+    }
+
     if (!message.content.startsWith(prefix)) return
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
@@ -49,6 +64,7 @@ client.on("message", async (message) => {
             .setTitle(`${message.author.username}, você está na blacklist.`)
         return message.channel.send(blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
     }
+    //-------------------------------
 
     if (db.get(`blockchannel_${message.channel.id}`)) {
         message.delete()

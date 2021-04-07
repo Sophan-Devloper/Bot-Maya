@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args) => {
     const format = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
       .addFields(
         {
           name: 'Exemplo',
@@ -29,14 +29,14 @@ module.exports.run = async (client, message, args) => {
     return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
   }
 
-  if (!args[0].endsWith("s") && !args[0].endsWith("m") && !args[0].endsWith("h") && !args[0].endsWith("d")) {
+  if (!args[0].endsWith("s") && !args[0].endsWith("m") && !args[0].endsWith("h")) {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
     const format = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
       .addFields(
         {
           name: 'Exemplo',
@@ -44,6 +44,13 @@ module.exports.run = async (client, message, args) => {
         }
       )
     return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+  }
+
+  if (args[0].length > 3) {
+    const nop = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Tempo limite é de 99h')
+    return message.channel.send(nop)
   }
 
   if (isNaN(args[0][0])) {
@@ -53,7 +60,7 @@ module.exports.run = async (client, message, args) => {
     const format = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
       .addFields(
         {
           name: 'Exemplo',
@@ -72,7 +79,7 @@ module.exports.run = async (client, message, args) => {
     const format = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
       .addFields(
         {
           name: 'Exemplo',
@@ -90,7 +97,7 @@ module.exports.run = async (client, message, args) => {
     const format = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'sorteio 1s/m/h/d #CanalDoSorteio Prêmio`')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
       .addFields(
         {
           name: 'Exemplo',

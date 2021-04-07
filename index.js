@@ -59,12 +59,13 @@ client.on("message", async (message) => {
     }
 
     if (db.get(`blacklist_${message.author.id}`)) {
+        message.delete()
         const blocked = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle(`${message.author.username}, você está na blacklist.`)
-        return message.channel.send(blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+            .setTitle('Você está na blacklist.')
+            .setDescription('Você não tem acesso a nenhum dos meus comandos.')
+        return message.channel.send(`${message.author}`, blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
     }
-    //-------------------------------
 
     if (db.get(`blockchannel_${message.channel.id}`)) {
         message.delete()
@@ -174,11 +175,11 @@ client.on("message", async (message) => {
     var linkhelpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
     const nocomand = new Discord.MessageEmbed()
         .setColor('#FF0000')
-        .setTitle('Comando desconhecido')
+        .setTitle('Você digitou um comando desconhecido')
         .setDescription(`Verifique a ortografia ou acesse minha [lista de comandos](${linkhelpgit})`)
 
-    return message.channel.send(nocomand).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
-})
+    return message.channel.send(`${message.author}`, nocomand).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+}) // Fim do Client.on('Message')
 
 client.on("guildMemberRemove", async (member, message) => {
     var canal = db.get(`leavechannel_${member.guild.id}`)

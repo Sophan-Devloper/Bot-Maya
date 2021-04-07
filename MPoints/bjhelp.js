@@ -2,7 +2,6 @@
 const Discord = require("discord.js")
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
     var linkgit = 'https://github.com/rodycouto/MayaCommands/blob/main/Exemplos/comojogarbj.md'
 

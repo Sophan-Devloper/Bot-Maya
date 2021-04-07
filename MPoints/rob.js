@@ -6,8 +6,6 @@ module.exports = {
     async run(client, message, args) {
         message.delete()
 
-        let author = message.author
-
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
@@ -41,6 +39,13 @@ module.exports = {
             return message.channel.send(nomoney)
         }
 
+        if (usermoney < 0) {
+            const nomoney = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle(`${user.user.username} não possui dinheiro.`)
+            return message.channel.send(nomoney)
+        }
+
         var timeout = 6040000
         var daily = db.get(`robtime_${message.author.id}`)
         if (daily !== null && timeout - (Date.now() - daily) > 0) {
@@ -52,10 +57,11 @@ module.exports = {
             return message.channel.send(embedtime)
         } else {
 
-            let sorte = Math.floor(Math.random() * 4) + 1
+            var luck = ['win', 'lose']
+            var result = luck[Math.floor(Math.random() * luck.length)]
 
-            if (sorte == 2) {
-                var amount = Math.floor(Math.random() * autormoney) + 1
+            if (result == 'lose') {
+                var amount = Math.floor(Math.random() * 10000) + 1
                 var embed1 = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle("🚨 A polícia te pegou e você foi preso!")
@@ -63,7 +69,7 @@ module.exports = {
                 message.channel.send(embed1)
                 db.subtract(`money_${message.author.id}`, amount)
                 db.set(`robtime_${message.author.id}`, Date.now())
-            } else {
+            } else if (result == 'win') {
                 let amount = Math.floor(Math.random() * usermoney) + 1
                 let moneyEmbed = new Discord.MessageEmbed()
                     .setColor("GREEN")

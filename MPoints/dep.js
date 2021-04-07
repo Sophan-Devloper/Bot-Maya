@@ -2,7 +2,6 @@ const db = require('quick.db')
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
     let money = db.get(`money_${message.author.id}`)
 

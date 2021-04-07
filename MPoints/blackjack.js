@@ -2,9 +2,7 @@ const db = require("quick.db")
 const Discord = require("discord.js")
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
-    let user = message.author
     let money = parseInt(args[1])
     let moneydb = await db.get(`money_${message.author.id}`)
     let a = message.author
@@ -22,7 +20,7 @@ exports.run = async (client, message, args) => {
         const noargs = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle(':spades: :hearts: 21 Pontos - Blackjack :clubs: :diamonds:')
-            .setDescription('Precisa de ajuda? `' + prefix + 'blackjackhelp`\n \nComando de aposta: `' + prefix + 'bj Valor`')
+            .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`\n \nComando de aposta: `' + prefix + 'bj Valor`')
         return message.channel.send(noargs).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
     }
 
@@ -38,7 +36,7 @@ exports.run = async (client, message, args) => {
         return
     }
 
-    if (moneydb === null || '0') {
+    if (moneydb === null) {
         const nomumber = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle("Você não tem dinheiro")

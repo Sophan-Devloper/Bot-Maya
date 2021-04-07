@@ -1,0 +1,106 @@
+[
+    {
+        "question": "Quem foi o quarto hokage?",
+        "answers": ["Minato", "Minato Na"]
+    },
+    {
+        "question": "Quem deu o seu Sharingan ao Kakashi?",
+        "answers": ['Itachi', 'Sasuke Uchiha', 'Shisui Uchiha', 'Obito Uchiha'
+        ],
+      correct: 4
+    },
+    {
+        "question": "Quais são os dois filhos da Kaguya??",
+        "answers": [
+            "Ashura e Indra",
+            "Haruma e Hagoromo",
+            "Indra e Hamura",
+            "Hagoromo e Ashura"
+        ],
+      correct: 2
+    },
+    {
+        "question": "Quem criou o Jutsu 'Clones das sombras'?",
+        "answers": ['Madara Uchiha', 'Kaguya Otsutsuki', 'Tobirama Senju', 'Minato Namikaze'
+        ],
+      correct: 3
+    },
+    {
+        "question": "Quem são as duas estátuas do Vale do fim?",
+        "answers": ['Madara Uchiha & Hashirama Senju', 'Naruto Uzumaki & Sasuke Uchiha', 'Tobirama Senju & Hashirama Senju', 'Minato Namikaze & Kakashi Hatake'
+        ],
+      correct: 1
+    },
+    {
+        "question": "Quem foi o Sensei do Kakashi?",
+        "answers": ['Hashirama Senju', 'Minato Namikaze', 'Tobirama Senju', 'Hiruzen Sarutobi'
+        ],
+      correct: 2
+    },
+    {
+        "question": "Qual desses é o melhor usuário de Genjutsu?",
+        "answers": ['Shisui Uchiha', 'Kurenai Yuuhi', 'Madara Uchiha', 'Itachi Uchiha'
+        ],
+      correct: 1
+    },
+    {
+        "question": "O que é um Jinchuuriki?",
+        "answers": ['Quem possui uma besta de cauda dentro do seu próprio corpo', 'Hokage Renegado', 'Apelido do Madara Uchiha', 'Nome das bestas de cauda'
+        ],
+      correct: 1
+    },
+    {
+        "question": "Qual o nome do filho mais velho de Naruto Uzumaki?",
+        "answers": ['Boruto Uzumaki', 'Himarawari Uzumaki', 'Sarada Uzumaki', 'Shisui Uzumaki'
+        ],
+      correct: 1
+    },
+    {
+        "question": "Quem é a mãe do Hagoromo?",
+        "answers": ['Juuby', 'Kaguya', 'Sakura', 'Kushina', 'Mito Uzumaki'
+        ],
+      correct: 2
+    },
+    {
+        "question": "Sarutobi Azuma foi morto por quem na temporada Shippuuden?",
+        "answers": ['Deidara', 'Sasuke', 'Hidan', 'Gaara'
+        ],
+      correct: 3
+    },
+    {
+        "question": "Quem lutou e derrotou o Sasori?",
+        "answers": ['Sakura e Chiyo-baa', 'Tsunade e Kankuro', 'Jiraya e Sai', 'Naruto e Kakashi'
+        ],
+      correct: 1
+    },
+    {
+        "question": "Gaara foi capturado por quais integrantes da Akatsuke?",
+        "answers": ['Gaara nunca foi capturado', 'Itachi e kizame', 'Sasori e Deidara', 'Pain e Konan'
+        ],
+      correct: 3
+    },
+    {
+        "question": "Qual é o nome da cobra do Orotimaru?",
+        "answers": ['Manda', 'MimTume', 'Gamabunta', 'Gamakichi'
+        ],
+      correct: 1
+    },
+    {
+        "question": "Naruto usa roupas de que cor na temporada Shippuuden?",
+        "answers": ['Preto e prateado', 'Verde e preto', 'Preto e azul', 'Laranja e preto'
+        ],
+      correct: 1
+    },
+    {
+        "question": "Naruto usa roupas de que cor na temporada Shippuuden?",
+        "answers": ['Preto e prateado', 'Verde e preto', 'Preto e azul', 'Laranja e preto'
+        ],
+      correct: 1
+    },
+    {
+        "question": "Sasuke, em busca de integrantes para seu novo time, decide convidar 3 pessoas. Quais os nomes dessas pessoas?",
+        "answers": ['Kakuzu, Kisame e Juugo', 'Kakuzu, Suigetsu e Tobi', 'Suigetsu, Kisame e Kakuzu', 'Karin, Juugo e Suigetsu'
+        ],
+      correct: 4
+    },
+]

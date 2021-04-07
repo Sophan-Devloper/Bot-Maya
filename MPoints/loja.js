@@ -1,9 +1,4 @@
-const db = require("quick.db")
-const discord = require("discord.js")
+exports.run = async (client, message, args) => {
 
-module.exports = {
-    run: async (client, message, args) => {
-
-        message.channel.send('A loja está em construção...')
-    }
+    message.channel.send('A loja está em construção...')
 }

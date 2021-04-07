@@ -2,7 +2,6 @@ const db = require("quick.db")
 const Discord = require("discord.js")
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
     let money = parseInt(args[1])
     let moneydb = await db.get(`money_${message.author.id}`)
@@ -15,15 +14,15 @@ exports.run = async (client, message, args) => {
         money = parseInt(args[0])
     }
 
-    if(!args[0]){
+    if (!args[0]) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = '-'
-      const noargs = new Discord.MessageEmbed()
-      .setColor('BLUE')
-      .setTitle(':spades: :hearts: 21 Pontos - Blackjack :clubs: :diamonds:')
-      .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`\n \nComando de aposta: `' + prefix + 'bj Valor`')
-      return message.channel.send(noargs).then(msg => msg.delete({timeout: 8000})).catch(err => { return })
-  }
+        const noargs = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle(':spades: :hearts: 21 Pontos - Blackjack :clubs: :diamonds:')
+            .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`\n \nComando de aposta: `' + prefix + 'bj Valor`')
+        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+    }
 
     if (!money || money < 1 || money > moneydb) {
         let prefix = db.get(`prefix_${message.guild.id}`)
@@ -163,8 +162,8 @@ exports.run = async (client, message, args) => {
         const gambleEmbed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setAuthor(`${message.author.username} começou um BlackJack!`, message.author.displayAvatarURL())
-            .addField('Suas Cartas','**' + cardsMsg + '**')
-            .addField('Cartas da Maya','**' + dealerMsg + '**')
+            .addField('Suas Cartas', '**' + cardsMsg + '**')
+            .addField('Cartas da Maya', '**' + dealerMsg + '**')
             .addField(title, msg)
             .setFooter('21 Pontos - Blackjack')
 

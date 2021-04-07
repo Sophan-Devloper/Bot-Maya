@@ -1,8 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-    message.delete()
-
     var list = [
         'O que é um pontinho amarelo em cima do prédio?\n||Um Fandangos suicida||',
         'Por que ele um Doritos quer se matar?\n||Porque a casa dele é um saco||',
@@ -47,10 +45,6 @@ exports.run = async (client, message, args) => {
     const PiadaEmbed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Piadinha saindo do forno...')
-        .addFields(
-            {
-                name: 'Piadinha',
-                value: (rand)
-            })
-    await message.channel.send(PiadaEmbed).then(msg => msg.delete({ timeout: 12000 })).catch(err => { return })
+        .setDescription(rand)
+    await message.channel.send(PiadaEmbed)
 }

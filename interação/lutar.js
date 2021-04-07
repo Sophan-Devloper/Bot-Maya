@@ -11,7 +11,8 @@ exports.run = async (client, message, args) => {
         const nouser = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Use formato correto')
-            .setDescription('`' + prefix + 'luta @user`')
+            .setDescription('`' + prefix + 'lutar @user`')
+        return message.channel.send(nouser)
     }
 
     var list = ['win', 'lose']

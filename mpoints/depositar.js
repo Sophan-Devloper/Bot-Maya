@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
         const noamout = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'dep Valor`\n ' + '`' + prefix + 'dep all`\n ')
+            .setDescription('`' + prefix + 'depositar Valor`\n ' + '`' + prefix + 'depositar all`')
         return message.channel.send(noamout)
     }
 
@@ -59,7 +59,7 @@ exports.run = async (client, message, args) => {
             .setDescription('O valor que você digitou não é um número.')
         return message.channel.send(notnumber)
     }
-    
+
     if (money < 0) {
         const not = new Discord.MessageEmbed()
             .setColor('#FF0000')
@@ -80,12 +80,19 @@ exports.run = async (client, message, args) => {
             .setTitle('Diga um valor maior que 0')
         return message.channel.send(nota)
     }
+
+    if (money = 0) {
+        const nota = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Você não tem nada para depositar')
+        return message.channel.send(nota)
+    }
+
     db.add(`bank_${message.author.id}`, args[0])
     db.subtract(`money_${message.author.id}`, args[0])
 
     const embed = new Discord.MessageEmbed()
         .setColor('#efff00')
         .setDescription(`Você depositou ${args[0]}<:StarPoint:766794021128765469> no banco.`)
-    message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
-
+    return message.channel.send(embed)
 }

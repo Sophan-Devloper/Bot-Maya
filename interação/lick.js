@@ -2,7 +2,6 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-   message.delete()
 
    var list = [
       'https://imgur.com/ixqmPUG.gif',
@@ -62,7 +61,7 @@ exports.run = async (client, message, args) => {
 
          if (reaction.emoji.name === '🔁') { // Retribuiu
             reaction.users.remove()
-            message.channel.send(embed2)
+            return message.channel.send(embed2)
          }
       })
    })

@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
 
   var list = [
     'https://imgur.com/oXZYxLZ.gif',
@@ -20,5 +19,5 @@ exports.run = async (client, message, args) => {
     .setColor('#000000')
     .setDescription(`Fazer o que, né?`)
     .setImage(rand)
-  await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 }))
+  return message.channel.send(embed)
 }

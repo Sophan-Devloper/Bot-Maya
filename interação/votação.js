@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
         const noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'vote O que você quer que seja votado.`')
+            .setDescription('`' + prefix + 'votação O que você quer que seja votado.`')
 
         return message.channel.send(noargs).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
     }

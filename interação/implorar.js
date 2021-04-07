@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
     const no = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Tente usar o comando correto')
-      .setDescription('`' + prefix + 'onegai @user`')
+      .setDescription('`' + prefix + 'implorar @user`')
     return message.channel.send(`${message.author}`, no).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
   }
 

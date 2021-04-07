@@ -4,28 +4,23 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
 
    var list = [
-      'https://imgur.com/LFZfUsJ.gif',
-      'https://imgur.com/Yvhlp1r.gif',
-      'https://imgur.com/TQ6FcAG.gif',
-      'https://imgur.com/terWE4l.gif',
-      'https://imgur.com/Bta6nGN.gif',
-      'https://imgur.com/jIEUPVf.gif',
-      'https://imgur.com/s2VwYxD.gif',
-      'https://imgur.com/rc3lYTa.gif',
-      'https://imgur.com/L9qnxnv.gif'
+      'https://imgur.com/ixqmPUG.gif',
+      'https://imgur.com/fcQKlLL.gif',
+      'https://imgur.com/WtIcBUB.gif',
+      'https://imgur.com/XXPT5jN.gif',
+      'https://imgur.com/lBhuZIZ.gif',
+      'https://imgur.com/NaD26Am.gif'
    ]
 
    var list1 = [
-      'https://imgur.com/LFZfUsJ.gif',
-      'https://imgur.com/Yvhlp1r.gif',
-      'https://imgur.com/TQ6FcAG.gif',
-      'https://imgur.com/terWE4l.gif',
-      'https://imgur.com/Bta6nGN.gif',
-      'https://imgur.com/jIEUPVf.gif',
-      'https://imgur.com/s2VwYxD.gif',
-      'https://imgur.com/rc3lYTa.gif',
-      'https://imgur.com/L9qnxnv.gif'
+      'https://imgur.com/ixqmPUG.gif',
+      'https://imgur.com/fcQKlLL.gif',
+      'https://imgur.com/WtIcBUB.gif',
+      'https://imgur.com/XXPT5jN.gif',
+      'https://imgur.com/lBhuZIZ.gif',
+      'https://imgur.com/NaD26Am.gif'
    ]
+
 
    var rand = list[Math.floor(Math.random() * list.length)]
    var rand1 = list1[Math.floor(Math.random() * list1.length)]
@@ -38,25 +33,25 @@ exports.run = async (client, message, args) => {
       const nouser = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('Erroooou')
-         .setDescription('`' + prefix + 'poke @user`')
+         .setDescription('`' + prefix + 'lamber @user`')
       return message.reply(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
    }
 
    if (user.id === '821471191578574888') {
-      return message.channel.send('Saai, eu não gosto que me cutuquem.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+      return message.channel.send('Sai pervertido!').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
    }
 
    let avatar = message.author.displayAvatarURL({ format: 'png' })
    let avatar1 = user.displayAvatarURL({ format: 'png' })
    const embed = new Discord.MessageEmbed()
       .setColor('BLUE')
-      .setDescription(`${message.author} está te cutucando ${user}`, avatar)
+      .setAuthor(message.author.username + ` está lambendo ${user.username}`, avatar)
       .setImage(rand)
       .setFooter('Clique em 🔁 para retribuir')
 
    const embed2 = new Discord.MessageEmbed()
       .setColor('BLUE')
-      .setDescription(`${user} também cutucou você ${message.author} `, avatar1)
+      .setAuthor(user.username + ` gostou e retribuiu a lambida de ${message.author.username}`, avatar1)
       .setImage(rand1)
 
    await message.channel.send(embed).then(msg => {
@@ -64,7 +59,8 @@ exports.run = async (client, message, args) => {
       msg.awaitReactions((reaction, user) => {
          if (message.mentions.users.first().id !== user.id) return
 
-         if (reaction.emoji.name === '🔁') {
+         if (reaction.emoji.name === '🔁') { // Retribuiu
+            reaction.users.remove()
             return message.channel.send(embed2)
          }
       })

@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
     const nouser = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Erroooou')
-      .setDescription('`' + prefix + 'greet @user`')
+      .setDescription('`' + prefix + 'saudar @user`')
     return message.reply(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
   }
 

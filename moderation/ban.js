@@ -126,9 +126,9 @@ module.exports.run = async (client, message, args) => {
         const banned = new Discord.MessageEmbed()
           .setColor('GREEN')
           .setTitle(`Você baniu ${user.username} com sucesso.`)
-          .setDescription(`Relatório enviado ao ${logchannel.name}`)
+          .setDescription(`Relatório enviado ao ${client.channels.cache.get(logchannel)}`)
 
-        user.ban()
+        message.mentions.members.first().ban().catch(err => { message.channel.send(`ERROR: ${err}`) })
         message.channel.send(banned)
         return client.channels.cache.get(logchannel).send(banEmbed)
       }

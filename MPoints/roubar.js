@@ -14,7 +14,7 @@ module.exports = {
             const nook = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'rob @user`')
+                .setDescription('`' + prefix + 'roubar @user`')
             return message.channel.send(nook)
         }
 
@@ -22,7 +22,7 @@ module.exports = {
             const nook = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'rob @user`')
+                .setDescription('`' + prefix + 'roubar @user`')
             return message.channel.send(nook)
         }
 

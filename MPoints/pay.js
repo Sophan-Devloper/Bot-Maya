@@ -34,6 +34,13 @@ exports.run = async (client, message, args) => {
             return message.channel.send(noamout)
         }
 
+        if (user.id == message.author.id) {
+            const noamout = new Discord.MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Você não pode pagar para você mesmo.')
+            return message.channel.send(noamout)
+        }
+
         let money = db.get(`money_${message.author.id}`)
         if (money === null) money = '0'
 

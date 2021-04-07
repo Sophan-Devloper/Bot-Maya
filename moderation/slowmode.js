@@ -55,11 +55,18 @@ module.exports = {
       return message.channel.send(number).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
     }
 
+    if (args[0] < 1) {
+      const number = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('O tempo mínimo é 1 segundo')
+      return message.channel.send(number).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+    }
+
     message.channel.setRateLimitPerUser(args[0])
     const slowmode = new Discord.MessageEmbed()
       .setColor('GREEN')
       .setTitle(`${message.author.username} colocou o canal em Slowmode.`)
-      .setDescription('Tempo definido: `' + args[0] + 'segundos.`')
+      .setDescription('Tempo definido: `' + args[0] + ' segundos.`')
     message.channel.send(slowmode)
   }
 }

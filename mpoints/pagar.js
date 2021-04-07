@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
             const noamout = new Discord.MessageEmbed()
                 .setColor('#ff0000')
                 .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'pagar @user Valor`')
+                .setDescription('`' + prefix + 'pay @user Valor`')
             return message.channel.send(noamout)
         }
 
@@ -31,6 +31,13 @@ exports.run = async (client, message, args) => {
                 .setColor('#ff0000')
                 .setTitle('Siga o formato correto')
                 .setDescription('`' + prefix + 'pay @user Valor`')
+            return message.channel.send(noamout)
+        }
+
+        if (user.id == message.author.id) {
+            const noamout = new Discord.MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Você não pode pagar para você mesmo.')
             return message.channel.send(noamout)
         }
 

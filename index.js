@@ -132,7 +132,7 @@ client.on("message", async (message) => {
     } catch (err) { }
 
     try {
-        const commandFile = require(`./interação/${command}.js`)
+        const commandFile = require(`./interacao/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }
 
@@ -152,7 +152,7 @@ client.on("message", async (message) => {
     } catch (err) { }
 
     try {
-        const commandFile = require(`./reações/${command}.js`)
+        const commandFile = require(`./reacoes/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }
 

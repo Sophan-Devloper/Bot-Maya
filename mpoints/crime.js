@@ -60,7 +60,7 @@ exports.run = async (client, message, args) => {
                             return message.channel.send(`${message.author}`, embedcrime).then(msg => {
                                 msg.react('🏠').catch(err => { return }) // 1
                                 msg.react('🏦').catch(err => { return }) // 2
-                                msg.react('🏛️').catch(err => { return })// 3
+                                msg.react('🏛️').catch(err => { return }) // 3
                                 msg.react('🏣').catch(err => { return }) // 4
                                 msg.react('📨').catch(err => { return }) // 5
                                 msg.react('💍').catch(err => { return }) // 6

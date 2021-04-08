@@ -3,16 +3,7 @@ const db = require('quick.db')
 const ms = require('parse-ms')
 
 exports.run = async (client, message, args) => {
-    // 🏠 1 - Casa
-    // 🏦 2 - Mansão 
-    // 🏛️ 3 - Prefeitura
-    // 🏣 4 - Cartório
-    // 📨 5 - Correios
-    // 💍 6 - Joaleria
-    // 🏢 7 - Shopping
-    // 🏭 8 - Fabrica
-    // 🏩 9 - Motel
-    // 🪙 10 - Banco
+    // 🏠 1  Casa - 🏦 2 Mansão - 🏛️ 3 Prefeitura - 🏣 4 Cartório - 📨 5 Correios - 💍 6 Joaleria - 🏢 7 Shopping - 🏭 8 Fabrica - 🏩 9 Motel - 🪙 10 Banco
 
     let user = message.author
 
@@ -21,7 +12,13 @@ exports.run = async (client, message, args) => {
 
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
-        return message.channel.send(`${message.author}, você está sob prisão máxima! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
+
+        const presomax = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('🚨 Você está em prisão máxima!')
+            .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
+
+        return message.channel.send(presomax)
     } else {
 
         let timeout = 600000
@@ -42,7 +39,7 @@ exports.run = async (client, message, args) => {
 
                 const newcrime = new Discord.MessageEmbed()
                     .setColor('GRAY')
-                    .setTitle('🕵️‍♂️ Você está preste a entrar no mundo do crime.🕵️‍♂️ ')
+                    .setTitle('🕵️‍♂️ Você está preste a entrar no mundo do crime 🕵️‍♂️ ')
                     .setDescription('O mundo do crime é um lugar perigoso, você pode ser preso e não conseguir fazer mais nada por horas.\n \nTem certeza que deseja entrar no mundo do crime?')
 
                 await message.channel.send(`${message.author}`, newcrime).then(msg => {
@@ -559,7 +556,7 @@ exports.run = async (client, message, args) => {
                         }
                         if (reaction.emoji.name === '❌') { // Não
                             msg.delete().catch(err => { return })
-                            msg.channel.send("Roubo cancelado.").then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+                            return msg.channel.send("Roubo cancelado.")
                         }
                     })
                 })

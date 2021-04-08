@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-     
 
     var list = [
         'https://imgur.com/LVVGS8f.gif',
@@ -18,11 +17,10 @@ exports.run = async (client, message, args) => {
     ]
 
     var gif = list[Math.floor(Math.random() * list.length)]
-    let user = client.users.cache.get(args[0])
 
     const ClapEmbed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`${message.author.username} aplaudiu isso!`)
         .setImage(gif)
-    await message.channel.send(ClapEmbed).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(ClapEmbed)
 }

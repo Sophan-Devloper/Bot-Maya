@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var list = [
     'https://imgur.com/pkQLxS0.gif',
@@ -20,11 +19,10 @@ exports.run = async (client, message, args) => {
   ]
 
   var gifs = list[Math.floor(Math.random() * list.length)]
-  let user = client.users.cache.get(args[0])
 
   const ShyEmbed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setDescription(`${message.author.username} está com vergonha...`)
     .setImage(gifs)
-  await message.channel.send(ShyEmbed).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+  return message.channel.send(ShyEmbed)
 }

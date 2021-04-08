@@ -13,11 +13,10 @@ exports.run = async (client, message, args) => {
   ]
 
   var rand = list[Math.floor(Math.random() * list.length)]
-  let user = client.users.cache.get(args[0])
 
   const embed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setDescription(`${message.author.username} está gostando disso.`)
     .setImage(rand)
-  await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(embed)
 }

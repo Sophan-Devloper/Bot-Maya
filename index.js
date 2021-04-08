@@ -5,17 +5,6 @@ const db = require('quick.db')
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
 
-const express = require('express')
-const { measureMemory } = require("vm")
-const app = express()
-app.listen(process.env.PORT)
-app.get('/', (request, response) => {
-    const ping = new Date()
-    ping.setHours(ping.getHours() - 3)
-    console.log(`Ping! ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`)
-    response.sendStatus(200)
-})
-
 client.on("message", async (message) => {
 
     if (message.author.bot) return // no bots
@@ -67,11 +56,6 @@ client.on("message", async (message) => {
         return message.channel.send(`${message.author}`, blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
     }
 
-    if (db.get(`blockchannel_${message.channel.id}`)) {
-        message.delete()
-        return message.channel.send('Meus comandos foram bloqueados neste canal.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
-    }
-
     function xp(message) {
         if (message) {
             let xp = db.add(`xp_${message.author.id}`, 2)
@@ -90,6 +74,11 @@ client.on("message", async (message) => {
                 }
             }
         }
+    }
+
+    if (db.get(`blockchannel_${message.channel.id}`)) {
+        message.delete()
+        return message.channel.send('Meus comandos foram bloqueados neste canal.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
     }
 
     const cmd = client.commands.get(command) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command))

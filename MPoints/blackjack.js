@@ -13,7 +13,13 @@ exports.run = async (client, message, args) => {
 
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
-        return message.channel.send(`${message.author}, você está sob prisão máxima! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
+
+        const presomax = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('🚨 Você está em prisão máxima!')
+            .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
+
+        return message.channel.send(presomax)
     } else {
 
         if (args[0] === 'all' || args[0] === 'max') {
@@ -28,7 +34,7 @@ exports.run = async (client, message, args) => {
             const noargs = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setTitle(':spades: :hearts: 21 Pontos - Blackjack :clubs: :diamonds:')
-                .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`\n \nComando de aposta: `' + prefix + 'blackjack Valor`')
+                .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`\n \nComando de aposta: `' + prefix + 'bj Valor`')
             return message.channel.send(noargs).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
         }
 

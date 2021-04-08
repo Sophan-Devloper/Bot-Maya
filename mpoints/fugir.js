@@ -9,7 +9,13 @@ exports.run = async (client, message, args) => {
 
     if (author !== null && timeout - (Date.now() - author) > 0) {
         let time = ms(timeout - (Date.now() - author))
-        return message.channel.send(`${message.author}, você está sob prisão máxima! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
+
+        const presomax = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('🚨 Você está em prisão máxima!')
+            .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
+
+        return message.channel.send(presomax)
     } else {
 
         let timeout2 = 1000000

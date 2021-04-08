@@ -1,3 +1,4 @@
+const Discord = require('discord.js')
 const db = require('quick.db')
 const ms = require('parse-ms')
 
@@ -8,7 +9,14 @@ exports.run = async (client, message, args) => {
 
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
-        return message.channel.send(`${message.author}, você está sob prisão máxima! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
+
+        const presomax = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('🚨 Você está em prisão máxima!')
+            .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
+
+        return message.channel.send(presomax)
+
     } else {
 
         let timeout = 600000

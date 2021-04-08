@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     if (prefix === null) { prefix = '-' }
 
     if (!message.member.hasPermission("MANAGE_CHANNELS")) {
-        message.delete()
+         
         const noperm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')

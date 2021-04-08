@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var linkserver = 'https://discord.gg/mx8eMx6'
 

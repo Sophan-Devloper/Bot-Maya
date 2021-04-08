@@ -5,7 +5,7 @@ module.exports = {
     name: 'status no perfil',
     aliases: ['status', 'perfil'],
     run: async (client, message, args) => {
-        message.delete()
+         
 
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"

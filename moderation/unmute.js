@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 module.exports = {
     run: async (client, message, args) => {
-        message.delete()
+         
 
         if (!message.member.hasPermission('MANAGE_ROLES')) {
             const noperms = new Discord.MessageEmbed()

@@ -5,7 +5,7 @@ module.exports = {
     name: "user-info",
     category: "extra",
     run: async (client, message, args) => {
-        message.delete()
+         
 
         let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
  

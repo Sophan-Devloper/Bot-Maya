@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const db = require("quick.db")
 module.exports.run = async (Client, message, args) => {
-message.delete()
+ 
 
     if (!db.get(`family5_${message.author.id}`))
     return message.channel.send("Você não tem familia...").then(msg => msg.delete({timeout: 6000}))

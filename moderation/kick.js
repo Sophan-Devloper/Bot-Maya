@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     let member = message.mentions.members.first()
     let reason = args.slice(1).join(" ")

@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Haboo Hotel'
   var link1 = 'https://www.habbo.com.br/'

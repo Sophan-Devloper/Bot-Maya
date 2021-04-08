@@ -6,7 +6,7 @@ module.exports = {
     category: "seta um canal log",
     description: "escolher canal log no server",
     run: async (client, message, args) => {
-        message.delete()
+         
 
         let permss = message.member.hasPermission("ADMINISTRATOR")
         if (!permss) {

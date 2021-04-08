@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Ddtank'
   var link1 = 'http://www.337.com/pt/ddtank/'

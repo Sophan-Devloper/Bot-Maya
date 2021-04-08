@@ -7,7 +7,7 @@ module.exports = {
 
     async run(client, message, args) {
 
-        message.delete()
+         
         let user = message.mentions.members.first()
         let timeout = 1800000
         let rptimeout = await db.get(`rptimeout_${message.author.id}`)

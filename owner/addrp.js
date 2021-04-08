@@ -5,7 +5,7 @@ module.exports = {
     description: "add rp",
 
     async run(client, message, args) {
-        message.delete()
+         
 
         let member = message.mentions.users.first()
 

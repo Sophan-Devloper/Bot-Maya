@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'anime [Seu anime aqui]`\nExemplo: `' + prefix + 'anime Boku No Hero Academia`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+        return message.channel.send(noargs)
     }
     //DEFINE OPTIONS
 

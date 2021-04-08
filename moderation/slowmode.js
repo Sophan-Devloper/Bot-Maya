@@ -7,7 +7,7 @@ module.exports = {
   description: "Set the slowmode for the channel!",
 
   run: async (bot, message, args) => {
-    message.delete()
+     
 
     let permss = message.member.hasPermission("MANAGE_CHANNELS")
     if (!permss) {

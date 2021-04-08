@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 module.exports = {
     run: async (client, message, args) => {
-        message.delete()
+         
 
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"

@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports.run = async (bot, message, args) => {
-    message.delete()
+     
 
     let member = message.mentions.users.first()
     let user = message.author

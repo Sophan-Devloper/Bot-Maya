@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
 
   var lista = [
     'https://imgur.com/XhwPW1b.png',
@@ -71,5 +70,5 @@ exports.run = async (client, message, args) => {
     .setColor('#DCDCDC')
     .setImage(saophotos)
     .setFooter(message.author.tag, message.author.displayAvatarURL())
-  await message.channel.send(SAOEmbed).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
+  return message.channel.send(SAOEmbed)
 }

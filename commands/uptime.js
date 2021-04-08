@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const moment = require('moment')
 
 module.exports.run = async (client, message, args) => {
-message.delete()
+ 
 
     const duration = moment.duration(client.ontime)
     let u = convertMS(client.uptime)

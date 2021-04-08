@@ -5,7 +5,7 @@ module.exports = {
     description: "Converts text to ascii",
 
     async run(client, message, args) {
-        message.delete()
+         
 
         if (!args[0])
             return message.channel.send('Ei, o que é para colocar em ASCII? (Escreva um texto pequeno, uma ou duas palavras)').then(msg => msg.delete({ timeout: 5000 }))

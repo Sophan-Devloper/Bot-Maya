@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports.run = (client, message, args) => {
-    message.delete()
+     
 
     if (!message.member.hasPermission('MOVE_MEMBERS')) {
         const noperm = new Discord.MessageEmbed()

@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     var numb = ['1', '2', '3', '4', '5', '6']
     var rand = numb[Math.floor(Math.random() * numb.length)]

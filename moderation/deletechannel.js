@@ -2,7 +2,6 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports.run = (client, message, args) => {
-    message.delete().catch(err => { return })
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()

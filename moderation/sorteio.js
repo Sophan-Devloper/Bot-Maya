@@ -3,7 +3,7 @@ const db = require('quick.db')
 const ms = require("ms")
 
 module.exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   if (!message.member.permissions.has("MANAGE_CHANNELS")) {
     const perms = new Discord.MessageEmbed()

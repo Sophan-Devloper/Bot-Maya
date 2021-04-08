@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
   var game = 'Minecraft'
   var link1 = 'https://www.minecraft.net/pt-pt'
   var link2 = 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=pt'

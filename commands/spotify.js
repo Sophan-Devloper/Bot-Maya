@@ -2,7 +2,6 @@ const Discord = require("discord.js")
 const convert = require("parse-ms")
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
     let avatar = user.user.displayAvatarURL({ format: 'png' })

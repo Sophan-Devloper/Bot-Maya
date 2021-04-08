@@ -2,7 +2,6 @@ const Discord = require("discord.js")
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
     if (!args[0]) {
         let prefix = db.get(`prefix_${message.guild.id}`)

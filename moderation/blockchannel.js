@@ -4,7 +4,7 @@ const Discord = require("discord.js")
 exports.run = async (client, message, args) => {
 
     if (!message.member.hasPermission("ADMINISTRATOR")) {
-        message.delete()
+         
         const noperm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Administrador')

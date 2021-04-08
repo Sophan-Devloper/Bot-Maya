@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Genshin Impact RPG'
   var link1 = 'https://genshin.mihoyo.com/en'

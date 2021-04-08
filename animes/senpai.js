@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
     var list = [
         'https://i.pinimg.com/originals/78/72/6a/78726a6ec74ba506137966e9f9250bd1.gif',
@@ -14,5 +13,5 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setDescription('Meu senpai é o Itachi :heart:')
         .setImage(gif)
-    await message.channel.send(Itachi).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(Itachi)
 }

@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
+
 exports.run = async (client, message, args) => {
 
-    message.delete()
     const ChannelName = message.channel.name
     const ChannelId = message.channel.id
     const ChannelCategory = message.channel.parent
@@ -11,10 +11,10 @@ exports.run = async (client, message, args) => {
     const ChannelInfo = new Discord.MessageEmbed()
         .setColor('#b700ff')
         .setTitle('Channel Info')
-        .addField("Channel Name : ", `${ChannelName}`)
-        .addField("Channel ID : ", `${ChannelId}`)
-        .addField("Category Name : ", `${ChannelCategory}`)
-        .addField("Category ID : ", `${ChannelCategoryID}`)
-        .addField("Last Pinned Message Date : ", `${LastPinAt}`)
+        .addField("Nome: ", `${ChannelName}`)
+        .addField("ID: ", `${ChannelId}`)
+        .addField("Nome da Categoria: ", `${ChannelCategory}`)
+        .addField("Categoria - ID : ", `${ChannelCategoryID}`)
+        .addField("Ultimo pin: ", `${LastPinAt}`)
     message.channel.send(ChannelInfo)
 }

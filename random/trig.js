@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const canvacord = require('canvacord')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     message.channel.send("Carregando...").then(m => m.delete({ timeout: 5000 }))
     let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author

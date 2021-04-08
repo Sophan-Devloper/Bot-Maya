@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const db = require('quick.db')
 
 module.exports.run = async (client, message, args) => {
-    message.delete()
+     
     let data = db.all().filter(i => i.ID.startsWith("whitelist_")).sort((a, b) => b.data - a.data);
     if (data.length < 1) return message.channel.send("Sem ranking por enquanto").then(m => m.delete({ timeout: 5000 }))
 

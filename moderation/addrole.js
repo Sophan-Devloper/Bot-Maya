@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 module.exports.run = async (bot, message, args) => {
-    message.delete()
+     
 
     let perms = message.member.hasPermission("MANAGE_ROLES")
     if (!perms) {

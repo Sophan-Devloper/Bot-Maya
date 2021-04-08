@@ -2,7 +2,6 @@ const Discord = require("discord.js")
 const weather = require("weather-js")
 
 exports.run = async (client, message, args) => {
-  message.delete()
 
   let city = args.join(" ")
   let degreetype = "C"; // Mude para Fahrenheit F

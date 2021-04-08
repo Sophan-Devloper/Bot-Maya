@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Transformice'
   var link1 = 'https://store.steampowered.com/app/335240/Transformice/'

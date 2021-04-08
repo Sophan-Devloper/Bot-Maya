@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Among Us'
   var link1 = 'https://store.steampowered.com/app/945360/Among_Us/'

@@ -5,7 +5,6 @@ module.exports = {
 	name: 'casamento',
 	aliases: ['casar', 'marry'],
 	run: async (client, message, args) => {
-		message.delete()
 
 		const member = message.mentions.users.first()
 

@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var gif = 'https://imgur.com/sFBDKCA.gif'
   var array1 = ["cara", "coroa"]

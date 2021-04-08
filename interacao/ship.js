@@ -6,7 +6,7 @@ module.exports = {
   description: "Calculates the love affinity you have for another person.",
   usage: "[mention | id | username]",
   run: async (client, message, args) => {
-    message.delete()
+     
 
     let user = message.mentions.members.first()
     if (!user || message.author.id === user.id)

@@ -6,7 +6,7 @@ module.exports = {
     description: "Receive a daily award of xp",
 
     async run(client, message, args) {
-        message.delete()
+         
         let user = message.author
         let timeout = 86400000
         let amount = 500

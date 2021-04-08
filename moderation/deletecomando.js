@@ -7,7 +7,7 @@ module.exports = {
     usage: "?addcommand <Command Name> <Command Response>",
     aliases: ['addcmd'],
     run: async (client, message, args) => {
-        message.delete()
+         
 
         if (!message.member.hasPermission('ADMINISTRATOR')) {
             const permss = new Discord.MessageEmbed()

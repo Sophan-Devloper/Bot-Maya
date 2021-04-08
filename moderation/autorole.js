@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     var role = db.get(`autorole_${message.guild.id}`)
     let prefix = db.get(`prefix_${message.guild.id}`)

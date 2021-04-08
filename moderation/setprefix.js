@@ -7,7 +7,7 @@ module.exports = {
     usage: "setprefix newprefix",
     description: "Mudar o prefix do server",
     run: async (client, message, args) => {
-        message.delete()
+         
 
         if (!message.member.hasPermission('ADMINISTRATOR')) {
             const permss = new Discord.MessageEmbed()

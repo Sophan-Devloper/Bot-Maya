@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     var list = [
         '⠀\nCreio no riso e nas lágrimas como antídotos contra o ódio e o terror. \n Charles Chaplin',

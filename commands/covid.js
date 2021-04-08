@@ -2,7 +2,6 @@ const axios = require('axios')
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-    message.delete()
 
     const baseUrl = "https://corona.lmao.ninja/v2"
     let url, response, corona;

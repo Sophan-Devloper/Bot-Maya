@@ -36,7 +36,7 @@ module.exports = {
             .setColor('RED')
             .setTitle(`Ninguém acertou!`)
           msg.delete()
-          message.channel.send(timeover).then(msg => msg.delete({ timeout: 6000 }))
+          message.channel.send(timeover)
         })
     })
   }

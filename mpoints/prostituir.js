@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
 
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
-            message.delete()
+             
             return message.channel.send(`Você pode se prostituir em ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 6000 }))
         } else {
 

@@ -45,7 +45,7 @@ exports.run = async (client, message, args) => {
   }
 
   if (user.id === '821471191578574888') {
-    message.delete()
+     
     const embed1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setDescription(`${message.author.username} & ${user.username} mandaram um HIGHFIVE!`)

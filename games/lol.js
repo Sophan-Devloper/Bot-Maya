@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'League of Legends'
   var link1 = 'https://na.leagueoflegends.com/pt-br/'

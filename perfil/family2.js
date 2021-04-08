@@ -5,7 +5,6 @@ module.exports = {
 	name: 'family',
 	aliases: ['adotar', 'adoção'],
 	run: async (client, message, args) => {
-		message.delete()
 
 		const member = message.mentions.users.first()
 

@@ -6,7 +6,7 @@ module.exports = {
     category: "moderation",
 
     run: async (client, message, args) => {
-        message.delete()
+         
 
         if (!message.member.permissions.has("MOVE_MEMBERS")) {
             const noperms = new Discord.MessageEmbed()

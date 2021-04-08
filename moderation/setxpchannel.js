@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 module.exports = {
     run: async (client, message, args) => {
-        message.delete()
+         
 
         let permss = message.member.hasPermission("ADMINISTRATOR")
         if (!permss) {

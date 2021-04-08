@@ -3,7 +3,7 @@ const db = require('quick.db')
 const moment = require('moment')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     let user = message.mentions.members.first() || message.member
 

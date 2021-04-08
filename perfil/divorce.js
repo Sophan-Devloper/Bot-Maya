@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const db = require("quick.db")
 module.exports.run = async (Client, message, args) => {
-message.delete()
+ 
 
     if (!db.get(`marry_${message.author.id}`))
     return message.channel.send("Você não esta casado...").then(msg => msg.delete({timeout: 6000}))

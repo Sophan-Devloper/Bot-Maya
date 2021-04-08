@@ -6,7 +6,7 @@ module.exports = {
     category: "moderation",
 
     run: async (client, message, args) => {
-        message.delete()
+         
 
         const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category')
 

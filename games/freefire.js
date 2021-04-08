@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Garena Free Fire'
   var link1 = 'https://play.google.com/store/apps/details?id=com.dts.freefireth&hl=pt_BR'

@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Grand Theft Auto V - Rockstar Games'
   var link1 = 'https://www.rockstargames.com/'

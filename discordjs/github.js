@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const moment = require('moment')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     var gitlink = "https://github.com/rodycouto/Maya-GitHub.git"
     var linksupport = "https://docs.google.com/forms/d/e/1FAIpQLSeEMnYYmlaVv_nG4PBdPD8CA6Q-MdBi-9KW_xVrqjs2MG5AqQ/viewform?usp=sf_link"

@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-    message.delete()
+     
 
     var helpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
     var linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'

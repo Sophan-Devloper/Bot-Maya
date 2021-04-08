@@ -4,7 +4,7 @@ module.exports = {
     name: "server-info",
     category: "extra",
     run: async (client, message, args) => {
-        message.delete()
+        
         let region;
         switch (message.guild.region) {
             case "europe":

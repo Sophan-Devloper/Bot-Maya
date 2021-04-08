@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-  message.delete()
+   
 
   var game = 'Mario'
   var link1 = 'https://store.nintendo.com.br/catalogsearch/result/?q=Mario'

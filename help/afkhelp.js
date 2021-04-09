@@ -8,18 +8,18 @@ exports.run = async (client, message, args) => {
 
     const embed = new Discord.MessageEmbed()
         .setColor('BLUE')
-        .setTitle('Maya - AFK System')
+        .setTitle('📢 Maya - AFK Global System')
         .setDescription('Com o AFK System, eu avisarei as pessoas que te marcarem que você está offline.\nVocê pode deixar uma mensagem pra elas também.')
         .addFields(
             {
-                name: 'AFK System - Servidor',
-                value: '`' + prefix + 'afk Almoçando` Avisarei a todos que você está almoçando.'
+                name: '📴 Servidor',
+                value: '`' + prefix + 'afk Almoçando`\nAvisarei a todos que você está almoçando.'
             },
             {
-                name: 'AFK System - Global',
-                value: '`' + prefix + 'afk all Estudando` Avisarei em todos os servidores que você está estudando.'
+                name: '🌎 Global',
+                value: '`' + prefix + 'afk all` ou ' + '`' + prefix + 'afk global`\n' +  'Avisarei em todos os servidores que você está offline.\n \nExemplo: ' + '`' + prefix + 'afk global Estou almoçando, já volto.`'
             }
         )
-        .setFooter('O AFK System vai ser desativado quando você mandar uma mensagem.')
-    return message.channel.send(`${message.author}`, embed)
+        .setFooter('O AFK System será desativado quando você mandar uma mensagem.')
+    return message.channel.send(`${message.author}, este é um comando novo, se houve algúm bug, use **${prefix}support**`, embed)
 }

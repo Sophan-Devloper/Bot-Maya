@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
+    message.delete()
 
     let user = message.mentions.members.first()
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -13,24 +14,35 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Nenhum canal de report definido.')
             .setDescription('`' + prefix + 'setreportchannel #canal`')
-        return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+        return message.channel.send(nochannel)
     }
 
-    if (!db.get(`reportchannel_${message.guild.id}`)) {
+    if (!client.channels.cache.get(channel)) {
         const nochanel = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Parece que o canal de report foi excluido.')
             .setDescription('`' + prefix + 'setreportchannel #canal`')
-        return message.channel.send(nochanel).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+        return message.channel.send(nochanel)
     }
 
     if (!args[0]) {
         const noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Por favor, siga o formato correto')
-            .setDescription(`Use o comando abaixo para reportar algo para equipe da ${message.guild.name}. \nO **@user** é opcional, use se quiser reportar algum membro.`)
+            .setDescription(`Use o comando abaixo para reportar algo a equipe da ${message.guild.name}. \nO **@user** é opcional, use se quiser reportar algum membro.`)
             .addField('⠀', '`' + prefix + 'report @user O motivo da sua denúncia`')
-        return message.channel.send(noargs)
+        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+    }
+
+    if (user && !args[1]) {
+        let prefix = db.get(`prefix_${message.guild.id}`)
+        if (prefix === null) prefix = "-"
+
+        const nop = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Siga o formato correto')
+            .setDescription('`' + prefix + 'report <@user> O motivo do seu report`')
+        return message.channel.send(nop).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
     }
 
     if (!user) {
@@ -56,10 +68,11 @@ exports.run = async (client, message, args) => {
             .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
             .setTimestamp()
         client.channels.cache.get(channel).send(embed1)
+
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setTitle('O report foi enviado com sucesso!')
-        message.channel.send(ok)
+            .setTitle('O seu report foi enviado com sucesso!')
+        return message.channel.send(`${message.author}`, ok).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
     }
 
     if (user) {
@@ -85,9 +98,10 @@ exports.run = async (client, message, args) => {
             .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
             .setTimestamp()
         client.channels.cache.get(channel).send(embed1)
+
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setTitle('O report foi enviado com sucesso!')
-        message.channel.send(ok)
+            .setTitle('O seu report foi enviado com sucesso!')
+        return message.channel.send(`${message.author}`, ok).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
     }
 }

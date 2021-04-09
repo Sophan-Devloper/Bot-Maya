@@ -14,6 +14,7 @@ exports.run = async (client, message, args) => {
         const loading = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🔄 Loading...')
+            
         const noerl = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`O argumento ***${args[0]}*** não existe ou os dados não foram publicados pela OMS (Organização Mundial da Saúde`)
@@ -55,5 +56,5 @@ exports.run = async (client, message, args) => {
             })
         .setFooter(message.author.username, message.author.displayAvatarURL())
 
-    await message.channel.send(embed).then(msg => message.delete({ timeout: 20000 })).catch(err => { return })
+    await message.channel.send(embed)
 }

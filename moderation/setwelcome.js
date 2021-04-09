@@ -34,7 +34,7 @@ module.exports = {
                     .setColor('#ff0000')
                     .setTitle('O Welcome System já está desativado.')
 
-                return message.channel.send(semcanal).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+                return message.channel.send(semcanal)
             } else if (canal) {
                 db.delete(`welcomechannel_${message.guild.id}`)
                 const comcanal = new Discord.MessageEmbed()

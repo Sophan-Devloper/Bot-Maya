@@ -1,27 +1,40 @@
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
     var user = message.mentions.members.first()
 
-    if (!isNaN(args[0]))
-        return message.channel.send('Ué? Números não são usuários... cadê o usuário?\n \n`-id @user`').then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    if (!args[0]) {
+        const embed1 = new Discord.MessageEmbed()
+            .setColor('#9D24DD')
+            .setTitle(`${message.author.username}`)
+            .setDescription(`🆔 \`${message.author.id}\``)
+        return message.channel.send(embed1)
+    }
 
     if (user) {
-        var idembed = new Discord.MessageEmbed()
-            .setColor('RANDOM')
-            .setDescription(`**Usuário:** ${user.user.username}\n**ID:** \`${user.user.id}\``)
-        return message.channel.send(idembed).then(msg => msg.delete({ timeout: 12000 })).catch(err => { return })
+        const idembed = new Discord.MessageEmbed()
+            .setColor('#9D24DD')
+            .setTitle(`${user.user.username}`)
+            .setDescription(`🆔 \`${user.user.id}\``)
+        return message.channel.send(idembed)
     }
 
-    if (!args[0]) {
-        var idembed = new Discord.MessageEmbed()
-            .setColor('RANDOM')
-            .setDescription(`**Usuário:** ${message.author.username}\n**ID:** \`${message.author.id}\``)
-        return message.channel.send(idembed).then(msg => msg.delete({ timeout: 12000 })).catch(err => { return })
-    }
+    if (!user) {
+        let prefix = db.get(`prefix_${message.guild.id}`)
+        if (prefix === null) prefix = "-"
 
-    if (isNaN(args[0])) {
-        return message.channel.send(`${message.author.username}, por favor. Mencione um usuário do servidor.`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        const no = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Comando não reconhecido.')
+            .setDescription('Neste comando, é preciso marcar alguém ou mandar apenas o comando sem conteúdo algúm.')
+            .addFields(
+                {
+                    name: 'Exemplo',
+                    value: '`' + prefix + 'id` ou `' + prefix + 'id @user`'
+                }
+            )
+        return message.channel.send(no)
     }
 }

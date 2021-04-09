@@ -1,14 +1,12 @@
-const Discord = require('discord.js')
 const moment = require('moment')
 
 module.exports.run = async (client, message, args) => {
- 
 
     const duration = moment.duration(client.ontime)
     let u = convertMS(client.uptime)
     let ontime = `**${u.h}**` + " Hora(s) " + `**${u.m}**` + " Minutos, " + `**${u.s}**` + " Segundos"
 
-    message.channel.send(`Eu estou acordada a: ${ontime}`).then(msg => msg.delete({timeout: 6000}))
+    message.channel.send(`Eu estou acordada a: ${ontime}`)
 
     function convertMS(ms) {
         var d, h, m, s;
@@ -25,6 +23,6 @@ module.exports.run = async (client, message, args) => {
             , h: h
             , m: m
             , s: s
-        }}}
-
-module.exports.help = {nome: "uptime"}
+        }
+    }
+}

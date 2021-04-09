@@ -20,12 +20,25 @@ client.on("message", async (message) => {
         message.channel.send(`${message.author}, o modo AFK foi desativado.`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
+    if (db.get(`afk_${message.author.id}+${message.author.id}`)) {
+        db.delete(`afk_${message.author.id}+${message.author.id}`)
+        message.channel.send(`${message.author}, o modo AFK Global foi desativado.`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    }
+
     if (message.mentions.members.first()) {
-        if (db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)) {
+
+        if (db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)) { // AFK Sistema Global
+            const off = new Discord.MessageEmbed()
+                .setColor('#01eff8')
+                .addField(`${message.mentions.members.first().user.username} está offline.`, '`' + `${db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)}` + '`')
+                .setFooter('AFK Global System')
+            return message.channel.send(`${message.author}`, off)
+        } else if (db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)) { // AFK Sistema Servidor
             const off = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .addField(`${message.mentions.members.first().user.username} está offline.`, '`' + `${db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)}` + '`')
-            message.channel.send(`${message.author}`, off)
+                .setFooter('AFK Server System')
+            return message.channel.send(`${message.author}`, off)
         }
     }
 

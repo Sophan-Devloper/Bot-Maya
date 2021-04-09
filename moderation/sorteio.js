@@ -69,8 +69,8 @@ module.exports.run = async (client, message, args) => {
       )
     return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
   }
-
   let time = isNaN(args[0][0])
+  
   let channel = message.mentions.channels.first()
   if (!channel) {
     let prefix = db.get(`prefix_${message.guild.id}`)

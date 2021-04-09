@@ -10,7 +10,6 @@ exports.run = async (client, message, args) => {
     .setColor(`#DCDCDC`)
     .setDescription(`[Baixar](${linkavatar}) avatar de ${user.username}`)
     .setImage(avatar)
-    .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-  await message.channel.send(embed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  await message.channel.send(embed).then(msg => msg.delete({ timeout: 60000 })).catch(err => { return })
 }

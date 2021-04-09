@@ -28,6 +28,5 @@ exports.run = async (client, message, args) => {
                 inline: true
             }
         )
-        .setFooter(message.author.username, message.author.displayAvatarURL())
-    await message.channel.send(Support)
+    return message.channel.send(`${message.author}`, Support)
 }

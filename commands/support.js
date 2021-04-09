@@ -1,6 +1,6 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js')
+
 exports.run = async (client, message, args) => {
-     
 
     var linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
     var linkservidor = 'https://discord.gg/mx8eMx6'
@@ -28,6 +28,5 @@ exports.run = async (client, message, args) => {
                 inline: true
             }
         )
-        .setFooter(message.author.username, message.author.displayAvatarURL())
-    await message.channel.send(Support)
+    return message.channel.send(`${message.author}`, Support)
 }

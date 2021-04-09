@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Brawlhalla'
   var link1 = 'https://store.steampowered.com/app/291550/Brawlhalla/'
@@ -22,5 +21,5 @@ exports.run = async (client, message, args) => {
     .addField(`${st}`, `${link1}`)
     .addField(`${ps}`, `${link2}`)
     .setFooter(`Plataformas: ${pt} 4, ${nsw}, ${an}, ${xbo}, ${mc}, ${w}, ${ios}`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(GameEmbed)
 }

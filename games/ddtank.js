@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Ddtank'
   var link1 = 'http://www.337.com/pt/ddtank/'
@@ -15,5 +14,5 @@ exports.run = async (client, message, args) => {
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)
     .setFooter(`Plataformas: ${win}m ${li}, ${mc}`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(GameEmbed)
 }

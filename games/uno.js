@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
   
   var game = 'Uno - Ubisoft'
   var link1 = 'https://www.ubisoft.com/pt-br/game/uno/uno'
@@ -20,5 +19,5 @@ exports.run = async (client, message, args) => {
     .addField(`${site}`, `${link1}`)
     .addField(`${st}`, `${link2}`)
     .setFooter(`Plataformas: ${win}, ${mc}, ${li}, ${an}, ${ios}`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(GameEmbed)
 }

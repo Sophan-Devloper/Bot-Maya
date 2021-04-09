@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Haboo Hotel'
   var link1 = 'https://www.habbo.com.br/'
@@ -19,5 +18,5 @@ exports.run = async (client, message, args) => {
     .addField(`${site}`, `${link1}`)
     .addField(`${ps}`, `${link2}`)
     .setFooter(`Plataformas: ${nv}, ${an}, ${win}, ${ios}`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(GameEmbed)
 }

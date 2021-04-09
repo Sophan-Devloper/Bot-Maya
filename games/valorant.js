@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Valorant'
   var link1 = 'https://playvalorant.com/pt-br/'
@@ -13,5 +12,5 @@ exports.run = async (client, message, args) => {
     .setTitle(`${game}`)
     .addField(`${site}`, `${link1}`)
     .setFooter(`Plataformas: ${win}`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(GameEmbed)
 }

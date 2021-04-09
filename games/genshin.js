@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Genshin Impact RPG'
   var link1 = 'https://genshin.mihoyo.com/en'
@@ -19,5 +18,5 @@ exports.run = async (client, message, args) => {
     .addField(`${ps}`, `${link2}`)
     .setImage('https://imgur.com/380aoSo.gif')
     .setFooter(`Plataformas: ${w}, ${pt} 4, Nintendo Switch, ${an}, ${ios}`)
-  return message.channel.send(TFMEmbed).then(msg => msg.delete({ timeout: 10000 }));
+  return message.channel.send(TFMEmbed)
 }

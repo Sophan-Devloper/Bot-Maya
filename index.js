@@ -244,7 +244,6 @@ client.on("message", async (message) => {
 client.on('guildCreate', guild => {
     const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
     var helpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
-    var sup = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
 
     const newguild = new Discord.MessageEmbed()
         .setColor('BLUE')

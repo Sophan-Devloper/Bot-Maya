@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Counter-Strike: Global Offensive'
   var link1 = 'https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/'
@@ -17,5 +16,5 @@ exports.run = async (client, message, args) => {
     .setTitle(`${game}`)
     .addField(`${st}`, `${link1}`)
     .setFooter(`Plataformas: ${win}, ${mc}, ${pt} 3/4, ${li}, ${x} 360`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(GameEmbed)
 }

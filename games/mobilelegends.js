@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Mobile Legends: Bang Bang'
   var link1 = 'https://play.google.com/store/apps/details?id=com.mobile.legends&hl=en_US&gl=US'
@@ -17,5 +16,5 @@ exports.run = async (client, message, args) => {
     .addField(`${ps}`, `${link1}`)
     .addField(`${as}`, `${link2}`)
     .setFooter(`Plataformas: ${an}, ${ios}`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(GameEmbed)
 }

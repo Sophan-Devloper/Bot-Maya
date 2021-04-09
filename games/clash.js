@@ -1,8 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
-
+  
   var game = '**Clash Royale**'
   var link1 = 'https://play.google.com/store/apps/details?id=com.supercell.clashroyale&hl=pt_BR'
   var link2 = 'https://apps.apple.com/br/app/clash-royale/id1053012308'
@@ -16,5 +15,5 @@ exports.run = async (client, message, args) => {
     .addField(`${ps}`, `${link1}`)
     .addField(`${as}`, `${link2}`)
     .setFooter(`${plat}`)
-  return message.channel.send(HelpEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  return message.channel.send(HelpEmbed)
 }

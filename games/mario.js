@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   var game = 'Mario'
   var link1 = 'https://store.nintendo.com.br/catalogsearch/result/?q=Mario'
@@ -20,5 +19,5 @@ exports.run = async (client, message, args) => {
     .addField(`${site}`, `${link1}`)
     .addField(`${ps}`, `${link2}`)
     .setFooter(`Plataformas: ${nsw}, ${an}, ${ios}, ${win}, ${mc}`)
-  return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 }))
+  return message.channel.send(GameEmbed)
 }

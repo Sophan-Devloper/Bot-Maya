@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
 
   const games = new Discord.MessageEmbed()
     .setColor('BLUE')
@@ -36,7 +35,7 @@ exports.run = async (client, message, args) => {
           .addField(`${st}`, `${link1}`)
           .addField(`${ps}`, `${link2}`)
           .setFooter(`Plataformas: ${pt} 4, ${nsw}, ${an}, ${xbo}, ${mc}, ${w}, ${ios}`)
-        return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+        return message.channel.send(GameEmbed)
       }
       if (reaction.emoji.name === '✌️') { // Não
         msg.delete()
@@ -60,7 +59,7 @@ exports.run = async (client, message, args) => {
           .addField(`${st}`, `${link1}`)
           .addField(`${ps}`, `${link2}`)
           .setFooter(`Plataformas: ${pt} 4, ${nsw}, ${an}, ${xbo}, ${mc}, ${w}, ${ios}`)
-        return message.channel.send(GameEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+        return message.channel.send(GameEmbed)
       }
     })
   })

@@ -11,12 +11,12 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'jokenpo <papel> <pedra> <tesoura>`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+        return message.channel.send(noargs)
     }
 
     const Options = ["pedra", "papel", "tesoura"]
     if (!Options.includes(args[0]))
-        return message.channel.send(":x: Opção Incorreta!").then(m => m.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(":x: Opção Incorreta!")
 
     if (args[0] === "pedra") {
 
@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
             .setDescription('Você 👊 x 👊 Maya')
 
         const random1 = [win, lose, draw]
-        message.channel.send(random1[Math.floor(Math.random() * random1.length)]).then(m => m.delete({ timeout: 5000 })).catch(err => { return })
+        message.channel.send(random1[Math.floor(Math.random() * random1.length)])
 
     } else if (args[0] === "papel") {
 
@@ -56,7 +56,7 @@ exports.run = async (client, message, args) => {
             .setDescription('Você ✋ x ✋ Maya')
 
         let random2 = [lose, win, draw]
-        message.channel.send(random2[Math.floor(Math.random() * random2.length)]).then(m => m.delete({ timeout: 5000 })).catch(err => { return })
+        message.channel.send(random2[Math.floor(Math.random() * random2.length)])
 
     } else if (args[0] === "tesoura") {
 
@@ -76,6 +76,6 @@ exports.run = async (client, message, args) => {
             .setDescription('Você ✌️ x ✌️ Maya')
 
         let random3 = [lose, win, draw]
-        message.channel.send(random3[Math.floor(Math.random() * random3.length)]).then(m => m.delete({ timeout: 5000 })).catch(err => { return })
+        message.channel.send(random3[Math.floor(Math.random() * random3.length)])
     }
 }

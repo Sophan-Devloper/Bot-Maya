@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
 
     const commands = new Discord.MessageEmbed()
         .setColor('BLUE')
-        .setTitle('Bloqueie canais para não usarem meus comandos')
-        .setDescription('`' + prefix + 'blockchannel #canal` Bloqueie canais\n' + '`' + prefix + 'unblockchannel #canal` Desbloqueie canais')
+        .setTitle('🚫 Bloqueie canais para não usarem meus comandos')
+        .setDescription('`' + prefix + 'lockcommands #canal` Bloqueie meus comandos\n' + '`' + prefix + 'unlockcommands #canal` Desbloqueie meus comandos')
     return message.channel.send(commands)
 }

@@ -1,3 +1,11 @@
+const Discord = require('discord.js')
+
 exports.run = async (client, message, args) => {
-    message.channel.send(`Nome no servidor: ${message.guild.owner.user.username}\nNome da conta: ${message.guild.owner.user.tag}`).then(m => m.delete({timeout: 8000})).catch(err => { return })
+
+    const embed = new Discord.MessageEmbed()
+        .setColor('BLUE')
+        .setTitle(message.guild.name)
+        .setDescription(`Dono/a: ${message.guild.owner.user} | ${message.guild.owner.user.tag}`)
+
+    return message.channel.send(embed)
 }

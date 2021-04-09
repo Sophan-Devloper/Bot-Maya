@@ -24,10 +24,9 @@ exports.run = async (client, message, args) => {
                 .setColor("GREEN")
                 .setAuthor(message.author.tag + ' ativou o modo AFK Global.', message.author.displayAvatarURL({ dynamic: true }))
                 .setDescription('`' + `${content1}` + '`')
-                .setFooter('O modo AFK Global desativado quando você mandar uma mensagem em qualquer servidor.')
+                .setFooter('O modo AFK Global será desativado quando você mandar uma mensagem em qualquer servidor.')
             return message.channel.send(embed)
         }
-
     }
 
     const content = args.join(" ")

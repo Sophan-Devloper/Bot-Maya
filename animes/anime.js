@@ -5,6 +5,13 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+    if (!args[99]) {
+        const reforma = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('Comando em reforma')
+        return message.channel.send(reforma)
+    }
+
     if (!args.length) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"

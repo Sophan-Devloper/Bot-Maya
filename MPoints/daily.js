@@ -29,8 +29,8 @@ exports.run = async (client, message, args) => {
       let money = db.fetch(`money_${message.author.id}`)
       if (money === null) { money = 0 }
 
-      db.add(`money_${message.author.id}`, amount);
-      db.set(`daily_${message.author.id}`, Date.now());
+      db.add(`money_${message.author.id}`, amount)
+      db.set(`daily_${message.author.id}`, Date.now())
 
       message.channel.send(`Você adquiriu ${amount} <:StarPoint:766794021128765469>MPoints.`).then(msg => msg.delete({ timeout: 6000 }))
     }

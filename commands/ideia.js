@@ -61,7 +61,7 @@ exports.run = async (client, message, args) => {
         .setFooter(`${prefix}ideia`)
     )
 
-    await message.channel.send(`${message.author}, a sua ideia foi enviada com sucesso no canal ${client.channels.cache.get(canal)}`).then(msg => msg.delete({ timeout: 60000 })).catch(err => { return })
+    await message.channel.send(`${message.author}, a sua ideia foi enviada com sucesso no canal ${client.channels.cache.get(canal)}`)
 
     const emojis = ["✅", "❌", "❔"]
 

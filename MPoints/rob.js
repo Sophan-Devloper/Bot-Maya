@@ -30,12 +30,12 @@ exports.run = async (client, message, args) => {
             return message.channel.send(nook)
         }
 
+        if (user.id == '821471191578574888') {
+            return message.channel.send('Você realmente quer me roubar? Tá doido é? Vou te quebrar no meio.')
+        }
+
         if (user.id == message.author.id) {
-            const nook = new Discord.MessageEmbed()
-                .setColor('#FF0000')
-                .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'rob @user`')
-            return message.channel.send(nook)
+            return message.channel.send(`${message.author}, você não pode roubar você mesmo.`)
         }
 
         var usermoney = db.get(`money_${user.id}`)

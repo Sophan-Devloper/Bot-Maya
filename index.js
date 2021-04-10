@@ -13,7 +13,7 @@ client.on("message", async (message) => {
     xp(message)
 
     let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) prefix = default_prefix
+    if (prefix === null) { prefix = "-" }
 
     if (db.get(`afk_${message.author.id}+${message.guild.id}`)) {
         db.delete(`afk_${message.author.id}+${message.guild.id}`)
@@ -235,8 +235,10 @@ client.on("ready", () => {
 })
 
 client.on("message", async (message) => {
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) { prefix = default_prefix }
+    if (message.author.bot) return false
+    if (message.channel.type == "dm") return false
+    var prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = "-" }
     if (!message.content.startsWith('<')) return false
     if (message.mentions.has(client.user.id)) { return message.channel.send('Prefixo atual: `' + prefix + '`') }
 })

@@ -2,6 +2,13 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+      const adm = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+      return message.channel.send(adm)
+    }
+
     var list = [
         'https://i.pinimg.com/originals/78/72/6a/78726a6ec74ba506137966e9f9250bd1.gif',
         'https://i.pinimg.com/originals/b1/b8/94/b1b8947fbb9e61d279125f678ff263ab.gif',

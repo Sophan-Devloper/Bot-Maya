@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
             const embed = new Discord.MessageEmbed()
                 .setColor("GREEN")
                 .setAuthor(message.author.tag + ' ativou o modo AFK Global', message.author.displayAvatarURL({ dynamic: true }))
-                .setDescription('`Nenhuma razão especificada.`')
+                .addField('Mensagem', 'Nenhuma razão especificada.')
                 .setFooter('O modo AFK Global será desativado quando você mandar uma mensagem em qualquer servidor.')
             return message.channel.send(embed)
         }
@@ -47,7 +47,7 @@ exports.run = async (client, message, args) => {
             const embed = new Discord.MessageEmbed()
                 .setColor("GREEN")
                 .setAuthor(message.author.tag + ' ativou o modo AFK Global.', message.author.displayAvatarURL({ dynamic: true }))
-                .setDescription('`' + `${content1}` + '`')
+                .addField('Mensagem', `${content1}`)
                 .setFooter('O modo AFK Global será desativado quando você mandar uma mensagem em qualquer servidor.')
             return message.channel.send(embed)
         }
@@ -60,7 +60,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor("GREEN")
             .setAuthor(message.author.tag + ' ativou o modo afk.', message.author.displayAvatarURL({ dynamic: true }))
-            .setDescription('`Nenhuma razão especificada.`')
+            .addField('Mensagem', 'Nenhuma razão especificada.')
             .setFooter('O modo afk será desativado quando você mandar uma mensagem')
         return message.channel.send(embed)
     }
@@ -70,7 +70,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor("GREEN")
             .setAuthor(message.author.tag + ' ativou o modo afk', message.author.displayAvatarURL({ dynamic: true }))
-            .setDescription('`' + `${content}` + '`')
+            .addField('Mensagem', `${content1}`)
             .setFooter('O modo afk será desativado quando você mandar uma mensagem')
         return message.channel.send(embed)
     }

@@ -1,6 +1,20 @@
-const { MessageEmbed } = require("discord.js")
+const Discord = require("discord.js")
 
 exports.run = async (client, message, args) => {
+
+    if (!message.guild.me.hasPermission("MANAGE_GUILD")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Gerenciar Servidor" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
+
+    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
 
     message.guild.fetchInvites().then((invites) => {
         const inviteCounter = {}
@@ -14,7 +28,7 @@ exports.run = async (client, message, args) => {
             inviteCounter[name] = (inviteCounter[name] || 0) + uses
         }))
 
-        let replyText = new MessageEmbed()
+        let replyText = new Discord.MessageEmbed()
             .setTitle(`📩 Convites ${message.guild.name}`)
             .setDescription(` \n`)
             .setColor("BLUE")

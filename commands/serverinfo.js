@@ -1,6 +1,13 @@
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
+
+    if (!message.guild.me.hasPermission("MANAGE_GUILD")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Gerenciar Servidor" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
 
     let region;
     switch (message.guild.region) {
@@ -24,7 +31,7 @@ exports.run = async (client, message, args) => {
             break;
     }
 
-    const embed = new MessageEmbed()
+    const embed = new Discord.MessageEmbed()
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
         .setColor('#f3f3f3')
         .setTitle(`${message.guild.name}`)

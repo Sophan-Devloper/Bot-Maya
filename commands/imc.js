@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
         const imcError = new Discord.MessageEmbed()
             .setColor("#FF0000")
             .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'imc Peso Altura`' + '\n \n**Atenção**\nPeso em **Kilogramas** e Altura em **centimentros**\n \n')
+            .setDescription('`' + prefix + 'imc Peso Altura`' + '\n \n**Atenção**\nPeso em **Kilogramas** e Altura em **Centimentros**\n \n')
             .addFields(
                 {
                     name: 'Exemplo',

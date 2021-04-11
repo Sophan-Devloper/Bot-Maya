@@ -4,11 +4,25 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+
+  let prefix = db.get(`prefix_${message.guild.id}`)
+  if (prefix === null) { prefix = "-" }
+
   if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
     return message.channel.send(adm)
+  }
+
+  if (!args[0]) {
+    const noargs = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle('⛅ Estação de Tempo da Maya')
+      .setDescription('• Aqui você pode ver o clima de qualquer lugar do mundo, explore o clima dos paises e cidades.')
+      .addField("Comando", '`' + prefix + 'clima SP/RJ/MG ou o nome da Cidade/Estado`')
+      .addField("Exemplo", '`' + prefix + 'clima SP ou São Paulo`')
+    return message.channel.send(noargs)
   }
 
   let city = args.join(" ")
@@ -17,8 +31,6 @@ exports.run = async (client, message, args) => {
   await weather.find({ search: city, degreeType: degreetype }, function (err, result) {
 
     if (!city) {
-      let prefix = db.get(`prefix_${message.guild.id}`)
-      if (prefix === null) { prefix = "-" }
 
       const nocity = new Discord.MessageEmbed()
         .setColor('#FF0000')
@@ -56,6 +68,6 @@ exports.run = async (client, message, args) => {
       .addField("Observação TimeTemp", current.observationtime, true)
       .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-    return message.channel.send(embed)
+    return message.channel.send(`${message.author}, isso aqui não é previsão do tempo`, embed)
   })
 }

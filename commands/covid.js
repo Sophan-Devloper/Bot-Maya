@@ -1,5 +1,6 @@
 const axios = require('axios')
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
@@ -22,10 +23,18 @@ exports.run = async (client, message, args) => {
             .setColor('BLUE')
             .setTitle('🔄 Loading...')
 
+        let prefix = db.get(`prefix_${message.guild.id}`)
+        if (prefix === null) prefix = "-"
         const noerl = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setDescription(`O argumento ***${args[0]}*** não existe ou os dados não foram publicados pela OMS (Organização Mundial da Saúde`)
-        return message.channel.send(loading).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(noerl))
+            .setDescription(`O argumento ***${args[0]}*** não existe ou os dados não foram publicados pela OMS (Organização Mundial da Saúde)`)
+            .addFields(
+                {
+                    name: 'Comando',
+                    value: '`' + prefix + 'covid BR/AR/USA/FR...`'
+                }
+            )
+        return message.channel.send(loading).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.channel.send(noerl))
     }
 
     const embed = new Discord.MessageEmbed()
@@ -63,5 +72,5 @@ exports.run = async (client, message, args) => {
             })
         .setFooter(message.author.username, message.author.displayAvatarURL())
 
-    await message.channel.send(embed)
+    await message.channel.send(`${message.author}, tenta colocar com a sigla de algúm pais`, embed)
 }

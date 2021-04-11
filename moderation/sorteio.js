@@ -25,6 +25,23 @@ exports.run = async (client, message, args) => {
     return message.channel.send(perms)
   }
 
+  if (!args[0]) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
+    const format = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
+      .addFields(
+        {
+          name: 'Exemplo',
+          value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
+        }
+      )
+    return message.channel.send(format)
+  }
+  
   if (!args[0].endsWith("s") && !args[0].endsWith("m") && !args[0].endsWith("h")) {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
@@ -135,10 +152,9 @@ exports.run = async (client, message, args) => {
       .setTitle(`Vencedor/a: ${winner.tag}`)
       .setDescription(`Parabéns ${winner}, você ganhou!\n \nPrêmio: ${prize}`)
       .setThumbnail(avatar)
-    channel.send(":tada: ***Sorteio Acabou*** ")
 
     winner.send(`Parabéééééééns!! Você ganhou o sorteio em **${message.guild.name}**.\n \nVocê ganhou: **${prize}**.`).catch(err => { return })
-    message.author.send(`${winner} foi o ganhador do sorteio em ${message.guild.name}.`).catch(err => { return })
-    channel.send(winembed).catch(err => { return })
+    message.author.send(`${winner.user.tag} foi o ganhador do sorteio em ${message.guild.name}.`).catch(err => { return })
+    channel.send(":tada: ***Sorteio Acabou*** ", winembed).catch(err => { return })
   }, ms(args[0]))
 }

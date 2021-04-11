@@ -89,6 +89,11 @@ client.on("message", async (message) => {
     if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
 
     try {
+        const commandFile = require(`./afksystem/${command}.js`)
+        return commandFile.run(client, message, args)
+    } catch (err) { }
+
+    try {
         const commandFile = require(`./commands/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }
@@ -179,15 +184,10 @@ client.on("guildMemberRemove", async (member, message) => {
     if (!client.channels.cache.get(canal)) { return }
 
     var msgleave = db.get(`msgleave_${member.guild.id}`)
-    if (msgleave === null) { msgleave = '`Os Adms não escreveram nada aqui`' }
+    if (msgleave === null) { msgleave = 'saiu do servidor' }
 
     if (canal) {
-        const leaveembed = new Discord.MessageEmbed()
-            .setColor('GRAY')
-            .setAuthor(member.user.tag + ' saiu do servidor', member.user.displayAvatarURL())
-            .setDescription('' + msgleave)
-
-        client.channels.cache.get(canal).send(leaveembed)
+        client.channels.cache.get(canal).send(`${member.user.tag} saiu do servidor`)
     }
 })
 
@@ -198,15 +198,10 @@ client.on("guildMemberAdd", (member) => {
     if (!client.channels.cache.get(canal)) { return }
 
     var msgwelcome = db.get(`msgwelcome_${member.guild.id}`)
-    if (msgwelcome === null) { msgwelcome = '`Os administradores são preguiçosos e não escreveram nada aqui`' }
+    if (msgwelcome === null) { msgwelcome = 'entrou no servidor.' }
 
     if (canal) {
-        const joinembed = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setAuthor(member.user.tag + ' entrou no servidor', member.user.displayAvatarURL())
-            .setDescription(`${member.user}, seja bem vindo a ${member.guild.name}\n \n` + msgwelcome)
-
-        return client.channels.cache.get(canal).send(joinembed)
+        return client.channels.cache.get(canal).send(`💞 ${member} ${msgwelcome}`)
     }
 })
 

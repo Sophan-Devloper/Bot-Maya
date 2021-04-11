@@ -4,6 +4,20 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
     message.delete()
 
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso das permissões "Gerenciar Mensagens" e "Gerenciar Canais" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
+
+    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+      const adm = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('Eu preciso das permissões "Gerenciar Mensagens" e "Gerenciar Canais" para utilizar esta função.')
+      return message.channel.send(adm)
+    }
+
     let user = message.mentions.members.first()
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
@@ -31,7 +45,7 @@ exports.run = async (client, message, args) => {
             .setTitle('Por favor, siga o formato correto')
             .setDescription(`Use o comando abaixo para reportar algo a equipe da ${message.guild.name}. \nO **@user** é opcional, use se quiser reportar algum membro.`)
             .addField('⠀', '`' + prefix + 'report @user O motivo da sua denúncia`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+        return message.channel.send(noargs)
     }
 
     if (user && !args[1]) {
@@ -42,7 +56,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'report <@user> O motivo do seu report`')
-        return message.channel.send(nop).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+        return message.channel.send(nop)
     }
 
     if (!user) {
@@ -72,7 +86,7 @@ exports.run = async (client, message, args) => {
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle('O seu report foi enviado com sucesso!')
-        return message.channel.send(`${message.author}`, ok).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+        return message.channel.send(`${message.author}`, ok)
     }
 
     if (user) {
@@ -102,6 +116,6 @@ exports.run = async (client, message, args) => {
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle('O seu report foi enviado com sucesso!')
-        return message.channel.send(`${message.author}`, ok).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+        return message.channel.send(`${message.author}`, ok)
     }
 }

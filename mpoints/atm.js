@@ -13,11 +13,20 @@ exports.run = async (client, message, args) => {
   let bank = db.get(`bank_${user.id}`)
   if (bank === null) bank = 0
 
+  var list = [
+    'Pessoas podem te roubar, tenha cuidado.',
+    'Mantenha seu dinheiro no banco',
+    'Sabia que você pode roubar o dinheiro de outras pessoas?',
+    'Já jogou blackjack hoje?',
+    'O banco é impossivel de roubar.'
+  ]
+  var frase = list[Math.floor(Math.random() * list.length)]
+
   const embed = new Discord.MessageEmbed()
     .setColor('#efff00')
     .setAuthor(`Finanças de ${user.user.tag}`, user.user.displayAvatarURL())
     .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
-    .setDescription(`Pessoas podem roubar dinheiro da carteira\nMantenha seu dinheiro no banco`)
+    .setDescription(frase)
     .addFields(
       {
         name: '💸 Carteira:',

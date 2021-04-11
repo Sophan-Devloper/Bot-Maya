@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 
-module.exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
 
     const embeddetail = new Discord.MessageEmbed()
         .setColor("BLUE")
@@ -26,5 +26,5 @@ module.exports.run = (client, message, args) => {
         .setTimestamp()
         .setFooter('Está mensagem será excluida em 1 minuto...')
 
-    message.channel.send(embeddetail).then(msg => msg.delete({timeout: 120000})).catch(err => {return})
+    message.channel.send(embeddetail)
 }

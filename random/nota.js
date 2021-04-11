@@ -2,7 +2,6 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-     
 
     var user = message.mentions.members.first()
     if (!user) {
@@ -13,7 +12,18 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'nota @user`')
-        return message.channel.send(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(nouser)
+    }
+
+    if (user.id === '451619591320371213') {
+        const embed1 = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setDescription(`🤔 Huum... Minha nota para ${user} é 1000. Ele é liiiiiiindo, perfeeeeito!!!`)
+        return message.channel.send(embed1)
+    }
+
+    if (user.id === '821471191578574888') {
+        return message.channel.send('Uma nota pra mim? Que tal infinito?')
     }
 
     var num = ['5', '6', '7', '8', '9', '5', '6', '7', '8', '9', '10']

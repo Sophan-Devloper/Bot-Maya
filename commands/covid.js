@@ -3,6 +3,13 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
+
     const baseUrl = "https://corona.lmao.ninja/v2"
     let url, response, corona;
 
@@ -14,11 +21,11 @@ exports.run = async (client, message, args) => {
         const loading = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🔄 Loading...')
-            
+
         const noerl = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle(`O argumento ***${args[0]}*** não existe ou os dados não foram publicados pela OMS (Organização Mundial da Saúde`)
-        return message.channel.send(loading).then(msg => msg.delete({ timeout: 7000 })).then(msg => msg.channel.send(noerl))
+            .setDescription(`O argumento ***${args[0]}*** não existe ou os dados não foram publicados pela OMS (Organização Mundial da Saúde`)
+        return message.channel.send(loading).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(noerl))
     }
 
     const embed = new Discord.MessageEmbed()

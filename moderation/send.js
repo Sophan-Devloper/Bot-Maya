@@ -6,12 +6,18 @@ exports.run = async (client, message, args) => {
     var prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = '-' }
 
-    if (!message.member.hasPermission("MANAGE_CHANNELS")) {
-         
-        const noperm = new Discord.MessageEmbed()
+    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
+
+    if (!message.member.hasPermission('MANAGE_CHANNELS')) {
+        const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(`${message.author}`, noperm).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(perms)
     }
 
     var canal = message.mentions.channels.first()

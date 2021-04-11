@@ -2,6 +2,13 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
   var list = [
     'https://imgur.com/RMxwAN7.gif',
     'https://imgur.com/I6bM3F2.gif',
@@ -17,10 +24,10 @@ exports.run = async (client, message, args) => {
   let user = message.mentions.users.first() || client.users.cache.get(args[0])
 
   if (!user)
-    return message.reply('Hey, quem você quer chamar de baka? `-baka @user`').then(msg => msg.delete({ timeout: 5000 }))
+    return message.reply('Hey, quem você quer chamar de baka? `-baka @user`')
 
   if (user === message.author)
-    return message.reply("você não pode chamar você mesmo de baka >.< `-baka @user`").then(msg => msg.delete({ timeout: 5000 }))
+    return message.reply("você não pode chamar você mesmo de baka >.< `-baka @user`")
 
   const embed = new Discord.MessageEmbed()
     .setColor('BLUE')

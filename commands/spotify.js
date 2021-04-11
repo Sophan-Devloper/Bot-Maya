@@ -3,8 +3,16 @@ const convert = require("parse-ms")
 
 exports.run = async (client, message, args) => {
 
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
     let avatar = user.user.displayAvatarURL({ format: 'png' })
+    var fotospot = 'https://imgur.com/vw6z7v4.png'
     if (message.mentions.users.first()) {
         user = message.mentions.users.first()
     } else {
@@ -41,6 +49,7 @@ exports.run = async (client, message, args) => {
             .addField("Artista", artist, false)
             .addField("Album", album, true)
             .addField("Resumo", `[\`${artist} - ${name}\`](${url})`, false)
+            .setFooter('Spotify e Discord fazendo seu dia melhor.', fotospot)
         message.channel.send(`${message.author}, também enviei no seu privado.`, embed)
         return message.author.send("Prontinho, vou deixar a música aqui :hearts:", embed).catch(err => { return })
     }

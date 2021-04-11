@@ -1,170 +1,174 @@
 const Discord = require("discord.js")
 const db = require("quick.db")
 
-module.exports = {
-  run: async (client, message, args) => {
-     
+exports.run = async (client, message, args) => {
 
-    if (!message.member.hasPermission(["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_ROLES"])) {
-      const perms = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Permissão Necessária: Administrador, Banir Membros, Manusear Roles (cargos)')
-      return message.channel.send(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
+  if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
 
-    let logchannel = db.get(`logchannel_${message.guild.id}`)
-    if (logchannel === null) {
-      let prefix = db.get(`prefix_${message.guild.id}`)
-      if (prefix === null) prefix = "-"
+  if (!message.member.hasPermission(["MANAGE_ROLES"])) {
+    const perms = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Permissão Necessária: Manusear Cargos')
+    return message.channel.send(perms)
+  }
 
-      const nolog = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Não há Canal Log registrado.')
-        .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-      return message.channel.send(nolog).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
-    }
+  let logchannel = db.get(`logchannel_${message.guild.id}`)
+  if (logchannel === null) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
-    if (!client.channels.cache.get(logchannel)) {
-      let prefix = db.get(`prefix_${message.guild.id}`)
-      if (prefix === null) prefix = "-"
+    const nolog = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Não há Canal Log registrado.')
+      .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
+    return message.channel.send(nolog)
+  }
 
-      const nolog1 = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Parece que o canal log foi excluido.')
-        .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-      return message.channel.send(nolog1).then(msg => msg.delete({ timeout: 120000 })).catch(err => { return })
-    }
+  if (!client.channels.cache.get(logchannel)) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
-    const user = message.mentions.members.first()
-    if (!user) {
-      let prefix = db.get(`prefix_${message.guild.id}`)
-      if (prefix === null) prefix = "-"
+    const nolog1 = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Parece que o canal log foi excluido.')
+      .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
+    return message.channel.send(nolog1)
+  }
 
-      const nouser = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Siga o formato correto')
-        .setDescription('`' + prefix + 'warn @user Razão (opcional)`')
-      return message.channel.send(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
+  const user = message.mentions.members.first()
+  if (!user) {
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
-    if (db.get(`whitelist_${user.id}`)) {// Rodrigo Couto
-      const banrody = new Discord.MessageEmbed()
-        .setColor('GREEN')
-        .setTitle(user.user.username + ' está na whitelist.')
-      return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
+    const nouser = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Siga o formato correto')
+      .setDescription('`' + prefix + 'warn @user Razão (opcional)`')
+    return message.channel.send(nouser)
+  }
 
-    if (message.mentions.users.first().bot) {
-      const nobot = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Bots não podem receber warns.')
-      return message.channel.send(nobot).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
+  if (db.get(`whitelist_${user.id}`)) {// Rodrigo Couto
+    const banrody = new Discord.MessageEmbed()
+      .setColor('GREEN')
+      .setTitle(user.user.username + ' está na whitelist.')
+    return message.channel.send(banrody)
+  }
 
-    if (message.author.id === user.id) {
-      const autowarn = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Auto warn não é uma opção.')
-      return message.channel.send(autowarn).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
+  if (message.mentions.users.first().bot) {
+    const nobot = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Bots não podem receber warns.')
+    return message.channel.send(nobot)
+  }
 
-    if (user.id === message.guild.owner.id) {
-      const owner = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Warn no dono do servidor não é uma opção.')
-      return message.channel.send(owner).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
+  if (message.author.id === user.id) {
+    const autowarn = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Auto warn não é uma opção.')
+    return message.channel.send(autowarn)
+  }
 
-    let reason = args.slice(1).join(" ")
-    if (!reason) { reason = `${message.author.username} não especificou nenhuma razão` }
+  if (user.id === message.guild.owner.id) {
+    const owner = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Warn no dono do servidor não é uma opção.')
+    return message.channel.send(owner)
+  }
+
+  let reason = args.slice(1).join(" ")
+  if (!reason) { reason = `${message.author.username} não especificou nenhuma razão` }
+
+  let warnings = db.get(`warnings_${message.guild.id}_${user.id}`)
+  if (warnings === 5) {
+    const limit = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle(`Limite de warns atingido`)
+      .setDescription(`${user} atingiu 4 warns. Está na hora de uma punição maior. Mute? Kick? Ban?`)
+    return message.channel.send(limit)
+  }
+
+  if (warnings === null) {
+    db.set(`warnings_${message.guild.id}_${user.id}`, 1)
+    const newwarn = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle('Alerta de Aviso')
+      .setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)
+    user.send(newwarn).catch(err => { return })
 
     let warnings = db.get(`warnings_${message.guild.id}_${user.id}`)
-    if (warnings === 5) {
-      const limit = new Discord.MessageEmbed()
-        .setColor('BLUE')
-        .setTitle(`Limite de warns atingido`)
-        .setDescription(`${user} atingiu 4 warns. Está na hora de uma punição maior. Mute? Kick? Ban?`)
-      return message.channel.send(limit).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-    }
+    let msg1 = new Discord.MessageEmbed()
+      .setTitle(`Sistema de Avisos ${message.guild.name}`)
+      .setColor('GRAY')
+      .addFields(
+        {
+          name: 'Usuário',
+          value: user.user.tag
+        },
+        {
+          name: 'Moderador',
+          value: message.author
+        },
+        {
+          name: 'Motivo',
+          value: reason
+        },
+        {
+          name: 'Warnings',
+          value: warnings
+        },
+      )
+      .setTimestamp()
+      .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
 
-    if (warnings === null) {
-      db.set(`warnings_${message.guild.id}_${user.id}`, 1)
-      const newwarn = new Discord.MessageEmbed()
-        .setColor('BLUE')
-        .setTitle('Alerta de Aviso')
-        .setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)
-      user.send(newwarn).catch(err => { return })
+    const sucess = new Discord.MessageEmbed()
+      .setColor('GREEN')
+      .setDescription(`Warn adicionado! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
 
-      let warnings = db.get(`warnings_${message.guild.id}_${user.id}`)
-      let msg1 = new Discord.MessageEmbed()
-        .setTitle(`Sistema de Avisos ${message.guild.name}`)
-        .setColor('GRAY')
-        .addFields(
-          {
-            name: 'Usuário',
-            value: user.user.tag
-          },
-          {
-            name: 'Moderador',
-            value: message.author
-          },
-          {
-            name: 'Motivo',
-            value: reason
-          },
-          {
-            name: 'Warnings',
-            value: warnings
-          },
-        )
-        .setTimestamp()
-        .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+    message.channel.send(sucess)
+    client.channels.cache.get(logchannel).send(msg1)
 
-      const sucess = new Discord.MessageEmbed()
-        .setColor('GREEN')
-        .setDescription(`O Warn foi um sucesso! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
+  } else if (warnings !== null) {
+    db.add(`warnings_${message.guild.id}_${user.id}`, 1)
+    const newwarn = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle('Alerta de Aviso')
+      .setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)
+    user.send(newwarn).catch(err => { return })
 
-      await message.channel.send(sucess).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-      client.channels.cache.get(logchannel).send(msg1)
+    let msg2 = new Discord.MessageEmbed()
+      .setTitle(`Sistema de Avisos ${message.guild.name}`)
+      .setColor('GRAY')
+      .addFields(
+        {
+          name: 'Usuário',
+          value: user.user.tag
+        },
+        {
+          name: 'Moderador',
+          value: message.author
+        },
+        {
+          name: 'Motivo',
+          value: reason
+        },
+        {
+          name: 'Warnings',
+          value: warnings
+        },
+      )
+      .setTimestamp()
+      .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
 
-    } else if (warnings !== null) {
-      db.add(`warnings_${message.guild.id}_${user.id}`, 1)
-      const newwarn = new Discord.MessageEmbed()
-        .setColor('BLUE')
-        .setTitle('Alerta de Aviso')
-        .setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)
-      user.send(newwarn).catch(err => { return })
+    const sucess = new Discord.MessageEmbed()
+      .setColor('GREEN')
+      .setDescription(`O Warn foi um sucesso! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
 
-      let msg2 = new Discord.MessageEmbed()
-        .setTitle(`Sistema de Avisos ${message.guild.name}`)
-        .setColor('GRAY')
-        .addFields(
-          {
-            name: 'Usuário',
-            value: user.user.tag
-          },
-          {
-            name: 'Moderador',
-            value: message.author
-          },
-          {
-            name: 'Motivo',
-            value: reason
-          },
-          {
-            name: 'Warnings',
-            value: warnings
-          },
-        )
-        .setTimestamp()
-        .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
-
-      const sucess = new Discord.MessageEmbed()
-        .setColor('GREEN')
-        .setDescription(`O Warn foi um sucesso! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
-
-      message.channel.send(sucess).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
-      client.channels.cache.get(logchannel).send(msg2)
-    }
+    message.channel.send(sucess)
+    client.channels.cache.get(logchannel).send(msg2)
   }
 }

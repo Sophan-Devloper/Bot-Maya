@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async (client, message, args) => {
+exports.run = async (client, message, args) => {
   message.delete()
 
   const rody = message.author.id === ("451619591320371213")
@@ -10,12 +10,18 @@ module.exports.run = async (client, message, args) => {
     return message.channel.send(sayMessage)
   }
 
-  let perms = message.member.hasPermission("MANAGE_MESSAGES")
-  if (!perms) {
+  if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Manusear Mensagens" para utilizar esta função.')
+    return message.author.send(adm).catch(err => { return })
+  }
+
+  if (!message.member.hasPermission("MANAGE_MESSAGES")) {
     const noperms = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão Necessária: Manusear Mensagens')
-    return message.channel.send(noperms).then(message => message.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(noperms)
   }
 
   if (!args[0]) {
@@ -26,7 +32,7 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'say Alguma coisa`')
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+    return message.channel.send(format)
   }
 
   const sayMessage = args.join(' ')

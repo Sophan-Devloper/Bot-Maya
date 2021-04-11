@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
+
     var list = [
         'O que é um pontinho amarelo em cima do prédio?\n||Um Fandangos suicida||',
         'Por que ele um Doritos quer se matar?\n||Porque a casa dele é um saco||',
@@ -40,7 +41,6 @@ exports.run = async (client, message, args) => {
     ]
 
     var rand = list[Math.floor(Math.random() * list.length)]
-    let user = client.users.cache.get(args[0])
 
     const PiadaEmbed = new Discord.MessageEmbed()
         .setColor('BLUE')

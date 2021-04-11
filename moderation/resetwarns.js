@@ -1,14 +1,20 @@
 const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = (client, message, args) => {
-     
+exports.run = async (client, message, args) => {
 
-    if (!message.member.hasPermission(["ADMINISTRATOR", "BAN_MEMBERS", "MANAGE_ROLES"])) {
+    if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
+
+    if (!message.member.hasPermission(["MANAGE_ROLES"])) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle('Permissão Necessária: Administrador, Banir Membros, Manusear Roles (cargos)')
-        return message.channel.send(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+            .setTitle('Permissão Necessária: Manusear Cargos')
+        return message.channel.send(perms)
     }
 
     if (!args[0]) {
@@ -19,7 +25,7 @@ module.exports.run = (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'resetwarns @user`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(noargs)
     }
 
     let user = message.mentions.members.first()
@@ -31,7 +37,7 @@ module.exports.run = (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'resetwarns @user`')
-        return message.channel.send(nouser).then(msg => msg.delete({ timeout: 5000 }))
+        return message.channel.send(nouser)
     }
 
     let warnings = db.get(`warnings_${message.guild.id}_${user.id}`)
@@ -39,7 +45,7 @@ module.exports.run = (client, message, args) => {
         const nowa = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${user.user.username} não tem nenhum warn.`)
-        return message.channel.send(nowa).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(nowa)
     }
 
     db.delete(`warnings_${message.guild.id}_${user.id}`)

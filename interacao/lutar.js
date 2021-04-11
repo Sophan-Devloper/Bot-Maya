@@ -3,6 +3,13 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
     var user = message.mentions.members.first()
     if (!user) {
         let prefix = db.get(`prefix_${message.guild.id}`)
@@ -28,7 +35,7 @@ exports.run = async (client, message, args) => {
             .setTitle('👑 Vitória')
             .setDescription(`Você ganhou a luta contra ${user.user.username}`)
 
-        return message.channel.send(lutando).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(vitória))
+        return message.channel.send(lutando)
     }
 
     if (result === 'lose') {
@@ -37,6 +44,6 @@ exports.run = async (client, message, args) => {
             .setTitle('⛑️ Derrota')
             .setDescription(`Você perdeu a luta contra ${user.user.username}`)
 
-        return message.channel.send(lutando).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(derrota))
+        return message.channel.send(lutando)
     }
 }

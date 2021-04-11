@@ -4,6 +4,13 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+      const adm = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+      return message.channel.send(adm)
+    }
+
     let timeout1 = 6140000
     let author1 = await db.fetch(`pego_${message.author.id}`)
 
@@ -23,13 +30,13 @@ exports.run = async (client, message, args) => {
 
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
-            return message.channel.send(`Você pode jogar novamente em ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 6000 }))
+            return message.channel.send(`Você pode jogar novamente em ${time.minutes}m e ${time.seconds}s`)
         } else {
             let amount = Math.floor(Math.random() * 1000) + 1;
             db.add(`money_${message.author.id}`, amount)
             db.set(`lotery_${message.author.id}`, Date.now())
 
-            message.channel.send(`Você jogou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints.`).then(msg => msg.delete({ timeout: 6000 }))
+            message.channel.send(`${message.author} jogou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints.`)
         }
     }
 }

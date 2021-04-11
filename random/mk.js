@@ -1,7 +1,13 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-   
+
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
 
   var linkserver = 'https://discord.gg/mx8eMx6'
 
@@ -11,5 +17,5 @@ exports.run = async (client, message, args) => {
     .setURL('https://discord.gg/mx8eMx6')
     .setDescription(`${message.author}, vem pra minha casa :heart:\n \n[Meu servidor](${linkserver})`)
     .setImage('https://imgur.com/cjoVaGJ.gif')
-  await message.channel.send(HelpEmbed).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+  await message.channel.send(HelpEmbed)
 }

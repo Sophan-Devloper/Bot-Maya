@@ -1,13 +1,20 @@
 const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
+
+    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(perms)
     }
 
     if (!args[0]) {
@@ -91,7 +98,7 @@ module.exports.run = (client, message, args) => {
                                         const canceled3 = new Discord.MessageEmbed()
                                             .setColor('GREEN')
                                             .setTitle('Comando cancelado.')
-                                        msg.channel.send(canceled3).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+                                        msg.channel.send(canceled3)
                                     }
                                 })
                             })
@@ -102,7 +109,7 @@ module.exports.run = (client, message, args) => {
                             const canceled2 = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('Comando cancelado.')
-                            msg.channel.send(canceled2).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+                            msg.channel.send(canceled2)
                         }
                     })
                 })
@@ -112,7 +119,7 @@ module.exports.run = (client, message, args) => {
                 const canceled = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('Comando cancelado.')
-                msg.channel.send(canceled).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+                msg.channel.send(canceled)
             }
         })
     })

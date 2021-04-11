@@ -2,18 +2,23 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-     
 
-    let member = message.mentions.members.first()
-    let reason = args.slice(1).join(" ")
+    if (!message.guild.me.hasPermission("KICK_MEMBERS")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Kickar Membros" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
 
     if (!message.member.hasPermission('KICK_MEMBERS')) {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Expulsar Membros')
-        return message.channel.send(permss).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(permss)
     }
 
+    let member = message.mentions.members.first()
+    let reason = args.slice(1).join(" ")
     let logchannel = db.get(`logchannel_${message.guild.id}`)
     if (logchannel === null) {
         let prefix = db.get(`prefix_${message.guild.id}`)
@@ -23,7 +28,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('O logchannel não foi definido.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-        return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+        return message.channel.send(nochannel)
     }
 
     if (!client.channels.cache.get(logchannel)) {
@@ -45,7 +50,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'kick @user Razão do kick (opcional)`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(noargs)
     }
 
     if (!member) {
@@ -56,14 +61,14 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'kick @user Razão do kick (opcional)`')
-        return message.channel.send(noargs1).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(noargs1)
     }
 
     if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
         const banrody = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle(member.user.username + ' está na whitelist.')
-        return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(banrody)
     }
 
     if (member.hasPermission(['ADMINISTRATOR'])) {
@@ -77,14 +82,14 @@ exports.run = async (client, message, args) => {
         const nokick = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(member.user.username + ' tem algum cargo maior que o meu')
-        return message.channel.send(nokick).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(nokick)
     }
 
     if (member.id === message.author.id) {
         const autokick = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Autokick não é uma opção')
-        return message.channel.send(autokick).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(autokick)
     }
 
     if (!reason) { reason = `${message.author.username} não especificou nenhuma razão` }
@@ -149,7 +154,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('Comando cancelado.')
 
-                message.channel.send(cancel).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+                message.channel.send(cancel)
             }
         })
     })

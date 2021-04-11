@@ -3,6 +3,13 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
   var list = [
     'https://imgur.com/ox15B5R.gif',
     'https://imgur.com/vpv5tE0.gif',
@@ -41,7 +48,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Erroooou')
       .setDescription('`' + prefix + 'highfive @user`')
-    return message.channel.send(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(nouser)
   }
 
   if (user.id === '821471191578574888') {
@@ -50,7 +57,7 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setDescription(`${message.author.username} & ${user.username} mandaram um HIGHFIVE!`)
       .setImage(rand)
-    return message.channel.send(embed1).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+    return message.channel.send(embed1)
   }
 
   const embed = new Discord.MessageEmbed()

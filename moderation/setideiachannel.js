@@ -3,13 +3,25 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    let permss = message.member.hasPermission("ADMINISTRATOR")
-    if (!permss) {
-        const noperm = new Discord.MessageEmbed()
+    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+        const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle('Permissão Necessária: Administrador')
+            .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
 
-        return message.channel.send(noperm)
+    if (!message.guild.me.hasPermission("ADD_REACTIONS")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
+    
+    if (!message.member.hasPermission('MANAGE_CHANNELS')) {
+        const perms = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Permissão Necessária: Manusear Canais')
+        return message.channel.send(perms)
     }
 
     if (!args[0]) {
@@ -82,7 +94,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🎉 Novo Comando Liberado!')
             .setDescription('`' + prefix + 'ideia Sua ideia em diante`\n \nEnvie ideias para o servidor votar.')
 
-        setTimeout(function(){
+        setTimeout(function () {
             message.channel.send(liberado)
         }, 5000)
 

@@ -1,17 +1,22 @@
 const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async (bot, message, args) => {
-     
+exports.run = async (client, message, args) => {
+
+    if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
 
     let perms = message.member.hasPermission("MANAGE_ROLES")
     if (!perms) {
-        const noperms = new Discord.MessageEmbed()
+        const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle('Permissão necessária: Manusear Roles (cargos)')
-        return message.channel.send(noperms).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+            .setTitle('Permissão Necessária: Manusear Roles (cargos)')
+        return message.channel.send(permss)
     }
-
     let user = message.mentions.members.first()
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
@@ -21,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'removerole @user @cargo`')
-        return message.channel.send(nouser).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+        return message.channel.send(nouser)
     }
 
     let role = message.mentions.roles.first()
@@ -30,14 +35,14 @@ module.exports.run = async (bot, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'removerole @user @cargo`')
-        return message.channel.send(norole).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+        return message.channel.send(norole)
     }
 
     if (!user.roles.cache.has(role.id)) {
         const norole = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${user.user.username} não possui este cargo.`)
-        return message.channel.send(norole).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+        return message.channel.send(norole)
     }
 
     let linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
@@ -72,5 +77,5 @@ module.exports.run = async (bot, message, args) => {
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setDescription(`O cargo ${role} foi removido de ${user.user.username} com sucesso.`)
-    return message.channel.send(sucess).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+    return message.channel.send(sucess)
 }

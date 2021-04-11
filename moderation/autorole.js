@@ -2,7 +2,6 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-     
 
     var role = db.get(`autorole_${message.guild.id}`)
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -25,7 +24,7 @@ exports.run = async (client, message, args) => {
                     inline: true
                 }
             )
-        return message.channel.send(autoroleautal).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+        return message.channel.send(autoroleautal)
     }
 
     if (role === null) {
@@ -39,7 +38,7 @@ exports.run = async (client, message, args) => {
                     inline: true
                 }
             )
-        return message.channel.send(autoroleautal).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+        return message.channel.send(autoroleautal)
     }
 
 }

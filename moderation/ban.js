@@ -1,15 +1,20 @@
 const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async (client, message, args) => {
-   
+exports.run = async (client, message, args) => {
 
-  let perms = message.member.hasPermission("BAN_MEMBERS")
-  if (!perms) {
-    const noperm = new Discord.MessageEmbed()
-      .setColor('#FF0000') // Red 
+  if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Banir Membros" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
+  if (!message.member.hasPermission('BAN_MEMBERS')) {
+    const permss = new Discord.MessageEmbed()
+      .setColor('#FF0000')
       .setTitle('Permissão Necessária: Banir Membros')
-    return message.channel.send(noperm).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+    return message.channel.send(permss)
   }
 
   let logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -21,7 +26,7 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Não há Canal Log registrado.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nolog).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+    return message.channel.send(nolog)
   }
 
   if (!client.channels.cache.get(logchannel)) {
@@ -32,7 +37,7 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Parece que o canal log foi excluido.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nolog1).then(msg => msg.delete({ timeout: 120000 })).catch(err => { return })
+    return message.channel.send(nolog1)
   }
 
   var user = message.mentions.members.first()
@@ -44,35 +49,35 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato')
       .setDescription('`' + prefix + 'ban @user Razão`')
-    return message.channel.send(nouser).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(nouser)
   }
 
   if (db.get(`whitelist_${user.id}`)) {// Rodrigo Couto
     const banrody = new Discord.MessageEmbed()
       .setColor('GREEN')
       .setTitle(user.user.username + ' está na whitelist.')
-    return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(banrody)
   }
 
   if (user.id === message.author.id) {
     const autoban = new Discord.MessageEmbed()
       .setColor('#ff0000')
       .setTitle('Banir você mesmo não é uma opção.')
-    return message.channel.send(autoban).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(autoban)
   }
 
   if (user.id === message.guild.owner.id) {
     const banowner = new Discord.MessageEmbed()
       .setColor('#ff0000')
       .setTitle('Banir o dono do servidor não é uma opção.')
-    return message.channel.send(banowner).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(banowner)
   }
 
   if (user.hasPermission('BAN_MEMBERS')) {
     const banperm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle(`${user.user.username} tem permissões importantes neste servidor, não posso banir.`)
-    return message.channel.send(banperm).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(banperm)
   }
 
   var reason = args.slice(1).join(" ")
@@ -138,7 +143,7 @@ module.exports.run = async (client, message, args) => {
           .setColor('GREY')
           .setTitle('Comando cancelado.')
 
-        message.channel.send(cancel).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+        message.channel.send(cancel)
       }
     })
   })

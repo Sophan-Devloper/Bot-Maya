@@ -1,11 +1,31 @@
 const canvacord = require('canvacord/src/Canvacord')
-const { MessageAttachment } = require('discord.js')
+const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-        const member = message.mentions.users.first() || message.author;
+
+        if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+                const adm = new Discord.MessageEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+                return message.channel.send(adm)
+        }
+
+        const member = message.mentions.users.first() || message.author
+
+        if (!member) {
+                let prefix = db.get(`prefix_${message.guild.id}`)
+                if (prefix === null) prefix = "-"
+
+                const nouser = new Discord.MessageEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('Erroooou')
+                        .setDescription('`' + prefix + 'beaut @user`')
+                return message.reply(nouser)
+        }
         const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })
 
         const image = await canvacord.beautiful(memberAvatar)
-        const beautiful = new MessageAttachment(image, 'beautiful.png')
+        const beautiful = new Discord.MessageAttachment(image, 'beautiful.png')
         return message.channel.send(beautiful)
 }

@@ -7,12 +7,26 @@ exports.run = async (client, message, args) => {
    let prefix = db.get(`prefix_${message.guild.id}`)
    if (prefix === null) prefix = "-"
 
+   if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+      const adm = new Discord.MessageEmbed()
+         .setColor('#FF0000')
+         .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
+      return message.channel.send(adm)
+   }
+
+   if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
+      const adm = new Discord.MessageEmbed()
+         .setColor('#FF0000')
+         .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
+      return message.channel.send(adm)
+   }
+
    let perms = message.member.hasPermission("MANAGE_ROLES")
    if (!perms) {
-      const noperms = new Discord.MessageEmbed()
+      const permss = new Discord.MessageEmbed()
          .setColor('#FF0000')
-         .setTitle('Permissão necessária: Manusear Roles (cargos)')
-      return message.channel.send(noperms).then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
+         .setTitle('Permissão Necessária: Manusear Roles (cargos)')
+      return message.channel.send(permss)
    }
 
    const logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -24,7 +38,7 @@ exports.run = async (client, message, args) => {
          .setColor('#FF0000')
          .setTitle('Não há Canal Log registrado.')
          .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-      return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 })).catch(err => { return })
+      return message.channel.send(nolog)
    }
 
    if (!client.channels.cache.get(logchannel)) {
@@ -35,7 +49,7 @@ exports.run = async (client, message, args) => {
          .setColor('#FF0000')
          .setTitle('Parece que o canal log foi excluido.')
          .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-      return message.channel.send(nolog).then(msg => msg.delete({ timeout: 120000 })).catch(err => { return })
+      return message.channel.send(nolog)
    }
 
    const role = message.guild.roles.cache.find(role => role.name === 'Muted')
@@ -89,16 +103,16 @@ exports.run = async (client, message, args) => {
    if (!args[0]) {
       const nomember = new Discord.MessageEmbed()
          .setColor('#FF0000')
-         .setTitle('Favor, mencione o usuário.')
+         .setTitle('Por favor, mencione o usuário.')
          .setDescription('`' + prefix + 'mute @user 10s/m/h Razão`')
-      return message.channel.send(nomember).then(msg => msg.delete({ timeout: 60000 })).catch(err => { return })
+      return message.channel.send(nomember)
    }
 
    if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
       const banrody = new Discord.MessageEmbed()
          .setColor('GREEN')
          .setTitle(member.user.username + ' está na whitelist.')
-      return message.channel.send(banrody).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+      return message.channel.send(banrody)
    }
 
    if (!role.editable) {
@@ -120,7 +134,6 @@ exports.run = async (client, message, args) => {
          message.channel.send(soberol)
       }, 6000)
       return message.channel.send(sobcarg)
-
    }
 
    if (member.id === message.author.id) {
@@ -154,14 +167,14 @@ exports.run = async (client, message, args) => {
       const dono = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('Mutar o dono do servidor não é uma opção.')
-      return message.channel.send(dono).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+      return message.channel.send(dono)
    }
 
    if (member.hasPermission('ADMINISTRATOR')) {
       const unbannable = new Discord.MessageEmbed()
          .setColor('#FF0000')
-         .setTitle('Esta pessoa tem um cargo maior que o meu.')
-      return message.channel.send(unbannable).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+         .setTitle('Esta pessoa tem permissões importantes ou tem um cargo maior que o meu.')
+      return message.channel.send(unbannable)
    }
 
    var time = args[1]
@@ -219,7 +232,7 @@ exports.run = async (client, message, args) => {
       const limitover = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('O tempo não pode passar de 4 digitos.')
-      return message.channel.send(limitover).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+      return message.channel.send(limitover)
    }
 
    let reason = args.slice(2).join(" ")
@@ -343,7 +356,7 @@ exports.run = async (client, message, args) => {
                   .setDescription(`Mais informações em ${client.channels.cache.get(logchannel).name}`)
 
                message.channel.send(rela)
-                  client.channels.cache.get(logchannel).send(muteembed)
+               client.channels.cache.get(logchannel).send(muteembed)
             }
             if (reaction.emoji.name === '❌') { // MPEmbed
                msg.delete()

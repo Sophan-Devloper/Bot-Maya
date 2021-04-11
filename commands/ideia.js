@@ -3,6 +3,20 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+  if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
+  if (!message.guild.me.hasPermission("ADD_REACTIONS")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
   var canal = db.get(`ideiachannel_${message.guild.id}`)
   if (canal === null) {
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -42,7 +56,7 @@ exports.run = async (client, message, args) => {
     return message.reply(noideia)
   }
 
-  if (content.length > 500) {
+  if (content.length > 300) {
     const umk = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Sua ideia não pode passar de 500 caracteres')

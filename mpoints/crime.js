@@ -3,6 +3,13 @@ const db = require('quick.db')
 const ms = require('parse-ms')
 
 exports.run = async (client, message, args) => {
+
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+      const adm = new Discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+      return message.channel.send(adm)
+    }
     // 🏠 1  Casa - 🏦 2 Mansão - 🏛️ 3 Prefeitura - 🏣 4 Cartório - 📨 5 Correios - 💍 6 Joaleria - 🏢 7 Shopping - 🏭 8 Fabrica - 🏩 9 Motel - 🪙 10 Banco
 
     let user = message.author
@@ -106,7 +113,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da casa, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -153,7 +160,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da mansão, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -200,7 +207,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da prefeitura, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -247,7 +254,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do cartório, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -303,7 +310,7 @@ exports.run = async (client, message, args) => {
                                                 if (amount < 40000) {
                                                     const win = new Discord.MessageEmbed()
                                                         .setColor('GREEN')
-                                                        .setTitle('O roubo foi um sucesso!')
+                                                       .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                         .setDescription(`Com o roubo do cartório, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
                                                     return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
                                                 }
@@ -350,7 +357,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da joaleria, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -397,7 +404,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do shopping, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -444,7 +451,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da fabrica, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -491,7 +498,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do motel, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
@@ -538,7 +545,7 @@ exports.run = async (client, message, args) => {
 
                                                 const win = new Discord.MessageEmbed()
                                                     .setColor('GREEN')
-                                                    .setTitle('O roubo foi um sucesso!')
+                                                   .setTitle(`${message.author} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do banco, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))

@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
         const imcError = new Discord.MessageEmbed()
             .setColor("#FF0000")
             .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'imc Peso Altura)`' + '\n \nAtenção: Peso em **Kilogramas** e **Altura** em centimentros')
+            .setDescription('`' + prefix + 'imc Peso Altura`' + '\n \nAtenção: Peso em **Kilogramas** e **Altura** em centimentros')
             .addFields(
                 {
                     name: 'Exemplo',
@@ -81,12 +81,12 @@ exports.run = async (client, message, args) => {
     if (imc < 24.9 && imc > 18.5) category = "Padrão"
 
     const embed = new Discord.MessageEmbed()
-        .setTitle(`${message.author.username}\'s IMC`)
+        .setColor("BLUE")
+        .setTitle(`📉 ${message.author.username}\'s IMC`)
         .addField('Peso', weight)
         .addField('Altura', height)
         .addField('IMC', imc)
         .addField('Categoria', category)
-        .setColor("#DCDCDC")
 
     await message.channel.send(embed)
 }

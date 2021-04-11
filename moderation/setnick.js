@@ -2,17 +2,22 @@ const Discord = require("discord.js")
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-   
+
+  if (!message.guild.me.hasPermission("MANAGE_NICKNAMES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Manusear Nicknames (Nomes/Apelidos)" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
 
   let prefix = db.get(`prefix_${message.guild.id}`)
   if (prefix === null) prefix = "-"
 
-  let perms = message.member.hasPermission("MANAGE_NICKNAMES")
-  if (!perms) {
+  if (!message.member.hasPermission("MANAGE_NICKNAMES")) {
     const noperms = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão necessária: Manusear Nicknames (Nomes/Apelidos)')
-    return message.channel.send(noperms).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+    return message.channel.send(noperms)
   }
 
   let user = message.mentions.users.first()
@@ -21,7 +26,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'setnick @user NovoNome`')
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+    return message.channel.send(format)
   }
 
   let nick = args.slice(1).join(" ")
@@ -30,7 +35,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'setnick @user NovoNome`')
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+    return message.channel.send(format)
   }
 
   let linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
@@ -49,7 +54,12 @@ exports.run = async (client, message, args) => {
             inline: true
           },
           {
-            name: 'API Connect Problem Ask',
+            name: 'Unknow Member',
+            value: `O usuário saiu do servidor.`,
+            inline: true
+          },
+          {
+            name: 'API Connect Problem Asking',
             value: 'Tente novamente, o servidor reconectou.',
             inline: true
           },
@@ -59,12 +69,12 @@ exports.run = async (client, message, args) => {
           }
         )
 
-      message.channel.send(erro)
+      return message.channel.send(erro)
     }
   })
 
   const sucess = new Discord.MessageEmbed()
     .setColor('GREEN')
     .setDescription(`O nickname de ${user.tag} foi alterado para ${nick}`)
-  return message.channel.send(sucess).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+  return message.channel.send(sucess)
 }

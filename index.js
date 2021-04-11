@@ -1,8 +1,7 @@
 const Discord = require("discord.js")
 const client = new Discord.Client()
-const { token, default_prefix } = require("./config.json")
+const { token } = require("./config.json")
 const db = require('quick.db')
-const { get } = require("request-promise-native")
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
 
@@ -17,28 +16,27 @@ client.on("message", async (message) => {
 
     if (db.get(`afk_${message.author.id}+${message.guild.id}`)) {
         db.delete(`afk_${message.author.id}+${message.guild.id}`)
-        message.channel.send(`${message.author}, o modo AFK foi desativado.`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        message.channel.send(`${message.author}, o modo AFK foi desativado.`).then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
     }
 
     if (db.get(`afk_${message.author.id}+${message.author.id}`)) {
         db.delete(`afk_${message.author.id}+${message.author.id}`)
-        message.channel.send(`${message.author}, o modo AFK Global foi desativado.`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        message.channel.send(`${message.author}, o modo AFK Global foi desativado.`).then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
     }
 
     if (message.mentions.members.first()) {
-
         if (db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)) { // AFK Sistema Global
             const off = new Discord.MessageEmbed()
-                .setColor('#01eff8')
-                .addField(`${message.mentions.members.first().user.username} está offline.`, '`' + `${db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)}` + '`')
-                .setFooter('AFK Global System')
-            return message.channel.send(`${message.author}`, off)
+                .setColor('#B98823')
+                .setTitle('🔇 AFK Global System')
+                .addField(`${message.mentions.members.first().user.username} está offline no momento.`, '```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)}` + '```')
+            message.channel.send(`${message.author}`, off).then(msg => msg.delete({ timeout: 120000 })).catch(err => { return })
         } else if (db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)) { // AFK Sistema Servidor
             const off = new Discord.MessageEmbed()
-                .setColor('BLUE')
-                .addField(`${message.mentions.members.first().user.username} está offline.`, '`' + `${db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)}` + '`')
-                .setFooter('AFK Server System')
-            return message.channel.send(`${message.author}`, off)
+                .setColor('#B98823')
+                .setTitle('🔇 AFK Server System')
+                .addField(`${message.mentions.members.first().user.username} está offline no momento.`, '```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)}` + '```')
+            message.channel.send(`${message.author}`, off).then(msg => msg.delete({ timeout: 120000 })).catch(err => { return })
         }
     }
 
@@ -46,28 +44,13 @@ client.on("message", async (message) => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
 
-    if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
-
-        const embedperm = new Discord.MessageEmbed()
-            .setColor('BLUE')
-            .setTitle('Ative a função Administrador')
-            .setDescription('1 - Acesse as "Configurações do Servidor"\n2 - Clique em "Cargos"\n3 - Procure pelo meu cargo "Maya"\n4 - A permissão "Administrador" é a última, desça até ela e ative.\n5 - Salve as alterações.')
-            .setFooter(`Maya Dicas`, message.client.user.displayAvatarURL())
-
-        const adm = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Eu preciso da função "ADMINISTRADOR" para liberar todas as minhas funções.')
-
-        return message.channel.send(adm).then(msg => msg.channel.send(embedperm))
-    }
-
     if (db.get(`blacklist_${message.author.id}`)) {
         message.delete()
         const blocked = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Você está na blacklist.')
-            .setDescription('Você não tem acesso a nenhum dos meus comandos.')
-        return message.channel.send(`${message.author}`, blocked).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
+            .setDescription(`${message.author}, você não tem acesso a nenhum dos meus comandos.`)
+        return message.channel.send(`${message.author}`, blocked).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
     }
 
     function xp(message) {
@@ -79,7 +62,7 @@ client.on("message", async (message) => {
                 let newLevel = db.set(`level_${message.author.id}`, level)
                 let xpchannel = db.get(`xpchannel_${message.guild.id}`)
                 if (xpchannel === null) { return }
-                if (!db.get(`xpchannel_${message.guild.id}`)) { return false }
+                if (!db.get(`xpchannel_${message.guild.id}`)) { return }
                 if (client.channels.cache.get(xpchannel)) {
                     const newlevel = new Discord.MessageEmbed()
                         .setColor('GREEN')
@@ -161,6 +144,11 @@ client.on("message", async (message) => {
     } catch (err) { }
 
     try {
+        const commandFile = require(`./maya/${command}.js`)
+        return commandFile.run(client, message, args)
+    } catch (err) { }
+
+    try {
         const commandFile = require(`./perfil/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }
@@ -186,9 +174,9 @@ client.on("message", async (message) => {
 
 client.on("guildMemberRemove", async (member, message) => {
     var canal = db.get(`leavechannel_${member.guild.id}`)
-    if (canal === null) { return false }
+    if (canal === null) { return }
 
-    if (!client.channels.cache.get(canal)) { return false }
+    if (!client.channels.cache.get(canal)) { return }
 
     var msgleave = db.get(`msgleave_${member.guild.id}`)
     if (msgleave === null) { msgleave = '`Os Adms não escreveram nada aqui`' }
@@ -205,9 +193,9 @@ client.on("guildMemberRemove", async (member, message) => {
 
 client.on("guildMemberAdd", (member) => {
     var canal = db.get(`welcomechannel_${member.guild.id}`)
-    if (canal === null) { return false }
+    if (canal === null) { return }
 
-    if (!client.channels.cache.get(canal)) { return false }
+    if (!client.channels.cache.get(canal)) { return }
 
     var msgwelcome = db.get(`msgwelcome_${member.guild.id}`)
     if (msgwelcome === null) { msgwelcome = '`Os administradores são preguiçosos e não escreveram nada aqui`' }
@@ -224,7 +212,7 @@ client.on("guildMemberAdd", (member) => {
 
 client.on("guildMemberAdd", (member) => {
     var role = db.get(`autorole_${member.guild.id}`)
-    if (role === null) { return false }
+    if (role === null) { return }
     return member.roles.add(role)
 })
 
@@ -235,11 +223,11 @@ client.on("ready", () => {
 })
 
 client.on("message", async (message) => {
-    if (message.author.bot) return false
-    if (message.channel.type == "dm") return false
+    if (message.author.bot) return
+    if (message.channel.type == "dm") return
     var prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
-    if (!message.content.startsWith('<')) return false
+    if (!message.content.startsWith('<')) return
     if (message.mentions.has(client.user.id)) { return message.channel.send('Prefixo atual: `' + prefix + '`') }
 })
 

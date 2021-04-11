@@ -1,9 +1,7 @@
 const Discord = require("discord.js")
 const db = require('quick.db')
-const moment = require('moment')
 
 exports.run = async (client, message, args) => {
-     
 
     let user = message.mentions.members.first() || message.member
 
@@ -34,17 +32,20 @@ exports.run = async (client, message, args) => {
     let rp = await db.fetch(`rp_${user.id}`)
     if (rp === null) rp = 0
 
+    let bank = db.get(`bank_${user.id}`)
+    if (bank === null) bank = 0
+
     let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não escreveu nada ainda.`
 
 
-    const casamento = new Discord.MessageEmbed()
+    const perfil = new Discord.MessageEmbed()
         .setTitle(`📃 Perfil Pessoal de ${user.user.username}`)
-        .setColor('#bf3bfc')
+        .setColor('#BF3BFC')
         .addFields(
             {
-                name: `💍 Em relacionamento com`,
-                value: marry
+                name: `💍 ${marry}`,
+                value: '⠀'
             },
             {
                 name: '❤️ Familia',
@@ -56,9 +57,13 @@ exports.run = async (client, message, args) => {
                 inline: true
             },
             {
-                name: '🌐 Level Interservidor',
-                value: `${level}<:level:766847577416138772>`,
+                name: ':bank: Banco',
+                value: `${bank}<:StarPoint:766794021128765469>MPoints`,
                 inline: true
+            },
+            {
+                name: '🌐 Level Interservidor',
+                value: `${level}<:level:766847577416138772>`
             },
             {
                 name: 'Reputação',
@@ -70,5 +75,5 @@ exports.run = async (client, message, args) => {
             }
         )
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
-    message.channel.send(casamento).then(msg => msg.delete({ timeout: 10000 }))
+    await message.channel.send(perfil)
 }

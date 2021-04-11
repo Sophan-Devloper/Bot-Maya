@@ -1,14 +1,20 @@
 const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async (client, message, args) => {
-   
+exports.run = async (client, message, args) => {
+
+  if (!message.guild.me.hasPermission("BAN_MEMBERS")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Banir Membros" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
 
   if (!message.member.hasPermission('BAN_MEMBERS')) {
     const permss = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão Necessária: Banir Membros')
-    return message.channel.send(permss).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+    return message.channel.send(permss)
   }
 
   let logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -20,7 +26,7 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('O logchannel não foi definido.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+    return message.channel.send(nochannel)
   }
 
   if (!db.get(`logchannel_${message.guild.id}`)) {
@@ -31,7 +37,7 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('O logchannel não foi definido.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nochannel).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+    return message.channel.send(nochannel)
   }
 
   let member = args[0]
@@ -43,7 +49,7 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'unban IdDoUsuário`' + '\n \nNão tem o ID do usuário? \n`Configurações do Servidor - Banimentos - Copie o ID do usuário`')
-    return message.channel.send(nomember).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+    return message.channel.send(nomember)
   }
 
   if (args[0].length <= 17) {
@@ -51,7 +57,7 @@ module.exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Por favor, informe o ID de um usuário')
       .setDescription('Não tem o ID do usuário? \n`Configurações do Servidor - Banimentos - Copie o ID do usuário`')
-    return message.channel.send(noid).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+    return message.channel.send(noid)
   }
 
   const UnbanEmbed = new Discord.MessageEmbed()

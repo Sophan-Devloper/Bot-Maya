@@ -2,31 +2,27 @@ const Discord = require("discord.js")
 const db = require('quick.db')
 const ms = require("ms")
 
-module.exports.run = async (client, message, args) => {
-   
+exports.run = async (client, message, args) => {
 
-  if (!message.member.permissions.has("MANAGE_CHANNELS")) {
-    const perms = new Discord.MessageEmbed()
+  if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+    const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
-      .setTitle('Permissão necessária: Manusear Canais')
-    return message.reply(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+      .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
+    return message.channel.send(adm)
   }
 
-  if (!args[0]) {
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) prefix = "-"
-
-    const format = new Discord.MessageEmbed()
+  if (!message.guild.me.hasPermission("ADD_REACTIONS")) {
+    const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
-      .setTitle('Siga o formato correto')
-      .setDescription('`' + prefix + 'sorteio 1s/m/h #CanalDoSorteio Prêmio`')
-      .addFields(
-        {
-          name: 'Exemplo',
-          value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
-        }
-      )
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+      .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
+  if (!message.member.hasPermission('MANAGE_CHANNELS')) {
+    const perms = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Permissão Necessária: Manusear Canais')
+    return message.channel.send(perms)
   }
 
   if (!args[0].endsWith("s") && !args[0].endsWith("m") && !args[0].endsWith("h")) {
@@ -43,7 +39,7 @@ module.exports.run = async (client, message, args) => {
           value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
         }
       )
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+    return message.channel.send(format)
   }
 
   if (args[0].length > 3) {
@@ -67,10 +63,10 @@ module.exports.run = async (client, message, args) => {
           value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
         }
       )
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+    return message.channel.send(format)
   }
   let time = isNaN(args[0][0])
-  
+
   let channel = message.mentions.channels.first()
   if (!channel) {
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -86,7 +82,7 @@ module.exports.run = async (client, message, args) => {
           value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
         }
       )
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+    return message.channel.send(format)
   }
 
   let prize = args.slice(2).join(" ")
@@ -104,29 +100,29 @@ module.exports.run = async (client, message, args) => {
           value: '`' + prefix + 'sorteio 2h #Sorteios Cargo Mod`\n \nO sorteio acaba em 2 horas no canal #Sorteios, prêmio: Cargo Mod'
         }
       )
-    return message.channel.send(format).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+    return message.channel.send(format)
   }
 
   let Embed = new Discord.MessageEmbed()
-    .setTitle(prize)
+    .setColor(`#067aff`)
+    .setTitle(`Prêmio: ${prize}`)
     .setDescription(`Reaja ao :tada: para participar do sorteio\nAutor: ${message.author}`)
     .setThumbnail('https://imgur.com/mNgzqkU.gif')
     .setTimestamp(Date.now() + ms(args[0]))
-    .setColor(`#067aff`)
-  channel.send(`:tada: **SORTEIO** :tada:`)
+    .setFooter('Resultado')
 
-  let m = await channel.send(Embed)
+  let m = await channel.send(`:tada:🥳 **NOVO SORTEIO** 🥳:tada:`, Embed)
   m.react("🎉")
 
   const ok = new Discord.MessageEmbed()
     .setColor('GREEN')
     .setDescription(`Sorteio criado em ${channel} com sucesso.`)
-  message.channel.send(ok).then(msg => msg.delete({ timeout: 5000 }))
+  message.channel.send(ok)
 
   setTimeout(() => {
     if (m.reactions.cache.get("🎉").count <= 1) {
       const cancel = new Discord.MessageEmbed()
-        .setColor('##067aff')
+        .setColor('#067aff')
         .setTitle('Sorteio cancelado por falta de participantes.')
       return channel.send(cancel)
     }

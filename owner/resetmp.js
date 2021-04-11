@@ -1,9 +1,7 @@
-const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async (bot, message, args) => {
+exports.run = async (client, message, args) => {
    
-
   let user = message.mentions.members.first()
   let amount = args.slice(1).join(" ")
   let money = db.fetch(`money_${user.id}`)

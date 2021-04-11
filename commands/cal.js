@@ -1,5 +1,5 @@
-const math = require('mathjs')
 const Discord = require('discord.js')
+const math = require('mathjs')
 
 exports.run = async (client, message, args) => {
 
@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Formato suportado')
             .setDescription('`Adição: 10 + 10`\n`Divisão: 10 / 10`\n`Subtração: 10 - 10`\n`Multiplicação: 10 * 10`')
-        return message.channel.send(noargs).then(msg => msg.delete({ timeout: 15000 })).catch(err => { return })
+        return message.channel.send(noargs)
     }
 
     let resp

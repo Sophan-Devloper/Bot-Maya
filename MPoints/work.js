@@ -25,13 +25,13 @@ exports.run = async (client, message, args) => {
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
              
-            return message.channel.send(`Você pode trabalhar em ${time.minutes}m e ${time.seconds}s`).then(msg => msg.delete({ timeout: 6000 }))
+            return message.channel.send(`Você pode trabalhar novamente em ${time.minutes}m e ${time.seconds}s`)
         } else {
             let amount = Math.floor(Math.random() * 1000) + 1;
             db.add(`money_${message.author.id}`, amount)
             db.set(`worked_${message.author.id}`, Date.now())
 
-            message.channel.send(`${message.author.username} trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints`)
+            message.channel.send(`${message.author} trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints`)
         }
     }
 }

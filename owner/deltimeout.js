@@ -1,12 +1,11 @@
-const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async (bot, message, args) => {
+exports.run = async (client, message, args) => {
 
     let user = message.mentions.users.first() || message.author
-
     const rody = message.author.id === ("451619591320371213")
     if (!rody) {
+        message.delete()
         return message.channel.send('⚠️ Este comando é restrito.').then(msg => msg.delete({ timeout: 5000 }))
     }
 
@@ -19,5 +18,5 @@ module.exports.run = async (bot, message, args) => {
     db.delete(`preso_${user.id}`)
     db.delete(`pego_${user.id}`)
     db.delete(`procurado_${user.id}`)
-    return message.channel.send(`Timeout resetado.`).then(msg => msg.delete({ timeout: 6000 }))
+    return message.channel.send(`Timeout resetado.`)
 }

@@ -2,13 +2,19 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
-     
+
+    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
+        return message.channel.send(adm)
+    }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+        return message.channel.send(perms)
     }
 
     if (args[0]) {
@@ -24,5 +30,5 @@ exports.run = async (client, message, args) => {
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setTitle('Canal criado com sucesso.')
-    message.channel.send(sucess).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+    message.channel.send(sucess)
 }

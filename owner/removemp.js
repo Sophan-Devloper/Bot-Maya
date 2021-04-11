@@ -1,8 +1,6 @@
-const Discord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async (bot, message, args) => {
-     
+exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first()
     let amount = args.slice(1).join(" ")
@@ -10,9 +8,10 @@ module.exports.run = async (bot, message, args) => {
     if (money === null) { money = 0 }
 
     const rody = message.author.id === ("451619591320371213")
-    if (!rody)
+    if (!rody) {
+        message.delete()
         return message.channel.send('⚠️ Este comando é restrito.').then(msg => msg.delete({ timeout: 5000 }))
-
+    }
     if (!user)
         return message.channel.send('Você não me disse pra quem é pra remover o dinheiro, marque alguém por favor.').then(msg => msg.delete({ timeout: 6000 }))
 
@@ -23,5 +22,5 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send('Eu acho que o valor que você me informou não é um número.').then(msg => msg.delete({ timeout: 5000 }))
 
     db.subtract(`money_${user.id}`, amount)
-    message.channel.send(`Foi removido ${amount}<:StarPoint:766794021128765469>MPoints de ${user.user.username} com sucesso`).then(msg => msg.delete({timeout: 4000}))
+    message.channel.send(`Foi removido ${amount}<:StarPoint:766794021128765469>MPoints de ${user.user.username} com sucesso`).then(msg => msg.delete({ timeout: 4000 }))
 }

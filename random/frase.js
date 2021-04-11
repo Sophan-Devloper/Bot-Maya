@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
-     
 
     var list = [
         '⠀\nCreio no riso e nas lágrimas como antídotos contra o ódio e o terror. \n Charles Chaplin',
@@ -34,5 +33,5 @@ exports.run = async (client, message, args) => {
                 name: 'Frase',
                 value: (rand)
             })
-    await message.channel.send(HelpEmbed).then(msg => msg.delete({ timeout: 17000 })).catch(err => { return })
+    await message.channel.send(HelpEmbed)
 }

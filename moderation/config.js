@@ -4,13 +4,6 @@ var linkgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md#%EF
 
 exports.run = async (client, message, args) => {
 
-    if (!message.member.hasPermission('ADMINISTRATOR')) {
-        const noperm = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Permissão Necessária: Administrador')
-        return message.channel.send(noperm)
-    }
-
     const configuração = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('🛠️ Configurações Disponiveis (opicional)')

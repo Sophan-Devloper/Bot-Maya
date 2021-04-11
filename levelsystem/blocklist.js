@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const db = require('quick.db')
 
-module.exports.run = async (client, message, args) => {
+exports.run = async (client, message, args) => {
      
     let data = db.all().filter(i => i.ID.startsWith("blacklist_")).sort((a, b) => b.data - a.data);
     if (data.length < 1) return message.channel.send("Sem ranking por enquanto").then(m => m.delete({ timeout: 5000 }))
@@ -26,9 +26,5 @@ module.exports.run = async (client, message, args) => {
     lb.forEach(d => {
         embed.addField(`${d.user.tag}`, `ID: ${d.user.id}`)
     })
-    return message.channel.send(embed).then(msg => msg.delete({ timeout: 15000 }))
-}
-
-module.exports.help = {
-    name: "Ranking"
+    return message.channel.send(embed)
 }

@@ -1,9 +1,16 @@
 const Discord = require("discord.js")
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
-    const db = require('quick.db')
     var level = await db.fetch(`level_${user.id}`)
     if (level < 20) {
         const block = new Discord.MessageEmbed()

@@ -70,7 +70,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor("GREEN")
             .setAuthor(message.author.tag + ' ativou o modo afk', message.author.displayAvatarURL({ dynamic: true }))
-            .addField('Mensagem', `${content1}`)
+            .addField('Mensagem', `${content}`)
             .setFooter('O modo afk será desativado quando você mandar uma mensagem')
         return message.channel.send(embed)
     }

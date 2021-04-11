@@ -41,7 +41,7 @@ exports.run = async (client, message, args) => {
       )
     return message.channel.send(format)
   }
-  
+
   if (!args[0].endsWith("s") && !args[0].endsWith("m") && !args[0].endsWith("h")) {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"

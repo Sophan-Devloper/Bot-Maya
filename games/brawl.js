@@ -2,6 +2,13 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
   const games = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setTitle('Existe 2 jogos com o apelido Brawl no meu banco de dados')

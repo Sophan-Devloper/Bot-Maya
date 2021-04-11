@@ -2,6 +2,13 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
+ if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
+  }
+
   var game = 'Mario'
   var link1 = 'https://store.nintendo.com.br/catalogsearch/result/?q=Mario'
   var link2 = 'https://play.google.com/store/search?q=Mario&c=apps&hl=en_US&gl=US'

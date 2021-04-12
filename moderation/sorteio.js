@@ -154,7 +154,7 @@ exports.run = async (client, message, args) => {
       .setThumbnail(avatar)
 
     winner.send(`Parabéééééééns!! Você ganhou o sorteio em **${message.guild.name}**.\n \nVocê ganhou: **${prize}**.`).catch(err => { return })
-    message.author.send(`${winner.user.tag} foi o ganhador do sorteio em ${message.guild.name}.`).catch(err => { return })
+    message.author.send(`${winner} foi o ganhador do sorteio em ${message.guild.name}.`).catch(err => { return })
     channel.send(":tada: ***Sorteio Acabou*** ", winembed).catch(err => { return })
   }, ms(args[0]))
 }

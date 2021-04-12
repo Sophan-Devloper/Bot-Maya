@@ -11,14 +11,15 @@ client.on("message", async (message) => {
     if (message.channel.type == "dm") {
         const dmEmbed = new Discord.MessageEmbed()
             .setColor('BLUE')
-            .setTitle('Nova mensagem no privado')
-            .setDescription(`**Usuário:** ${message.author.tag}\n:id: ${message.author.id}\n**Horário**${new Date()}\n \\\\n**Conteúdo**\`\`\`\${message.content}\`\`\``)
+            .setTitle('💬 Nova mensagem no privado')
+            .setDescription(`**Usuário:** ${message.author.tag}\n:id: ${message.author.id}\n \n` + '**Conteúdo** ```' + `${message.content}` + '```')
+            .setTimestamp()
 
         const canal = client.channels.cache.get('831154821204803634')
         if (!canal) {
             return
         } else {
-            return canal.send(canal)
+            return canal.send(dmEmbed)
         }
     }
     xp(message)

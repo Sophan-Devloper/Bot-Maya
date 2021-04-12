@@ -73,7 +73,7 @@ exports.run = async (client, message, args) => {
         .addFields(
             {
                 name: 'Discord Server',
-                value: `[Clique aqui](https://discord.gg/mx8eMx6)`,
+                value: `[Clique aqui](https://discord.gg/YpFWgJuuUV)`,
                 inline: true
             },
             {

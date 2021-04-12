@@ -82,7 +82,7 @@ exports.run = async (client, message, args) => {
       message.guild.members.unban(member).catch(err => {
         if (err) {
           var linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
-          var discordserver = 'https://discord.gg/mx8eMx6'
+          var discordserver = 'https://discord.gg/YpFWgJuuUV'
           const errorembed = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Ocorreu um erro no desbanimento')

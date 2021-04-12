@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
         return message.channel.send(block)
     }
 
-    var linkserver = 'https://discord.gg/mx8eMx6'
+    var linkserver = 'https://discord.gg/YpFWgJuuUV'
     const embed = new Discord.MessageEmbed()
         .setColor('#1e3ddf')
         .setTitle('BETA - Dicas da Maya - CommandFile')

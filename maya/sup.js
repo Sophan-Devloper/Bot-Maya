@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 exports.run = async (client, message, args) => {
 
     var linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
-    var linkservidor = 'https://discord.gg/mx8eMx6'
+    var linkservidor = 'https://discord.gg/YpFWgJuuUV'
 
     const Support = new Discord.MessageEmbed()
         .setColor('BLUE')

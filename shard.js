@@ -212,7 +212,7 @@ client.on("guildMemberAdd", (member) => {
 })
 
 client.on("ready", () => {
-    let activities = [`Me marca que eu falo o prefixo`, `@maya`]
+    let activities = ['Me marca que eu falo o prefixo', '@maya', '382 Comandos Onlines | 2 Offlines']
     i = 0
     setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: "WATCHING" }), 10000)
 })
@@ -223,6 +223,7 @@ client.on("message", async (message) => {
     var prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
     if (!message.content.startsWith('<')) return
+    if (!message.content.endsWith('>')) return
     if (message.mentions.has(client.user.id)) { return message.channel.send('Prefixo atual: `' + prefix + '`') }
 })
 

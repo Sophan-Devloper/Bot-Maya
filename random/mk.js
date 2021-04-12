@@ -9,12 +9,12 @@ exports.run = async (client, message, args) => {
     return message.channel.send(adm)
   }
 
-  var linkserver = 'https://discord.gg/mx8eMx6'
+  var linkserver = 'https://discord.gg/YpFWgJuuUV'
 
   const HelpEmbed = new Discord.MessageEmbed()
     .setColor('GREEN')
     .setTitle(':hearts: Mystic Kingdom :hearts:')
-    .setURL('https://discord.gg/mx8eMx6')
+    .setURL('https://discord.gg/YpFWgJuuUV')
     .setDescription(`${message.author}, vem pra minha casa :heart:\n \n[Meu servidor](${linkserver})`)
     .setImage('https://imgur.com/cjoVaGJ.gif')
   await message.channel.send(HelpEmbed)

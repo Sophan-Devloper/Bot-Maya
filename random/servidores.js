@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
   }
 
     var Akatsuki = 'https://discord.gg/JMvXDZHG4H'
-    var mk = 'https://discord.gg/mx8eMx6'
+    var mk = 'https://discord.gg/YpFWgJuuUV'
 
     const historys = new Discord.MessageEmbed()
         .setColor('BLUE')

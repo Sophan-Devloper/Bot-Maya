@@ -94,7 +94,7 @@ exports.run = async (client, message, args) => {
 
     if (!reason) { reason = `${message.author.username} não especificou nenhuma razão` }
 
-    var discordserver = 'https://discord.gg/mx8eMx6'
+    var discordserver = 'https://discord.gg/YpFWgJuuUV'
     var support = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
 
     const kickembed = new Discord.MessageEmbed()

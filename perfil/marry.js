@@ -7,6 +7,23 @@ exports.run = async (client, message, args) => {
 
 	const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
 
+	let prefix = db.get(`prefix_${message.guild.id}`)
+	if (prefix === null) prefix = "-"
+
+	if (!args[0]) {
+		const noargs = new Discord.MessageEmbed()
+			.setColor('BLUE')
+			.setTitle('Casamento')
+			.setDescription('Você pode se casar no Sistema Maya. Siga o comando e se case. Veja também em `' + prefix + 'perfil`')
+			.addFields(
+				{
+					name: 'Comando',
+					value: '`' + prefix + 'marry @user`'
+				}
+			)
+		return message.channel.send(noargs)
+	}
+
 	var level = await db.get(`level_${user.id}`)
 	if (level === null) level = 0
 

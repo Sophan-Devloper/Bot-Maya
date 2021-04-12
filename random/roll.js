@@ -1,6 +1,10 @@
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
+
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = "-" }
 
     if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
         const adm = new Discord.MessageEmbed()
@@ -12,9 +16,9 @@ exports.run = async (client, message, args) => {
     if (!args[0]) {
         const dados = new Discord.MessageEmbed()
             .setColor('BLUE')
-            .setTitle('Quantos dados você quer?')
-            .setDescription('🟧 - 1\n🟦 - 2\n🟥 - 3\n🟫 - 4\n❌ - Cancelar')
-        await message.channel.send(newprefix).then(msg => {
+            .setTitle('Quantos dados você quer rolar?')
+            .setDescription('`Você pode usar ' + prefix + 'roll 1/2/3/4`' + '\n \n1 | 2 | 3 | 4 | ❌ - Cancelar')
+        await message.channel.send(dados).then(msg => {
             msg.react('🟧') // 1
             msg.react('🟦') // 2
             msg.react('🟥') // 3
@@ -32,11 +36,7 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-
-                    const dados = new Discord.MessageEmbed()
-                        .setColor('GREEN')
-                        .setTitle('🎲 `' + rand + '`')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '🟦') { // 2
                     msg.delete()
@@ -46,11 +46,7 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-
-                    const dados = new Discord.MessageEmbed()
-                        .setColor('GREEN')
-                        .setTitle('🎲 `' + rand + '`')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '🟥') { // 3
                     msg.delete()
@@ -60,11 +56,7 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-
-                    const dados = new Discord.MessageEmbed()
-                        .setColor('GREEN')
-                        .setTitle('🎲 `' + rand + '`')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '🟫') { // 4
                     msg.delete()
@@ -74,15 +66,12 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-
-                    const dados = new Discord.MessageEmbed()
-                        .setColor('GREEN')
-                        .setTitle('🎲 `' + rand + '`')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '❌') { // Não
                     msg.delete()
-                    return msg.channel.send("Comando cancelado.")
+                    message.delete()
+                    return msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
                 }
             })
         })
@@ -95,11 +84,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-
-        const dados = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setTitle('🎲 `' + rand + '`')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
     }
 
     if (args[0] === '2') {
@@ -109,11 +94,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-
-        const dados = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setTitle('🎲 `' + rand + '`')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
     }
 
     if (args[0] === '3') {
@@ -123,11 +104,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-
-        const dados = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setTitle('🎲 `' + rand + '`')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
     }
 
     if (args[0] === '4') {
@@ -137,10 +114,6 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-
-        const dados = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setTitle('🎲 `' + rand + '`')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => message.channel.send(dados))
+        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
     }
 }

@@ -70,7 +70,7 @@ exports.run = async (client, message, args) => {
 
             const nota = new Discord.MessageEmbed()
                 .setColor('GREEN')
-                .setDescription(`Você sacou ${money}<:StarPoint:766794021128765469> do banco`)
+                .setDescription(`${message.author} sacou ${money}<:StarPoint:766794021128765469> do banco`)
             return message.channel.send(nota)
         }
 

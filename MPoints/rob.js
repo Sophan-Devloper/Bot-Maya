@@ -72,7 +72,7 @@ exports.run = async (client, message, args) => {
 
             let embedtime = new Discord.MessageEmbed()
                 .setColor('#FF0000')
-                .setDescription(`Você já roubou alguém hoje, roube novamente em ${time.minutes}m e ${time.seconds}s.`)
+                .setDescription(`${message.author}, você já roubou alguém hoje, roube novamente em ${time.minutes}m e ${time.seconds}s.`)
             return message.channel.send(embedtime)
         } else {
 
@@ -93,7 +93,7 @@ exports.run = async (client, message, args) => {
                 let moneyEmbed = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle(`🔫 Você roubou ${user.user.username} com sucesso!`)
-                    .setDescription(`O lucro do roubo foi de ${amount}<:StarPoint:766794021128765469>`)
+                    .setDescription(`${message.author} obeteve um lucro de ${amount}<:StarPoint:766794021128765469> com o roubo.`)
 
                 message.channel.send(moneyEmbed)
                 db.subtract(`money_${user.id}`, amount)

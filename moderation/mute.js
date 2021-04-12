@@ -353,7 +353,7 @@ exports.run = async (client, message, args) => {
                const rela = new Discord.MessageEmbed()
                   .setColor('GREEN')
                   .setTitle(`${member.user.username} foi mutado com sucesso.`)
-                  .setDescription(`Mais informações em ${client.channels.cache.get(logchannel).name}`)
+                  .setDescription(`Mais informações em ${client.channels.cache.get(logchannel)}`)
 
                message.channel.send(rela)
                client.channels.cache.get(logchannel).send(muteembed)

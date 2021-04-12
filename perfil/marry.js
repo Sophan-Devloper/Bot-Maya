@@ -78,6 +78,7 @@ exports.run = async (client, message, args) => {
 					.setColor('BLUE')
 					.setTitle(':heart: Um novo casal acaba de se formar :heart:')
 					.setDescription(`${member} aceitou o pedido de casamento de ${message.author}`)
+				message.delete()
 				message.channel.send(casados)
 			})
 		})

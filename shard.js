@@ -8,7 +8,19 @@ client.aliases = new Discord.Collection()
 client.on("message", async (message) => {
 
     if (message.author.bot) return // no bots
-    if (message.channel.type == "dm") return // no pv
+    if (message.channel.type == "dm") {
+        const dmEmbed = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('Nova mensagem no privado')
+            .setDescription(`**Usuário:** ${message.author.tag}\n:id: ${message.author.id}\n**Horário**${new Date()}\n \\\\n**Conteúdo**\`\`\`\${message.content}\`\`\``)
+
+        const canal = client.channels.cache.get('831154821204803634')
+        if (!canal) {
+            return
+        } else {
+            return canal.send(canal)
+        }
+    }
     xp(message)
 
     let prefix = db.get(`prefix_${message.guild.id}`)

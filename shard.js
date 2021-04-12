@@ -251,5 +251,14 @@ client.on('guildCreate', guild => {
     return channel.send('**Oooopa, chegueeei!**', newguild)
 })
 
-client.once("ready", () => { console.log(`${client.user.tag} | OK!.`) })
+client.once("ready", () => {
+    const envi = client.channels.cache.get('830964037461344296')
+    console.log(`${client.user.tag} | OK!.`)
+
+    if (!envi) {
+        return
+    } else if (envi) {
+        return envi.send(`${client.user.tag} Online! | 382 Comandos Onlines | 0 Offlines`)
+    }
+})
 client.login(token)

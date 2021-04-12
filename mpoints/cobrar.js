@@ -58,7 +58,14 @@ exports.run = async (client, message, args) => {
             return message.channel.send(noamout)
         }
 
-        if (args[1] < 0) {
+        if (args[1] < '0') {
+            const nota = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle('Diga um valor maior que 0')
+            return message.channel.send(nota)
+        }
+
+        if (args[1] === '0') {
             const nota = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Diga um valor maior que 0')

@@ -11,14 +11,13 @@ exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first()
     if (!user)
-        return message.channel.send('`-addmp @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
+        return message.channel.send('`-addbank @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
 
     let amount = args.slice(1).join(" ")
     if (!amount)
-        return message.channel.send('`-addmp @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
+        return message.channel.send('`-addbank @user Quantidade`').then(msg => msg.delete({ timeout: 5000 }))
     if (isNaN(amount))
         return message.channel.send('Eu acho que o valor que você me informou não é um número.').then(msg => msg.delete({ timeout: 5000 }))
-
-    db.add(`money_${user.id}`, amount)
+    db.add(`bank_${user.id}`, amount)
     message.channel.send('Feito')
 }

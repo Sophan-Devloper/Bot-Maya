@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
             let time = ms(timeout - (Date.now() - author))
             return message.channel.send(`Você pode jogar novamente em ${time.minutes}m e ${time.seconds}s`)
         } else {
-            var amount = Math.floor(Math.random() * 2000) + 1
+            var amount = Math.floor(Math.random() * 1000) + 1
             db.add(`money_${message.author.id}`, amount)
             db.set(`lotery_${message.author.id}`, Date.now())
 

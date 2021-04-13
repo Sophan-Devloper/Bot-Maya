@@ -31,12 +31,12 @@ exports.run = async (client, message, args) => {
             var result = list[Math.floor(Math.random() * list.length)]
 
             if (result === "win") {
-                let amount = (Math.floor(Math.random() * 10000) + 1)
+                let amount = (Math.floor(Math.random() * 500) + 1)
                 db.add(`money_${message.author.id}`, amount)
                 db.set(`slut_${message.author.id}`, Date.now())
                 message.channel.send(`${message.author} se prostituiu e obteve ${amount} <:StarPoint:766794021128765469>MPoints`)
             } else if (result === "lose") {
-                let amount = (Math.floor(Math.random() * 10000) + 1)
+                let amount = (Math.floor(Math.random() * 500) + 1)
                 db.subtract(`money_${message.author.id}`, amount)
                 db.set(`slut_${message.author.id}`, Date.now())
                 message.channel.send(`${message.author} se prostituiu e perdeu ${amount} <:StarPoint:766794021128765469>MPoints`)

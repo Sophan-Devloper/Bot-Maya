@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
              
             return message.channel.send(`Você pode trabalhar novamente em ${time.minutes}m e ${time.seconds}s`)
         } else {
-            let amount = Math.floor(Math.random() * 1000) + 1;
+            let amount = Math.floor(Math.random() * 800) + 1;
             db.add(`money_${message.author.id}`, amount)
             db.set(`worked_${message.author.id}`, Date.now())
 

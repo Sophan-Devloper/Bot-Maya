@@ -107,7 +107,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 700) + 1)
+                                                let amount = (Math.floor(Math.random() * 100) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -121,7 +121,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 1000) + 1)
+                                                let amount = (Math.floor(Math.random() * 100) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -154,7 +154,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 10000) + 1)
+                                                let amount = (Math.floor(Math.random() * 300) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -168,7 +168,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 5000) + 1)
+                                                let amount = (Math.floor(Math.random() * 300) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -201,7 +201,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 15000) + 1)
+                                                let amount = (Math.floor(Math.random() * 500) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -215,7 +215,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 8000) + 1)
+                                                let amount = (Math.floor(Math.random() * 500) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -248,7 +248,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 8000) + 1)
+                                                let amount = (Math.floor(Math.random() * 400) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -262,7 +262,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 4000) + 1)
+                                                let amount = (Math.floor(Math.random() * 400) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -295,7 +295,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 80000) + 1)
+                                                let amount = (Math.floor(Math.random() * 600) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -308,7 +308,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 10000) + 1)
+                                                let amount = (Math.floor(Math.random() * 600) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -341,7 +341,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 15000) + 1)
+                                                let amount = (Math.floor(Math.random() * 700) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -355,7 +355,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 30000) + 1)
+                                                let amount = (Math.floor(Math.random() * 7000) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -388,7 +388,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 40000) + 1)
+                                                let amount = (Math.floor(Math.random() * 700) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -402,7 +402,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 6000) + 1)
+                                                let amount = (Math.floor(Math.random() * 700) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -435,7 +435,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 20000) + 1)
+                                                let amount = (Math.floor(Math.random() * 800) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -449,7 +449,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 10000) + 1)
+                                                let amount = (Math.floor(Math.random() * 800) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -482,7 +482,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 10000) + 1)
+                                                let amount = (Math.floor(Math.random() * 500) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -496,7 +496,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 30000) + 1)
+                                                let amount = (Math.floor(Math.random() * 500) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 
@@ -529,7 +529,7 @@ exports.run = async (client, message, args) => {
                                                 .setDescription('Você perdeu o dinheiro enquanto fugia.')
 
                                             if (result === "win") {
-                                                let amount = (Math.floor(Math.random() * 800000) + 1)
+                                                let amount = (Math.floor(Math.random() * 5000) + 1)
                                                 db.add(`money_${message.author.id}`, amount)
                                                 db.set(`procurado_${message.author.id}`, Date.now())
 
@@ -543,7 +543,7 @@ exports.run = async (client, message, args) => {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
                                                 return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
                                             } else if (result === "lose") {
-                                                let amount = (Math.floor(Math.random() * 500000) + 1)
+                                                let amount = (Math.floor(Math.random() * 5000) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
                                                 db.set(`preso_${message.author.id}`, Date.now())
 

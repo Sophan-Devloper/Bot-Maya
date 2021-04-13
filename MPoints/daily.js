@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
   let timeout = 86400000
-  let amount = 500
+  let amount = 300
 
   let timeout1 = 6140000
   let author1 = await db.fetch(`pego_${message.author.id}`)

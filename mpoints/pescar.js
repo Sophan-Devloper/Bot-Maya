@@ -82,15 +82,16 @@ exports.run = async (client, message, args) => {
         }
 
         if (iscas > 0) {
-            var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
+            var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
             var rand = num[Math.floor(Math.random() * num.length)]
-            var din = Math.floor(Math.random() * 50000) + 1
+            var din = Math.floor(Math.random() * 100) + 1
 
             if (rand === 'win') {
                 if (!db.get(`faca_${message.author.id}`)) {
-                    var a = ['win', 'lose', 'lose', 'lose']
+                    var a = ['wiin', 'loose', 'loose', 'loose']
                     var randa = a[Math.floor(Math.random() * a.length)]
-                    if (randa === "win") {
+                    if (randa === "wiin") {
+                        var dinh = Math.floor(Math.random() * 500) + 1
                         var peixes = Math.floor(Math.random() * 20) + 1
                         var iiscas = Math.floor(Math.random() * 50) + 1
                         var camarao = Math.floor(Math.random() * 3) + 1
@@ -99,17 +100,35 @@ exports.run = async (client, message, args) => {
                         db.add(`peixes_${message.author.id}`, peixes)
                         db.add(`camarao_${message.author.id}`, camarao)
                         db.set(`faca_${user.id}`, "Faca")
-                        db.add(`money_${message.author.id}`, din)
+                        db.add(`money_${message.author.id}`, dinh)
                         db.set(`pescatimeout_${message.author.id}`, Date.now())
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
                             .setTitle('🎣 Você pescou com sucesso!')
-                            .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${din}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
+                            .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
+                        return message.channel.send(`${message.author}`, pescaembed)
+                    }
+
+                    if (randa === "loose") {
+                        var dinh = Math.floor(Math.random() * 500) + 1
+                        var peixes = Math.floor(Math.random() * 20) + 1
+                        var iiscas = Math.floor(Math.random() * 50) + 1
+                        var camarao = Math.floor(Math.random() * 3) + 1
+                        db.subtract(`iscas_${message.author.id}`, 1)
+                        db.add(`iscas_${message.author.id}`, iiscas)
+                        db.add(`peixes_${message.author.id}`, peixes)
+                        db.add(`camarao_${message.author.id}`, camarao)
+                        db.add(`money_${message.author.id}`, dinh)
+                        db.set(`pescatimeout_${message.author.id}`, Date.now())
+                        const pescaembed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
+                            .setTitle('🎣 Você pescou com sucesso!')
+                            .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
                         return message.channel.send(`${message.author}`, pescaembed)
                     }
                 }
-                var peixes = Math.floor(Math.random() * 20) + 1
-                var iiscas = Math.floor(Math.random() * 50) + 1
+                var peixes = Math.floor(Math.random() * 10) + 1
+                var iiscas = Math.floor(Math.random() * 5) + 1
                 var camarao = Math.floor(Math.random() * 3) + 1
                 db.subtract(`iscas_${message.author.id}`, 1)
                 db.add(`iscas_${message.author.id}`, iiscas)
@@ -125,7 +144,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (rand === 'lose') {
-                var peixes = Math.floor(Math.random() * 5) + 1
+                var peixes = Math.floor(Math.random() * 3) + 1
                 db.subtract(`iscas_${message.author.id}`, 1)
                 db.add(`peixes_${message.author.id}`, peixes)
                 db.set(`pescatimeout_${message.author.id}`, Date.now())

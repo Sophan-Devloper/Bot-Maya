@@ -81,10 +81,10 @@ exports.run = async (client, message, args) => {
             for (i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length) }
 
             if (number[0] == number[1] && number[1] == number[2]) {
-                money *= 3
+                money *= 2
                 win = true
             } else if (number[0] == number[1] || number[0] == number[2] || number[1] == number[2]) {
-                money *= 5
+                money *= 3
                 win = true
             }
             if (win) {

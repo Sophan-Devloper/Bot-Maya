@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
 
         if (['vara de pesca', 'vara', 'pesca'].includes(args[0])) {
 
-            if (db.get(`itens_${message.author.id}`, "Vara de pesca")) {
+            if (db.get(`vara_${message.author.id}`)) {
                 return message.channel.send(`${message.author}, você já possui este item.`)
             }
 
@@ -74,7 +74,7 @@ exports.run = async (client, message, args) => {
             if (money = 5000 || money > 5000) {
                 db.subtract(`money_${message.author.id}`, 5000)
                 db.add(`bank_${client.user.id}`, 5000)
-                db.push(`itens_${message.author.id}`, "Vara de pesca")
+                db.set(`vara_${message.author.id}`, "Vara de pesca")
 
                 const buypesca = new Discord.MessageEmbed()
                     .setColor('GREEN')
@@ -86,7 +86,7 @@ exports.run = async (client, message, args) => {
 
         if (['arma'].includes(args[0])) {
 
-            if (db.get(`itens_${message.author.id}`, "Arma")) {
+            if (db.get(`arma_${message.author.id}`)) {
                 return message.channel.send(`${message.author}, você já possui este item.`)
             }
 
@@ -128,7 +128,7 @@ exports.run = async (client, message, args) => {
             if (money = 100000 || money > 100000) {
                 db.subtract(`money_${message.author.id}`, 100000)
                 db.add(`bank_${client.user.id}`, 100000)
-                db.push(`itens_${message.author.id}`, "Arma")
+                db.set(`arma_${message.author.id}`, "Arma")
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
@@ -201,7 +201,7 @@ exports.run = async (client, message, args) => {
 
         if (['picareta', "Picareta"].includes(args[0])) {
 
-            if (db.get(`itens_${message.author.id}`) == "Picareta") {
+            if (db.get(`picareta_${message.author.id}`)) {
                 return message.channel.send(`${message.author}, você já possui este item.`)
             }
 
@@ -243,7 +243,7 @@ exports.run = async (client, message, args) => {
             if (money = 350 || money > 350) {
                 db.subtract(`money_${message.author.id}`, 350)
                 db.add(`bank_${client.user.id}`, 350)
-                db.push(`itens_${message.author.id}`, "Picareta")
+                db.set(`picareta_${message.author.id}`, "Picareta")
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')

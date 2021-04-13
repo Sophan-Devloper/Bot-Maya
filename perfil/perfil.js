@@ -3,6 +3,9 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = "-" }
+
     let user = message.mentions.members.first() || message.member
 
     let bal = await db.get(`money_${user.id}`)
@@ -36,7 +39,7 @@ exports.run = async (client, message, args) => {
     if (bank === null) bank = 0
 
     let status = await db.get(`status_${user.id}`)
-    if (status === null) status = `${user.user.username} não escreveu nada ainda.`
+    if (status === null) status = `${user.user.username} não conhece o comando ${prefix}setstatus.`
 
 
     const perfil = new Discord.MessageEmbed()

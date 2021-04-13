@@ -25,18 +25,18 @@ exports.run = async (client, message, args) => {
         return message.channel.send(presomax)
     } else {
 
-        let timeout = 172800000
+        let timeout = 1728000
         let author = await db.fetch(`lotery_${message.author.id}`)
 
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
             return message.channel.send(`Você pode jogar novamente em ${time.minutes}m e ${time.seconds}s`)
         } else {
-            let amount = Math.floor(Math.random() * 1000) + 1;
+            var amount = Math.floor(Math.random() * 2000) + 1
             db.add(`money_${message.author.id}`, amount)
             db.set(`lotery_${message.author.id}`, Date.now())
 
-            message.channel.send(`${message.author} jogou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints.`)
+            await message.channel.send(`${message.author} jogou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints.`)
         }
     }
 }

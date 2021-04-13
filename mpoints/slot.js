@@ -5,39 +5,51 @@ exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first() || message.member
 
-    let peixes = db.get(`peixes_${user.id}`)
+    let peixes = await db.get(`peixes_${user.id}`)
     if (peixes === null) { peixes = "0" }
     if (!db.get(`peixes_${user.id}`)) { peixes = "0" }
 
-    let iscas = db.get(`iscas_${user.id}`)
+    let iscas = await db.get(`iscas_${user.id}`)
     if (iscas === null) { iscas = "0" }
     if (!db.get(`iscas_${user.id}`)) { peixes = "0" }
 
-    var arma = db.get(`itens_${user.id}`, "Arma")
+    let camarao = await db.get(`camarao_${user.id}`)
+    if (camarao === null) { camarao = "0" }
+    if (!db.get(`camarao_${user.id}`)) { camarao = "0" }
+
+    let diamond = await db.get(`diamond_${user.id}`)
+    if (diamond === null) { diamond = "0" }
+    if (!db.get(`diamond_${user.id}`)) { diamond = "0" }
+
+    let minerio = await db.get(`minerio_${user.id}`)
+    if (minerio === null) { minerio = "0" }
+    if (!db.get(`minerio_${user.id}`)) { minerio = "0" }
+
+    let arma = await db.get(`arma_${user.id}`)
     if (arma) { arma = "🔫 Arma" }
-    if (!db.get(`itens_${user.id}`, "Arma")) { arma = "❌ Slot Vazio" }
     if (arma === null) { arma = "❌ Slot Vazio" }
+    if (!db.get(`arma_${user.id}`)) { arma = "❌ Slot Vazio" }
 
-    var picareta = db.get(`itens_${user.id}`, "Picareta")
+    let picareta = await db.get(`picareta_${user.id}`)
     if (picareta) { picareta = "⛏️ Picareta" }
-    if (!db.get(`itens_${user.id}`, "Picareta")) { picareta = "❌ Slot Vazio" }
     if (picareta === null) { picareta = "❌ Slot Vazio" }
+    if (!db.get(`picareta_${user.id}`)) { picareta = "❌ Slot Vazio" }
 
-    var vara = db.get(`itens_${user.id}`, "Vara de pesca")
+    let vara = db.get(`vara_${user.id}`)
     if (vara) { vara = "🎣 Vara de pesca" }
-    if (!db.get(`itens_${user.id}`, "Vara de pesca")) { vara = "❌ Slot Vazio" }
     if (vara === null) { vara = "❌ Slot Vazio" }
+    if (!db.get(`vara_${user.id}`)) { vara = "❌ Slot Vazio" }
 
-    var faca = db.get(`itens_${user.id}`, "Faca")
+    let faca = db.get(`faca_${user.id}`)
     if (faca) { vara = "🔪 Faca" }
-    if (!db.get(`itens_${user.id}`, "Faca")) { faca = "❌ Slot Vazio" }
     if (faca === null) { faca = "❌ Slot Vazio" }
+    if (!db.get(`faca_${user.id}`)) { faca = "❌ Slot Vazio" }
 
     const Embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`📖 **Inventário de ${user.user.username}**`)
         .addField('Itens Obtidos', `${arma}\n${picareta}\n${vara}\n${faca}`)
-        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas`)
+        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🍤 ${camarao} Camarões\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.channel.send(Embed)
 }

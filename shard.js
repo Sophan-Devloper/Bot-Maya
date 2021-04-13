@@ -216,7 +216,9 @@ client.on("guildMemberAdd", (member) => {
     if (canal) {
         return client.channels.cache.get(canal).send(`📢 ${member} ${msgwelcome}`)
     }
+})
 
+client.on("guildMemberAdd", (member) => {
     var role = db.get(`autorole_${member.guild.id}`)
     if (role === null) { return }
     return member.roles.add(role)

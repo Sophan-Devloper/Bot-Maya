@@ -15,9 +15,13 @@ exports.run = async (client, message, args) => {
   if (prefix === null) prefix = "-"
 
   if (!args[0]) {
-      return message.channel.send('`' + prefix + 'affect @user`')
+    return message.channel.send('`' + prefix + 'affect @user`')
   }
-  const member = message.mentions.users.first() || message.author;
+  const member = message.mentions.users.first() || message.author
+
+  if (member.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
+  }
   const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })
 
   const image = await canvacord.affect(memberAvatar)

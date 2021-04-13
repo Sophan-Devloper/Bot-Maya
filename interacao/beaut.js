@@ -23,6 +23,10 @@ exports.run = async (client, message, args) => {
                         .setDescription('`' + prefix + 'beaut @user`')
                 return message.reply(nouser)
         }
+
+        if (member.id === message.author.id) {
+          return message.channel.send('Você não pode usar este comando com você mesmo.')
+        }
         const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })
 
         const image = await canvacord.beautiful(memberAvatar)

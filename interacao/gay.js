@@ -28,6 +28,10 @@ exports.run = async (client, message, args) => {
         return message.channel.send('Eu não tenho gênero, eu acho.')
     }
 
+    if (user.id === message.author.id) {
+      return message.channel.send('Você não pode usar este comando com você mesmo.')
+    }
+
     var rand = ['YELLOW', 'RED', 'GREEN', 'PURPLE']
     var calors = rand[Math.floor(Math.random() * rand.length)]
 

@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+  if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
@@ -23,11 +23,13 @@ exports.run = async (client, message, args) => {
   var rand = list[Math.floor(Math.random() * list.length)]
   let user = message.mentions.users.first() || client.users.cache.get(args[0])
 
-  if (!user)
+  if (!user) {
     return message.reply('Hey, quem você quer chamar de baka? `-baka @user`')
+  }
 
-  if (user === message.author)
-    return message.reply("você não pode chamar você mesmo de baka >.< `-baka @user`")
+  if (user.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
+  }
 
   const embed = new Discord.MessageEmbed()
     .setColor('BLUE')

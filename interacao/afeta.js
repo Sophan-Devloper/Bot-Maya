@@ -19,6 +19,10 @@ exports.run = async (client, message, args) => {
     }
 
     const member = message.mentions.users.first() || message.author;
+
+    if (member.id === message.author.id) {
+      return message.channel.send('Você não pode usar este comando com você mesmo.')
+    }
     const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })
 
     const image = await canvacord.affect(memberAvatar)

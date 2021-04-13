@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
         const embed1 = new Discord.MessageEmbed()
             .setColor('#FF0000') // RED 
             .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'status Um peixinho nadando no mar azul`')
+            .setDescription('`' + prefix + 'setstatus Um peixinho nadando no mar azul`')
         return message.channel.send(embed1)
     }
 

@@ -54,6 +54,10 @@ exports.run = async (client, message, args) => {
     return message.channel.send('Aiin, eu sou timida')
   }
 
+  if (user.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
+  }
+
   let avatar1 = user.displayAvatarURL({ format: 'png' })
   const embed = new Discord.MessageEmbed()
     .setColor('BLUE')

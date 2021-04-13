@@ -60,6 +60,10 @@ exports.run = async (client, message, args) => {
     return message.channel.send(embed1)
   }
 
+  if (user.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
+  }
+
   const embed = new Discord.MessageEmbed()
     .setColor('BLUE')
     .setDescription(`Highfive ${user}?`)

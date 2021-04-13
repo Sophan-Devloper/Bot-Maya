@@ -16,6 +16,10 @@ exports.run = async (client, message, args) => {
   if (user.id === '763072871597604874')
     return message.channel.send("Foi maaal, eu não tenho a capacidade de amar ninguém. (ainda)")
 
+  if (user.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
+  }
+
   const love = Math.random() * 100
   const loveIndex = Math.floor(love / 10)
   const loveLevel = "💖".repeat(loveIndex) + "💔".repeat(10 - loveIndex)

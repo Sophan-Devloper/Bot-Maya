@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
             const noamout = new Discord.MessageEmbed()
                 .setColor('#ff0000')
                 .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'give @user Valor`')
+                .setDescription('`' + prefix + 'doar @user Valor`')
             return message.channel.send(noamout)
         }
 
@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
             const noamout = new Discord.MessageEmbed()
                 .setColor('#ff0000')
                 .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'give @user Valor`')
+                .setDescription('`' + prefix + 'doar @user Valor`')
             return message.channel.send(noamout)
         }
 
@@ -60,7 +60,7 @@ exports.run = async (client, message, args) => {
         if (money < args[1]) {
             const not = new Discord.MessageEmbed()
                 .setColor('#FF0000')
-                .setDescription(`Você precisa ter ${args[1]}<:StarPoint:766794021128765469> na carteira para poder doar para ${user.user.username}.`)
+                .setDescription(`Você precisa ter pelo menos ${args[1]}<:StarPoint:766794021128765469> na carteira para poder doar.`)
             return message.channel.send(not)
         }
 
@@ -83,8 +83,8 @@ exports.run = async (client, message, args) => {
         db.subtract(`money_${message.author.id}`, args[1])
 
         const embed = new Discord.MessageEmbed()
-            .setColor('#efff00')
-            .setDescription(`${message.author} doou para ${args[1]}<:StarPoint:766794021128765469> para ${user.user.username}.`)
+            .setColor('GREEN')
+            .setDescription(`${message.author} doou para ${args[1]}<:StarPoint:766794021128765469> para ${user}.`)
         return message.channel.send(embed)
     }
 }

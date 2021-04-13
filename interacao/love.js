@@ -55,6 +55,10 @@ exports.run = async (client, message, args) => {
     return message.channel.send('Eu sou um robô, eu não consigo amar ninguém. (ainda)')
   }
 
+  if (user.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
+  }
+
   let avatar = message.author.displayAvatarURL({ format: 'png' })
   let avatar1 = user.displayAvatarURL({ format: 'png' })
   const embed = new Discord.MessageEmbed()

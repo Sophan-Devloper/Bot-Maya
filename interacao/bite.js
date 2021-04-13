@@ -58,6 +58,10 @@ exports.run = async (client, message, args) => {
   if (user.id === '821471191578574888')
     return message.channel.send('Paaara, não me morde não :cry:')
 
+    if (user.id === message.author.id) {
+      return message.channel.send('Você não pode usar este comando com você mesmo.')
+    }
+
   let avatar = message.author.displayAvatarURL({ format: 'png' })
   let avatar1 = user.displayAvatarURL({ format: 'png' })
   const embed = new Discord.MessageEmbed()

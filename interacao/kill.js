@@ -3,7 +3,7 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+  if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
@@ -67,6 +67,10 @@ exports.run = async (client, message, args) => {
 
   if (user.id === '821471191578574888') {
     return message.channel.send('Paaara, não tenta me matar! :cry:')
+  }
+
+  if (user.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
   }
 
   let avatar = message.author.displayAvatarURL({ format: 'png' })

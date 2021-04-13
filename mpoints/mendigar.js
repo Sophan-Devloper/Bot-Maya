@@ -1,8 +1,21 @@
+const Discord = require('discord.js')
+const db = require('quick.db')
+
 exports.run = async (client, message, args) => {
 
-  const rody = message.author.id === ("451619591320371213")
-  if (!rody) {
-    message.delete()
-    return message.channel.send('⚠️ Este comando está em criação.').then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
+  if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    const adm = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+    return message.channel.send(adm)
   }
+
+  let prefix = db.get(`prefix_${message.guild.id}`)
+  if (prefix === null) { prefix = "-" }
+
+  const embed = new Discord.MessageEmbed()
+    .setColor('#FF0000')
+    .setTitle(`${message.author.username} está pedindo um pouco de dinheiro`)
+    .setDescription(`${prefix}doar ${message.author} Valor`)
+  return message.channel.send(embed)
 }

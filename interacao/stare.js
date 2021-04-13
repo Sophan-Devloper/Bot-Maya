@@ -38,6 +38,10 @@ exports.run = async (client, message, args) => {
     return message.channel.send('O que foi que eu fiz? o-o')
   }
 
+  if (user.id === message.author.id) {
+    return message.channel.send('Você não pode usar este comando com você mesmo.')
+  }
+
   const embed = new Discord.MessageEmbed()
     .setColor('#000000')
     .setDescription(`${message.author} estou de olho em você ${user}`)

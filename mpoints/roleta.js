@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
                 money *= 3
                 win = true
             } else if (number[0] == number[1] || number[0] == number[2] || number[1] == number[2]) {
-                money *= 9
+                money *= 5
                 win = true
             }
             if (win) {

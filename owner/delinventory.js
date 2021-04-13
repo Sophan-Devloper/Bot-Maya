@@ -15,6 +15,7 @@ exports.run = async (client, message, args) => {
 
     db.delete(`peixes_${user.id}`)
     db.delete(`iscas_${user.id}`)
+    db.delete(`itens_${user.id}`, "Picareta")
     db.delete(`itens_${user.id}`, "Vara de pesca")
     db.delete(`itens_${user.id}`, "Arma")
     return message.channel.send('Inventário deletado.')

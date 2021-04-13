@@ -80,7 +80,7 @@ exports.run = async (client, message, args) => {
             var result = luck[Math.floor(Math.random() * luck.length)]
 
             if (result == 'lose') {
-                var amount = Math.floor(Math.random() * 10000) + 1
+                var amount = Math.floor(Math.random() * 1000) + 1
                 var embed1 = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle("🚨 A polícia te pegou e você foi preso!")

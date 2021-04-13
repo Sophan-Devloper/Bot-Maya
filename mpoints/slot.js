@@ -25,6 +25,14 @@ exports.run = async (client, message, args) => {
     if (minerio === null) { minerio = "0" }
     if (!db.get(`minerio_${user.id}`)) { minerio = "0" }
 
+    let ossos = await db.get(`ossos_${user.id}`)
+    if (ossos === null) { ossos = "0" }
+    if (!db.get(`ossos_${user.id}`)) { ossos = "0" }
+
+    let madeira = await db.get(`madeira_${user.id}`)
+    if (madeira === null) { madeira = "0" }
+    if (!db.get(`madeira_${user.id}`)) { madeira = "0" }
+
     let arma = await db.get(`arma_${user.id}`)
     if (arma) { arma = "🔫 Arma" }
     if (arma === null) { arma = "❌ Slot Vazio" }
@@ -41,15 +49,21 @@ exports.run = async (client, message, args) => {
     if (!db.get(`vara_${user.id}`)) { vara = "❌ Slot Vazio" }
 
     let faca = db.get(`faca_${user.id}`)
-    if (faca) { vara = "🔪 Faca" }
+    if (faca) { fara = "🔪 Faca" }
     if (faca === null) { faca = "❌ Slot Vazio" }
     if (!db.get(`faca_${user.id}`)) { faca = "❌ Slot Vazio" }
+
+    let machado = db.get(`machado_${user.id}`)
+    if (machado) { machado = "🪓 Machado" }
+    if (machado === null) { machado = "❌ Slot Vazio" }
+    if (!db.get(`machado_${user.id}`)) { machado = "❌ Slot Vazio" }
 
     const Embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`📖 **Inventário de ${user.user.username}**`)
-        .addField('Itens Obtidos', `${arma}\n${picareta}\n${vara}\n${faca}`)
-        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🍤 ${camarao} Camarões\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
+        .addField('Itens Obtidos', `${arma}\n${picareta}\n${vara}\n${faca}\n${machado}\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio`)
+        .addField('Itens Especiais', "❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio")
+        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.channel.send(Embed)
 }

@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
     if (!args[1]) amountToDelete = 20
 
     console.log(amountToDelete)
-    if (parseInt(amountToDelete) > 300) return message.channel.send('Me fala um número até 300, ok?')
+    if (parseInt(amountToDelete) > 100) return message.channel.send('Me fala um número até 300, ok?')
     let userMessages = await message.channel.messages.fetch({ limit: parseInt(amountToDelete) })
     let userFilter = userMessages.filter(obj => obj.author.id === message.mentions.users.first().id)
 
@@ -66,7 +66,7 @@ exports.run = async (client, message, args) => {
     return
   }
 
-  if (args[0] === "bots") {
+  if (['bot', "bots"].includes(args[0])) {
     let awaitBotMessages = await message.channel.messages.fetch({ limit: 100 })
     let botFilter = awaitBotMessages.filter(obj => obj.author.bot)
 
@@ -79,13 +79,11 @@ exports.run = async (client, message, args) => {
     return
   }
 
-  const imagens = [
-    "images",
-    "imagens",
-    "fotos"
-  ]
-  if (args[0] === imagens) {
+  if (['images', "imagens", "fotos", "foto", "imagem", "midia"].includes(args[0])) {
     let awaitImageMessages = await message.channel.messages.fetch({ limit: 100 })
+    if (args[1] > 100) {
+      return message.channel.send('O número de mensagens não pode passar de 100.')
+    }
     let imageFilter = awaitImageMessages.filter(obj => obj.attachments.size > 0)
 
     message.channel.bulkDelete(imageFilter).catch(err => {

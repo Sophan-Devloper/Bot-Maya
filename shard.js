@@ -216,6 +216,10 @@ client.on("guildMemberAdd", (member) => {
     if (canal) {
         return client.channels.cache.get(canal).send(`📢 ${member} ${msgwelcome}`)
     }
+
+    var role = db.get(`autorole_${member.guild.id}`)
+    if (role === null) { return }
+    return member.roles.add(role)
 })
 
 client.on("guildMemberAdd", (member) => {
@@ -248,17 +252,30 @@ client.on('guildCreate', guild => {
         .setColor('BLUE')
         .setTitle('Meu prefixo padrão é `-`')
         .setDescription(`:tools: [Lista de comandos](${helpgit}) | Comece com -config`)
-    return channel.send('**Oooopa, chegueeei!**', newguild)
+    channel.send('**Oooopa, chegueeei!**', newguild)
+
+    const NewGuildEmbed = new Discord.MessageEmbed()
+        .setColor('BLUE')
+        .setTitle('💬 Novo servidor me adicionou')
+        .setDescription(`**Servidor:** ${guild.name}\n:id: ${guild.id}\n**Membros:** ${guild.memberCount}\n🌐 **Shard** ${client.guilds.cache.size}`)
+        .setTimestamp()
+
+    const canal = client.channels.cache.get('831663336776400957')
+    if (!canal) {
+        return
+    } else {
+        return canal.send(NewGuildEmbed)
+    }
 })
 
 client.once("ready", () => {
     const envi = client.channels.cache.get('830964037461344296')
-    console.log(`${client.user.tag} | OK!.`)
+    console.log(`Loguei com sucesso!`)
 
     if (!envi) {
         return
     } else if (envi) {
-        return envi.send(`${client.user.tag} Online! | 382 Comandos Onlines | 0 Offlines`)
+        return envi.send(`Estou online.`)
     }
 })
 client.login(token)

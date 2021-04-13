@@ -17,6 +17,7 @@ exports.run = async (client, message, args) => {
         'https://imgur.com/M1bhUTr.gif',
         'https://imgur.com/wkG8DQP.gif',
         'https://imgur.com/YsPeGCr.gif',
+        'https://imgur.com/aoDtLiN.gif'
     ]
 
     var gif = list[Math.floor(Math.random() * list.length)]

@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
     const loja = new Discord.MessageEmbed()
         .setColor('YELLOW')
         .setTitle('🏪 Lojinha Maya 24h')
-        .setDescription('Aqui na Lojinha Maya, você pode comprar várias coisas para ter acesso a comandos e e funções incriveis.')
+        .setDescription('Aqui na Lojinha Maya, você pode comprar várias coisas para ter acesso a comandos e funções incriveis.')
         .addFields(
             {
                 name: 'Itens Disponiveis',
@@ -20,11 +20,11 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: 'Itens Especiais',
-                value: '<:Loli:831571527744356422> Loli xxxx<:estrelinha:831161441847345202>MPoints'
+                value: '<:Loli:831571527744356422> Loli\n🔪 Faca\n:x: Em Breve\n:x: Em Breve'
             },
             {
-                name: 'Itens Aquiriveis',
-                value: '🔪 `Faca` - Baú do Tesouro (Pesca)\n🍤 `Camarões` - Baú do Tesouro (Pesca)\n🐟 `Peixes` - Baú do Tesouro (Pesca)\n🪵 `Madeira` - Florestamento\n🪨 `Minérios` - Mineração\n💎 `Diamantes` - Mineração'
+                name: 'Itens Coletaveis',
+                value: '🍤 `Camarões` - Baú do Tesouro (Pesca)\n🐟 `Peixes` - Baú do Tesouro (Pesca)\n🪵 `Madeira` - Florestamento\n🦴 `Ossos` Mineração\n🪨 `Minérios` - Mineração\n💎 `Diamantes` - Mineração'
             }
         )
         .setFooter(`${prefix}buy Item`)

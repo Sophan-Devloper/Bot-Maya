@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
             const nocanal = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Canal de pesca não definido')
-                .setDescription('Peça para algúm administrador digitar o comando para habilidade o Canal de Pesca')
+                .setDescription('Peça para algúm administrador digitar o comando para habilitar o Canal de Pesca')
                 .addField('Comando de Ativação', '`' + prefix + 'setpescachannel #Canal`')
             return message.channel.send(nocanal)
         }
@@ -82,11 +82,11 @@ exports.run = async (client, message, args) => {
         }
 
         if (iscas > 0) {
-            var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
+            var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
             var rand = num[Math.floor(Math.random() * num.length)]
             var din = Math.floor(Math.random() * 100) + 1
 
-            var a = ['wiin', 'loose', 'loose', 'loose', 'loose', 'loose', 'loli', 'nololi', 'faca', 'nololi', 'nololi']
+            var a = ['wiin', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loli', 'nololi', 'faca', 'nololi', 'nololi', 'nololi', 'nololi']
             var randa = a[Math.floor(Math.random() * a.length)]
 
             if (rand === 'win') {
@@ -107,7 +107,7 @@ exports.run = async (client, message, args) => {
                         db.set(`pescatimeout_${message.author.id}`, Date.now())
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
-                            .setTitle('⭐ Você adquiriu um item de Classe Especial! DDD')
+                            .setTitle('⭐ Você adquiriu um item de Classe Especial')
                             .addField('Classe Especial: 🔪 Faca', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
                         return message.channel.send(`${message.author}`, pescaembed)
                     } else if (!db.get(`faca_${message.author.id}`)) {
@@ -124,7 +124,7 @@ exports.run = async (client, message, args) => {
                         db.set(`pescatimeout_${message.author.id}`, Date.now())
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
-                            .setTitle('⭐ Você adquiriu um item de Classe Especial! SSS')
+                            .setTitle('⭐ Você adquiriu um item de Classe Especial')
                             .addField('Classe Especial: 🔪 Faca', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
                         return message.channel.send(`${message.author}`, pescaembed)
                     } else {
@@ -141,7 +141,7 @@ exports.run = async (client, message, args) => {
                         db.set(`pescatimeout_${message.author.id}`, Date.now())
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
-                            .setTitle('🎣 Você pescou com sucesso! XXX')
+                            .setTitle('🎣 Você pescou com sucesso!')
                             .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
                         return message.channel.send(`${message.author}`, pescaembed)
 
@@ -179,7 +179,7 @@ exports.run = async (client, message, args) => {
                         db.set(`loli_${message.author.id}`, "Loli")
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
-                            .setTitle('⭐ Você adquiriu um item de Clase Especial 1')
+                            .setTitle('⭐ Você adquiriu um item de Clase Especial')
                             .setDescription(`**Loli:** <:Loli:831571527744356422> Oooi ${message.author}, tudo bem com você? De agora em diante eu vou ser a sua parceira :heart:`)
                         return message.channel.send(`${message.author}`, pescaembed)
                     } else {

@@ -255,8 +255,8 @@ client.on('guildCreate', guild => {
     channel.send('**Oooopa, chegueeei!**', newguild)
 
     const NewGuildEmbed = new Discord.MessageEmbed()
-        .setColor('BLUE')
-        .setTitle('💬 Novo servidor me adicionou')
+        .setColor('GREEN')
+        .setTitle('💬 Novo servidor')
         .setDescription(`**Servidor:** ${guild.name}\n:id: ${guild.id}\n**Membros:** ${guild.memberCount}\n🌐 **Shard** ${client.guilds.cache.size}`)
         .setTimestamp()
 
@@ -270,7 +270,7 @@ client.on('guildCreate', guild => {
 
 client.on('guildDelete', guild => {
     const NewGuildEmbed = new Discord.MessageEmbed()
-        .setColor('BLUE')
+        .setColor('#FF0000')
         .setTitle('💬 Um servidor me removeu')
         .setDescription(`**Servidor:** ${guild.name}\n:id: ${guild.id}\n🌐 **Shard** ${client.guilds.cache.size}`)
         .setTimestamp()

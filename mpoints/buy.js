@@ -191,6 +191,121 @@ exports.run = async (client, message, args) => {
             }
         }
 
+        if (['agua', 'água', 'water', 'águas', 'aguas'].includes(args[0])) {
+
+            var money = db.get(`money_${message.author.id}`)
+            if (money === null) { money = 0 }
+
+            if (money === null) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
+                return message.channel.send(nota)
+            }
+
+            if (!args[1]) {
+                return message.channel.send(`${message.author}, ` + 'quantas águas você quer comprar? `' + prefix + 'buy aguas quantidade`')
+            }
+            if (money < args[1] * 10) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
+                return message.channel.send(nota)
+            }
+
+            if (money == 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro.`)
+                return message.channel.send(nota)
+            }
+
+            if (money < 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('✅ Compra negada')
+                    .setDescription(`${message.author}, você está com divida.`)
+                return message.channel.send(nota)
+            }
+
+            db.add(`agua_${message.author.id}`, args[1] * 1)
+            var acima = db.get(`agua_${message.author.id}`)
+            if (acima > 70) {
+                db.subtract(`agua_${message.author.id}`, args[1] * 1)
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('LIMITE DE ÁGUAS ATINGIDO!')
+                    .setDescription(`${message.author}, você não pode passar de **70 copos d'água**.`)
+                return message.channel.send(nota)
+            }
+
+            if (money = 10 || money > 10) {
+                db.subtract(`money_${message.author.id}`, args[1] * 10)
+                db.add(`bank_${client.user.id}`, args[1] * 10)
+                const buyarma = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('✅ Compra aprovada')
+                    .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🥤 `Copos de água`')
+                return message.channel.send(buyarma)
+            }
+        }
+
+        if (['picareta', "Picareta"].includes(args[0])) {
+
+            if (db.get(`picareta_${message.author.id}`)) {
+                return message.channel.send(`${message.author}, você já possui este item.`)
+            }
+
+            var money = db.get(`money_${message.author.id}`)
+            if (money === null) { money = 0 }
+
+            if (money === null) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
+                return message.channel.send(nota)
+            }
+
+            if (money < 350) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
+                return message.channel.send(nota)
+            }
+
+            if (money == 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro.`)
+                return message.channel.send(nota)
+            }
+
+            if (money < 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('✅ Compra aprovada')
+                    .setDescription(`${message.author}, você está com divida.`)
+                return message.channel.send(nota)
+            }
+
+            if (money = 350 || money > 350) {
+                db.subtract(`money_${message.author.id}`, 350)
+                db.add(`bank_${client.user.id}`, 350)
+                db.set(`picareta_${message.author.id}`, "Picareta")
+                const buyarma = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('✅ Compra aprovada')
+                    .setDescription(`${message.author}` + ', você comprou uma ⛏️ `Picareta`')
+                return message.channel.send(buyarma)
+            }
+        }
+
         if (['isca', 'minhoca', 'iscas', 'minhocas'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)
@@ -249,59 +364,6 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🪱 `Iscas`')
-                return message.channel.send(buyarma)
-            }
-        }
-
-        if (['picareta', "Picareta"].includes(args[0])) {
-
-            if (db.get(`picareta_${message.author.id}`)) {
-                return message.channel.send(`${message.author}, você já possui este item.`)
-            }
-
-            var money = db.get(`money_${message.author.id}`)
-            if (money === null) { money = 0 }
-
-            if (money === null) {
-                const nota = new Discord.MessageEmbed()
-                    .setColor('#FF0000')
-                    .setTitle('❌ Compra negada')
-                    .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
-                return message.channel.send(nota)
-            }
-
-            if (money < 350) {
-                const nota = new Discord.MessageEmbed()
-                    .setColor('#FF0000')
-                    .setTitle('❌ Compra negada')
-                    .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
-                return message.channel.send(nota)
-            }
-
-            if (money == 0) {
-                const nota = new Discord.MessageEmbed()
-                    .setColor('#FF0000')
-                    .setTitle('❌ Compra negada')
-                    .setDescription(`${message.author}, você não tem dinheiro.`)
-                return message.channel.send(nota)
-            }
-
-            if (money < 0) {
-                const nota = new Discord.MessageEmbed()
-                    .setColor('#FF0000')
-                    .setTitle('✅ Compra aprovada')
-                    .setDescription(`${message.author}, você está com divida.`)
-                return message.channel.send(nota)
-            }
-
-            if (money = 350 || money > 350) {
-                db.subtract(`money_${message.author.id}`, 350)
-                db.add(`bank_${client.user.id}`, 350)
-                db.set(`picareta_${message.author.id}`, "Picareta")
-                const buyarma = new Discord.MessageEmbed()
-                    .setColor('GREEN')
-                    .setTitle('✅ Compra aprovada')
-                    .setDescription(`${message.author}` + ', você comprou uma ⛏️ `Picareta`')
                 return message.channel.send(buyarma)
             }
         } else {

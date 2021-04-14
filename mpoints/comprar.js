@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
                 .setColor('BLUE')
                 .setTitle('<:estrelinha:831161441847345202> Sistema de Compras Maya')
                 .setDescription('Aqui você pode comprar os itens da lojinha. É muito simples, basta usar o comando, assim você compra itens e pode usa-lo.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
-                .addField('Comando', '`' + prefix + 'buy Nome do item`')
+                .addField('Comando', '`' + prefix + 'comprar Nome do item`')
                 .addField('Todos os itens', '`' + prefix + 'loja`')
             return message.channel.send(noargs)
         }
@@ -191,7 +191,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['isca', 'minhoca', 'iscas', 'minhocas'].includes(args[0])) {
+        if (['agua', 'água', 'water', 'águas', 'aguas'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)
             if (money === null) { money = 0 }
@@ -205,7 +205,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantas iscas você quer comprar? `' + prefix + 'buy iscas quantidade`')
+                return message.channel.send(`${message.author}, ` + 'quantas águas você quer comprar? `' + prefix + 'comprar aguas quantidade`')
             }
             if (money < args[1] * 10) {
                 const nota = new Discord.MessageEmbed()
@@ -231,14 +231,14 @@ exports.run = async (client, message, args) => {
                 return message.channel.send(nota)
             }
 
-            db.add(`iscas_${message.author.id}`, args[1] * 1)
-            var acima = db.get(`iscas_${message.author.id}`)
-            if (acima > 50) {
-                db.subtract(`iscas_${message.author.id}`, args[1] * 1)
+            db.add(`agua_${message.author.id}`, args[1] * 1)
+            var acima = db.get(`agua_${message.author.id}`)
+            if (acima > 70) {
+                db.subtract(`agua_${message.author.id}`, args[1] * 1)
                 const nota = new Discord.MessageEmbed()
                     .setColor('#FF0000')
-                    .setTitle('LIMITE DE ISCAS ATINGIDO!')
-                    .setDescription(`${message.author}, você não pode passar de **50 iscas**.`)
+                    .setTitle('LIMITE DE ÁGUAS ATINGIDO!')
+                    .setDescription(`${message.author}, você não pode passar de **70 copos d'água**.`)
                 return message.channel.send(nota)
             }
 
@@ -248,7 +248,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
-                    .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🪱 `Iscas`')
+                    .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🥤 `Copos de água`')
                 return message.channel.send(buyarma)
             }
         }
@@ -302,6 +302,68 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou uma ⛏️ `Picareta`')
+                return message.channel.send(buyarma)
+            }
+        }
+
+        if (['isca', 'minhoca', 'iscas', 'minhocas'].includes(args[0])) {
+
+            var money = db.get(`money_${message.author.id}`)
+            if (money === null) { money = 0 }
+
+            if (money === null) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
+                return message.channel.send(nota)
+            }
+
+            if (!args[1]) {
+                return message.channel.send(`${message.author}, ` + 'quantas iscas você quer comprar? `' + prefix + 'comprar iscas quantidade`')
+            }
+            if (money < args[1] * 10) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
+                return message.channel.send(nota)
+            }
+
+            if (money == 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro.`)
+                return message.channel.send(nota)
+            }
+
+            if (money < 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('✅ Compra negada')
+                    .setDescription(`${message.author}, você está com divida.`)
+                return message.channel.send(nota)
+            }
+
+            db.add(`iscas_${message.author.id}`, args[1] * 1)
+            var acima = db.get(`iscas_${message.author.id}`)
+            if (acima > 50) {
+                db.subtract(`iscas_${message.author.id}`, args[1] * 1)
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('LIMITE DE ISCAS ATINGIDO!')
+                    .setDescription(`${message.author}, você não pode passar de **50 iscas**.`)
+                return message.channel.send(nota)
+            }
+
+            if (money = 10 || money > 10) {
+                db.subtract(`money_${message.author.id}`, args[1] * 10)
+                db.add(`bank_${client.user.id}`, args[1] * 10)
+                const buyarma = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('✅ Compra aprovada')
+                    .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🪱 `Iscas`')
                 return message.channel.send(buyarma)
             }
         } else {

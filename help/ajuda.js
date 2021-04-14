@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
       .setColor('#CD853F')
       .setTitle('⭐ Centralzinha de Ajuda da Maya ⭐')
       .setDescription(`Heey! Tudo bem ${message.author}?\n \nSe você quiser informações sobre algum comando especifico, use **${prefix}ajuda categoria** ou apenas o comando.\nExemplo: **${prefix}marry** que eu te falo tudo sobre o comando.`)
-      .addField('Acesso direto', `:tools: [Lista de Comandos](${helpgit}) | ☎️ [Suporte](${linksupport}) | 🧩 [Meu servidor](${linkservidor})`)
+      .addField('Acesso direto', `:tools: [Lista de Comandos](${helpgit})\n☎️ [Suporte](${linksupport})\n🧩 [Meu servidor](${linkservidor})\n:heart: [Me adicione](https://discord.com/api/oauth2/authorize?client_id=821471191578574888&permissions=8&scope=bot)`)
       .setFooter(`${prefix}ajuda categoria`)
     return message.channel.send(`${message.author}`, newhelp)
   }

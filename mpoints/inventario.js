@@ -42,7 +42,7 @@ exports.run = async (client, message, args) => {
     if (arma === null) { arma = "❌ Slot Vazio" }
     if (!db.get(`arma_${user.id}`)) { arma = "❌ Slot Vazio" }
 
-    var xusos = db.get(`offpicareta_${user.id}`)
+    var xusos = (db.get(`offpicareta_${user.id}`) + 1)
     let picareta = await db.get(`picareta_${user.id}`)
     if (picareta) { picareta = `⛏️ Picareta | Uso restante: ${xusos}` }
     if (picareta === null) { picareta = "❌ Slot Vazio" }
@@ -77,8 +77,6 @@ exports.run = async (client, message, args) => {
     if (mamute) { mamute = "🦣 Mamute" }
     if (mamute === null) { mamute = "❌ Slot Vazio" }
     if (!db.get(`mamute_${user.id}`)) { mamute = "❌ Slot Vazio" }
-
-
 
     const Embed = new Discord.MessageEmbed()
         .setColor('BLUE')

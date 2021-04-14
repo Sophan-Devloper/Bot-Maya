@@ -31,10 +31,10 @@ exports.run = async (client, message, args) => {
         if (!args[0]) {
             const noargs = new Discord.MessageEmbed()
                 .setColor('BLUE')
-                .setTitle('🔫 Comando Assaltar')
-                .setDescription('O comando assaltar te garante 100% do dinheiro que o @user tem na carteira.\n \nCaso a pessoa que você assaltar também tenha uma arma, você tem a chance de ser preso.')
+                .setTitle('Comando Assaltar')
+                .setDescription('O comando assaltar te garante 100% do dinheiro que o @user tem na carteira.\n \nCaso a pessoa que você assaltar também tenha uma arma, você tem a chance de ser assaltado de volta.')
                 .addField('Item Obrigatório', '🔫 Arma')
-                .setFooter('`' + prefix + 'loja`')
+                .setFooter(prefix + 'loja')
             return message.channel.send(noargs)
         }
 
@@ -79,17 +79,10 @@ exports.run = async (client, message, args) => {
         var autormoney = db.get(`money_${message.author.id}`)
         if (autormoney == null) autormoney = 0
 
-        if (usermoney = 0) {
+        if (usermoney === 0 || usermoney < 0) {
             const nomoney = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setDescription(`${user} não possui dinheiro.`)
-            return message.channel.send(nomoney)
-        }
-
-        if (usermoney < 0) {
-            const nomoney = new Discord.MessageEmbed()
-                .setColor('#FF0000')
-                .setTitle(`${user.user.username} esta individado.`)
             return message.channel.send(nomoney)
         }
 
@@ -109,6 +102,7 @@ exports.run = async (client, message, args) => {
 
                 var luck = ['win', 'lose']
                 var result = luck[Math.floor(Math.random() * luck.length)]
+
                 var authormoney = db.get(`money_${message.author.id}`)
                 var tudo = db.get(`money_${user.id}`)
 

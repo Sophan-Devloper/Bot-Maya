@@ -173,13 +173,15 @@ exports.run = async (client, message, args) => {
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
                             .setTitle('⭐ Você adquiriu um item de Clase Especial')
-                        return message.channel.send(`${message.author}`, `**Loli:** <:Loli:831571527744356422> Oooi ${message.author}, tudo bem com você? De agora em diante eu vou ser a sua parceira :heart:`)
+                            .setDescription(`**Loli:** <:Loli:831571527744356422> Oooi ${message.author}, tudo bem com você? De agora em diante eu vou ser a sua parceira :heart:`)
+                        return message.channel.send(`${message.author}`, pescaembed)
                     } else if (!db.get(`loli_${message.author.id}`)) {
                         db.set(`loli_${message.author.id}`, "Loli")
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
                             .setTitle('⭐ Você adquiriu um item de Clase Especial 1')
-                        return message.channel.send(`${message.author}`, `**Loli:** <:Loli:831571527744356422> Oooi ${message.author}, tudo bem com você? De agora em diante eu vou ser a sua parceira :heart:`)
+                            .setDescription(`**Loli:** <:Loli:831571527744356422> Oooi ${message.author}, tudo bem com você? De agora em diante eu vou ser a sua parceira :heart:`)
+                        return message.channel.send(`${message.author}`, pescaembed)
                     } else {
                         var frase = ['Oii, sabia que eu gosto de passear enquanto vejo os passarinhos?', 'Sabia que um dia eu cai da cama e machuquei meu braço?', 'Ei, eu tenho medo de pessoas más.']
                         var result = frase[Math.floor(Math.random() * frase.length)]

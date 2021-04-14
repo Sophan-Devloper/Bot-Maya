@@ -11,20 +11,6 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) { prefix = "-" }
 
-    if (!args[0]) {
-        const noargs = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Roleta Maya')
-            .setDescription('Aqui você pode apostar ou perder o dinheiro apostado, então cuidado.\n \n**Observações**\nPerdeu? Você perde o valor apostado.\nVitória? Você ganha 3x mais o valor apostado.')
-            .addFields(
-                {
-                    name: 'Comando',
-                    value: '`' + prefix + 'roleta valor`'
-                }
-            )
-        return message.channel.send(noargs)
-    }
-
     let timeout1 = 6140000
     let author1 = await db.fetch(`pego_${message.author.id}`)
 
@@ -46,8 +32,37 @@ exports.run = async (client, message, args) => {
             return message.channel.send(`Calminha! As maquinas precisam recarregar. Tempo de recarga completa: ${time.minutes}m, e ${time.seconds}s`)
         } else {
 
+            if (!args[0]) {
+                const noargs = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('Roleta Maya')
+                    .setDescription('Aqui você pode apostar ou perder o dinheiro apostado, então cuidado.\n \n**Observações**\nPerdeu? Você perde o valor apostado.\nVitória? Você pode ganhar 3x mais o valor apostado.')
+                    .addFields(
+                        {
+                            name: 'Comando',
+                            value: '`' + prefix + 'roleta valor`'
+                        }
+                    )
+                return message.channel.send(noargs)
+            }
+
+            if (isNaN(args[0])) {
+                const nonumber = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle(`${args[0]}, digite um número.`)
+                    .setDescription('`' + prefix + 'roleta valor`')
+                return message.channel.send(nonumber)
+            }
+
+            if (args[1]) {
+                const nonumber = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('Por favor, digite um número válido')
+                    .setDescription('`' + prefix + 'roleta valor`')
+                return message.channel.send(nonumber)
+            }
+
             let money = db.get(`money_${message.author.id}`)
-            if (!db.get(`money_${message.author.id}`)) money = '0'
 
             if (money === null) {
                 const nota = new Discord.MessageEmbed()
@@ -55,6 +70,9 @@ exports.run = async (client, message, args) => {
                     .setDescription(`${message.author}, você não tem dinheiro para apostar.`)
                 return message.channel.send(nota)
             }
+
+
+            if (!db.get(`money_${message.author.id}`)) { money = 0 }
 
             if (money < 0) {
                 const nota = new Discord.MessageEmbed()
@@ -90,14 +108,16 @@ exports.run = async (client, message, args) => {
             if (win) {
                 let slotsEmbed1 = new Discord.MessageEmbed()
                     .setColor("GREEN")
-                    .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} ganhou ${money} <:estrelinha:831161441847345202>`)
+                    .setTitle('GANHOU')
+                    .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${args[0]} e ganhou ${money} <:estrelinha:831161441847345202>`)
                 message.channel.send(slotsEmbed1)
                 db.add(`money_${message.author.id}`, money)
                 db.set(`roletatimeout_${message.author.id}`, Date.now())
             } else {
                 let slotsEmbed = new Discord.MessageEmbed()
                     .setColor("#FF0000")
-                    .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} perdeu ${money} <:estrelinha:831161441847345202>`)
+                    .setTitle('PERDEU')
+                    .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${args[0]} e perdeu ${money} <:estrelinha:831161441847345202>`)
                 message.channel.send(slotsEmbed)
                 db.subtract(`money_${message.author.id}`, money)
                 db.add(`bank_${client.user.id}`, money)

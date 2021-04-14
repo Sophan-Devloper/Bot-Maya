@@ -8,6 +8,6 @@ exports.run = async (client, message, args) => {
     }
 
     await db.delete(`family1_${db.get(`family1_${message.author.id}`)}`)
-    await db.delete(`family1_${message.author.id}`)
     await message.channel.send(`Você se separou de sua familia! Você não tem mais parentesco com ${db.get(`family1_${message.author.id}`)}.`)
+    await db.delete(`family1_${message.author.id}`)
 }

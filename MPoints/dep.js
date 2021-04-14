@@ -5,10 +5,10 @@ const ms = require('parse-ms')
 exports.run = async (client, message, args) => {
 
     if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-      const adm = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-      return message.channel.send(adm)
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+        return message.channel.send(adm)
     }
 
     let timeout1 = 6140000
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
             return message.channel.send(noamout)
         }
 
-        if (args[0] === 'all') {
+        if (['all', 'tudo'].includes(args[0])) {
             let money = db.get(`money_${message.author.id}`)
             if (!db.get(`money_${message.author.id}`)) money = '0'
 

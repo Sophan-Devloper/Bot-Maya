@@ -84,7 +84,16 @@ exports.run = async (client, message, args) => {
         if (agua > 0) {
             var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
             var rand = num[Math.floor(Math.random() * num.length)]
-            var din = Math.floor(Math.random() * 100) + 1
+            
+            var vezesmin = db.add(`offpicareta_${message.author.id}`, 1)
+            if (vezesmin === 50 || vezesmin > 50) {
+                db.delete(`picareta_${message.author}`)
+                const sempicareta = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('Que peeena')
+                    .setDescription(`${message.author}, a sua picareta quebrou. Você precisa comprar outra.`)
+                return message.channel.send(sempicareta)
+            }
 
             var a = ['wiin', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'loose', 'mamute', 'nomamute', 'fossil', 'nomamute', 'nomamute', 'nomamute', 'nomamute']
             var randa = a[Math.floor(Math.random() * a.length)]

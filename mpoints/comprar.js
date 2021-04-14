@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
                 .setColor('BLUE')
                 .setTitle('<:estrelinha:831161441847345202> Sistema de Compras Maya')
                 .setDescription('Aqui você pode comprar os itens da lojinha. É muito simples, basta usar o comando, assim você compra itens e pode usa-lo.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
-                .addField('Comando', '`' + prefix + 'comprar Nome do item`')
+                .addField('Comando', '`' + prefix + 'buy Nome do item`')
                 .addField('Todos os itens', '`' + prefix + 'loja`')
             return message.channel.send(noargs)
         }
@@ -205,7 +205,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantas águas você quer comprar? `' + prefix + 'comprar aguas quantidade`')
+                return message.channel.send(`${message.author}, ` + 'quantas águas você quer comprar? `' + prefix + 'buy aguas quantidade`')
             }
             if (money < args[1] * 10) {
                 const nota = new Discord.MessageEmbed()
@@ -298,6 +298,7 @@ exports.run = async (client, message, args) => {
                 db.subtract(`money_${message.author.id}`, 350)
                 db.add(`bank_${client.user.id}`, 350)
                 db.set(`picareta_${message.author.id}`, "Picareta")
+                db.delete(`offpicareta_${message.author.id}`)
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
@@ -320,7 +321,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantas iscas você quer comprar? `' + prefix + 'comprar iscas quantidade`')
+                return message.channel.send(`${message.author}, ` + 'quantas iscas você quer comprar? `' + prefix + 'buy iscas quantidade`')
             }
             if (money < args[1] * 10) {
                 const nota = new Discord.MessageEmbed()

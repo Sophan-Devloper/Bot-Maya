@@ -298,6 +298,7 @@ exports.run = async (client, message, args) => {
                 db.subtract(`money_${message.author.id}`, 350)
                 db.add(`bank_${client.user.id}`, 350)
                 db.set(`picareta_${message.author.id}`, "Picareta")
+                db.delete(`offpicareta_${message.author.id}`)
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')

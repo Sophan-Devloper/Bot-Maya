@@ -82,7 +82,7 @@ exports.run = async (client, message, args) => {
         .setDescription(`📖 **Inventário de ${user.user.username}**`)
         .addField('Itens Obtidos', `${arma}\n${picareta}\n${vara}\n${machado}\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio`)
         .addField('Itens Especiais', `${faca}\n${loli}\n${fossil}\n${mamute}`)
-        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua}\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
+        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.channel.send(Embed)
 }

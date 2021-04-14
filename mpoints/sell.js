@@ -104,7 +104,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['ossos', 'bone'].includes(args[0])) {
+        if (['ossos', 'bone', 'osso'].includes(args[0])) {
 
             if (ossos === null) {
                 const nota = new Discord.MessageEmbed()
@@ -144,8 +144,8 @@ exports.run = async (client, message, args) => {
 
             if (ossos = args[1] || ossos > args[1]) {
                 db.subtract(`ossos_${message.author.id}`, args[1])
-                db.add(`money_${message.author.id}`, args[1] * 5)
-                db.subtract(`bank_${client.user.id}`, args[1] * 5)
+                db.add(`money_${message.author.id}`, args[1] * 9)
+                db.subtract(`bank_${client.user.id}`, args[1] * 9)
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
@@ -194,8 +194,8 @@ exports.run = async (client, message, args) => {
 
             if (camarao = args[1] || camarao > args[1]) {
                 db.subtract(`camarao_${message.author.id}`, args[1])
-                db.add(`money_${message.author.id}`, args[1] * 12)
-                db.subtract(`bank_${client.user.id}`, args[1] * 12)
+                db.add(`money_${message.author.id}`, args[1] * 9)
+                db.subtract(`bank_${client.user.id}`, args[1] * 9)
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
@@ -203,7 +203,7 @@ exports.run = async (client, message, args) => {
                 return message.channel.send(buyarma)
             }
         }
-        if (['minerio', 'min'].includes(args[0])) {
+        if (['minerio', 'min', 'minerios', 'pedra', 'ferro', 'minérios', 'minério'].includes(args[0])) {
 
             if (minerio === null) {
                 const nota = new Discord.MessageEmbed()
@@ -243,8 +243,8 @@ exports.run = async (client, message, args) => {
 
             if (minerio = args[1] || minerio > args[1]) {
                 db.subtract(`minerio_${message.author.id}`, args[1])
-                db.add(`money_${message.author.id}`, args[1] * 15)
-                db.subtract(`bank_${client.user.id}`, args[1] * 15)
+                db.add(`money_${message.author.id}`, args[1] * 9)
+                db.subtract(`bank_${client.user.id}`, args[1] * 9)
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
@@ -303,7 +303,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['madeira', 'madeiras', 'wood'].includes(args[0])) {
+        if (['madeira', 'madeiras', 'wood', 'tronco'].includes(args[0])) {
 
             if (madeira === null) {
                 const nota = new Discord.MessageEmbed()
@@ -343,8 +343,8 @@ exports.run = async (client, message, args) => {
 
             if (madeira = args[1] || madeira > args[1]) {
                 db.subtract(`madeira_${message.author.id}`, args[1])
-                db.add(`money_${message.author.id}`, args[1] * 15)
-                db.subtract(`bank_${client.user.id}`, args[1] * 15)
+                db.add(`money_${message.author.id}`, args[1] * 8)
+                db.subtract(`bank_${client.user.id}`, args[1] * 8)
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')

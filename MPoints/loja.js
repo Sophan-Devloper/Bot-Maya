@@ -16,17 +16,17 @@ exports.run = async (client, message, args) => {
         .addFields(
             {
                 name: 'Itens Disponiveis',
-                value: '🎣 `Vara de Pesca` 5.000 <:estrelinha:831161441847345202>MPoints\n🔫 `Arma` 100.000 <:estrelinha:831161441847345202>MPoints\n🪱 `Isca` 10 <:estrelinha:831161441847345202>\n⛏️ `Picareta` 350 <:estrelinha:831161441847345202>MPoints\n🪓 `Machado` 400 <:estrelinha:831161441847345202>MPoints'
+                value: '🎣 `Vara de Pesca` 5.000 <:estrelinha:831161441847345202>MPoints\n🔫 `Arma` 100.000 <:estrelinha:831161441847345202>MPoints\n⛏️ `Picareta` 350 <:estrelinha:831161441847345202>MPoints\n🪓 `Machado` 400 <:estrelinha:831161441847345202>MPoints\n🪱 `Isca` 10 <:estrelinha:831161441847345202>\n🥤 `Água` 10 <:estrelinha:831161441847345202>MPoints'
             },
             {
                 name: 'Itens Especiais',
-                value: '<:Loli:831571527744356422> Loli\n🔪 Faca\n:x: Em Breve\n:x: Em Breve'
+                value: '<:Loli:831571527744356422> Loli\n🔪 Faca\n<:fossil:831859111578173450> Fossil\n🦣 Mamute'
             },
             {
                 name: 'Itens Coletaveis',
                 value: '🍤 `Camarões` - Baú do Tesouro (Pesca)\n🐟 `Peixes` - Baú do Tesouro (Pesca)\n🪵 `Madeira` - Florestamento\n🦴 `Ossos` Mineração\n🪨 `Minérios` - Mineração\n💎 `Diamantes` - Mineração'
             }
         )
-        .setFooter(`${prefix}buy Item`)
+        .setFooter(`${prefix}comprar Item`)
     return message.channel.send(loja)
 }

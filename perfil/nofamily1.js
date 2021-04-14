@@ -1,4 +1,3 @@
-
 const db = require("quick.db")
 
 exports.run = async (client, message, args) => {
@@ -7,7 +6,21 @@ exports.run = async (client, message, args) => {
         return message.channel.send("Você não tem um familiar nesta posição...")
     }
 
-    await db.delete(`family1_${db.get(`family1_${message.author.id}`)}`)
-    await message.channel.send(`Você se separou de sua familia! Você não tem mais parentesco com ${db.get(`family1_${message.author.id}`)}.`)
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = "-" }
+
+    var user = message.mentions.members.first()
+
+    if (!args[0]) {
+        return message.channel.send('Marque o seu familiar `' + prefix + 'nofamily1 @Familiar`')
+    }
+
+    var par = user.id === db.get(`family1_${message.author.id}`)
+    if (!par) {
+        return message.channel.send(`${user} não é a pessoa que você está em um relacionamento.`)
+    }
+
+    await db.delete(`family1_${par}`)
     await db.delete(`family1_${message.author.id}`)
+    await message.channel.send(`Você se separou de sua familia! Você não tem mais parentesco com ${user}.`)
 }

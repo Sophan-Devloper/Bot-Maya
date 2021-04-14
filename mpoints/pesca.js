@@ -59,7 +59,7 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('❌ Comando bloqueado')
                 .setDescription(`${message.author}, você precisa de uma vara de pesca. Compre uma na ${prefix}loja`)
-            return message.channel.send(novara)
+            await message.channel.send(novara)
         }
 
         let iscas = db.get(`iscas_${message.author.id}`)
@@ -67,7 +67,7 @@ exports.run = async (client, message, args) => {
             const novara = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('❌ Comando bloqueado')
-                .setDescription(`${message.author}, você não possui iscas para pescar. Compre algumas na ${loja}`)
+                .setDescription(`${message.author}, você não possui iscas para pescar. Compre algumas na ${prefix}loja`)
             return message.channel.send(novara)
         }
 
@@ -77,42 +77,61 @@ exports.run = async (client, message, args) => {
             const novara = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('❌ Comando bloqueado')
-                .setDescription(`${message.author}, você não possui iscas para pescar. Compre algumas na ${loja}`)
+                .setDescription(`${message.author}, você não possui iscas para pescar. Compre algumas na ${prefix}loja`)
             return message.channel.send(novara)
         }
 
         if (iscas > 0) {
-            var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
+            var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
             var rand = num[Math.floor(Math.random() * num.length)]
             var din = Math.floor(Math.random() * 100) + 1
 
-            if (rand === 'win') {
-                if (!db.get(`faca_${message.author.id}`)) {
-                    var a = ['wiin', 'loose', 'loose', 'loose']
-                    var randa = a[Math.floor(Math.random() * a.length)]
-                    if (randa === "wiin") {
-                        var dinh = Math.floor(Math.random() * 500) + 1
-                        var peixes = Math.floor(Math.random() * 20) + 1
-                        var iiscas = Math.floor(Math.random() * 50) + 1
-                        var camarao = Math.floor(Math.random() * 3) + 1
-                        db.subtract(`iscas_${message.author.id}`, 1)
-                        db.add(`iscas_${message.author.id}`, iiscas)
-                        db.add(`peixes_${message.author.id}`, peixes)
-                        db.add(`camarao_${message.author.id}`, camarao)
-                        db.set(`faca_${user.id}`, "Faca")
-                        db.add(`money_${message.author.id}`, dinh)
-                        db.set(`pescatimeout_${message.author.id}`, Date.now())
-                        const pescaembed = new Discord.MessageEmbed()
-                            .setColor('GREEN')
-                            .setTitle('🎣 Você pescou com sucesso!')
-                            .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
-                        return message.channel.send(`${message.author}`, pescaembed)
-                    }
+            var a = ['wiin', 'loose', 'loose', 'loose', 'loose', 'loose', 'loli', 'nololi', 'faca', 'nololi', 'nololi']
+            var randa = a[Math.floor(Math.random() * a.length)]
 
-                    if (randa === "loose") {
+            if (rand === 'win') {
+
+                if (randa === 'faca') {
+                    var faca = db.get(`faca_${message.author.id}`)
+                    if (faca === null) {
                         var dinh = Math.floor(Math.random() * 500) + 1
                         var peixes = Math.floor(Math.random() * 20) + 1
-                        var iiscas = Math.floor(Math.random() * 50) + 1
+                        var iiscas = Math.floor(Math.random() * 5) + 1
+                        var camarao = Math.floor(Math.random() * 3) + 1
+                        db.subtract(`iscas_${message.author.id}`, 1)
+                        db.add(`iscas_${message.author.id}`, iiscas)
+                        db.add(`peixes_${message.author.id}`, peixes)
+                        db.add(`camarao_${message.author.id}`, camarao)
+                        db.add(`money_${message.author.id}`, dinh)
+                        db.set(`faca_${message.author.id}`, "Faca")
+                        db.set(`pescatimeout_${message.author.id}`, Date.now())
+                        const pescaembed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
+                            .setTitle('⭐ Você adquiriu um item de Classe Especial! DDD')
+                            .addField('Classe Especial: 🔪 Faca', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
+                        return message.channel.send(`${message.author}`, pescaembed)
+                    } else if (!db.get(`faca_${message.author.id}`)) {
+                        var dinh = Math.floor(Math.random() * 500) + 1
+                        var peixes = Math.floor(Math.random() * 20) + 1
+                        var iiscas = Math.floor(Math.random() * 5) + 1
+                        var camarao = Math.floor(Math.random() * 3) + 1
+                        db.subtract(`iscas_${message.author.id}`, 1)
+                        db.add(`iscas_${message.author.id}`, iiscas)
+                        db.add(`peixes_${message.author.id}`, peixes)
+                        db.add(`camarao_${message.author.id}`, camarao)
+                        db.add(`money_${message.author.id}`, dinh)
+                        db.set(`faca_${message.author.id}`, "Faca")
+                        db.set(`pescatimeout_${message.author.id}`, Date.now())
+                        const pescaembed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
+                            .setTitle('⭐ Você adquiriu um item de Classe Especial! SSS')
+                            .addField('Classe Especial: 🔪 Faca', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
+                        return message.channel.send(`${message.author}`, pescaembed)
+                    } else {
+
+                        var dinh = Math.floor(Math.random() * 300) + 1
+                        var peixes = Math.floor(Math.random() * 10) + 1
+                        var iiscas = Math.floor(Math.random() * 5) + 1
                         var camarao = Math.floor(Math.random() * 3) + 1
                         db.subtract(`iscas_${message.author.id}`, 1)
                         db.add(`iscas_${message.author.id}`, iiscas)
@@ -122,25 +141,65 @@ exports.run = async (client, message, args) => {
                         db.set(`pescatimeout_${message.author.id}`, Date.now())
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
-                            .setTitle('🎣 Você pescou com sucesso!')
+                            .setTitle('🎣 Você pescou com sucesso! XXX')
                             .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões`)
                         return message.channel.send(`${message.author}`, pescaembed)
+
                     }
                 }
-                var peixes = Math.floor(Math.random() * 10) + 1
-                var iiscas = Math.floor(Math.random() * 5) + 1
-                var camarao = Math.floor(Math.random() * 3) + 1
-                db.subtract(`iscas_${message.author.id}`, 1)
-                db.add(`iscas_${message.author.id}`, iiscas)
-                db.add(`peixes_${message.author.id}`, peixes)
-                db.add(`camarao_${message.author.id}`, camarao)
-                db.add(`money_${message.author.id}`, din)
-                db.set(`pescatimeout_${message.author.id}`, Date.now())
-                const pescaembed = new Discord.MessageEmbed()
-                    .setColor('GREEN')
-                    .setTitle('🎣 Você pescou com sucesso!')
-                    .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${din}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões `)
-                return message.channel.send(`${message.author}`, pescaembed)
+
+                if (randa === "loose") {
+
+                    var peixes = Math.floor(Math.random() * 10) + 1
+                    var iiscas = Math.floor(Math.random() * 3) + 1
+                    var camarao = Math.floor(Math.random() * 3) + 1
+                    db.subtract(`iscas_${message.author.id}`, 1)
+                    db.add(`iscas_${message.author.id}`, iiscas)
+                    db.add(`peixes_${message.author.id}`, peixes)
+                    db.add(`camarao_${message.author.id}`, camarao)
+                    db.add(`money_${message.author.id}`, din)
+                    db.set(`pescatimeout_${message.author.id}`, Date.now())
+                    const pescaembed = new Discord.MessageEmbed()
+                        .setColor('GREEN')
+                        .setTitle('🎣 Você pescou com sucesso')
+                        .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou um baú do tesouro! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${din}<:estrelinha:831161441847345202>MPoints, ${peixes} 🐟 peixes, ${iiscas} 🪱 Iscas e ${camarao} 🍤 Camarões `)
+                    return message.channel.send(`${message.author}`, pescaembed)
+                }
+
+                var loli = db.get(`loli_${message.author.id}`)
+                if (randa === "loli") {
+                    if (loli === null) {
+                        db.set(`loli_${message.author.id}`, "Loli")
+                        const pescaembed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
+                            .setTitle('⭐ Você adquiriu um item de Clase Especial')
+                        return message.channel.send(`${message.author}`, `**Loli:** <:Loli:831571527744356422> Oooi ${message.author}, tudo bem com você? De agora em diante eu vou ser a sua parceira :heart:`)
+                    } else if (!db.get(`loli_${message.author.id}`)) {
+                        db.set(`loli_${message.author.id}`, "Loli")
+                        const pescaembed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
+                            .setTitle('⭐ Você adquiriu um item de Clase Especial 1')
+                        return message.channel.send(`${message.author}`, `**Loli:** <:Loli:831571527744356422> Oooi ${message.author}, tudo bem com você? De agora em diante eu vou ser a sua parceira :heart:`)
+                    } else {
+                        var frase = ['Oii, sabia que eu gosto de passear enquanto vejo os passarinhos?', 'Sabia que um dia eu cai da cama e machuquei meu braço?', 'Ei, eu tenho medo de pessoas más.']
+                        var result = frase[Math.floor(Math.random() * frase.length)]
+                        const looli = new Discord.MessageEmbed()
+                            .setColor('BLUE')
+                            .setTitle('Uma garotinha atrapalhou sua pesca.')
+                            .setDescription(`<:Loli:831571527744356422> ${result}`)
+                        return message.channel.send(`${message.author}`, looli)
+                    }
+                }
+
+                if (randa === "nololi") {
+                    var frase = ['Oii, sabia que eu gosto de passear enquanto vejo os passarinhos?', 'Sabia que um dia eu cai da cama e machuquei meu braço?', 'Ei, eu tenho medo de pessoas más.']
+                    var result = frase[Math.floor(Math.random() * frase.length)]
+                    const looli = new Discord.MessageEmbed()
+                        .setColor('BLUE')
+                        .setTitle('Uma garotinha atrapalhou sua pesca.')
+                        .setDescription(`<:Loli:831571527744356422> ${result}`)
+                    return message.channel.send(`${message.author}`, looli)
+                }
             }
 
             if (rand === 'lose') {
@@ -152,7 +211,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('🎣 Você pescou com sucesso!')
                     .setDescription(`Com a pesca, você obteve ${peixes} peixes.`)
-                return message.channel.send(pescaembed)
+                return message.channel.send(`${message.author}`, pescaembed)
             }
         } else {
             const novara = new Discord.MessageEmbed()

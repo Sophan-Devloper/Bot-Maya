@@ -268,6 +268,21 @@ client.on('guildCreate', guild => {
     }
 })
 
+client.on('guildDelete', guild => {
+    const NewGuildEmbed = new Discord.MessageEmbed()
+        .setColor('BLUE')
+        .setTitle('💬 Um servidor me removeu')
+        .setDescription(`**Servidor:** ${guild.name}\n:id: ${guild.id}\n🌐 **Shard** ${client.guilds.cache.size}`)
+        .setTimestamp()
+
+    const canal = client.channels.cache.get('831663336776400957')
+    if (!canal) {
+        return
+    } else {
+        return canal.send(NewGuildEmbed)
+    }
+})
+
 client.once("ready", () => {
     const envi = client.channels.cache.get('830964037461344296')
     console.log(`Loguei com sucesso!`)

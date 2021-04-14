@@ -13,6 +13,10 @@ exports.run = async (client, message, args) => {
     if (iscas === null) { iscas = "0" }
     if (!db.get(`iscas_${user.id}`)) { iscas = "0" }
 
+    let agua = await db.get(`agua_${user.id}`)
+    if (agua === null) { agua = "0" }
+    if (!db.get(`agua_${user.id}`)) { agua = "0" }
+
     let camarao = await db.get(`camarao_${user.id}`)
     if (camarao === null) { camarao = "0" }
     if (!db.get(`camarao_${user.id}`)) { camarao = "0" }
@@ -38,8 +42,9 @@ exports.run = async (client, message, args) => {
     if (arma === null) { arma = "❌ Slot Vazio" }
     if (!db.get(`arma_${user.id}`)) { arma = "❌ Slot Vazio" }
 
+    var xusos = db.get(`offpicareta_${user.id}`)
     let picareta = await db.get(`picareta_${user.id}`)
-    if (picareta) { picareta = "⛏️ Picareta" }
+    if (picareta) { picareta = `⛏️ Picareta | Uso restante: ${xusos}` }
     if (picareta === null) { picareta = "❌ Slot Vazio" }
     if (!db.get(`picareta_${user.id}`)) { picareta = "❌ Slot Vazio" }
 
@@ -63,12 +68,24 @@ exports.run = async (client, message, args) => {
     if (loli === null) { loli = "❌ Slot Vazio" }
     if (!db.get(`loli_${user.id}`)) { loli = "❌ Slot Vazio" }
 
+    let fossil = db.get(`fossil_${user.id}`)
+    if (fossil) { fossil = "<:fossil:831859111578173450> Fossil" }
+    if (fossil === null) { fossil = "❌ Slot Vazio" }
+    if (!db.get(`fossil_${user.id}`)) { fossil = "❌ Slot Vazio" }
+
+    let mamute = db.get(`mamute_${user.id}`)
+    if (mamute) { mamute = "🦣 Mamute" }
+    if (mamute === null) { mamute = "❌ Slot Vazio" }
+    if (!db.get(`mamute_${user.id}`)) { mamute = "❌ Slot Vazio" }
+
+
+
     const Embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`📖 **Inventário de ${user.user.username}**`)
         .addField('Itens Obtidos', `${arma}\n${picareta}\n${vara}\n${machado}\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio`)
-        .addField('Itens Especiais', `${faca}\n${loli}\n❌ Slot Vazio`)
-        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
+        .addField('Itens Especiais', `${faca}\n${loli}\n${fossil}\n${mamute}`)
+        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.channel.send(Embed)
 }

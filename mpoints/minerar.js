@@ -59,7 +59,7 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('❌ Comando bloqueado')
                 .setDescription(`${message.author}, você precisa de uma picareta. Compre uma na ${prefix}loja`)
-            await message.channel.send(nopicareta)
+            return message.channel.send(nopicareta)
         }
 
         let agua = db.get(`agua_${message.author.id}`)
@@ -84,10 +84,10 @@ exports.run = async (client, message, args) => {
         if (agua > 0) {
             var num = ['win', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose', 'lose']
             var rand = num[Math.floor(Math.random() * num.length)]
-            
-            var vezesmin = db.add(`offpicareta_${message.author.id}`, 1)
-            if (vezesmin === 50 || vezesmin > 50) {
-                db.delete(`picareta_${message.author}`)
+
+            var vezesmin = db.subtract(`offpicareta_${message.author.id}`, 1)
+            if (vezesmin === 0 || vezesmin < 0) {
+                db.delete(`picareta_${message.author.id}`)
                 const sempicareta = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('Que peeena')

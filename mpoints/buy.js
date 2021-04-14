@@ -191,7 +191,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['agua', 'água', 'water', 'águas', 'aguas'].includes(args[0])) {
+        if (['agua', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água', 'copo de agua', 'copo de água'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)
             if (money === null) { money = 0 }
@@ -298,7 +298,7 @@ exports.run = async (client, message, args) => {
                 db.subtract(`money_${message.author.id}`, 350)
                 db.add(`bank_${client.user.id}`, 350)
                 db.set(`picareta_${message.author.id}`, "Picareta")
-                db.delete(`offpicareta_${message.author.id}`)
+                db.add(`offpicareta_${message.author.id}`, 50)
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')

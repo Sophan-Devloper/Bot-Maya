@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
       .setTitle('⭐ Centralzinha de Ajuda da Maya ⭐')
       .setDescription(`Heey! Tudo bem ${message.author}?\n \nSe você quiser informações sobre algum comando especifico, use **${prefix}ajuda categoria** ou apenas o comando.\nExemplo: **${prefix}marry** que eu te falo tudo sobre o comando.`)
       .addField('Acesso direto', `:tools: [Lista de Comandos](${helpgit}) | ☎️ [Suporte](${linksupport}) | 🧩 [Meu servidor](${linkservidor})`)
-      .setFooter(`${prefix}ajuda categoria • 382 Comandos Onlines | 2 Offlines`)
+      .setFooter(`${prefix}ajuda categoria`)
     return message.channel.send(`${message.author}`, newhelp)
   }
 
@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
       .setTitle('📑 Todos os comandos sob categorias')
       .setDescription('❓ **O que são categorias?**\nCategorias são como caixas, dentro de cada caixa tem os comandos que a ela pertence.\n \nDentro de cada categoria, tem comandos disponiveis. Começe a explorar!\n \nExemplo: `' + prefix + 'help moderation` Comandos de moderação.')
       .addField('• Categorias Disponiveis (14)', 'afk\nanimes\ncommands\ndiscordjs\ngames\ninteração\nlevel\nmaya\nmoderation\nmpoints\nperfil\nquiz\nrandom\nreações')
-      .addField('• Categorias Privadas (3)', '**• Categorias Offline (2)**')
+      .addField('• Categorias Privadas (3)', '**• Categorias Offline (0)**')
     return message.channel.send(`${message.author}`, catego)
   }
 
@@ -173,9 +173,10 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setTitle(':coin: Economia Global System')
       .setDescription('Ganhe e perca dinheiro, tem coisa melhor?')
-      .addField('• Comandos Online', '`' + prefix + 'atm/bal/saldo`\n' + '`' + prefix + 'blackjack/bj`\n' + '`' + prefix + 'cobrar`\n' + '`' + prefix + 'pay`\n' + '`' + prefix + 'daily`\n' + '`' + prefix + 'lotery`\n' + '`' + prefix + 'crime`\n' + '`' + prefix + 'work`\n' + '`' + prefix + 'fugir`\n' + '`' + prefix + 'roubar`')
-      .addField('• Comandos Offline (15)', '`' + prefix + 'loja`\n' + '`' + prefix + 'buy`\n' + '`' + prefix + 'waifu`\n...')
-      .addField('• Comandos em construção', 'Comandos no registro: (32)')
+      .addField('• Comandos Online', '`' + prefix + 'atm/bal/saldo`\n' + '`' + prefix + 'blackjack/bj`\n' + '`' + prefix + 'cobrar`\n' + '`' + prefix + 'pay`\n' + '`' + prefix + 'daily`\n' + '`' + prefix + 'lotery`\n' + '`' + prefix + 'crime`\n' + '`' + prefix + 'work`\n' + '`' + prefix + 'fugir`\n' + '`' + prefix + 'roubar`\n' + '`' + prefix + 'pescar`\n' + '`' + prefix + 'minerar`\n' + '`' + prefix + 'loja`\n' + '`' + prefix + 'slot/inve/inventario`\n' + '`' + prefix + 'buy`\n' + '`' + prefix + 'vender/sell`')
+      .addField('• Comandos Offline (0)', 'Nenhum')
+      .addField('• Comandos Moderação', '`' + prefix + 'setpescachannel`\n' + '`' + prefix + 'setminechannel`')
+      .addField('• Comandos em construção', 'Comandos no registro: (25)')
       .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
     return message.channel.send(embed)
   }

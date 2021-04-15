@@ -7,21 +7,21 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     if (args[0]) {
         const noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Utilize apenas `-clonechannel` no canal em que deseja clonar.')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     var NomeDoCanal = message.channel.name
@@ -30,5 +30,5 @@ exports.run = async (client, message, args) => {
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setTitle('Canal criado com sucesso.')
-    message.channel.send(sucess)
+    message.inlineReply(sucess)
 }

@@ -3,12 +3,12 @@ const os = require('os')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
-  }
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+        return message.inlineReply(adm)
+    }
 
     const embed = new Discord.MessageEmbed()
         .setThumbnail(client.user.displayAvatarURL())
@@ -21,7 +21,6 @@ exports.run = async (client, message, args) => {
                 value: '📃 Essa página aqui\n⚙️ Informações Técnicas\n❤️ Colaboradores\n💬 Suporte\n❌ Apaga a Central de Informações'
             }
         )
-        .setFooter(message.author.tag, message.author.displayAvatarURL())
 
     const embed2 = new Discord.MessageEmbed()
         .setThumbnail(client.user.displayAvatarURL())
@@ -33,7 +32,6 @@ exports.run = async (client, message, args) => {
                 value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/03/2021\n💡 Idealizada por: Rody#3756 \n:gear: Criada por: Rody#3756\n🖌️ Design: yma?#5175\n🖊️ Coop: Gowther#9233\n📡 Host: DisCloud\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1\n⌨️ 359 Comandos (287 Liberados)`)
             }
         )
-        .setFooter(message.author.tag, message.author.displayAvatarURL())
 
     const Thanks = new Discord.MessageEmbed()
         .setColor('#DCDCDC')
@@ -62,7 +60,6 @@ exports.run = async (client, message, args) => {
             },
         )
         .setImage('https://imgur.com/MkQo0Lh.gif')
-        .setFooter(message.author.tag, message.author.displayAvatarURL())
 
     const support = new Discord.MessageEmbed()
         .setColor('BLUE')
@@ -87,10 +84,8 @@ exports.run = async (client, message, args) => {
                 inline: true
             }
         )
-        .setFooter(message.author.username, message.author.displayAvatarURL())
 
-
-    await message.channel.send(embed).then(msg => {
+    await message.inlineReply(embed).then(msg => {
         msg.react('📃') // 1º Embed
         msg.react('⚙️') // 2º Embed
         msg.react('❤️') // Thanks

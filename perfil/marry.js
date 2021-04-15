@@ -71,8 +71,8 @@ exports.run = async (client, message, args) => {
 
 			coletor.on('collect', cp => {
 
-				db.set(`marry_${message.author.id}`, member.tag)
-				db.set(`marry_${member.id}`, message.author.tag)
+				db.set(`marry_${message.author.id}`, member.id)
+				db.set(`marry_${member.id}`, message.author.id)
 
 				let casados = new Discord.MessageEmbed()
 					.setColor('BLUE')

@@ -27,6 +27,7 @@ exports.run = async (client, message, args) => {
         db.add(`rp_${user.id}`, amount)
         db.set(`rptimeout_${message.author.id}`, Date.now())
 
+        message.user.send(`${message.author} te deu uma reputação.`)
         message.inlineReply(`Você deu reputação para ${user}`)
     }
 }

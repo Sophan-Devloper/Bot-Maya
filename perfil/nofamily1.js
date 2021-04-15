@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`${user} não é a pessoa que você está em um relacionamento.`)
     }
 
-    await db.delete(`family1_${par}`)
+    await db.delete(`family1_${db.get(`family1_${message.author.id}`)}`)
     await db.delete(`family1_${message.author.id}`)
     await message.inlineReply(`Você se separou de sua familia! Você não tem mais parentesco com ${user}.`)
 }

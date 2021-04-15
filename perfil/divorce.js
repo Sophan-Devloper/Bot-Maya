@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`${user} não é a pessoa que você está em um relacionamento.`)
     }
 
-    db.delete(`marry_${par}`)
+    db.delete(`marry_${db.get(`marry_${message.author.id}`)}`)
     db.delete(`marry_${message.author.id}`)
     return message.inlineReply(`Você se divorciou! Você não está mais se relacionando com ${user}.`)
 }

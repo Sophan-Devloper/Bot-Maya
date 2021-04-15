@@ -43,8 +43,8 @@ exports.run = async (client, message, args) => {
 
 			coletor.on('collect', cp => {
 
-				db.set(`family1_${message.author.id}`, member.tag)
-				db.set(`family1_${member.id}`, message.author.tag)
+				db.set(`family1_${message.author.id}`, member.id)
+				db.set(`family1_${member.id}`, message.author.id)
 
 				let familyembed = new discord.MessageEmbed()
 					.setColor('BLUE')

@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
     let user = message.mentions.members.first()
 
     if (['banco', 'bank'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del bank @user`')
         }
@@ -34,7 +34,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['iscas', 'isca'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del iscas @user`')
         }
@@ -44,7 +44,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['mp', 'money', 'carteira'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del money @user`')
         }
@@ -54,7 +54,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['peixe', 'peixes', 'fish'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del peixes @user`')
         }
@@ -64,7 +64,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['rp', 'reputação'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del rp @user`')
         }
@@ -73,7 +73,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['status'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del status @user`')
         }
@@ -83,7 +83,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['xp', 'level'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del xp @user`')
         }
@@ -93,8 +93,48 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`O level de ${user} foi deletado.`)
     }
 
+    if (['marry', 'casal', 'casamento'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'del marry @user`')
+        }
+
+        db.delete(`marry_${user.id}`)
+        return message.inlineReply(`O relacionamento de ${user} foi deletado.`)
+    }
+
+    if (['family1'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'del family1 @user`')
+        }
+
+        db.delete(`family1_${user.id}`)
+        return message.inlineReply(`O family1 de ${user} foi deletado.`)
+    }
+
+    if (['family2'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'del family2 @user`')
+        }
+
+        db.delete(`family2_${user.id}`)
+        return message.inlineReply(`O family2 de ${user} foi deletado.`)
+    }
+
+    if (['family3'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'del family2 @user`')
+        }
+
+        db.delete(`family2_${user.id}`)
+        return message.inlineReply(`O family3 de ${user} foi deletado.`)
+    }
+
     if (['blacklist'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del blacklist @user`')
         }
@@ -104,7 +144,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['whitelist'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del whitelist @user`')
         }
@@ -114,7 +154,7 @@ exports.run = async (client, message, args) => {
     }
 
     if (['timeout', 'tempo', 'cooldown'].includes(args[0])) {
-        
+
         if (!user) {
             return message.inlineReply('`' + prefix + 'del timeout @user')
         }

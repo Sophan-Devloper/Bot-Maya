@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     let u = convertMS(client.uptime)
     let ontime = `**${u.h}**` + " Hora(s) " + `**${u.m}**` + " Minutos, " + `**${u.s}**` + " Segundos"
 
-    message.channel.send(`Eu estou acordada a: ${ontime}`)
+    message.inlineReply(`Eu estou acordada a: ${ontime}`)
 
     function convertMS(ms) {
         var d, h, m, s;

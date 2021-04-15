@@ -4,15 +4,11 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-
   let prefix = db.get(`prefix_${message.guild.id}`)
   if (prefix === null) { prefix = "-" }
 
   if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
   }
 
   if (!args[0]) {
@@ -22,7 +18,7 @@ exports.run = async (client, message, args) => {
       .setDescription('• Aqui você pode ver o clima de qualquer lugar do mundo, explore o clima dos paises e cidades.')
       .addField("Comando", '`' + prefix + 'clima SP/RJ/MG ou o nome da Cidade/Estado`')
       .addField("Exemplo", '`' + prefix + 'clima SP ou São Paulo`')
-    return message.channel.send(noargs)
+    return message.inlineReply(noargs)
   }
 
   let city = args.join(" ")
@@ -36,7 +32,7 @@ exports.run = async (client, message, args) => {
         .setColor('#FF0000')
         .setTitle('Siga o formato correto')
         .setDescription('`' + prefix + 'clima SP/RJ/MG ou o nome da Cidade/Estado`')
-      return message.channel.send(nocity)
+      return message.inlineReply(nocity)
     }
 
     if (err || result === undefined || result.length === 0) {
@@ -44,7 +40,7 @@ exports.run = async (client, message, args) => {
         .setColor('#FF0000')
         .setTitle('Parece que ocorreu um erro no meu sistema de busca')
         .setDescription('`Nenhuma cidade/estado foi encontrado`')
-      return message.channel.send(noresult)
+      return message.inlineReply(noresult)
     }
 
     let current = result[0].current
@@ -68,6 +64,6 @@ exports.run = async (client, message, args) => {
       .addField("Observação TimeTemp", current.observationtime, true)
       .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-    return message.channel.send(`${message.author}, isso aqui não é previsão do tempo`, embed)
+    return message.inlineReply(`${message.author}, isso aqui não é previsão do tempo`, embed)
   })
 }

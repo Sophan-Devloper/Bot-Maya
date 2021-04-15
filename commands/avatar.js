@@ -18,5 +18,5 @@ exports.run = async (client, message, args) => {
     .setDescription(`[Baixar](${linkavatar}) avatar de ${user.username}`)
     .setImage(avatar)
 
-  await message.channel.send(embed).then(msg => msg.delete({ timeout: 60000 })).catch(err => { return })
+  await message.inlineReply(embed).then(msg => msg.delete({ timeout: 60000 })).catch(err => { return })
 }

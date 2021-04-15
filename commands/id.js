@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
             .setColor('#9D24DD')
             .setTitle(`${message.author.username}`)
             .setDescription(`🆔 \`${message.author.id}\``)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (user) {
@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
             .setColor('#9D24DD')
             .setTitle(`${user.user.username}`)
             .setDescription(`🆔 \`${user.user.id}\``)
-        return message.channel.send(idembed)
+        return message.inlineReply(idembed)
     }
 
     if (!user) {
@@ -35,6 +35,6 @@ exports.run = async (client, message, args) => {
                     value: '`' + prefix + 'id` ou `' + prefix + 'id @user`'
                 }
             )
-        return message.channel.send(no)
+        return message.inlineReply(no)
     }
 }

@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     const baseUrl = "https://corona.lmao.ninja/v2"
@@ -34,7 +34,7 @@ exports.run = async (client, message, args) => {
                     value: '`' + prefix + 'covid BR/AR/USA/FR...`'
                 }
             )
-        return message.channel.send(loading).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.channel.send(noerl))
+        return message.inlineReply(loading).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.inlineReply(noerl))
     }
 
     const embed = new Discord.MessageEmbed()
@@ -72,5 +72,5 @@ exports.run = async (client, message, args) => {
             })
         .setFooter(message.author.username, message.author.displayAvatarURL())
 
-    await message.channel.send(`${message.author}, tenta colocar com a sigla de algúm pais`, embed)
+    await message.inlineReply(`${message.author}, tenta colocar com a sigla de algúm pais`, embed)
 }

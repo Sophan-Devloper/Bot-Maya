@@ -53,5 +53,5 @@ exports.run = async (client, message, args) => {
             `❯ Entrou no Server em: ${moment(user.joinedAt).format('DD/MM/YY')}`,
             `❯ Maior cargo: ${user.roles.highest.id === message.guild.id ? 'Nenhum' : user.roles.highest.name}`
         ])
-    await message.channel.send(embed)
+    await message.inlineReply(embed)
 }

@@ -14,16 +14,11 @@ exports.run = async (client, message, args) => {
     const lan = new Discord.MessageEmbed()
         .setColor('#FF0000') // Red
         .setTitle('Siga o formato correto')
-        .setDescription('`' + prefix + 'translate en/pt/fr/lt A frase que deseja traduzir`')
+        .setDescription('`' + prefix + 't en/pt/fr/lt A frase que deseja traduzir`')
 
-    if (!language)
+    if (!language || language.length !== 2 || !text) {
         return message.channel.send(lan)
-
-    if (language.length !== 2)
-        return message.channel.send(lan)
-
-    if (!text)
-        return message.channel.send(lan)
+    }
 
     translate(args.slice(1).join(" "), { to: language }).then(res => {
         const translateEmbed = new Discord.MessageEmbed()
@@ -31,9 +26,9 @@ exports.run = async (client, message, args) => {
             .setAuthor(`Google Tradutor`, googlepng)
             .setDescription("```css\n" + `${res.text}` + "\n```", false)
             .setColor("#6959CD")
-        message.channel.send(translateEmbed)
+        message.inlineReply(translateEmbed)
     }).catch(err => {
-        message.channel.send("Eu tive um problema com a tradução.\n`Tente novamente usando o padrão do comando, se o problema persistir, por favor, user o comando de `-sup`")
+        message.inlineReply("Eu tive um problema com a tradução.\n`Tente novamente usando o padrão do comando, se o problema persistir, por favor, user o comando de `-sup`")
         console.log(err)
     })
 }

@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Formato suportado')
             .setDescription('`Adição: 10 + 10`\n`Divisão: 10 / 10`\n`Subtração: 10 - 10`\n`Multiplicação: 10 * 10`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     let resp
@@ -19,12 +19,12 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Por favor, diga uma conta válida')
             .setDescription('Exemplo: 10 + 10\nExemplo: 10 / 10\nExemplo: 10 - 10\nExemplo: 10 * 10')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     const embed = new Discord.MessageEmbed()
         .setColor('BLUE')
         .addField('Conta', `\`\`\`css\n${args.join(' ')}\`\`\``)
         .addField('Resultado', `\`\`\`css\n${resp}\`\`\``)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
 }

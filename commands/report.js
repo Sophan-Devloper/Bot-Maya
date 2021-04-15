@@ -8,14 +8,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso das permissões "Gerenciar Mensagens" e "Gerenciar Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
       const adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso das permissões "Gerenciar Mensagens" e "Gerenciar Canais" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
     }
 
     let user = message.mentions.members.first()
@@ -28,7 +28,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Nenhum canal de report definido.')
             .setDescription('`' + prefix + 'setreportchannel #canal`')
-        return message.channel.send(nochannel)
+        return message.inlineReply(nochannel)
     }
 
     if (!client.channels.cache.get(channel)) {
@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Parece que o canal de report foi excluido.')
             .setDescription('`' + prefix + 'setreportchannel #canal`')
-        return message.channel.send(nochanel)
+        return message.inlineReply(nochanel)
     }
 
     if (!args[0]) {
@@ -45,7 +45,7 @@ exports.run = async (client, message, args) => {
             .setTitle('Por favor, siga o formato correto')
             .setDescription(`Use o comando abaixo para reportar algo a equipe da ${message.guild.name}. \nO **@user** é opcional, use se quiser reportar algum membro.`)
             .addField('⠀', '`' + prefix + 'report @user O motivo da sua denúncia`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     if (user && !args[1]) {
@@ -56,7 +56,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'report <@user> O motivo do seu report`')
-        return message.channel.send(nop)
+        return message.inlineReply(nop)
     }
 
     if (!user) {
@@ -83,16 +83,13 @@ exports.run = async (client, message, args) => {
             .setTimestamp()
         client.channels.cache.get(channel).send(embed1)
 
-        const ok = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setTitle('O seu report foi enviado com sucesso!')
-        return message.channel.send(`${message.author}`, ok)
+        return message.channel.send (`${message.author}, o seu report foi enviado com sucesso!`)
     }
 
     if (user) {
         const embed1 = new Discord.MessageEmbed()
             .setColor("BLUE")
-            .setTitle('Novo Reporte Recebido')
+            .setTitle('📨 Novo Reporte Recebido')
             .addFields(
                 {
                     name: 'Autor do Reporte',
@@ -112,10 +109,6 @@ exports.run = async (client, message, args) => {
             .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
             .setTimestamp()
         client.channels.cache.get(channel).send(embed1)
-
-        const ok = new Discord.MessageEmbed()
-            .setColor('GREEN')
-            .setTitle('O seu report foi enviado com sucesso!')
-        return message.channel.send(`${message.author}`, ok)
+        return message.channel.send (`${message.author}, o seu report foi enviado com sucesso!`)
     }
 }

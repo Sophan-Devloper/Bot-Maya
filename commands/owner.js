@@ -7,5 +7,5 @@ exports.run = async (client, message, args) => {
         .setTitle(message.guild.name)
         .setDescription(`Dono/a: ${message.guild.owner.user} | ${message.guild.owner.user.tag}`)
 
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
 }

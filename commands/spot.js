@@ -50,7 +50,7 @@ exports.run = async (client, message, args) => {
             .addField("Album", album, true)
             .addField("Resumo", `[\`${artist} - ${name}\`](${url})`, false)
             .setFooter('Spotify e Discord fazendo seu dia melhor.', fotospot)
-        message.channel.send(`${message.author}, também enviei no seu privado.`, embed)
+        message.inlineReply(`Também enviei no seu privado.`, embed)
         return message.author.send("Prontinho, vou deixar a música aqui :hearts:", embed).catch(err => { return })
     }
 }

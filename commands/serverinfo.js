@@ -75,6 +75,7 @@ exports.run = async (client, message, args) => {
             {
                 name: "Emojis: ",
                 value: message.guild.emojis.cache.size >= 1 ? `${message.guild.emojis.cache.size} emojis!` : 'Não há emojis'
-            })
-    await message.channel.send(embed)
+            }
+        )
+    await message.inlineReply(embed)
 }

@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   if (!message.guild.me.hasPermission("ADD_REACTIONS")) {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var canal = db.get(`ideiachannel_${message.guild.id}`)
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Nenhum canal de ideias/sugestões definido.')
       .setDescription('`' + prefix + 'setideiachannel #canal`')
-    return message.channel.send(nochannel)
+    return message.inlineReply(nochannel)
   }
 
   if (!client.channels.cache.get(canal)) {
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Parece que o canal de ideias/sugestões foi excluido.')
       .setDescription('`' + prefix + 'setideiachannel #canal`')
-    return message.channel.send(nochanel)
+    return message.inlineReply(nochanel)
   }
 
   const content = args.join(" ")
@@ -60,7 +60,7 @@ exports.run = async (client, message, args) => {
     const umk = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Sua ideia não pode passar de 500 caracteres')
-    return message.channel.send(umk)
+    return message.inlineReply(umk)
 
   } else {
     let prefix = db.get(`prefix_${message.guild.id}`)

@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
                 }
             )
 
-        return message.channel.send(imcError)
+        return message.inlineReply(imcError)
     }
 
     if (isNaN(args[0])) {
@@ -47,7 +47,7 @@ exports.run = async (client, message, args) => {
                 }
             )
 
-        return message.channel.send(imcError)
+        return message.inlineReply(imcError)
     }
 
     if (isNaN(args[1])) {
@@ -69,7 +69,7 @@ exports.run = async (client, message, args) => {
                 }
             )
 
-        return message.channel.send(imcError)
+        return message.inlineReply(imcError)
     }
 
     const imc = (weight / ((height * height) / 10000)).toFixed(2)
@@ -82,11 +82,11 @@ exports.run = async (client, message, args) => {
 
     const embed = new Discord.MessageEmbed()
         .setColor("BLUE")
-        .setTitle(`📉 ${message.author.username}\'s IMC`)
+        .setTitle(`📉 Índice de Massa Corporal`)
         .addField('Peso', weight)
         .addField('Altura', height)
         .addField('IMC', imc)
         .addField('Categoria', category)
 
-    await message.channel.send(embed)
+    await message.inlineReply(embed)
 }

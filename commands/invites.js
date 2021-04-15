@@ -44,6 +44,6 @@ exports.run = async (client, message, args) => {
             const count = inviteCounter[invite]
             replyText.description += `\n${invite} convidou ${count} membro(s).`
         }
-        message.channel.send(replyText)
+        message.inlineReply(replyText)
     })
 }

@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
         .addFields(
             {
                 name: 'Itens Disponiveis',
-                value: '🎣 `Vara de Pesca` 5.000 <:estrelinha:831161441847345202>MPoints\n🔫 `Arma` 100.000 <:estrelinha:831161441847345202>MPoints\n⛏️ `Picareta` 350 <:estrelinha:831161441847345202>MPoints\n🪓 `Machado` 400 <:estrelinha:831161441847345202>MPoints\n🪱 `Isca` 10 <:estrelinha:831161441847345202>\n🥤 `Água` 10 <:estrelinha:831161441847345202>MPoints'
+                value: '🔰 `Título` 10.000.000<:estrelinha:831161441847345202>MPoints\n🎣 `Vara de Pesca` 5.000 <:estrelinha:831161441847345202>MPoints\n🔫 `Arma` 100.000 <:estrelinha:831161441847345202>MPoints\n⛏️ `Picareta` 350 <:estrelinha:831161441847345202>MPoints\n🪓 `Machado` 400 <:estrelinha:831161441847345202>MPoints\n🪱 `Isca` 10 <:estrelinha:831161441847345202>\n🥤 `Água` 10 <:estrelinha:831161441847345202>MPoints'
             },
             {
                 name: 'Itens Especiais',

@@ -8,26 +8,20 @@ exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first() || message.member
 
-    let bal = await db.get(`money_${user.id}`)
-    if (bal === null) bal = 0
+    let money = await db.get(`money_${user.id}`) + db.get(`bank_${user.id}`)
+    if (money === null) money = 0
 
-    let marry = await `${db.get(`marry_${user.id}`)}`
-    if (marry === `null`) marry = "Solteiro(a)"
+    let marry = await `<@${db.get(`marry_${user.id}`)}>`
+    if (marry === `<@null>`) marry = "Solteiro(a)"
 
-    let family = await `${db.get(`family1_${user.id}`)}`
-    if (family === `null`) family = "Vago"
+    let family = await `<@${db.get(`family1_${user.id}`)}>`
+    if (family === `<@null>`) family = "Vago"
 
-    let family2 = await `${db.get(`family2_${user.id}`)}`
-    if (family2 === `null`) family2 = "Vago"
+    let family2 = await `<@${db.get(`family2_${user.id}`)}>`
+    if (family2 === `<@null>`) family2 = "Vago"
 
-    let family3 = await `${db.get(`family3_${user.id}`)}`
-    if (family3 === `null`) family3 = "Vago"
-
-    let family4 = await `${db.get(`family4_${user.id}`)}`
-    if (family4 === `null`) family4 = "Vago"
-
-    let family5 = await `${db.get(`family5_${user.id}`)}`
-    if (family5 === `null`) family5 = "Vago"
+    let family3 = await `<@${db.get(`family3_${user.id}`)}>`
+    if (family3 === `<@null>`) family3 = "Vago"
 
     let level = await db.fetch(`level_${user.id}`)
     if (level === null) level = 0
@@ -35,45 +29,72 @@ exports.run = async (client, message, args) => {
     let rp = await db.fetch(`rp_${user.id}`)
     if (rp === null) rp = 0
 
-    let bank = db.get(`bank_${user.id}`)
-    if (bank === null) bank = 0
+    let title = await db.get(`title_${user.id}`)
+    if (title === null) title = "Sem título"
 
     let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não conhece o comando ${prefix}setstatus.`
 
+    if (user.id === '821471191578574888') {
+        const perfil = new Discord.MessageEmbed()
+            .setTitle(`📃 Perfil Pessoal de ${user.user.username}`)
+            .setColor('#BF3BFC')
+            .addFields(
+                {
+                    name: `🔰 A Princesa do Discord`,
+                    value: `💍 ${marry}`
+                },
+                {
+                    name: '❤️ Familia',
+                    value: `1. ${family}\n2. ${family2}\n3. ${family3}`
+                },
+                {
+                    name: '💸 Dinheiro Total',
+                    value: `${money} <:StarPoint:766794021128765469> MPoints`,
+                },
+                {
+                    name: '🌐 Level',
+                    value: `${level} <:level:766847577416138772>`
+                },
+                {
+                    name: '💌 Reputação',
+                    value: rp
+                },
+                {
+                    name: '📝 Status',
+                    value: '`' + status + '`'
+                }
+            )
+            .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+        return message.inlineReply(perfil)
+    }
 
     const perfil = new Discord.MessageEmbed()
         .setTitle(`📃 Perfil Pessoal de ${user.user.username}`)
         .setColor('#BF3BFC')
         .addFields(
             {
-                name: `💍 ${marry}`,
-                value: '⠀'
+                name: `🔰 ${title}`,
+                value: `💍 ${marry}`
             },
             {
                 name: '❤️ Familia',
-                value: '1. ' + family + '\n2. ' + family2 + '\n3. ' + family3 + '\n4. ' + family4 + '\n5. ' + family5 + ''
+                value: `1. ${family}\n2. ${family2}\n3. ${family3}`
             },
             {
-                name: '💸 Dinheiro Intersevidor',
-                value: `${bal}<:StarPoint:766794021128765469>MPoints`,
-                inline: true
+                name: '💸 Dinheiro Total',
+                value: `${money} <:StarPoint:766794021128765469> MPoints`,
             },
             {
-                name: ':bank: Banco',
-                value: `${bank}<:StarPoint:766794021128765469>MPoints`,
-                inline: true
+                name: '🌐 Level',
+                value: `${level} <:level:766847577416138772>`
             },
             {
-                name: '🌐 Level Interservidor',
-                value: `${level}<:level:766847577416138772>`
-            },
-            {
-                name: 'Reputação',
+                name: '💌 Reputação',
                 value: rp
             },
             {
-                name: 'Status',
+                name: '📝 Status',
                 value: '`' + status + '`'
             }
         )

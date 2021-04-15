@@ -307,6 +307,59 @@ exports.run = async (client, message, args) => {
             }
         }
 
+        if (['título', 'title', 'titulo'].includes(args[0])) {
+
+            if (db.get(`title_${message.author.id}`)) {
+                return message.inlineReply(`Você já possui a permissão de alterar seu título.`)
+            }
+
+            var money = db.get(`money_${message.author.id}`)
+            if (money === null) { money = 0 }
+
+            if (money === null) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro para comprar esta permissão.`)
+                return message.inlineReply(nota)
+            }
+
+            if (money < 10000000) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar esta permissão.`)
+                return message.inlineReply(nota)
+            }
+
+            if (money == 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro.`)
+                return message.inlineReply(nota)
+            }
+
+            if (money < 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('✅ Compra aprovada')
+                    .setDescription(`${message.author}, você está com divida.`)
+                return message.inlineReply(nota)
+            }
+
+            if (money = 10000000 || money > 10000000) {
+                db.subtract(`money_${message.author.id}`, 10000000)
+                db.add(`bank_${client.user.id}`, 10000000)
+                db.set(`title_${message.author.id}`, "ON")
+                const buyTitle = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('✅ Compra aprovada')
+                    .setDescription(`${message.author}` + ', você comprou a permissão 🔰 `Título`')
+                return message.inlineReply(buyTitle)
+            }
+        }
+
         if (['isca', 'minhoca', 'iscas', 'minhocas'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)

@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+require("./inlineReply")
 const client = new Discord.Client()
 const { token } = require("./config.json")
 const db = require('quick.db')
@@ -100,7 +101,7 @@ client.on("message", async (message) => {
     }
 
     if (message.content.startsWith(`${prefix}check`)) { message.react("✅") }
-
+    if (message.content.startsWith(`${prefix}inline`)) { return message.inlineReply("✅ Inline Reply funcionando corretamente") }
     try {
         const commandFile = require(`./afksystem/${command}.js`)
         return commandFile.run(client, message, args)

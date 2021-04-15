@@ -64,7 +64,7 @@ exports.run = async (client, message, args) => {
         return message.channel.send(`Uma faca adicionada ao slot de ${user}`)
     }
 
-    if (['machado'].include(args[0])) {
+    if (['machado'].includes(args[0])) {
 
         if (!user) {
             return message.channel.send('`' + prefix + 'give machado @user')

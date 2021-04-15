@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var lista = [
@@ -73,9 +73,8 @@ exports.run = async (client, message, args) => {
   let user = client.users.cache.get(args[0]);
 
   const SAOEmbed = new Discord.MessageEmbed()
-    .setTitle('SAO - Sword Art Online')
-    .setColor('#DCDCDC')
+    .setTitle('📺 SAO - Sword Art Online')
+    .setColor('BLUE')
     .setImage(saophotos)
-    .setFooter(message.author.tag, message.author.displayAvatarURL())
-  return message.channel.send(SAOEmbed)
+  return message.inlineReply(SAOEmbed)
 }

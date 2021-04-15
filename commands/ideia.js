@@ -53,7 +53,7 @@ exports.run = async (client, message, args) => {
       .setTitle('Por favor, siga o formato correto')
       .setDescription('Use este comando para enviar sua ideia ao servidor, para que todos possam votar.')
       .addField('⠀', '`' + prefix + 'ideia Sua ideia em diante`')
-    return message.reply(noideia)
+    return message.inlineReply(noideia)
   }
 
   if (content.length > 300) {
@@ -75,7 +75,7 @@ exports.run = async (client, message, args) => {
         .setFooter(`${prefix}ideia`)
     )
 
-    await message.channel.send(`${message.author}, a sua ideia foi enviada com sucesso no canal ${client.channels.cache.get(canal)}`)
+    await message.inlineReply(`A sua ideia foi enviada com sucesso no canal ${client.channels.cache.get(canal)}`)
 
     const emojis = ["✅", "❌", "❔"]
 

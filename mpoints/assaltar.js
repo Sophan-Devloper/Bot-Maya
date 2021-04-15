@@ -104,7 +104,6 @@ exports.run = async (client, message, args) => {
                 var result = luck[Math.floor(Math.random() * luck.length)]
 
                 var authormoney = db.get(`money_${message.author.id}`)
-                var tudo = db.get(`money_${user.id}`)
 
                 if (result == 'lose') {
                     var amount = Math.floor(Math.random() * authormoney) + 1
@@ -120,34 +119,34 @@ exports.run = async (client, message, args) => {
                     let moneyEmbed = new Discord.MessageEmbed()
                         .setColor("GREEN")
                         .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
-                        .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${tudo}<:StarPoint:766794021128765469>`)
+                        .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`money_${user.id}`)}<:StarPoint:766794021128765469>`)
 
                     message.channel.send(moneyEmbed)
-                    db.subtract(`money_${user.id}`, tudo)
-                    db.add(`money_${message.author.id}`, tudo)
+                    db.subtract(`money_${user.id}`, db.get(`money_${user.id}`))
+                    db.add(`money_${message.author.id}`, db.get(`money_${user.id}`))
                     db.set(`assaltotime_${message.author.id}`, Date.now())
                 }
             }
 
             if (gunuser === null) {
-                db.subtract(`money_${user.id}`, tudo)
-                db.add(`money_${message.author.id}`, tudo)
-                db.set(`assaltotime_${message.author.id}`, Date.now())
                 let moneyEmbed = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
-                    .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${tudo}<:StarPoint:766794021128765469>`)
+                    .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`money_${user.id}`)}<:StarPoint:766794021128765469>`)
 
                 message.channel.send(moneyEmbed)
-            } else if (!db.get(`arma_${user.id}`)) {
-                db.subtract(`money_${user.id}`, tudo)
-                db.add(`money_${message.author.id}`, tudo)
+                db.subtract(`money_${user.id}`, db.get(`money_${user.id}`))
+                db.add(`money_${message.author.id}`, db.get(`money_${user.id}`))
                 db.set(`assaltotime_${message.author.id}`, Date.now())
+            } else if (!db.get(`arma_${user.id}`)) {
                 let moneyEmbed = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
-                    .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${tudo}<:StarPoint:766794021128765469>`)
+                    .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`money_${user.id}`)}<:StarPoint:766794021128765469>`)
 
+                db.subtract(`money_${user.id}`, db.get(`money_${user.id}`))
+                db.add(`money_${message.author.id}`, db.get(`money_${user.id}`))
+                db.set(`assaltotime_${message.author.id}`, Date.now())
                 message.channel.send(moneyEmbed)
             }
         }

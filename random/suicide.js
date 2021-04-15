@@ -6,5 +6,5 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle('Hey, espera. Não faça isso!')
 
-    return message.channel.send(nop)
+    return message.inlineReply(nop)
 }

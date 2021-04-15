@@ -12,6 +12,6 @@ exports.run = async (client, message, args) => {
             .setDescription(`${res.text}`)
             .setColor("BLUE")
 
-        return message.channel.send(embed)
+        return message.inlineReply(embed)
     })
 }

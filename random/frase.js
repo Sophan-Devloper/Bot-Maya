@@ -33,5 +33,5 @@ exports.run = async (client, message, args) => {
                 name: 'Frase',
                 value: (rand)
             })
-    await message.channel.send(HelpEmbed)
+    await message.inlineReply(HelpEmbed)
 }

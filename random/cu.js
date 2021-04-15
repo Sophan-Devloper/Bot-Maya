@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
     if (author !== null && timeout - (Date.now() - author) > 0) {
         let time = ms(timeout - (Date.now() - author))
 
-        return message.channel.send(`Pelo bem do seu querido anûs, espere mais ${time.minutes}m e ${time.seconds}s`)
+        return message.inlineReply(`Pelo bem do seu querido anûs, espere mais ${time.minutes}m e ${time.seconds}s`)
     } else {
 
         const cu = new Discord.MessageEmbed()
@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
             .setTitle('⚠️ Esta é uma escolha dificil')
             .setDescription(`${message.author}, o cú é algo valioso, você realmente deseja entrega-lo por dinheiro?\n \n**Faça sua escolha**`)
 
-        await message.channel.send(cu).then(msg => {
+        await message.inlineReply(cu).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
 
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
                             .setColor('GREEN')
                             .setTitle('O cliente gostou!')
                             .setDescription(`${message.author}, o cliente anônimo gostou dos seus serviços e te pagou ${din}<:estrelinha:831161441847345202>MPoints`)
-                        return message.channel.send(embed)
+                        return message.inlineReply(embed)
                     }
 
                     if (result === "lose") {
@@ -50,7 +50,7 @@ exports.run = async (client, message, args) => {
                             .setColor('#FF0000')
                             .setTitle('O cliente não gostou!')
                             .setDescription(`${message.author}, o cliente anônimo não gostou dos seus serviços e seu prejuizo foi de ${din}<:estrelinha:831161441847345202>MPoints`)
-                        return message.channel.send(embed)
+                        return message.inlineReply(embed)
                     }
                 }
 
@@ -59,7 +59,7 @@ exports.run = async (client, message, args) => {
                     const cancel = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('Comando cancelado com sucesso')
-                    return message.channel.send(cancel)
+                    return message.inlineReply(cancel)
                 }
             })
         })

@@ -46,5 +46,5 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle('Piadinha saindo do forno...')
         .setDescription(rand)
-    await message.channel.send(PiadaEmbed)
+    await message.inlineReply(PiadaEmbed)
 }

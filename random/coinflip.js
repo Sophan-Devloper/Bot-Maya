@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
    
   var gif = 'https://imgur.com/sFBDKCA.gif'
@@ -19,11 +19,11 @@ exports.run = async (client, message, args) => {
   else if (args[0].toLowerCase() == array1[rand]) {
     var embed = new Discord.MessageEmbed()
       .setImage(gif)
-    message.channel.send(embed).then(msg => msg.delete({ timeout: 4000 })).then(msg => message.channel.send("Deu **" + array1[rand] + "**, você ganhou!"))
+    message.inlineReply(embed).then(msg => msg.delete({ timeout: 4000 })).then(msg => message.inlineReply("Deu **" + array1[rand] + "**, você ganhou!"))
   }
   else if (args[0].toLowerCase() != array1[rand]) {
     var embed1 = new Discord.MessageEmbed()
       .setImage(gif)
-    message.channel.send(embed1).then(msg => msg.delete({ timeout: 4000 })).then(msg => message.channel.send("Deu **" + array1[rand] + "**, você perdeu!"))
+    message.inlineReply(embed1).then(msg => msg.delete({ timeout: 4000 })).then(msg => message.inlineReply("Deu **" + array1[rand] + "**, você perdeu!"))
   }
 }

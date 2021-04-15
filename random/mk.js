@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var linkserver = 'https://discord.gg/YpFWgJuuUV'
@@ -17,5 +17,5 @@ exports.run = async (client, message, args) => {
     .setURL('https://discord.gg/YpFWgJuuUV')
     .setDescription(`${message.author}, vem pra minha casa :heart:\n \n[Meu servidor](${linkserver})`)
     .setImage('https://imgur.com/cjoVaGJ.gif')
-  await message.channel.send(HelpEmbed)
+  await message.inlineReply(HelpEmbed)
 }

@@ -27,5 +27,5 @@ exports.run = async (client, message, args) => {
     .setDescription(`Filhotinhooo :hearts: :cat:`)
     .setImage(rand)
     .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
-  await message.channel.send(embed)
+  await message.inlineReply(embed)
 }

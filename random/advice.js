@@ -8,5 +8,5 @@ exports.run = async (client, message, args) => {
         .setDescription(data.slip.advice)
         .setColor("BLUE")
 
-    message.channel.send(embed)
+    message.inlineReply(embed)
 }

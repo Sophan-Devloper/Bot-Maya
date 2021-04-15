@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
     var Akatsuki = 'https://discord.gg/JMvXDZHG4H'
@@ -26,5 +26,5 @@ exports.run = async (client, message, args) => {
                 value: `[Mystic Kingdom](${mk})`
             }
         )
-    return message.channel.send(historys)
+    return message.inlineReply(historys)
 }

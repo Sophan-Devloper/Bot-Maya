@@ -12,18 +12,18 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'nota @user`')
-        return message.channel.send(nouser)
+        return message.inlineReply(nouser)
     }
 
     if (user.id === '451619591320371213') {
         const embed1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`🤔 Huum... Minha nota para ${user} é 1000. Ele é liiiiiiindo, perfeeeeito!!!`)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (user.id === '821471191578574888') {
-        return message.channel.send('Uma nota pra mim? Que tal infinito?')
+        return message.inlineReply('Uma nota pra mim? Que tal infinito?')
     }
 
     var num = ['5', '6', '7', '8', '9', '5', '6', '7', '8', '9', '10']
@@ -33,41 +33,41 @@ exports.run = async (client, message, args) => {
         const embed1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`🤔 Huum... Minha nota para ${user} é 5. Na escola pública passa em...`)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (nota === '6') {
         const embed1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`🤔 Huum... Minha nota para ${user} é 6. Não é Itachi mais me deixou em um genjutsu.`)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (nota === '7') {
         const embed1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`🤔 Huum... Minha nota para ${user} é 7. Não é Neji mas atingiu meu ponto fraco.`)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (nota === '8') {
         const embed1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`🤔 Huum... Minha nota para ${user} é 8. Se fosse um avião, me levava as alturas.`)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (nota === '9') {
         const embed1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`🤔 Huum... Minha nota para ${user} é 9. Tô fugindo de problemas mas se o problema for ${user}, eu vou até buscar.`)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (nota === '10') {
         const embed1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`🤔 Huum... Minha nota para ${user} é 10. Vou juntar as esferas do dragão e pedir você.`)
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 }

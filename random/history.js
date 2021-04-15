@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
     var ThePromisedDream = 'https://www.wattpad.com/story/264799146?utm_source=android&utm_medium=link&utm_content=story_info&wp_page=story_details_button&wp_uname=Raybr_&wp_originator=%2BokvsQU5aaH%2BAjFfnXGStBV8zKV%2FEi1Z6j8ABBpok%2FGClphW3tC3zQ0jBe%2BlrT8Yaeb7j284T6%2Fz%2BczW9iB8sb6hJvQJNlZ0KO9zrtdZ0AhOU95OZp7vBhxS2q4jwo3S'
@@ -21,5 +21,5 @@ exports.run = async (client, message, args) => {
                 value: `estou com febre#0999 - [The Promised Dream](${ThePromisedDream})`
             }
         )
-    return message.channel.send(historys)
+    return message.inlineReply(historys)
 }

@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
    var list = [
@@ -27,5 +27,5 @@ exports.run = async (client, message, args) => {
       .setDescription(`:flushed:`)
       .setImage(rand)
       .setFooter(`Comando por: ${message.author.tag}`, message.author.displayAvatarURL())
-   await message.channel.send(embed).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+   await message.inlineReply(embed).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
 }

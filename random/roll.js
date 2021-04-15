@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!args[0]) {
@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
             .setColor('BLUE')
             .setTitle('Quantos dados você quer rolar?')
             .setDescription('`Você pode usar ' + prefix + 'roll 1/2/3/4`' + '\n \n1 | 2 | 3 | 4 | ❌ - Cancelar')
-        await message.channel.send(dados).then(msg => {
+        await message.inlineReply(dados).then(msg => {
             msg.react('🟧') // 1
             msg.react('🟦') // 2
             msg.react('🟥') // 3
@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+                    return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '🟦') { // 2
                     msg.delete()
@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+                    return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '🟥') { // 3
                     msg.delete()
@@ -56,7 +56,7 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+                    return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '🟫') { // 4
                     msg.delete()
@@ -66,12 +66,12 @@ exports.run = async (client, message, args) => {
                     const embed = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('🎲 Rolando os dados...')
-                    return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+                    return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
                 }
                 if (reaction.emoji.name === '❌') { // Não
                     msg.delete()
                     message.delete()
-                    return msg.channel.send("Comando cancelado.").then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
+                    return msg.inlineReply("Comando cancelado.").then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
                 }
             })
         })
@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+        return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
     }
 
     if (args[0] === '2') {
@@ -94,7 +94,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+        return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
     }
 
     if (args[0] === '3') {
@@ -104,7 +104,7 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+        return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
     }
 
     if (args[0] === '4') {
@@ -114,6 +114,6 @@ exports.run = async (client, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🎲 Rolando os dados...')
-        return message.channel.send(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.channel.send("🎲 `" + rand + '`'))
+        return message.inlineReply(embed).then(msg => msg.delete({ timeout: 2500 })).then(msg => msg.inlineReply("🎲 `" + rand + '`'))
     }
 }

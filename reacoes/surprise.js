@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
     var list = [
@@ -25,5 +25,5 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setDescription(`${message.author.username} ficou chocado!`)
         .setImage(gifs)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
 }

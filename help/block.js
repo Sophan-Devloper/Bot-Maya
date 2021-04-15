@@ -10,5 +10,5 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle('🚫 Bloqueie canais para não usarem meus comandos')
         .setDescription('`' + prefix + 'lockcommands #canal` Bloqueie meus comandos\n' + '`' + prefix + 'unlockcommands #canal` Desbloqueie meus comandos')
-    return message.channel.send(commands)
+    return message.inlineReply(commands)
 }

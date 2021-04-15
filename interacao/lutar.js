@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     var user = message.mentions.members.first()
@@ -19,11 +19,11 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Use formato correto')
             .setDescription('`' + prefix + 'lutar @user`')
-        return message.channel.send(nouser)
+        return message.inlineReply(nouser)
     }
 
     if (user.id === message.author.id) {
-      return message.channel.send('Você não pode usar este comando com você mesmo.')
+      return message.inlineReply('Você não pode usar este comando com você mesmo.')
     }
 
     var list = ['win', 'lose']
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
             .setTitle('👑 Vitória')
             .setDescription(`Você ganhou a luta contra ${user.user.username}`)
 
-        return message.channel.send(lutando)
+        return message.inlineReply(lutando)
     }
 
     if (result === 'lose') {
@@ -48,6 +48,6 @@ exports.run = async (client, message, args) => {
             .setTitle('⛑️ Derrota')
             .setDescription(`Você perdeu a luta contra ${user.user.username}`)
 
-        return message.channel.send(lutando)
+        return message.inlineReply(lutando)
     }
 }

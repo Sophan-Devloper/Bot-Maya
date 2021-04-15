@@ -28,5 +28,5 @@ exports.run = async (client, message, args) => {
                 inline: true
             }
         )
-    return message.channel.send(`${message.author}`, Support)
+    return message.inlineReply(Support)
 }

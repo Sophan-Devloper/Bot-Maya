@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('ADMINISTRATOR')) {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: ADMINISTRATOR')
-        return message.channel.send(permss)
+        return message.inlineReply(permss)
     }
 
     if (!args[0]) {
@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
                     value: '`' + prefix + 'criarcomando Sorvete Eu amo sorvete`'
                 }
             )
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     let commandName = args[0].toLowerCase()
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
         const toname = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('O nome do comando não pode ultrapassar 10 letras')
-        return message.channel.send(toname)
+        return message.inlineReply(toname)
     }
 
     let commandResponse = args.slice(1).join(" ")
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
                     value: '`' + prefix + 'criarcomando Sorvete Eu amo sorvete`'
                 }
             )
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     let database = db.get(`guildConfigurations_${message.guild.id}.commands`)
@@ -65,7 +65,7 @@ exports.run = async (client, message, args) => {
         const existe = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Este comando já existe')
-        return message.channel.send(existe)
+        return message.inlineReply(existe)
     }
 
     let data = {
@@ -81,5 +81,5 @@ exports.run = async (client, message, args) => {
         .setColor('GREEN')
         .setTitle('O comando `' + prefix + commandName.toLowerCase() + '` foi adicionado ao servidor!')
 
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
 }

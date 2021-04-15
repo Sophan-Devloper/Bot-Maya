@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var i = 'Isekai'
@@ -352,6 +352,7 @@ exports.run = async (client, message, args) => {
       {
         name: 'Maya Indica :hearts:',
         value: `Nome: ${rand}`
-      })
-  await message.channel.send(IndEmbed)
+      }
+    )
+  await message.inlineReply(IndEmbed)
 }

@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var game = 'Transformice'
@@ -23,5 +23,5 @@ exports.run = async (client, message, args) => {
     .addField(`${st}`, `${link1}`)
     .addField(`${nv}`, `${link2}`)
     .setFooter(`Plataformas: ${w}, ${mc}`)
-  return message.channel.send(TFMEmbed)
+  return message.inlineReply(TFMEmbed)
 }

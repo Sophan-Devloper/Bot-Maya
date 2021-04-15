@@ -17,5 +17,5 @@ exports.run = async (client, message, args) => {
             }
         )
 
-    return message.channel.send(`${message.author}`, prefixembed)
+    return message.inlineReply(prefixembed)
 }

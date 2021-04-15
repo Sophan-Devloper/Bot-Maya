@@ -4,7 +4,7 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
      
     let data = db.all().filter(i => i.ID.startsWith("xp_")).sort((a, b) => b.data - a.data);
-    if (data.length < 1) return message.channel.send("Sem ranking por enquanto").then(m => m.delete({ timeout: 5000 }))
+    if (data.length < 1) return message.inlineReply("Sem ranking por enquanto").then(m => m.delete({ timeout: 5000 }))
     let myrank = data.map(m => m.ID).indexOf(`xp_${message.author.id}`) + 1 || "N/A";
     data.length = 10;
     let lb = [];
@@ -32,5 +32,5 @@ exports.run = async (client, message, args) => {
         embed.addField(`${d.rank}. ${d.user.tag}`, `Level - ${d.level}\nXP - ${d.xp} / ${d.xpreq}`);
     });
     embed.setFooter(`Seu ranking: ${myrank}`)
-    return message.channel.send(embed).then(msg => msg.delete({ timeout: 15000 }))
+    return message.inlineReply(embed).then(msg => msg.delete({ timeout: 15000 }))
 }

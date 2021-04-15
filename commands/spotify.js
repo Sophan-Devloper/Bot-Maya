@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
     else if (user.presence.activities.length > 1) status = user.presence.activities[1]
 
     if (user.presence.activities.length === 0 || status.name !== "Spotify" && status.type !== "LISTENING")
-        return message.channel.send("Essa pessoa não está ouvindo nada no Spotify ou não vinculou o Spotify com o Discord.")
+        return message.inlineReply("Essa pessoa não está ouvindo nada no Spotify ou não vinculou o Spotify com o Discord.")
 
     if (status !== null && status.type === "LISTENING" && status.name === "Spotify" && status.assets !== null) {
         let image = `https://i.scdn.co/image/${status.assets.largeImage.slice(8)}`

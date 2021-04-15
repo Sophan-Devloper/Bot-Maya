@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var list = [
@@ -35,16 +35,16 @@ exports.run = async (client, message, args) => {
   }
 
   if (user.id === '821471191578574888') {
-    return message.channel.send('O que foi que eu fiz? o-o')
+    return message.inlineReply('O que foi que eu fiz? o-o')
   }
 
   if (user.id === message.author.id) {
-    return message.channel.send('Você não pode usar este comando com você mesmo.')
+    return message.inlineReply('Você não pode usar este comando com você mesmo.')
   }
 
   const embed = new Discord.MessageEmbed()
     .setColor('#000000')
     .setDescription(`${message.author} estou de olho em você ${user}`)
     .setImage(rand)
-  return message.channel.send(embed)
+  return message.inlineReply(embed)
 }

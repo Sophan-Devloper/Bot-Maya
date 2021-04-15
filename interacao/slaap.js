@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   const member = message.mentions.users.first()
@@ -21,15 +21,15 @@ exports.run = async (client, message, args) => {
       .setTitle('Siga o formato')
       .setDescription('`' + prefix + 'slaap @user`')
 
-    return message.channel.send(n)
+    return message.inlineReply(n)
   }
 
   if (member.id === message.author.id) {
-    return message.channel.send('Você não pode usar este comando com você mesmo.')
+    return message.inlineReply('Você não pode usar este comando com você mesmo.')
   }
   const messageAuthorAvatar = message.author.displayAvatarURL({ dynamic: false, format: "png" })
   let image = await Canvacord.slap(messageAuthorAvatar, mentionedMemberAvatar)
   let slap = new Discord.MessageAttachment(image, "slap.png")
 
-  return message.channel.send(slap)
+  return message.inlineReply(slap)
 }

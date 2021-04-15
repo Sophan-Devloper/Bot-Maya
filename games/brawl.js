@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   const games = new Discord.MessageEmbed()
@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
     .setTitle('Existe 2 jogos com o apelido Brawl no meu banco de dados')
     .setDescription('☝️ Brawlhalla\n✌️ Brawlstars')
 
-  await message.channel.send(games).then(msg => {
+  await message.inlineReply(games).then(msg => {
     msg.react('☝️') // Check
     msg.react('✌️') // X
 
@@ -42,7 +42,7 @@ exports.run = async (client, message, args) => {
           .addField(`${st}`, `${link1}`)
           .addField(`${ps}`, `${link2}`)
           .setFooter(`Plataformas: ${pt} 4, ${nsw}, ${an}, ${xbo}, ${mc}, ${w}, ${ios}`)
-        return message.channel.send(GameEmbed)
+        return message.inlineReply(GameEmbed)
       }
       if (reaction.emoji.name === '✌️') { // Não
         msg.delete()
@@ -66,7 +66,7 @@ exports.run = async (client, message, args) => {
           .addField(`${st}`, `${link1}`)
           .addField(`${ps}`, `${link2}`)
           .setFooter(`Plataformas: ${pt} 4, ${nsw}, ${an}, ${xbo}, ${mc}, ${w}, ${ios}`)
-        return message.channel.send(GameEmbed)
+        return message.inlineReply(GameEmbed)
       }
     })
   })

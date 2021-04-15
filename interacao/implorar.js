@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var list = [
@@ -30,20 +30,20 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Tente usar o comando correto')
       .setDescription('`' + prefix + 'implorar @user`')
-    return message.channel.send(`${message.author}`, no)
+    return message.inlineReply(no)
   }
 
   if (user.id === '821471191578574888') {
-    return message.channel.send('Porque imploras a mim?')
+    return message.inlineReply('Porque imploras a mim?')
   }
 
   if (user.id === message.author.id) {
-    return message.channel.send('Você não pode usar este comando com você mesmo.')
+    return message.inlineReply('Você não pode usar este comando com você mesmo.')
   }
 
   const embed = new Discord.MessageEmbed()
     .setColor('#000000')
     .setDescription(`${message.author} esta implorando ${user}`)
     .setImage(rand)
-  return message.channel.send(embed)
+  return message.inlineReply(embed)
 }

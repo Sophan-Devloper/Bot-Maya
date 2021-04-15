@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
                 const adm = new Discord.MessageEmbed()
                         .setColor('#FF0000')
                         .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-                return message.channel.send(adm)
+                return message.inlineReply(adm)
         }
 
         const member = message.mentions.users.first() || message.author
@@ -25,11 +25,11 @@ exports.run = async (client, message, args) => {
         }
 
         if (member.id === message.author.id) {
-          return message.channel.send('Você não pode usar este comando com você mesmo.')
+          return message.inlineReply('Você não pode usar este comando com você mesmo.')
         }
         const memberAvatar = member.displayAvatarURL({ dynamic: false, format: 'png' })
 
         const image = await canvacord.beautiful(memberAvatar)
         const beautiful = new Discord.MessageAttachment(image, 'beautiful.png')
-        return message.channel.send(beautiful)
+        return message.inlineReply(beautiful)
 }

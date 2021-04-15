@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission("ADMINISTRATOR")) {
@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Administrador')
 
-        return message.channel.send(noperm)
+        return message.inlineReply(noperm)
     }
 
     var channel = message.mentions.channels.first() || message.channel
@@ -25,14 +25,14 @@ exports.run = async (client, message, args) => {
         const ok = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setDescription(`${channel} já está bloqueado.`)
-        return message.channel.send(ok)
+        return message.inlineReply(ok)
     }
 
     const confirm = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`Você deseja bloquear todos os meus comandos no canal ${channel}?`)
 
-    await message.channel.send(confirm).then(msg => {
+    await message.inlineReply(confirm).then(msg => {
         msg.react('✅') // Check
         msg.react('❌') // X
 
@@ -46,11 +46,11 @@ exports.run = async (client, message, args) => {
                 const ok = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setDescription(`Meus comandos no canal ${channel} foram bloqueados.`)
-                return message.channel.send(ok)
+                return message.inlineReply(ok)
             }
             if (reaction.emoji.name === '❌') { // Não
                 msg.delete()
-                msg.channel.send("Comando cancelado.")
+                msg.inlineReply("Comando cancelado.")
             }
         })
     })

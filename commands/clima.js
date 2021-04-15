@@ -64,6 +64,6 @@ exports.run = async (client, message, args) => {
       .addField("Observação TimeTemp", current.observationtime, true)
       .setFooter(message.author.tag, message.author.displayAvatarURL())
 
-    return message.inlineReply(`${message.author}, isso aqui não é previsão do tempo`, embed)
+    return message.inlineReply(`Isso aqui não é previsão do tempo`, embed)
   })
 }

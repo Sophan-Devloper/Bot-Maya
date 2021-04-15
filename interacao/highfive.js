@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var list = [
@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Erroooou')
       .setDescription('`' + prefix + 'highfive @user`')
-    return message.channel.send(nouser)
+    return message.inlineReply(nouser)
   }
 
   if (user.id === '821471191578574888') {
@@ -57,11 +57,11 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setDescription(`${message.author.username} & ${user.username} mandaram um HIGHFIVE!`)
       .setImage(rand)
-    return message.channel.send(embed1)
+    return message.inlineReply(embed1)
   }
 
   if (user.id === message.author.id) {
-    return message.channel.send('Você não pode usar este comando com você mesmo.')
+    return message.inlineReply('Você não pode usar este comando com você mesmo.')
   }
 
   const embed = new Discord.MessageEmbed()
@@ -74,14 +74,14 @@ exports.run = async (client, message, args) => {
     .setDescription(`${message.author.username} & ${user.username} mandaram um HIGHFIVE!`)
     .setImage(rand1)
 
-  await message.channel.send(embed).then(msg => {
+  await message.inlineReply(embed).then(msg => {
     msg.react('🔁')
     msg.awaitReactions((reaction, user) => {
       if (message.mentions.users.first().id !== user.id) return
 
       if (reaction.emoji.name === '🔁') {
         msg.delete()
-        return message.channel.send(embed2)
+        return message.inlineReply(embed2)
       }
     })
   })

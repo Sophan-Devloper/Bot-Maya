@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: ADMINISTRATOR')
-        return message.channel.send(permss)
+        return message.inlineReply(permss)
     }
 
     if (!args[0]) {
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
                     value: '`' + prefix + 'deletarcomando Sorvete`'
                 }
             )
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     let commandName = args[0].toLowerCase()
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
             const noex = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Este comando não existe no meu banco de dados.')
-            return message.channel.send(noex)
+            return message.inlineReply(noex)
         }
 
         let value = database.indexOf(data)
@@ -54,12 +54,12 @@ exports.run = async (client, message, args) => {
             .setColor('GREEN')
             .setTitle('Comando `' + prefix + args[0] + '` deletado com sucesso!')
 
-        return message.channel.send(embed)
+        return message.inlineReply(embed)
     }
     else {
         const nof = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Comando não encontrado')
-        return message.channel.send(nof)
+        return message.inlineReply(nof)
     }
 }

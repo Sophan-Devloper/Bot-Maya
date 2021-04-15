@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
     .setStatus(user.presence.status)
     .setAvatar(user.displayAvatarURL({ format: "png", size: 1024 }))
 
-  const img = await card.build().catch(err => { message.channel.send('Um erro foi detectado na execução de CANVACORD' + err) })
+  const img = await card.build().catch(err => { message.inlineReply('Um erro foi detectado na execução de CANVACORD' + err) })
 
-  return message.channel.send("Carregando...").then(m => m.delete({ timeout: 5000 })).then(msg => msg.channel.send(new Discord.MessageAttachment(img, "rank.png")))
+  return message.inlineReply("Carregando...").then(m => m.delete({ timeout: 5000 })).then(msg => msg.inlineReply(new Discord.MessageAttachment(img, "rank.png")))
 }

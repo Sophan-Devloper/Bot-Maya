@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var game = '**Clash Royale**'
@@ -22,5 +22,5 @@ exports.run = async (client, message, args) => {
     .addField(`${ps}`, `${link1}`)
     .addField(`${as}`, `${link2}`)
     .setFooter(`${plat}`)
-  return message.channel.send(HelpEmbed)
+  return message.inlineReply(HelpEmbed)
 }

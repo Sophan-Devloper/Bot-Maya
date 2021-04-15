@@ -6,8 +6,8 @@ exports.run = async (client, message, args) => {
     if (!message.member.hasPermission('ADMINISTRATOR')) {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle('Permissão Necessária: ADMINISTRATOR')
-        return message.channel.send(permss)
+            .setTitle('Permissão Necessária: ADMINISTRADOR')
+        return message.inlineReply(permss)
     }
 
     if (!args[0]) {
@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'setprefix NovoPrefixo`\n \nExemplo: `' + prefix + 'setprefix !`')
-        return message.channel.send(format).then(m => m.delete({ timeout: 4000 })).catch(err => { return })
+        return message.inlineReply(format)
     }
 
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -27,27 +27,27 @@ exports.run = async (client, message, args) => {
         const atual = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Este já é meu prefixo atual.')
-        return message.channel.send(atual)
+        return message.inlineReply(atual)
     }
 
     if (args[1]) {
         const space = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('O prefixo não pode ter espaços.')
-        return message.channel.send(space)
+        return message.inlineReply(space)
     }
 
     if (args[0].length > 2) {
         const caracter = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('O prefixo não pode ter mais de 2 caracteres.')
-        return message.channel.send(caracter)
+        return message.inlineReply(caracter)
     }
 
     const newprefix = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setTitle('Deseja alterar meu prefixo para: `' + args[0] + '` ?')
-    await message.channel.send(newprefix).then(msg => {
+    await message.inlineReply(newprefix).then(msg => {
         msg.react('✅') // Check
         msg.react('❌') // X
 
@@ -60,11 +60,11 @@ exports.run = async (client, message, args) => {
                 const alterado = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setDescription(`${message.author}` + ' alterou meu prefixo para: `' + args[0] + '`')
-                return message.channel.send(alterado)
+                return message.inlineReply(alterado)
             }
             if (reaction.emoji.name === '❌') { // Não
                 msg.delete()
-                msg.channel.send("Comando cancelado.")
+                msg.inlineReply("Comando cancelado.")
             }
         })
     }) // aqui

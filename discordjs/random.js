@@ -7,16 +7,13 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member || message.mentions.users.first()
     var level = await db.fetch(`level_${user.id}`)
     if (level < 5) {
-        const block = new Discord.MessageEmbed()
-            .setColor('RED')
-            .setTitle('🚫  Libere no level 5')
-        return message.channel.send(block)
+        return message.inlineReply('🚫 Libere este comando no level 5')
     }
 
     var linkserver = 'https://discord.gg/YpFWgJuuUV'
@@ -39,9 +36,9 @@ exports.run = async (client, message, args) => {
         .setFooter('Apoio Maya - Developers')
 
     function code() {
-        message.channel.send("```js\n var resultado = ARRAY[Math.floor(Math.random() * ARRAY.length)]\n```")
+        message.inlineReply("```js\n var resultado = ARRAY[Math.floor(Math.random() * ARRAY.length)]\n```")
     }
 
-    message.channel.send(embed)
+    message.inlineReply(embed)
     setTimeout(code, 1000)
 }

@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
         .setDescription('`' + prefix + 't en/pt/fr/lt A frase que deseja traduzir`')
 
     if (!language || language.length !== 2 || !text) {
-        return message.channel.send(lan)
+        return message.inlineReply(lan)
     }
 
     translate(args.slice(1).join(" "), { to: language }).then(res => {

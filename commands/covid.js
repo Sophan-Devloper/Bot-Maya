@@ -72,5 +72,5 @@ exports.run = async (client, message, args) => {
             })
         .setFooter(message.author.username, message.author.displayAvatarURL())
 
-    await message.inlineReply(`${message.author}, tenta colocar com a sigla de algúm pais`, embed)
+    await message.inlineReply(`Tenta colocar com a sigla de algúm pais`, embed)
 }

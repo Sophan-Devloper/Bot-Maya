@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var game = 'Among Us'
@@ -25,5 +25,5 @@ exports.run = async (client, message, args) => {
     .addField(`${ps}`, `${link2}`)
     .addField('Among Us Gratis (pc)', 'https://discord.gg/CSAKXC6')
     .setFooter(`Plataformas: ${win}, ${an}, ${ios}`)
-  return message.channel.send(GameEmbed)
+  return message.inlineReply(GameEmbed)
 }

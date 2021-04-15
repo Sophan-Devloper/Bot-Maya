@@ -21,5 +21,5 @@ exports.run = async (client, message, args) => {
             }
         )
         .setFooter('O AFK System será desativado quando você mandar uma mensagem.')
-    return message.channel.send(`${message.author}, este é um comando novo, se houve algúm bug, use **${prefix}support**`, embed)
+    return message.inlineReply(`Este é um comando novo, se houve algúm bug, use **${prefix}support**`, embed)
 }

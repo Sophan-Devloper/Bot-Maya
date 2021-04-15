@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
      
     var content = args.join(' ')
@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'votar O que você quer que seja votado.`')
 
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     if (content) {
@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
             .setTitle(`Votação aberta por ${message.author.username}`)
             .setDescription(content)
 
-        return message.channel.send(embed).then(msg => {
+        return message.inlineReply(embed).then(msg => {
             msg.react('👍')
             msg.react('👎')
         })

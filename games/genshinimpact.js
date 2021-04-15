@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
   
   var game = 'Genshin Impact RPG'
@@ -25,5 +25,5 @@ exports.run = async (client, message, args) => {
     .addField(`${ps}`, `${link2}`)
     .setImage('https://imgur.com/380aoSo.gif')
     .setFooter(`Plataformas: ${w}, ${pt} 4, Nintendo Switch, ${an}, ${ios}`)
-  return message.channel.send(TFMEmbed)
+  return message.inlineReply(TFMEmbed)
 }

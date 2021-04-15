@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
    var list = [
@@ -45,11 +45,11 @@ exports.run = async (client, message, args) => {
    }
 
    if (user.id === '821471191578574888') {
-      return message.channel.send('Sai pervertido!')
+      return message.inlineReply('Sai pervertido!')
    }
 
    if (user.id === message.author.id) {
-     return message.channel.send('Você não pode usar este comando com você mesmo.')
+     return message.inlineReply('Você não pode usar este comando com você mesmo.')
    }
 
    let avatar = message.author.displayAvatarURL({ format: 'png' })
@@ -65,14 +65,14 @@ exports.run = async (client, message, args) => {
       .setAuthor(user.username + ` gostou e retribuiu a lambida de ${message.author.username}`, avatar1)
       .setImage(rand1)
 
-   await message.channel.send(embed).then(msg => {
+   await message.inlineReply(embed).then(msg => {
       msg.react('🔁')
       msg.awaitReactions((reaction, user) => {
          if (message.mentions.users.first().id !== user.id) return
 
          if (reaction.emoji.name === '🔁') { // Retribuiu
             reaction.users.remove()
-            return message.channel.send(embed2)
+            return message.inlineReply(embed2)
          }
       })
    })

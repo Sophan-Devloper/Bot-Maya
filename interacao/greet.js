@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var list = [
@@ -70,12 +70,12 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setDescription(`Olá ${message.author.username}`)
       .setImage(rand1)
-    message.channel.send(embed1)
-    return message.channel.send(embed3)
+    message.inlineReply(embed1)
+    return message.inlineReply(embed3)
   }
 
   if (user.id === message.author.id) {
-    return message.channel.send('Você não pode usar este comando com você mesmo.')
+    return message.inlineReply('Você não pode usar este comando com você mesmo.')
   }
 
   let avatar = message.author.displayAvatarURL({ format: 'png' })
@@ -91,13 +91,13 @@ exports.run = async (client, message, args) => {
     .setAuthor(user.username + ` comprimentou ${message.author.username} de volta`, avatar1)
     .setImage(rand1)
 
-  await message.channel.send(embed).then(msg => {
+  await message.inlineReply(embed).then(msg => {
     msg.react('🔁')
     msg.awaitReactions((reaction, user) => {
       if (message.mentions.users.first().id !== user.id) return
 
       if (reaction.emoji.name === '🔁') {
-        return message.channel.send(embed2)
+        return message.inlineReply(embed2)
       }
     })
   })

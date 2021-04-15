@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     let perms = message.member.hasPermission("MANAGE_ROLES")
@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Roles (cargos)')
-        return message.channel.send(permss)
+        return message.inlineReply(permss)
     }
 
     let user = message.mentions.members.first()
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato')
             .setDescription('`-addrole @user @cargo`')
-        return message.channel.send(userr)
+        return message.inlineReply(userr)
     }
 
     let role = message.mentions.roles.first()
@@ -32,19 +32,19 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato')
             .setDescription('`-addrole @user @cargo`')
-        return message.channel.send(rolee)
+        return message.inlineReply(rolee)
     }
 
     if (user.roles.cache.has(role.id)) {
         const roleee = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${user.user.username} já possui este cargo.`)
-        return message.channel.send(roleee)
+        return message.inlineReply(roleee)
     }
 
     user.roles.add(role)
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setDescription(`${user.user.username} recebeu o cargo ${role} com sucesso!`)
-    message.channel.send(sucess)
+    message.inlineReply(sucess)
 }

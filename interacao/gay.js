@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var gif = 'https://imgur.com/8SbJOzL.gif'
@@ -22,15 +22,15 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'gay @user`')
-    return message.channel.send(`${message.author}`, nouser)
+    return message.inlineReply(nouser)
   }
 
   if (user.id === '821471191578574888') {
-    return message.channel.send('Eu não tenho gênero, eu acho.')
+    return message.inlineReply('Eu não tenho gênero, eu acho.')
   }
 
   if (user.id === message.author.id) {
-    return message.channel.send('Você não pode usar este comando com você mesmo.')
+    return message.inlineReply('Você não pode usar este comando com você mesmo.')
   }
 
   var rand = ['YELLOW', 'RED', 'GREEN', 'PURPLE']
@@ -43,5 +43,5 @@ exports.run = async (client, message, args) => {
   if (num > 80) {
     gay.setImage(gif)
   }
-  return message.channel.send(gay)
+  return message.inlineReply(gay)
 }

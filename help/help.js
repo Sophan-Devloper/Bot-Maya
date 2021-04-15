@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var helpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
       .setDescription(`Heey! Tudo bem ${message.author}?\n \nSe você quiser informações sobre algum comando especifico, use **${prefix}ajuda categoria** ou apenas o comando.\nExemplo: **${prefix}marry** que eu te falo tudo sobre o comando.`)
       .addField('Acesso direto', `:tools: [Lista de Comandos](${helpgit})\n☎️ [Suporte](${linksupport})\n🧩 [Meu servidor](${linkservidor})\n:heart: [Me adicione](https://discord.com/api/oauth2/authorize?client_id=821471191578574888&permissions=8&scope=bot)`)
       .setFooter(`${prefix}ajuda categoria`)
-    return message.channel.send(`${message.author}`, newhelp)
+    return message.inlineReply(newhelp)
   }
 
   if (['categoria', 'categorias'].includes(args[0])) {
@@ -33,7 +33,7 @@ exports.run = async (client, message, args) => {
       .setDescription('❓ **O que são categorias?**\nCategorias são como caixas, dentro de cada caixa tem os comandos que a ela pertence.\n \nDentro de cada categoria, tem comandos disponiveis. Começe a explorar!\n \nExemplo: `' + prefix + 'help moderation` Comandos de moderação.')
       .addField('• Categorias Disponiveis (14)', 'afk\nanimes\ncommands\ndiscordjs\ngames\ninteração\nlevel\nmaya\nmoderation\nmpoints\nperfil\nquiz\nrandom\nreações')
       .addField('• Categorias Privadas (3)', '**• Categorias Offline (0)**')
-    return message.channel.send(`${message.author}`, catego)
+    return message.inlineReply(catego)
   }
 
   if (['afksystem', 'afk'].includes(args[0])) {
@@ -52,7 +52,7 @@ exports.run = async (client, message, args) => {
         }
       )
       .setFooter('O AFK System será desativado quando você mandar uma mensagem.')
-    return message.channel.send(`${message.author}, este é um comando novo, se houve algúm bug, use **${prefix}support**`, embed)
+    return message.inlineReply(`Este é um comando novo, se houve algúm bug, use **${prefix}support**`, embed)
   }
 
   if (['anime', 'animes'].includes(args[0])) {
@@ -74,7 +74,7 @@ exports.run = async (client, message, args) => {
           value: 'Comandos no registro: (62)'
         }
       )
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['comandos', 'commands'].includes(args[0])) {
@@ -85,7 +85,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comando Online', '<opicional> [obrigatório]\n \n' + '`' + prefix + 'avatar <@user>`\n' + '`' + prefix + 'clima [Sua Cidade]`\n' + '`' + prefix + 'covid <Sua Cidade>`\n' + '`' + prefix + 'clima [Sua Cidade]`\n' + '`' + prefix + 'dono`\n' + '`' + prefix + 'id/user/userinfo <@user>`\n' + '`' + prefix + 'ideia [sua ideia em diante]`\n' + '`' + prefix + 'imc [peso] [altura]`\n' + '`' + prefix + 'invites`\n' + '`' + prefix + 'jokenpo`\n' + '`' + prefix + 'report`\n' + '`' + prefix + 'serverinfo`\n' + '`' + prefix + 'spotify`\n' + '`' + prefix + 'translate`\n' + '`' + prefix + 'uptime`')
       .addField('• Comandos Offline (4)', '`' + prefix + 'cal` | ' + '`' + prefix + 'chagemymind` | ' + '`' + prefix + 'wow` | n' + '`' + prefix + 'over`')
       .addField('• Comandos em construção', 'Comandos no registro: (21)')
-    return message.channel.send(`${message.author}`, embed1)
+    return message.inlineReply(embed1)
   }
 
   if (['github', 'discordjs'].includes(args[0])) {
@@ -96,7 +96,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'github`\n' + '`' + prefix + 'commandfile`\n' + '`' + prefix + 'levelsystem`\n' + '`' + prefix + 'random`')
       .addField('• Comandos Offline (0)', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (361)')
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['games', 'jogos', 'game', 'jogo'].includes(args[0])) {
@@ -107,7 +107,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'amongus`\n' + '`' + prefix + 'brawl`\n' + '`' + prefix + 'brawlhalla`\n' + '`' + prefix + 'brawlstars`\n' + '`' + prefix + 'clash/clashroyale`\n' + '`' + prefix + 'counterstrike/cs`\n' + '`' + prefix + 'ddtank`\n' + '`' + prefix + 'freefire/ff`\n' + '`' + prefix + 'gartic`\n' + '`' + prefix + 'genshinimpact/genshin`\n' + '`' + prefix + 'gta`\n' + '`' + prefix + 'habbo`\n' + '`' + prefix + 'leagueoflegends/lol`\n' + '`' + prefix + 'mario`\n' + '`' + prefix + 'mobilelegends/mbl`\n' + '`' + prefix + 'minecraft/mine`\n' + '`' + prefix + 'paladins`\n' + '`' + prefix + 'rocketleague`\n' + '`' + prefix + 'summoners`\n' + '`' + prefix + 'sumwar`\n' + '`' + prefix + 'transformice/tfm`\n' + '`' + prefix + 'uno`\n' + '`' + prefix + 'valorant`')
       .addField('• Comandos Offline (No Status Defined)', ' ')
       .addField('• Comandos em construção', 'Comandos no registro: (2)')
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['help', 'h', 'ajuda'].includes(args[0])) {
@@ -118,7 +118,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'help`\n' + '`' + prefix + 'ajuda`\n' + '`' + prefix + 'h`\n' + '`' + prefix + 'thanks`\n' + '`' + prefix + 'support/sup/suporte`\n' + '`' + prefix + 'afkhelp`\n' + '`' + prefix + 'bjhelp/blackjackhelp`')
       .addField('• Comandos Offline (0)', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (361)')
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['interacao', 'interação', 'interation'].includes(args[0])) {
@@ -131,7 +131,7 @@ exports.run = async (client, message, args) => {
       .setFooter('Quase todos os comandos também estão disponiveis em inglês')
       .addField('• Comandos Offline (2)', '`' + prefix + 'oi` | ' + '`' + prefix + 'tchau`')
       .addField('• Comandos em construção', 'Comandos no registro: (15)')
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['level', 'nivel', 'xp'].includes(args[0])) {
@@ -142,7 +142,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'level`\n' + '`' + prefix + 'dailyxp`\n' + '`' + prefix + 'rank`')
       .addField('• Comandos Offline (0)', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (4)')
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['maya'].includes(args[0])) {
@@ -153,7 +153,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'att/new`\n' + '`' + prefix + 'botinfo`\n' + '`' + prefix + 'inv/invite/convidar`\n' + '`' + prefix + 'criarcomando [nome] [resposta]`\n' + '`' + prefix + 'deletarcomando [nome]`\n' + '`' + prefix + 'dm/pv`\n' + '`' + prefix + 'lockcommands`\n' + '`' + prefix + 'unlockcommands`\n' + '`' + prefix + 'ping`\n' + '`' + prefix + 'prefix`')
       .addField('• Comandos Offline', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (34)')
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['moderation', 'moderação', 'mod', 'administração', 'adm', 'administration'].includes(args[0])) {
@@ -165,7 +165,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Offline (0)', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (9)')
       .addField('⠀', `Devido a quantidade de comandos, entre no meu [painel de comandos](${helpgit})`)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['economy', 'economia', 'mpoints', 'money'].includes(args[0])) {
@@ -178,7 +178,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Moderação', '`' + prefix + 'setpescachannel`\n' + '`' + prefix + 'setminechannel`')
       .addField('• Comandos em construção', 'Comandos no registro: (25)')
       .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['perfil', 'profile'].includes(args[0])) {
@@ -190,7 +190,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Offline', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (11)')
       .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['quiz', 'trivia'].includes(args[0])) {
@@ -202,7 +202,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Offline', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (54)')
       .addField('⠀', `Mais informações no meu [painel de comandos](${helpgit})`)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['random', 'aleatório', 'aleatorio'].includes(args[0])) {
@@ -214,7 +214,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Offline (12)', 'Lista indisponivel')
       .addField('• Comandos em construção', 'Comandos no registro: (154)')
       .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   }
 
   if (['react', 'reações'].includes(args[0])) {
@@ -226,8 +226,8 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Offline (17)', 'Processo de tradução')
       .addField('• Comandos em construção', 'Comandos no registro: (81)')
       .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
   } else {
-    return message.channel.send('Esta categoria não foi encontrada. use `' + prefix + 'help categoria` e veja as categorias disponiveis.')
+    return message.inlineReply('Esta categoria não foi encontrada. use `' + prefix + 'help categoria` e veja as categorias disponiveis.')
   }
 }

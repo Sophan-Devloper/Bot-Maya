@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
                     inline: true
                 }
             )
-        return message.channel.send(autoroleautal)
+        return message.inlineReply(autoroleautal)
     }
 
     if (role === null) {
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                     inline: true
                 }
             )
-        return message.channel.send(autoroleautal)
+        return message.inlineReply(autoroleautal)
     }
 
 }

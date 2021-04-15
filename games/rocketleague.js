@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var game = 'Rocket League - Epic Games'
@@ -17,5 +17,5 @@ exports.run = async (client, message, args) => {
     .setTitle(`${game}`)
     .addField(`Epic Games`, `${link1}`)
     .setFooter(`Plataformas: PlayStation 4, Nintendo Switch, Xbox One, macOS, Microsoft Windows, Linux, Mac OS Classic`)
-  return message.channel.send(GameEmbed)
+  return message.inlineReply(GameEmbed)
 }

@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   var list = [
@@ -58,7 +58,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Erroooou')
       .setDescription('`' + prefix + 'hug @user`')
-    return message.channel.send(nouser)
+    return message.inlineReply(nouser)
   }
 
   if (user.id === '821471191578574888') {
@@ -67,12 +67,12 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setAuthor(message.author.username + ` está abraçando ${user.username}`, avatar)
       .setImage(rand)
-    message.channel.send(embed1)
-    return message.channel.send('Que abraço fofinho')
+    message.inlineReply(embed1)
+    return message.inlineReply('Que abraço fofinho')
   }
 
   if (user.id === message.author.id) {
-    return message.channel.send('Você não pode usar este comando com você mesmo.')
+    return message.inlineReply('Você não pode usar este comando com você mesmo.')
   }
 
   let avatar = message.author.displayAvatarURL({ format: 'png' })
@@ -90,13 +90,13 @@ exports.run = async (client, message, args) => {
     .setAuthor(message.author.username + ` retribuiu o abraço de ${user.username}`, avatar1)
     .setImage(rand1)
 
-  await message.channel.send(embed).then(msg => {
+  await message.inlineReply(embed).then(msg => {
     msg.react('🔁')
     msg.awaitReactions((reaction, user) => {
       if (message.mentions.users.first().id !== user.id) return
 
       if (reaction.emoji.name === '🔁') {
-        return message.channel.send(embed2)
+        return message.inlineReply(embed2)
       }
     })
   })

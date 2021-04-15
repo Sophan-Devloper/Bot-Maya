@@ -4,7 +4,7 @@ const db = require('quick.db')
 exports.run = async (client, message, args) => {
      
     let data = db.all().filter(i => i.ID.startsWith("whitelist_")).sort((a, b) => b.data - a.data);
-    if (data.length < 1) return message.channel.send("Sem ranking por enquanto").then(m => m.delete({ timeout: 5000 }))
+    if (data.length < 1) return message.inlineReply("Sem ranking por enquanto").then(m => m.delete({ timeout: 5000 }))
 
     let myrank = data.map(m => m.ID).indexOf(`whitelist_${message.author.id}`) + 1 || "N/A"
     data.length = 10;
@@ -26,5 +26,5 @@ exports.run = async (client, message, args) => {
     lb.forEach(d => {
         embed.addField(`${d.user.tag}`, `ID: ${d.user.id}`)
     })
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
 }

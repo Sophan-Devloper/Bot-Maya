@@ -7,21 +7,21 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.guild.me.hasPermission("ADD_REACTIONS")) {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso das permissões "Manusear Canais" e "Adicionar Reações" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
     
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     if (!args[0]) {
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                     value: '`' + prefix + 'setideiachannel #Canal`\n`' + prefix + 'setideiachannel off`',
                 }
             )
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     if (args[0] === 'off') {
@@ -48,13 +48,13 @@ exports.run = async (client, message, args) => {
                 .setColor('#ff0000')
                 .setTitle('O Ideia System já está desativado.')
 
-            return message.channel.send(semcanal)
+            return message.inlineReply(semcanal)
         } else if (canal) {
             db.delete(`ideiachannel_${message.guild.id}`)
             const comcanal = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setTitle('Ideia System desativado.')
-            return message.channel.send(comcanal)
+            return message.inlineReply(comcanal)
         }
     }
 
@@ -67,7 +67,7 @@ exports.run = async (client, message, args) => {
             .setTitle('Siga o formato correto')
             .setDescription('' + prefix + 'setideiachannel #Canallogs')
 
-        return message.channel.send(nochannel)
+        return message.inlineReply(nochannel)
     }
 
     var atual = db.get(`ideiachannel_${message.guild.id}`)
@@ -77,7 +77,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // Red
             .setTitle('Este canal já foi definido como Ideia Channel!')
 
-        return message.channel.send(iqual)
+        return message.inlineReply(iqual)
     } else if (args[0] !== atual) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
@@ -95,9 +95,9 @@ exports.run = async (client, message, args) => {
             .setDescription('`' + prefix + 'ideia Sua ideia em diante`\n \nEnvie ideias para o servidor votar.')
 
         setTimeout(function () {
-            message.channel.send(liberado)
+            message.inlineReply(liberado)
         }, 5000)
 
-        return message.channel.send(sucess)
+        return message.inlineReply(sucess)
     }
 }

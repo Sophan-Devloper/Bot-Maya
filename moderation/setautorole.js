@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     let perms = message.member.hasPermission("MANAGE_ROLES")
@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Roles (cargos)')
-        return message.channel.send(permss)
+        return message.inlineReply(permss)
     }
 
     if (!args[0]) {
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             const rolee = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setDescription(`O autorole atual é: <@&${db.get(`autorole_${message.guild.id}`)}>`)
-            return message.channel.send(rolee)
+            return message.inlineReply(rolee)
         }
 
         const noargs = new Discord.MessageEmbed()
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
             .setDescription('Escolha o cargo que todos vão receber assim que entrar no servidor.')
             .addField('Defina o cargo', '`' + prefix + 'setautorole @Cargo`')
             .addField('Desative o Autorole', '`' + prefix + 'setautorole off`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     if (args[0] === 'off') {
@@ -46,14 +46,14 @@ exports.run = async (client, message, args) => {
             const noauto = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('O Autorole System já está desativado.')
-            return message.channel.send(noauto)
+            return message.inlineReply(noauto)
         }
 
         var cargo = db.get(`autorole_${message.guild.id}`)
         const confirm1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`Você deseja desligar o sistema de Autorole? O cargo <@&${cargo}> deixará de ser dado a todos os novos membros.`)
-        return message.channel.send(confirm1).then(msg => {
+        return message.inlineReply(confirm1).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
 
@@ -72,10 +72,10 @@ exports.run = async (client, message, args) => {
                         .setTitle('Autorole System foi desativado com sucesso.')
 
                     setTimeout(function desativando() {
-                        message.channel.send(desativado)
+                        message.inlineReply(desativado)
                     }, 3400)
 
-                    return message.channel.send(semrole)
+                    return message.inlineReply(semrole)
                 }
 
                 if (reaction.emoji.name === '❌') { // MPEmbed
@@ -83,7 +83,7 @@ exports.run = async (client, message, args) => {
                     const cancel = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('Comando cancelado')
-                    return message.channel.send(cancel)
+                    return message.inlineReply(cancel)
                 }
             })
         })
@@ -98,7 +98,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'setautorole @cargo`')
-        return message.channel.send(norole)
+        return message.inlineReply(norole)
     }
 
     if (!role.editable) {
@@ -117,9 +117,9 @@ exports.run = async (client, message, args) => {
             .setTitle('🔄 Um erro foi encontrado. Buscando solução...')
 
         setTimeout(function () {
-            message.channel.send(soberol)
+            message.inlineReply(soberol)
         }, 6000)
-        return message.channel.send(sobcarg)
+        return message.inlineReply(sobcarg)
 
     }
 
@@ -129,14 +129,14 @@ exports.run = async (client, message, args) => {
         const iqual = new Discord.MessageEmbed()
             .setColor('#FF0000') // Red
             .setTitle('Este cargo já foi definido como Autorole!')
-        return message.channel.send(iqual)
+        return message.inlineReply(iqual)
     }
 
     const confirm = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setDescription(`Você deseja definir o cargo ${role} como autorole?`)
 
-    await message.channel.send(confirm).then(msg => {
+    await message.inlineReply(confirm).then(msg => {
         msg.react('✅') // Check
         msg.react('❌') // X
 
@@ -153,7 +153,7 @@ exports.run = async (client, message, args) => {
                 const timing = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setDescription(`Autenticando o cargo no banco de dados do servidor "${message.guild.name}"...`)
-                return message.channel.send(timing).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.channel.send(redefine))
+                return message.inlineReply(timing).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.inlineReply(redefine))
             }
 
             if (reaction.emoji.name === '❌') { // MPEmbed
@@ -161,7 +161,7 @@ exports.run = async (client, message, args) => {
                 const cancel = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('Comando cancelado')
-                return message.channel.send(cancel)
+                return message.inlineReply(cancel)
             }
         })
     })

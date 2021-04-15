@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   let money = parseInt(args[1])
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
       .setTitle('🚨 Você está em prisão máxima!')
       .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-    return message.channel.send(presomax)
+    return message.inlineReply(presomax)
   } else {
 
     if (args[0] === 'all' || args[0] === 'max') {
@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
         .setTitle(':spades: :hearts: 21 Pontos - Blackjack :clubs: :diamonds:')
         .setDescription('Precisa de ajuda? `' + prefix + 'bjhelp`')
         .addField('Comando de aposta:', '`' + prefix + 'bj Valor`')
-      return message.channel.send(noargs)
+      return message.inlineReply(noargs)
     }
 
     if (!money || money < 1 || money > moneydb) {
@@ -55,7 +55,7 @@ exports.run = async (client, message, args) => {
         .setTitle('Qual o valor que deseja apostar?')
         .setDescription('Dinheiro disponivel: ' + moneydb + '<:StarPoint:766794021128765469>')
         .setFooter(`${prefix}sacar`)
-      message.channel.send(nomumber)
+      message.inlineReply(nomumber)
       return
     }
 
@@ -63,7 +63,7 @@ exports.run = async (client, message, args) => {
       const nomumber = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle("Você não tem dinheiro suficiente")
-      message.channel.send(nomumber)
+      message.inlineReply(nomumber)
       return
     }
 
@@ -190,7 +190,7 @@ exports.run = async (client, message, args) => {
         .addField(title, msg)
         .setFooter('21 Pontos - Blackjack')
 
-      message.channel.send(gambleEmbed);
+      message.inlineReply(gambleEmbed);
     }
 
     async function endGame() {
@@ -287,7 +287,7 @@ exports.run = async (client, message, args) => {
           return
         }
       }).catch(_ => {
-        message.channel.send("**Você perdeu todo seu dinheiro**")
+        message.inlineReply("**Você perdeu todo seu dinheiro**")
         bet("lose")
         return
       })

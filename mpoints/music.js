@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
       const adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
     }
 
     const embed = new Discord.MessageEmbed()
@@ -19,5 +19,5 @@ exports.run = async (client, message, args) => {
                 inline: true
             }
         )
-    return message.channel.send(embed)
+    return message.inlineReply(embed)
 }

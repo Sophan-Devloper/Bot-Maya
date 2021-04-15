@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     let perms = message.member.hasPermission("MANAGE_ROLES")
@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Roles (cargos)')
-        return message.channel.send(permss)
+        return message.inlineReply(permss)
     }
     let user = message.mentions.members.first()
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'removerole @user @cargo`')
-        return message.channel.send(nouser)
+        return message.inlineReply(nouser)
     }
 
     let role = message.mentions.roles.first()
@@ -35,14 +35,14 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'removerole @user @cargo`')
-        return message.channel.send(norole)
+        return message.inlineReply(norole)
     }
 
     if (!user.roles.cache.has(role.id)) {
         const norole = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${user.user.username} não possui este cargo.`)
-        return message.channel.send(norole)
+        return message.inlineReply(norole)
     }
 
     let linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
@@ -70,12 +70,12 @@ exports.run = async (client, message, args) => {
                     }
                 )
 
-            message.channel.send(erro)
+            message.inlineReply(erro)
         }
     })
 
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setDescription(`O cargo ${role} foi removido de ${user.user.username} com sucesso.`)
-    return message.channel.send(sucess)
+    return message.inlineReply(sucess)
 }

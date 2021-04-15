@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         if (!args[0]) {
@@ -27,13 +27,13 @@ exports.run = async (client, message, args) => {
                 .setDescription('Aqui você pode comprar os itens da lojinha. É muito simples, basta usar o comando, assim você compra itens e pode usa-lo.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
                 .addField('Comando', '`' + prefix + 'buy Nome do item`')
                 .addField('Todos os itens', '`' + prefix + 'loja`')
-            return message.channel.send(noargs)
+            return message.inlineReply(noargs)
         }
 
         if (['vara de pesca', 'vara', 'pesca'].includes(args[0])) {
 
             if (db.get(`vara_${message.author.id}`)) {
-                return message.channel.send(`${message.author}, você já possui este item.`)
+                return message.inlineReply(`Você já possui este item.`)
             }
 
             var money = db.get(`money_${message.author.id}`)
@@ -44,7 +44,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 5000) {
@@ -52,7 +52,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money == 0) {
@@ -60,7 +60,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}, você não tem dinheiro.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 0) {
@@ -68,7 +68,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}, você está com divida.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money = 5000 || money > 5000) {
@@ -80,14 +80,14 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou uma 🎣 `Vara de Pesca`')
-                return message.channel.send(buypesca)
+                return message.inlineReply(buypesca)
             }
         }
 
         if (['machado'].includes(args[0])) {
 
             if (db.get(`machado_${message.author.id}`)) {
-                return message.channel.send(`${message.author}, você já possui este item.`)
+                return message.inlineReply(`Você já possui este item.`)
             }
 
             var money = db.get(`money_${message.author.id}`)
@@ -98,7 +98,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 400) {
@@ -106,7 +106,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money == 0) {
@@ -114,7 +114,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}, você não tem dinheiro.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 0) {
@@ -122,7 +122,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}, você está com divida.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money = 400 || money > 400) {
@@ -134,14 +134,14 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou um 🪓 `Machado`')
-                return message.channel.send(buypesca)
+                return message.inlineReply(buypesca)
             }
         }
 
         if (['arma', 'gun'].includes(args[0])) {
 
             if (db.get(`arma_${message.author.id}`)) {
-                return message.channel.send(`${message.author}, você já possui este item.`)
+                return message.inlineReply(`Você já possui este item.`)
             }
 
             var money = db.get(`money_${message.author.id}`)
@@ -152,7 +152,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 100000) {
@@ -160,7 +160,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money == 0) {
@@ -168,7 +168,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 0) {
@@ -176,7 +176,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}, você está com divida.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money = 100000 || money > 100000) {
@@ -187,11 +187,11 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou uma 🔫 `Arma`')
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
 
-        if (['agua', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água', 'copo de agua', 'copo de água'].includes(args[0])) {
+        if (['agua', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água', 'copo de agua', 'copos de agua', 'copo de água', 'copos de água'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)
             if (money === null) { money = 0 }
@@ -201,18 +201,18 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantas águas você quer comprar? `' + prefix + 'buy aguas quantidade`')
+                return message.inlineReply('Quantas águas você quer comprar? `' + prefix + 'buy aguas quantidade`')
             }
             if (money < args[1] * 10) {
                 const nota = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money == 0) {
@@ -220,7 +220,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 0) {
@@ -228,7 +228,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra negada')
                     .setDescription(`${message.author}, você está com divida.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             db.add(`agua_${message.author.id}`, args[1] * 1)
@@ -239,7 +239,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('LIMITE DE ÁGUAS ATINGIDO!')
                     .setDescription(`${message.author}, você não pode passar de **70 copos d'água**.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money = 10 || money > 10) {
@@ -249,14 +249,14 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🥤 `Copos de água`')
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
 
         if (['picareta', "Picareta"].includes(args[0])) {
 
             if (db.get(`picareta_${message.author.id}`)) {
-                return message.channel.send(`${message.author}, você já possui este item.`)
+                return message.inlineReply(`Você já possui este item.`)
             }
 
             var money = db.get(`money_${message.author.id}`)
@@ -267,7 +267,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 350) {
@@ -275,7 +275,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money == 0) {
@@ -283,7 +283,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 0) {
@@ -291,7 +291,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}, você está com divida.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money = 350 || money > 350) {
@@ -303,7 +303,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou uma ⛏️ `Picareta`')
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
 
@@ -317,18 +317,18 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantas iscas você quer comprar? `' + prefix + 'buy iscas quantidade`')
+                return message.inlineReply('Quantas iscas você quer comprar? `' + prefix + 'buy iscas quantidade`')
             }
             if (money < args[1] * 10) {
                 const nota = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money == 0) {
@@ -336,7 +336,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Compra negada')
                     .setDescription(`${message.author}, você não tem dinheiro.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money < 0) {
@@ -344,7 +344,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('✅ Compra negada')
                     .setDescription(`${message.author}, você está com divida.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             db.add(`iscas_${message.author.id}`, args[1] * 1)
@@ -355,7 +355,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('LIMITE DE ISCAS ATINGIDO!')
                     .setDescription(`${message.author}, você não pode passar de **50 iscas**.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money = 10 || money > 10) {
@@ -365,10 +365,10 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🪱 `Iscas`')
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         } else {
-            return message.channel.send(`${message.author}, eu não achei nenhum item com o nome **${args.join(" ")}** na minha loja.`)
+            return message.inlineReply(`Eu não achei nenhum item com o nome **${args.join(" ")}** na minha loja.`)
         }
     }
 }

@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
       const adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
     }
 
     let timeout1 = 6140000
@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         let prefix = db.get(`prefix_${message.guild.id}`)
@@ -34,15 +34,15 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('Siga o formato correto')
                 .setDescription('`' + prefix + 'roubar @user`')
-            return message.channel.send(nook)
+            return message.inlineReply(nook)
         }
 
         if (user.id == '821471191578574888') {
-            return message.channel.send('Você realmente quer me roubar? Tá doido é? Vou te quebrar no meio.')
+            return message.inlineReply('Você realmente quer me roubar? Tá doido é? Vou te quebrar no meio.')
         }
 
         if (user.id == message.author.id) {
-            return message.channel.send(`${message.author}, você não pode roubar você mesmo.`)
+            return message.inlineReply(`Você não pode roubar você mesmo.`)
         }
 
         var usermoney = db.get(`money_${user.id}`)
@@ -55,14 +55,14 @@ exports.run = async (client, message, args) => {
             const nomoney = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle(`${user.user.username} não possui dinheiro.`)
-            return message.channel.send(nomoney)
+            return message.inlineReply(nomoney)
         }
 
         if (usermoney < 0) {
             const nomoney = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle(`${user.user.username} não possui dinheiro.`)
-            return message.channel.send(nomoney)
+            return message.inlineReply(nomoney)
         }
 
         var timeout = 6040000
@@ -73,7 +73,7 @@ exports.run = async (client, message, args) => {
             let embedtime = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setDescription(`Você já roubou alguém hoje, roube novamente em ${time.minutes}m e ${time.seconds}s.`)
-            return message.channel.send(embedtime)
+            return message.inlineReply(embedtime)
         } else {
 
             var luck = ['win', 'lose']
@@ -85,7 +85,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle("🚨 A polícia te pegou e você foi preso!")
                     .setDescription(`A fiança custou ${amount}<:StarPoint:766794021128765469>`)
-                message.channel.send(embed1)
+                message.inlineReply(embed1)
                 db.subtract(`money_${message.author.id}`, amount)
                 db.set(`robtime_${message.author.id}`, Date.now())
             } else if (result == 'win') {
@@ -95,7 +95,7 @@ exports.run = async (client, message, args) => {
                     .setTitle(`🔫 Você roubou ${user.user.username} com sucesso!`)
                     .setDescription(`O lucro do roubo foi de ${amount}<:StarPoint:766794021128765469>`)
 
-                message.channel.send(moneyEmbed)
+                message.inlineReply(moneyEmbed)
                 db.subtract(`money_${user.id}`, amount)
                 db.add(`money_${message.author.id}`, amount)
                 db.set(`robtime_${message.author.id}`, Date.now())

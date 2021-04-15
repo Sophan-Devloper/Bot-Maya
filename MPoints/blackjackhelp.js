@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     var linkgit = 'https://github.com/rodycouto/MayaCommands/blob/main/Exemplos/comojogarbj.md'
@@ -16,5 +16,5 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle('♠️ ♥️ 21 Pontos - Blackjack ♣️ ♦️')
         .setDescription(`Olhe tudo sobe o Blackjack [cliquando aqui](${linkgit})`)
-    return message.channel.send(help)
+    return message.inlineReply(help)
 }

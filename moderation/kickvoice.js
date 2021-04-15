@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Mover Membros" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MOVE_MEMBERS')) {
@@ -26,28 +26,28 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'kickvoice @user`')
-        return message.channel.send(nomember)
+        return message.inlineReply(nomember)
     }
 
     if (!member.voice.channel) {
         const novoice = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${member.user.username} não está em nenhum canal de voz.`)
-        return message.channel.send(novoice)
+        return message.inlineReply(novoice)
     }
 
     if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
         const banrody = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle(member.user.username + ' está na whitelist.')
-        return message.channel.send(banrody)
+        return message.inlineReply(banrody)
     }
 
     if (member.hasPermission(['MOVE_MEMBERS', 'ADMINISTRATOR', 'KICK_MEMBERS', 'BAN_MEMBERS', 'MANEGE_ROLES'])) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${member.user.username} tem permissões importantes neste servidor.`)
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     const kicked = new Discord.MessageEmbed()
@@ -59,8 +59,8 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Um erro foi encontrado')
             .setDescription(`ERROR BY CONSOLE.LOG \n` + err)
-        message.channel.send(error)
+        message.inlineReply(error)
     })
 
-    return message.channel.send(kicked)
+    return message.inlineReply(kicked)
 }

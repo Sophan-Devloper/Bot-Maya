@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Manusear Nicknames (Nomes/Apelidos)" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     const noperms = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão necessária: Manusear Nicknames (Nomes/Apelidos)')
-    return message.channel.send(noperms)
+    return message.inlineReply(noperms)
   }
 
   let user = message.mentions.users.first()
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'setnick @user NovoNome`')
-    return message.channel.send(format)
+    return message.inlineReply(format)
   }
 
   let nick = args.slice(1).join(" ")
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'setnick @user NovoNome`')
-    return message.channel.send(format)
+    return message.inlineReply(format)
   }
 
   let linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
@@ -69,12 +69,12 @@ exports.run = async (client, message, args) => {
           }
         )
 
-      return message.channel.send(erro)
+      return message.inlineReply(erro)
     }
   })
 
   const sucess = new Discord.MessageEmbed()
     .setColor('GREEN')
     .setDescription(`O nickname de ${user.tag} foi alterado para ${nick}`)
-  return message.channel.send(sucess)
+  return message.inlineReply(sucess)
 }

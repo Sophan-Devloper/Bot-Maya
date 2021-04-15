@@ -10,14 +10,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     var canal = message.mentions.channels.first()
@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'send #canal Sua mensagem`')
-        return message.channel.send(nocanal)
+        return message.inlineReply(nocanal)
     }
 
     if (!args[1]) {
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'send #canal Sua mensagem`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     var mensagem = args.slice(1).join(" ")
@@ -44,9 +44,9 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'send #canal Sua mensagem`')
-        return message.channel.send(nomensagem)
+        return message.inlineReply(nomensagem)
     }
 
     canal.send(mensagem + `\n \n*${message.author.username}*`)
-    message.channel.send('Enviado com sucesso.')
+    message.inlineReply('Enviado com sucesso.')
 }

@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   if (!message.member.hasPermission(["MANAGE_ROLES"])) {
     const perms = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão Necessária: Manusear Cargos')
-    return message.channel.send(perms)
+    return message.inlineReply(perms)
   }
 
   let logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Não há Canal Log registrado.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nolog)
+    return message.inlineReply(nolog)
   }
 
   if (!client.channels.cache.get(logchannel)) {
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Parece que o canal log foi excluido.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nolog1)
+    return message.inlineReply(nolog1)
   }
 
   const user = message.mentions.members.first()
@@ -49,35 +49,35 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'warn @user Razão (opcional)`')
-    return message.channel.send(nouser)
+    return message.inlineReply(nouser)
   }
 
   if (db.get(`whitelist_${user.id}`)) {// Rodrigo Couto
     const banrody = new Discord.MessageEmbed()
       .setColor('GREEN')
       .setTitle(user.user.username + ' está na whitelist.')
-    return message.channel.send(banrody)
+    return message.inlineReply(banrody)
   }
 
   if (message.mentions.users.first().bot) {
     const nobot = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Bots não podem receber warns.')
-    return message.channel.send(nobot)
+    return message.inlineReply(nobot)
   }
 
   if (message.author.id === user.id) {
     const autowarn = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Auto warn não é uma opção.')
-    return message.channel.send(autowarn)
+    return message.inlineReply(autowarn)
   }
 
   if (user.id === message.guild.owner.id) {
     const owner = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Warn no dono do servidor não é uma opção.')
-    return message.channel.send(owner)
+    return message.inlineReply(owner)
   }
 
   let reason = args.slice(1).join(" ")
@@ -89,7 +89,7 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setTitle(`Limite de warns atingido`)
       .setDescription(`${user} atingiu 4 warns. Está na hora de uma punição maior. Mute? Kick? Ban?`)
-    return message.channel.send(limit)
+    return message.inlineReply(limit)
   }
 
   if (warnings === null) {
@@ -129,7 +129,7 @@ exports.run = async (client, message, args) => {
       .setColor('GREEN')
       .setDescription(`Warn adicionado! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
 
-    message.channel.send(sucess)
+    message.inlineReply(sucess)
     client.channels.cache.get(logchannel).send(msg1)
 
   } else if (warnings !== null) {
@@ -168,7 +168,7 @@ exports.run = async (client, message, args) => {
       .setColor('GREEN')
       .setDescription(`O Warn foi um sucesso! Estou enviando mais informações no ${client.channels.cache.get(logchannel)}.`)
 
-    message.channel.send(sucess)
+    message.inlineReply(sucess)
     client.channels.cache.get(logchannel).send(msg2)
   }
 }

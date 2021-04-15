@@ -22,14 +22,14 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         let timeout5 = 380000
         let roletatime = await db.fetch(`roletatimeout_${message.author.id}`)
         if (roletatime !== null && timeout5 - (Date.now() - roletatime) > 0) {
             let time = ms(timeout5 - (Date.now() - roletatime))
-            return message.channel.send(`Calminha! As maquinas precisam recarregar. Tempo de recarga completa: ${time.minutes}m, e ${time.seconds}s`)
+            return message.inlineReply(`Calminha! As maquinas precisam recarregar. Tempo de recarga completa: ${time.minutes}m, e ${time.seconds}s`)
         } else {
 
             if (!args[0]) {
@@ -43,7 +43,11 @@ exports.run = async (client, message, args) => {
                             value: '`' + prefix + 'roleta valor`'
                         }
                     )
-                return message.channel.send(noargs)
+                return message.inlineReply(noargs)
+            }
+            
+            if (['all', 'tudo'].includes(args[0])) {
+                money = db.get(`money_${message.author.id}`)
             }
 
             if (isNaN(args[0])) {
@@ -51,7 +55,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle(`${args[0]}, digite um número.`)
                     .setDescription('`' + prefix + 'roleta valor`')
-                return message.channel.send(nonumber)
+                return message.inlineReply(nonumber)
             }
 
             if (args[1]) {
@@ -59,7 +63,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('Por favor, digite um número válido')
                     .setDescription('`' + prefix + 'roleta valor`')
-                return message.channel.send(nonumber)
+                return message.inlineReply(nonumber)
             }
 
             let money = db.get(`money_${message.author.id}`)
@@ -68,7 +72,7 @@ exports.run = async (client, message, args) => {
                 const nota = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setDescription(`${message.author}, você não tem dinheiro para apostar.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
 
@@ -78,21 +82,21 @@ exports.run = async (client, message, args) => {
                 const nota = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setDescription(`${message.author}, você não pode jogar com divida.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (money == 0) {
                 const nota = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setDescription(`${message.author}, você não tem dinheiro para apostar.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (args[0] > money) {
                 const nota = new Discord.MessageEmbed()
                     .setColor('#FF0000')
                     .setDescription(`${message.author}, você não tem todo esse dinheiro.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             let number = []
@@ -108,17 +112,17 @@ exports.run = async (client, message, args) => {
             if (win) {
                 let slotsEmbed1 = new Discord.MessageEmbed()
                     .setColor("GREEN")
-                    .setTitle('GANHOU')
+                    .setTitle('🎰 GANHOU')
                     .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${args[0]} e ganhou ${money} <:estrelinha:831161441847345202>`)
-                message.channel.send(slotsEmbed1)
+                message.inlineReply(slotsEmbed1)
                 db.add(`money_${message.author.id}`, money)
                 db.set(`roletatimeout_${message.author.id}`, Date.now())
             } else {
                 let slotsEmbed = new Discord.MessageEmbed()
                     .setColor("#FF0000")
-                    .setTitle('PERDEU')
+                    .setTitle('🎰 PERDEU')
                     .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${args[0]} e perdeu ${money} <:estrelinha:831161441847345202>`)
-                message.channel.send(slotsEmbed)
+                message.inlineReply(slotsEmbed)
                 db.subtract(`money_${message.author.id}`, money)
                 db.add(`bank_${client.user.id}`, money)
                 db.set(`roletatimeout_${message.author.id}`, Date.now())

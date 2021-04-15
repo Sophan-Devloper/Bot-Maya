@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -17,5 +17,5 @@ exports.run = async (client, message, args) => {
     .setColor('#FF0000')
     .setTitle(`${message.author.username} está pedindo um pouco de dinheiro`)
     .setDescription(`${prefix}doar ${message.author} Valor`)
-  return message.channel.send(embed)
+  return message.inlineReply(embed)
 }

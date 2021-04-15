@@ -39,5 +39,5 @@ exports.run = async (client, message, args) => {
         inline: true
       }
     )
-  return message.channel.send(embed)
+  return message.inlineReply(embed)
 }

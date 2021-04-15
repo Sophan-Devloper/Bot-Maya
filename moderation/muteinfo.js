@@ -26,5 +26,5 @@ exports.run = async (client, message, args) => {
         .setTimestamp()
         .setFooter('Está mensagem será excluida em 1 minuto...')
 
-    message.channel.send(embeddetail)
+    message.inlineReply(embeddetail)
 }

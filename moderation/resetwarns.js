@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission(["MANAGE_ROLES"])) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Cargos')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     if (!args[0]) {
@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'resetwarns @user`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     let user = message.mentions.members.first()
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'resetwarns @user`')
-        return message.channel.send(nouser)
+        return message.inlineReply(nouser)
     }
 
     let warnings = db.get(`warnings_${message.guild.id}_${user.id}`)
@@ -45,12 +45,12 @@ exports.run = async (client, message, args) => {
         const nowa = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${user.user.username} não tem nenhum warn.`)
-        return message.channel.send(nowa)
+        return message.inlineReply(nowa)
     }
 
     db.delete(`warnings_${message.guild.id}_${user.id}`)
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setTitle(`O warns de ${user.user.username} foi resatado com sucesso.`)
-    message.channel.send(sucess)
+    message.inlineReply(sucess)
 }

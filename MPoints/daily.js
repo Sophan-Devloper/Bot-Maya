@@ -17,13 +17,13 @@ exports.run = async (client, message, args) => {
       .setTitle('🚨 Você está em prisão máxima!')
       .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-    return message.channel.send(presomax)
+    return message.inlineReply(presomax)
   } else {
 
     let daily = await db.fetch(`daily_${message.author.id}`)
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
       let time = ms(timeout - (Date.now() - daily))
-      return message.channel.send(`Você já pegou seus pontos hoje. Volte em ${time.days}d, ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`)
+      return message.inlineReply(`Você já pegou seus pontos hoje. Volte em ${time.days}d, ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`)
     } else {
 
       let money = db.fetch(`money_${message.author.id}`)
@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
       db.add(`money_${message.author.id}`, amount)
       db.set(`daily_${message.author.id}`, Date.now())
 
-      message.channel.send(`Você adquiriu ${amount} <:StarPoint:766794021128765469>MPoints.`)
+      message.inlineReply(`Você adquiriu ${amount} <:StarPoint:766794021128765469>MPoints.`)
     }
   }
 }

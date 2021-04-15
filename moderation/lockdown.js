@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     let perms = message.member.hasPermission("ADMINISTRATOR")
@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
         const noperms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Administrador')
-        return message.channel.send(noperms)
+        return message.inlineReply(noperms)
     }
 
     if (!args[0]) {
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
                     inline: true
                 }
             )
-        return message.channel.send(alert)
+        return message.inlineReply(alert)
     }
 
     const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category')
@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
         const confirmon = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Você confirma o bloqueio de todos os canais de texto/voz do servidor?')
-        await message.channel.send(confirmon).then(msg => {
+        await message.inlineReply(confirmon).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
 
@@ -73,14 +73,14 @@ exports.run = async (client, message, args) => {
                     const info = new Discord.MessageEmbed()
                         .setColor('BLUE')
                         .setTitle('Todos os canais de texto e de voz foram bloqueados para @everyone.')
-                    return message.channel.send(ok).then(m => m.channel.send(info))
+                    return message.inlineReply(ok).then(m => m.inlineReply(info))
                 }
                 if (reaction.emoji.name === '❌') { // Não
                     msg.delete()
                     const ok = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setDescription('Comando cancelado')
-                    msg.channel.send(ok)
+                    msg.inlineReply(ok)
                 }
             })
         })
@@ -101,6 +101,6 @@ exports.run = async (client, message, args) => {
         const okok = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('**TODOS** os membros agora podem falar em **TODOS** os canais de texto e voz. Recomendo reconfigurar as permissões dos canais privados.')
-        return message.channel.send(free).then(m => m.channel.send(okok))
+        return message.inlineReply(free).then(m => m.inlineReply(okok))
     }
 }

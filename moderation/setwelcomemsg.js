@@ -7,21 +7,21 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais, Manusear Mensagens')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     if (!message.member.hasPermission("MANAGE_MESSAGES")) {
         const noperms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais, Manusear Mensagens')
-        return message.channel.send(noperms)
+        return message.inlineReply(noperms)
     }
 
     if (args[0] === 'off') {
@@ -31,13 +31,13 @@ exports.run = async (client, message, args) => {
                 .setColor('#ff0000')
                 .setTitle(message.guild.name + ' não tem nenhuma mensagem definida.')
 
-            return message.channel.send(semcanal)
+            return message.inlineReply(semcanal)
         } else if (canal) {
             db.delete(`msgwelcome_${message.guild.id}`)
             const comcanal = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setTitle('A mensagem de boas-vindas foi delatada com sucesso.')
-            return message.channel.send(comcanal)
+            return message.inlineReply(comcanal)
         }
     }
 
@@ -50,7 +50,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // Red Color
             .setTitle('O Welcome System está desativado.')
             .setDescription('`' + prefix + 'setwelcome`')
-        return message.channel.send(nocanal)
+        return message.inlineReply(nocanal)
     }
 
     const mensagem = args.slice(0).join(" ")
@@ -62,7 +62,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // red
             .setTitle('Siga o formato abaixo')
             .setDescription('`' + prefix + 'setwelcomemsg Sua mensagem de boas vindas`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     if (mensagem) {
@@ -73,6 +73,6 @@ exports.run = async (client, message, args) => {
             .setTitle('A mensagem foi armazenada com sucesso.')
             .setDescription('Mensagem: `' + mensagem + '`')
 
-        return message.channel.send(sucess)
+        return message.inlineReply(sucess)
     }
 }

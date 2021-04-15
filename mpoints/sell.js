@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         if (!args[0]) {
@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
                 .setDescription('Aqui você pode vender seus itens em troca de MPoints. É muito simples, basta usar o comando, assim você pdoe vender os itens obtidos.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
                 .addField('Comando', '`' + prefix + 'vender NomeDoItem Quantidade`')
                 .addField('Todos os itens', '`' + prefix + 'loja`')
-            return message.channel.send(noargs)
+            return message.inlineReply(noargs)
         }
 
         let peixes = await db.get(`peixes_${message.author.id}`)
@@ -61,11 +61,11 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem peixes para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantos peixes você quer vender? `' + prefix + 'vender peixes quantidade`')
+                return message.inlineReply('Quantos peixes você quer vender? `' + prefix + 'vender peixes quantidade`')
             }
 
             if (peixes < args[1]) {
@@ -73,7 +73,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem tudo isso de peixes para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (peixes == 0) {
@@ -81,7 +81,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem peixes para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (peixes < 0) {
@@ -89,7 +89,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem peixes para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (peixes = args[1] || peixes > args[1]) {
@@ -100,7 +100,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
                     .setDescription(`${message.author} vendeu 🐟 ${args[1]} peixes e obteve ${args[1] * 7}<:estrelinha:831161441847345202>MPoints`)
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
 
@@ -111,11 +111,11 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem ossos para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantos ossos você quer vender? `' + prefix + 'vender ossos quantidade`')
+                return message.inlineReply('Quantos ossos você quer vender? `' + prefix + 'vender ossos quantidade`')
             }
 
             if (ossos < args[1]) {
@@ -123,7 +123,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem tudo isso de ossos para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (ossos == 0) {
@@ -131,7 +131,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem ossos para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (ossos < 0) {
@@ -139,7 +139,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem ossos para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (ossos = args[1] || ossos > args[1]) {
@@ -150,7 +150,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
                     .setDescription(`${message.author} vendeu 🦴 ${args[1]} ossos e obteve ${args[1] * 5}<:estrelinha:831161441847345202>MPoints`)
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
 
@@ -161,11 +161,11 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem camarões para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantos camarões você quer vender? `' + prefix + 'vender camarões quantidade`')
+                return message.inlineReply('Quantos camarões você quer vender? `' + prefix + 'vender camarões quantidade`')
             }
 
             if (camarao < args[1]) {
@@ -173,7 +173,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem tudo isso de camarões para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (camarao == 0) {
@@ -181,7 +181,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (camarao < 0) {
@@ -189,7 +189,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (camarao = args[1] || camarao > args[1]) {
@@ -200,7 +200,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
                     .setDescription(`${message.author} vendeu 🍤 ${args[1]} minerios e obteve ${args[1] * 12}<:estrelinha:831161441847345202>MPoints`)
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
         if (['minerio', 'min', 'minerios', 'pedra', 'ferro', 'minérios', 'minério'].includes(args[0])) {
@@ -210,11 +210,11 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantos minerios você quer vender? `' + prefix + 'vender minerios quantidade`')
+                return message.inlineReply('Quantos minerios você quer vender? `' + prefix + 'vender minerios quantidade`')
             }
 
             if (minerio < args[1]) {
@@ -222,7 +222,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem tudo isso de minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (minerio == 0) {
@@ -230,7 +230,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (minerio < 0) {
@@ -238,7 +238,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (minerio = args[1] || minerio > args[1]) {
@@ -249,7 +249,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
                     .setDescription(`${message.author} vendeu 🪨 ${args[1]} minerios e obteve ${args[1] * 15}<:estrelinha:831161441847345202>MPoints`)
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
 
@@ -260,11 +260,11 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantos diamantes você quer vender? `' + prefix + 'vender minerios quantidade`')
+                return message.inlineReply('Quantos diamantes você quer vender? `' + prefix + 'vender minerios quantidade`')
             }
 
             if (diamond < args[1]) {
@@ -272,7 +272,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem tudo isso de minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (diamond == 0) {
@@ -280,7 +280,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem diamantes para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (diamond < 0) {
@@ -288,7 +288,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem diamantes para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (diamond = args[1] || diamond > args[1]) {
@@ -299,7 +299,7 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
                     .setDescription(`${message.author} vendeu 💎 ${args[1]} diamantes e obteve ${args[1] * 100}<:estrelinha:831161441847345202>MPoints`)
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         }
 
@@ -310,11 +310,11 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (!args[1]) {
-                return message.channel.send(`${message.author}, ` + 'quantos madeiras você quer vender? `' + prefix + 'vender minerios quantidade`')
+                return message.inlineReply('Quantos madeiras você quer vender? `' + prefix + 'vender minerios quantidade`')
             }
 
             if (madeira < args[1]) {
@@ -322,7 +322,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem tudo isso de minerios para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (madeira == 0) {
@@ -330,7 +330,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem madeiras para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (madeira < 0) {
@@ -338,7 +338,7 @@ exports.run = async (client, message, args) => {
                     .setColor('#FF0000')
                     .setTitle('❌ Venda negada')
                     .setDescription(`${message.author}, você não tem madeiras para vender.`)
-                return message.channel.send(nota)
+                return message.inlineReply(nota)
             }
 
             if (madeira = args[1] || madeira > args[1]) {
@@ -349,10 +349,10 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
                     .setDescription(`${message.author} vendeu 🪵 ${args[1]} madeiras e obteve ${args[1] * 15}<:estrelinha:831161441847345202>MPoints`)
-                return message.channel.send(buyarma)
+                return message.inlineReply(buyarma)
             }
         } else {
-            return message.channel.send(`${message.author}, eu não achei nenhum item com o nome **${args.join(" ")}** no meu banco de dados.`)
+            return message.inlineReply(`Eu não achei nenhum item com o nome **${args.join(" ")}** no meu banco de dados.`)
         }
     }
 }

@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
       const adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
     }
 
     let timeout = 6140000
@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         let timeout2 = 1000000
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
                 .setColor('GRAY')
                 .setDescription('‼️ Você está prestes a tentar fungir da penitenciária. A sua pena pode aumentar.\n \nVocê deseja tentar a fuga?')
 
-            await message.channel.send(`${message.author}`, fuga).then(msg => {
+            await message.inlineReply(fuga).then(msg => {
                 msg.react('✅') // Check
                 msg.react('❌') // X
 
@@ -63,20 +63,20 @@ exports.run = async (client, message, args) => {
 
                         if (result == 'win') {
                             db.delete(`preso_${message.author.id}`)
-                            return message.channel.send(`${message.author}`, fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, wins))
+                            return message.inlineReply(fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(wins))
                         } else if (result === "lose") {
                             db.set(`pego_${message.author.id}`, Date.now())
-                            return message.channel.send(`${message.author}`, fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                            return message.inlineReply(fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                         }
                     }
                     if (reaction.emoji.name === '❌') { // Não
                         msg.delete()
-                        msg.channel.send("Fuga cancelada.")
+                        msg.inlineReply("Fuga cancelada.")
                     }
                 })
             })
         } else {
-            return message.channel.send(`${message.author}, você não está preso.`)
+            return message.inlineReply(`Você não está preso.`)
         }
     }
 }

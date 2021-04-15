@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     if (!args[0]) {
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             .setDescription('Selecione um canal para todo mundo poder minerar')
             .addField('Comandos', '`' + prefix + 'setminechannel #Canal`')
             .addField('Desative o Canal', '`' + prefix + 'setminechannel off`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     if (args[0] === 'off') {
@@ -36,13 +36,13 @@ exports.run = async (client, message, args) => {
                 .setColor('#ff0000')
                 .setTitle('O Canal de Mineração já está desativado.')
 
-            return message.channel.send(semcanal)
+            return message.inlineReply(semcanal)
         } else if (canal) {
             db.delete(`minechannel_${message.guild.id}`)
             const comcanal = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setTitle('Canal de Mineração desativado.')
-            return message.channel.send(comcanal)
+            return message.inlineReply(comcanal)
         }
     }
 
@@ -54,7 +54,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // red
             .setTitle('' + prefix + 'setminechannel #Canal')
 
-        return message.channel.send(nochannel)
+        return message.inlineReply(nochannel)
     }
 
     var atual = db.get(`minechannel_${message.guild.id}`)
@@ -64,7 +64,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // Red
             .setTitle('Este canal já foi definido como Canal de Mineração!')
 
-        return message.channel.send(iqual)
+        return message.inlineReply(iqual)
     } else if (args[0] !== atual) {
         db.set(`minechannel_${message.guild.id}`, channel.id)
 
@@ -73,6 +73,6 @@ exports.run = async (client, message, args) => {
             .setTitle('Canal de Mineração Ativado!')
             .setDescription(`Canal escolhido: ${channel}`)
 
-        return message.channel.send(sucess)
+        return message.inlineReply(sucess)
     }
 }

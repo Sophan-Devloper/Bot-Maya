@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   const rody = message.author.id === ("451619591320371213")
   if (rody) {
     const sayMessage = args.join(' ')
-    return message.channel.send(sayMessage)
+    return message.inlineReply(sayMessage)
   }
 
   if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
     const noperms = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão Necessária: Manusear Mensagens')
-    return message.channel.send(noperms)
+    return message.inlineReply(noperms)
   }
 
   if (!args[0]) {
@@ -32,9 +32,9 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'say Alguma coisa`')
-    return message.channel.send(format)
+    return message.inlineReply(format)
   }
 
   const sayMessage = args.join(' ')
-  message.channel.send(sayMessage + `\n \n- *Mensagem por: ${message.author}*`)
+  message.inlineReply(sayMessage + `\n \n- *Mensagem por: ${message.author}*`)
 }

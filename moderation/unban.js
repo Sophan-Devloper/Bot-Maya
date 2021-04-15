@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Banir Membros" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   if (!message.member.hasPermission('BAN_MEMBERS')) {
     const permss = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão Necessária: Banir Membros')
-    return message.channel.send(permss)
+    return message.inlineReply(permss)
   }
 
   let logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('O logchannel não foi definido.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nochannel)
+    return message.inlineReply(nochannel)
   }
 
   if (!db.get(`logchannel_${message.guild.id}`)) {
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('O logchannel não foi definido.')
       .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-    return message.channel.send(nochannel)
+    return message.inlineReply(nochannel)
   }
 
   let member = args[0]
@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Siga o formato correto')
       .setDescription('`' + prefix + 'unban IdDoUsuário`' + '\n \nNão tem o ID do usuário? \n`Configurações do Servidor - Banimentos - Copie o ID do usuário`')
-    return message.channel.send(nomember)
+    return message.inlineReply(nomember)
   }
 
   if (args[0].length <= 17) {
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
       .setColor('#FF0000')
       .setTitle('Por favor, informe o ID de um usuário')
       .setDescription('Não tem o ID do usuário? \n`Configurações do Servidor - Banimentos - Copie o ID do usuário`')
-    return message.channel.send(noid)
+    return message.inlineReply(noid)
   }
 
   const UnbanEmbed = new Discord.MessageEmbed()
@@ -98,7 +98,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Um erro foi detectado.')
             .setDescription('🔍 Procurando erro')
-          return message.channel.send(erro).then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.channel.send(errorembed))
+          return message.inlineReply(erro).then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.inlineReply(errorembed))
         }
       }).then(msg => client.channels.cache.get(logchannel).send(UnbanEmbed))
     })

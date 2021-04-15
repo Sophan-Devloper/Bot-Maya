@@ -85,5 +85,5 @@ exports.run = async (client, message, args) => {
         .addField('Itens Especiais', `${faca}\n${loli}\n${fossil}\n${mamute}`)
         .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
-    await message.channel.send(Embed)
+    await message.inlineReply(Embed)
 }

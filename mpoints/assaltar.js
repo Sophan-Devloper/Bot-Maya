@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     let timeout1 = 6140000
@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         let prefix = db.get(`prefix_${message.guild.id}`)
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
                 .setDescription('O comando assaltar te garante 100% do dinheiro que o @user tem na carteira.\n \nCaso a pessoa que você assaltar também tenha uma arma, você tem a chance de ser assaltado de volta.')
                 .addField('Item Obrigatório', '🔫 Arma')
                 .setFooter(prefix + 'loja')
-            return message.channel.send(noargs)
+            return message.inlineReply(noargs)
         }
 
         let arma = await db.get(`arma_${message.author.id}`)
@@ -44,7 +44,7 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('❌ Comando Negado')
                 .setDescription(`${message.author}, é necessário que você tenho uma **🔫 Arma** para assaltar alguém.`)
-            return message.channel.send(nota)
+            return message.inlineReply(nota)
         }
 
         let user = message.mentions.members.first()
@@ -53,7 +53,7 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('Siga o formato correto')
                 .setDescription('`' + prefix + 'assaltar @user`')
-            return message.channel.send(nook)
+            return message.inlineReply(nook)
         }
 
         if (!db.get(`arma_${message.author.id}`)) {
@@ -62,15 +62,15 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('❌ Comando Negado')
                 .setDescription(`${message.author}, é necessário que você tenho uma **🔫 Arma** para assaltar alguém.`)
-            return message.channel.send(nota)
+            return message.inlineReply(nota)
         }
 
         if (user.id == '821471191578574888') {
-            return message.channel.send('Você realmente quer me assaltar? Tá doido é? Vou te quebrar no meio.')
+            return message.inlineReply('Você realmente quer me assaltar? Tá doido é? Vou te quebrar no meio.')
         }
 
         if (user.id == message.author.id) {
-            return message.channel.send(`${message.author}, você não pode assaltar você mesmo.`)
+            return message.inlineReply(`Você não pode assaltar você mesmo.`)
         }
 
         var usermoney = db.get(`money_${user.id}`)
@@ -83,7 +83,7 @@ exports.run = async (client, message, args) => {
             const nomoney = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setDescription(`${user} não possui dinheiro.`)
-            return message.channel.send(nomoney)
+            return message.inlineReply(nomoney)
         }
 
         var timeout = 1040000
@@ -94,7 +94,7 @@ exports.run = async (client, message, args) => {
             let embedtime = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setDescription(`Você já assaltou alguém hoje, assalte novamente em ${time.minutes}m e ${time.seconds}s.`)
-            return message.channel.send(embedtime)
+            return message.inlineReply(embedtime)
         } else {
 
             var gunuser = db.get(`arma_${user.id}`)
@@ -111,7 +111,7 @@ exports.run = async (client, message, args) => {
                         .setColor('#FF0000')
                         .setTitle("🔫 O assalto falhou!!")
                         .setDescription(`${user} reagiu mais rápido que você e te assaltou!\n \nVocê perdeu ${amount}<:StarPoint:766794021128765469>`)
-                    message.channel.send(embed1)
+                    message.inlineReply(embed1)
                     db.subtract(`money_${message.author.id}`, amount)
                     db.add(`money_${user.id}`, amount)
                     db.set(`assaltotime_${message.author.id}`, Date.now())
@@ -121,22 +121,23 @@ exports.run = async (client, message, args) => {
                         .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
                         .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`money_${user.id}`)}<:StarPoint:766794021128765469>`)
 
-                    message.channel.send(moneyEmbed)
-                    db.subtract(`money_${user.id}`, db.get(`money_${user.id}`))
-                    db.add(`money_${message.author.id}`, db.get(`money_${user.id}`))
+                    message.inlineReply(moneyEmbed)
+                    db.add(`money_${message.author.id}`, usermoney)
+                    db.subtract(`money_${user.id}`, usermoney)
                     db.set(`assaltotime_${message.author.id}`, Date.now())
                 }
             }
 
+            var usermoney = db.get(`money_${user.id}`)
             if (gunuser === null) {
                 let moneyEmbed = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
                     .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`money_${user.id}`)}<:StarPoint:766794021128765469>`)
 
-                message.channel.send(moneyEmbed)
-                db.subtract(`money_${user.id}`, db.get(`money_${user.id}`))
-                db.add(`money_${message.author.id}`, db.get(`money_${user.id}`))
+                message.inlineReply(moneyEmbed)
+                db.subtract(`money_${user.id}`, usermoney)
+                db.add(`money_${message.author.id}`, usermoney)
                 db.set(`assaltotime_${message.author.id}`, Date.now())
             } else if (!db.get(`arma_${user.id}`)) {
                 let moneyEmbed = new Discord.MessageEmbed()
@@ -144,10 +145,10 @@ exports.run = async (client, message, args) => {
                     .setTitle(`🔫 Você assaltou ${user.user.username} com sucesso!`)
                     .setDescription(`${message.author} assaltou todo o dinheiro de ${user} e obteve ${db.get(`money_${user.id}`)}<:StarPoint:766794021128765469>`)
 
-                db.subtract(`money_${user.id}`, db.get(`money_${user.id}`))
-                db.add(`money_${message.author.id}`, db.get(`money_${user.id}`))
+                db.add(`money_${message.author.id}`, usermoney)
+                db.subtract(`money_${user.id}`, usermoney)
                 db.set(`assaltotime_${message.author.id}`, Date.now())
-                message.channel.send(moneyEmbed)
+                message.inlineReply(moneyEmbed)
             }
         }
     }

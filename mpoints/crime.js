@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
     // 🏠 1  Casa - 🏦 2 Mansão - 🏛️ 3 Prefeitura - 🏣 4 Cartório - 📨 5 Correios - 💍 6 Joaleria - 🏢 7 Shopping - 🏭 8 Fabrica - 🏩 9 Motel - 🪙 10 Banco
 
@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         let timeout = 600000
@@ -33,7 +33,7 @@ exports.run = async (client, message, args) => {
 
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
-            return message.channel.send(`Xiiiiu ${message.author}!! Você está sendo procurado pela policia. A investigação vai durar mais ${time.minutes}m e ${time.seconds}s`)
+            return message.inlineReply(`Xiiiiu ${message.author}!! Você está sendo procurado pela policia. A investigação vai durar mais ${time.minutes}m e ${time.seconds}s`)
         } else {
 
             let timeout2 = 1000000
@@ -41,7 +41,7 @@ exports.run = async (client, message, args) => {
 
             if (author2 !== null && timeout2 - (Date.now() - author2) > 0) {
                 let time = ms(timeout2 - (Date.now() - author2))
-                return message.channel.send(`${message.author}, você está preso! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
+                return message.inlineReply(`Você está preso! Liberdade em: ${time.minutes}m e ${time.seconds}s`)
             } else {
 
                 const newcrime = new Discord.MessageEmbed()
@@ -53,10 +53,10 @@ exports.run = async (client, message, args) => {
                 let crimetime = await db.fetch(`crimetimeout_${message.author.id}`)
                 if (crimetime !== null && timeout5 - (Date.now() - crimetime) > 0) {
                     let time = ms(timeout5 - (Date.now() - crimetime))
-                    return message.channel.send(`Calminha! O mundo do crime é perigoso, volte em ${time.minutes}m, e ${time.seconds}s`)
+                    return message.inlineReply(`Calminha! O mundo do crime é perigoso, volte em ${time.minutes}m, e ${time.seconds}s`)
                 } else {
                     db.set(`crimetimeout_${message.author.id}`, Date.now())
-                    await message.channel.send(`${message.author}`, newcrime).then(msg => {
+                    await message.inlineReply(newcrime).then(msg => {
                         msg.react('🥷') // Check
                         msg.react('❌') // X
 
@@ -71,7 +71,7 @@ exports.run = async (client, message, args) => {
                                     .setTitle('🔎 Qual lugar da cidade você deseja roubar? :mag:')
                                     .setDescription('🏠 Casa\n🏦 Mansão\n🏛️ Prefeitura\n🏣 Cartório\n📨 Correios\n💍 Joaleria\n🏢 Shopping\n🏭 Fabrica\n🏩 Motel\n🪙 Banco')
 
-                                return message.channel.send(`${message.author}`, embedcrime).then(msg => {
+                                return message.inlineReply(embedcrime).then(msg => {
                                     msg.react('🏠').catch(err => { return }) // 1
                                     msg.react('🏦').catch(err => { return }) // 2
                                     msg.react('🏛️').catch(err => { return }) // 3
@@ -116,10 +116,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da casa, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 100) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -130,7 +130,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '🏦') { // 2
@@ -163,10 +163,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da mansão, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 300) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -177,7 +177,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '🏛️') { // 3
@@ -210,10 +210,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da prefeitura, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 500) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -224,7 +224,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '🏣') { // 4
@@ -257,10 +257,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do cartório, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 400) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -271,7 +271,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '📨') { // 5
@@ -303,10 +303,10 @@ exports.run = async (client, message, args) => {
                                                     .setColor('GREEN')
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do correios, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 600) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -317,7 +317,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '💍') { // 6
@@ -350,10 +350,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da joaleria, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 7000) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -364,7 +364,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '🏢') { // 7
@@ -397,10 +397,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do shopping, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 700) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -411,7 +411,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '🏭') { // 8
@@ -444,10 +444,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo da fabrica, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 800) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -458,7 +458,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '🏩') { // 9
@@ -491,10 +491,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do motel, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 500) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -505,7 +505,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                         if (reaction.emoji.name === '🪙') { // 10
@@ -538,10 +538,10 @@ exports.run = async (client, message, args) => {
                                                     .setTitle(`${message.author.username} efetuou o roubo com sucesso!`)
                                                     .setDescription(`Com o roubo do banco, você obteve ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(win))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(win))
                                             } else if (result === "fugiu") {
                                                 db.set(`procurado_${message.author.id}`, Date.now())
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugiu))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugiu))
                                             } else if (result === "lose") {
                                                 let amount = (Math.floor(Math.random() * 5000) + 1)
                                                 db.subtract(`money_${message.author.id}`, amount)
@@ -552,7 +552,7 @@ exports.run = async (client, message, args) => {
                                                     .setTitle('🚨 Preso!')
                                                     .setDescription(`Você foi preso e perdeu ${amount}<:StarPoint:766794021128765469>MPoints`)
 
-                                                return message.channel.send(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(`${message.author}`, lose))
+                                                return message.inlineReply(embedcrime).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(fugindo)).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
                                             }
                                         }
                                     })
@@ -560,7 +560,7 @@ exports.run = async (client, message, args) => {
                             }
                             if (reaction.emoji.name === '❌') { // Não
                                 msg.delete().catch(err => { return })
-                                return msg.channel.send("Roubo cancelado.")
+                                return msg.inlineReply("Roubo cancelado.")
                             }
                         })
                     })

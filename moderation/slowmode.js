@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
     const adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-    return message.channel.send(adm)
+    return message.inlineReply(adm)
   }
 
   if (!message.member.hasPermission('MANAGE_CHANNELS')) {
     const perms = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Permissão Necessária: Manusear Canais')
-    return message.channel.send(perms)
+    return message.inlineReply(perms)
   }
 
   if (!args[0]) {
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
           inline: true
         }
       )
-    return message.channel.send(noargs)
+    return message.inlineReply(noargs)
   }
 
   if (args[0] === 'off') {
@@ -46,21 +46,21 @@ exports.run = async (client, message, args) => {
     const noslow = new Discord.MessageEmbed()
       .setColor('GREEN')
       .setTitle(`${message.author.username} desativou o slowmode.`)
-    return message.channel.send(noslow)
+    return message.inlineReply(noslow)
   }
 
   if (isNaN(args[0])) {
     const number = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('`' + args[0] + '` não é um número.')
-    return message.channel.send(number)
+    return message.inlineReply(number)
   }
 
   if (args[0] < 1) {
     const number = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('O tempo mínimo é 1 segundo')
-    return message.channel.send(number)
+    return message.inlineReply(number)
   }
 
   message.channel.setRateLimitPerUser(args[0])
@@ -68,5 +68,5 @@ exports.run = async (client, message, args) => {
     .setColor('GREEN')
     .setTitle(`${message.author.username} colocou o canal em Slowmode.`)
     .setDescription('Tempo definido: `' + args[0] + ' segundos.`')
-  message.channel.send(slowmode)
+  message.inlineReply(slowmode)
 }

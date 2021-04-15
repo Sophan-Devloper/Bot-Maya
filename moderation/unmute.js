@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission("MANAGE_ROLES")) {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Roles (cargos)')
-        return message.channel.send(permss)
+        return message.inlineReply(permss)
     }
 
     let logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Não há Canal Log registrado.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-        return message.channel.send(nolog)
+        return message.inlineReply(nolog)
     }
 
     if (!client.channels.cache.get(logchannel)) {
@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Parece que o canal log foi excluido.')
             .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-        return message.channel.send(nolog1)
+        return message.inlineReply(nolog1)
     }
 
     const member = message.mentions.members.first()
@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'unmute @user`')
-        return message.channel.send(nomember)
+        return message.inlineReply(nomember)
     }
 
     if (!args[0]) {
@@ -58,7 +58,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'unmute @user`')
-        return message.channel.send(nomember)
+        return message.inlineReply(nomember)
     }
 
     const role = message.guild.roles.cache.find(role => role.name === 'Muted')
@@ -67,14 +67,14 @@ exports.run = async (client, message, args) => {
         const norole = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${member.user.username} não está mutado/a ou possui um cargo que eu não reconheço.`)
-        return message.channel.send(norole)
+        return message.inlineReply(norole)
     }
 
     if (!member.roles.cache.has(role.id)) {
         const norole = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle(`${member.user.username} não está mutado/a ou possui um cargo que eu não reconheço.`)
-        return message.channel.send(norole)
+        return message.inlineReply(norole)
     }
 
     await member.roles.remove(role)
@@ -99,6 +99,6 @@ exports.run = async (client, message, args) => {
         .setColor('GREEN')
         .setTitle(`${member.user.username} foi desmutado com sucesso.`)
         .setDescription(`Mais detalhes em ${client.channels.cache.get(logchannel)}`)
-    message.channel.send(sucess)
+    message.inlineReply(sucess)
     client.channels.cache.get(logchannel).send(unmuteembed)
 }

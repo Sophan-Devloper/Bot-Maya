@@ -16,15 +16,15 @@ exports.run = async (client, message, args) => {
     const w1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle(`${user.user.username} tem 1 aviso.`)
-    return message.channel.send(w1)
+    return message.inlineReply(w1)
   }
 
   if (warnings === 0) {
     const w1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle(`${user.user.username} não tem avisos.`)
-    return message.channel.send(w1)
+    return message.inlineReply(w1)
   }
 
-  return message.channel.send(warns)
+  return message.inlineReply(warns)
 }

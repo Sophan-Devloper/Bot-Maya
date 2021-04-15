@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
       const adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
     }
 
     let timeout1 = 6140000
@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         let timeout = 1728000
@@ -30,13 +30,13 @@ exports.run = async (client, message, args) => {
 
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
-            return message.channel.send(`Você pode jogar novamente em ${time.minutes}m e ${time.seconds}s`)
+            return message.inlineReply(`Você pode jogar novamente em ${time.minutes}m e ${time.seconds}s`)
         } else {
             var amount = Math.floor(Math.random() * 1000) + 1
             db.add(`money_${message.author.id}`, amount)
             db.set(`lotery_${message.author.id}`, Date.now())
 
-            await message.channel.send(`${message.author} jogou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints.`)
+            await message.inlineReply(`Você jogou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints.`)
         }
     }
 }

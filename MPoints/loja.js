@@ -28,5 +28,5 @@ exports.run = async (client, message, args) => {
             }
         )
         .setFooter(`${prefix}comprar Item`)
-    return message.channel.send(loja)
+    return message.inlineReply(loja)
 }

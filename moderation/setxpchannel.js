@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais, Manusear Mensagens')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     if (!args[0]) {
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
         const noargs = new Discord.MessageEmbed()
             .setColor('#FF0000') // red
             .setTitle('`' + prefix + 'setxpchannel #Canalxp`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     if (args[0] === 'off') {
@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
             .setTitle('O xpchannel não pode ser desativado. (Por enquanto)')
             .setDescription('Caso queira trocar de canal, use o comando \n`' + prefix + 'setxpchannel #Canalxp`')
 
-        return message.channel.send(semcanal)
+        return message.inlineReply(semcanal)
     }
 
     var channel = message.mentions.channels.first()
@@ -47,7 +47,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // red
             .setTitle('' + prefix + 'setxpchannel #Canalxp')
 
-        return message.channel.send(nochannel)
+        return message.inlineReply(nochannel)
     }
 
     var atual = db.get(`xpchannel_${message.guild.id}`)
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // Red
             .setTitle('Este canal já foi definido como Canal Xp!')
 
-        return message.channel.send(iqual)
+        return message.inlineReply(iqual)
     } else if (args[0] !== atual) {
         db.set(`xpchannel_${message.guild.id}`, channel.id)
 
@@ -66,6 +66,6 @@ exports.run = async (client, message, args) => {
             .setTitle('Xp Channel Definido!')
             .setDescription(`Canal escolhido: ${channel}`)
 
-        return message.channel.send(sucess)
+        return message.inlineReply(sucess)
     }
 }

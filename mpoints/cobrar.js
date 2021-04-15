@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
       const adm = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
     }
 
     let timeout1 = 6140000
@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
 
-        return message.channel.send(presomax)
+        return message.inlineReply(presomax)
     } else {
 
         user = message.mentions.members.first()
@@ -36,18 +36,18 @@ exports.run = async (client, message, args) => {
                 .setColor('#ff0000')
                 .setTitle('Siga o formato correto')
                 .setDescription('`' + prefix + 'cobrar @user Valor`')
-            return message.channel.send(noamout)
+            return message.inlineReply(noamout)
         }
 
         if (user.id === '821471191578574888') {
-            return message.channel.send('Sai pra lá, eu não to devendo ninguém :cry:')
+            return message.inlineReply('Sai pra lá, eu não to devendo ninguém :cry:')
         }
 
         if (user.id == message.author.id) {
             const noamout = new Discord.MessageEmbed()
                 .setColor('#ff0000')
                 .setTitle('Você não pode cobrar para você mesmo.')
-            return message.channel.send(noamout)
+            return message.inlineReply(noamout)
         }
 
         if (!args[1]) {
@@ -55,21 +55,21 @@ exports.run = async (client, message, args) => {
                 .setColor('#ff0000')
                 .setTitle('Siga o formato correto')
                 .setDescription('`' + prefix + 'cobrar @user Valor`')
-            return message.channel.send(noamout)
+            return message.inlineReply(noamout)
         }
 
         if (args[1] < '0') {
             const nota = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Diga um valor maior que 0')
-            return message.channel.send(nota)
+            return message.inlineReply(nota)
         }
 
         if (args[1] === '0') {
             const nota = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('Diga um valor maior que 0')
-            return message.channel.send(nota)
+            return message.inlineReply(nota)
         }
 
         if (isNaN(args[1])) {
@@ -77,7 +77,7 @@ exports.run = async (client, message, args) => {
                 .setColor('#FF0000')
                 .setTitle('Valor não reconhecido')
                 .setDescription('O valor que você digitou não é um número.')
-            return message.channel.send(notnumber)
+            return message.inlineReply(notnumber)
         }
 
         if (args[2]) {
@@ -85,7 +85,7 @@ exports.run = async (client, message, args) => {
                 .setColor('#ff0000')
                 .setTitle('Siga o formato correto')
                 .setDescription('`' + prefix + 'cobrar @user Valor`')
-            return message.channel.send(not)
+            return message.inlineReply(not)
         }
 
         const cobrando = new Discord.MessageEmbed()
@@ -93,7 +93,7 @@ exports.run = async (client, message, args) => {
             .setDescription(`${user}, você está sendo cobrado por ${message.author}\n \nValor cobrado: ${args[1]}<:StarPoint:766794021128765469>MPoints`)
             .setFooter("Você deseja pagar?")
 
-        await message.channel.send(cobrando).then(msg => {
+        await message.inlineReply(cobrando).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
 
@@ -108,21 +108,21 @@ exports.run = async (client, message, args) => {
                         const nomoney = new Discord.MessageEmbed()
                             .setColor('#FF0000')
                             .setDescription('Você não tem todo esse dinheiro na carteira.')
-                        return message.channel.send(`${user}`, nomoney)
+                        return message.inlineReply(`${user}`, nomoney)
                     }
 
                     if (!money) {
                         const nomoney = new Discord.MessageEmbed()
                             .setColor('#FF0000')
                             .setDescription('Você não tem todo esse dinheiro na carteira.')
-                        return message.channel.send(`${user}`, nomoney)
+                        return message.inlineReply(`${user}`, nomoney)
                     }
 
                     if (money < args[1]) {
                         const nomoney = new Discord.MessageEmbed()
                             .setColor('#FF0000')
                             .setDescription('Você não tem todo esse dinheiro na carteira.')
-                        return message.channel.send(`${user}`, nomoney)
+                        return message.inlineReply(`${user}`, nomoney)
                     }
 
                     db.subtract(`money_${user.id}`, args[1])
@@ -133,14 +133,14 @@ exports.run = async (client, message, args) => {
                         .setTitle('Transação concluida!')
                         .setDescription(`${user} pagou ${args[1]}<:StarPoint:766794021128765469>MPoints para ${message.author}`)
 
-                    return message.channel.send(embed2)
+                    return message.inlineReply(embed2)
                 }
                 if (reaction.emoji.name === '❌') { // Check
                     msg.delete()
                     const noop = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setDescription(`${user} recusou e não pagou o valor cobrado.`)
-                    return message.channel.send(noop)
+                    return message.inlineReply(noop)
                 }
             })
         })

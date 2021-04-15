@@ -7,14 +7,14 @@ exports.run = async (client, message, args) => {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
-        return message.channel.send(adm)
+        return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
         const perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais')
-        return message.channel.send(perms)
+        return message.inlineReply(perms)
     }
 
     if (!args[0]) {
@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Use o formato correto')
             .setDescription('`' + prefix + 'createvoice NomeDoCanal`')
-        return message.channel.send(noargs)
+        return message.inlineReply(noargs)
     }
 
     message.guild.channels.create(args.slice(0).join(" "), { type: 'voice' })
@@ -33,5 +33,5 @@ exports.run = async (client, message, args) => {
     const sucess = new Discord.MessageEmbed()
         .setColor('GREEN')
         .setTitle('Canal criado com sucesso.')
-    message.channel.send(sucess)
+    message.inlineReply(sucess)
 }

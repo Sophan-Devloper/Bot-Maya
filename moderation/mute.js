@@ -11,14 +11,14 @@ exports.run = async (client, message, args) => {
       const adm = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
    }
 
    if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
       const adm = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('Eu preciso da permissão "Manusear Cargos" para utilizar esta função.')
-      return message.channel.send(adm)
+      return message.inlineReply(adm)
    }
 
    let perms = message.member.hasPermission("MANAGE_ROLES")
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
       const permss = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('Permissão Necessária: Manusear Roles (cargos)')
-      return message.channel.send(permss)
+      return message.inlineReply(permss)
    }
 
    const logchannel = db.get(`logchannel_${message.guild.id}`)
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
          .setColor('#FF0000')
          .setTitle('Não há Canal Log registrado.')
          .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-      return message.channel.send(nolog)
+      return message.inlineReply(nolog)
    }
 
    if (!client.channels.cache.get(logchannel)) {
@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
          .setColor('#FF0000')
          .setTitle('Parece que o canal log foi excluido.')
          .setDescription('`' + prefix + 'setlogchannel #CanalLog`')
-      return message.channel.send(nolog)
+      return message.inlineReply(nolog)
    }
 
    const role = message.guild.roles.cache.find(role => role.name === 'Muted')
@@ -91,7 +91,7 @@ exports.run = async (client, message, args) => {
             .setColor('GREEN')
             .setTitle('Cargo criado e configurado com sucesso!')
 
-         message.channel.send(criando).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return }).then(msg => message.channel.send(roleembedcreate)).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return }).then(msg => message.channel.send(criado))
+         message.inlineReply(criando).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return }).then(msg => message.inlineReply(roleembedcreate)).then(msg => msg.delete({ timeout: 4000 })).catch(err => { return }).then(msg => message.inlineReply(criado))
       } catch (error) {
          console.log(error)
       }
@@ -105,14 +105,14 @@ exports.run = async (client, message, args) => {
          .setColor('#FF0000')
          .setTitle('Por favor, mencione o usuário.')
          .setDescription('`' + prefix + 'mute @user 10s/m/h Razão`')
-      return message.channel.send(nomember)
+      return message.inlineReply(nomember)
    }
 
    if (db.get(`whitelist_${member.id}`)) {// Rodrigo Couto
       const banrody = new Discord.MessageEmbed()
          .setColor('GREEN')
          .setTitle(member.user.username + ' está na whitelist.')
-      return message.channel.send(banrody)
+      return message.inlineReply(banrody)
    }
 
    if (!role.editable) {
@@ -131,9 +131,9 @@ exports.run = async (client, message, args) => {
          .setTitle('🔄 Um erro foi encontrado. Buscando solução...')
 
       setTimeout(function () {
-         message.channel.send(soberol)
+         message.inlineReply(soberol)
       }, 6000)
-      return message.channel.send(sobcarg)
+      return message.inlineReply(sobcarg)
    }
 
    if (member.id === message.author.id) {
@@ -141,7 +141,7 @@ exports.run = async (client, message, args) => {
          .setColor('BLUE')
          .setTitle('Tem certeza que deseja mutar você mesmo?')
 
-      return message.channel.send(muteproprio).then(msg => {
+      return message.inlineReply(muteproprio).then(msg => {
          msg.react('✅') // Check
          msg.react('❌') // X
 
@@ -154,7 +154,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '✅') { // home
                msg.delete()
-               return message.channel.send(troll)
+               return message.inlineReply(troll)
             }
             if (reaction.emoji.name === '❌') { // MPEmbed
                msg.delete()
@@ -167,14 +167,14 @@ exports.run = async (client, message, args) => {
       const dono = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('Mutar o dono do servidor não é uma opção.')
-      return message.channel.send(dono)
+      return message.inlineReply(dono)
    }
 
    if (member.hasPermission('ADMINISTRATOR')) {
       const unbannable = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('Esta pessoa tem permissões importantes ou tem um cargo maior que o meu.')
-      return message.channel.send(unbannable)
+      return message.inlineReply(unbannable)
    }
 
    var time = args[1]
@@ -212,7 +212,7 @@ exports.run = async (client, message, args) => {
          )
          .setTimestamp()
 
-      return message.channel.send(notime).then(msg => {
+      return message.inlineReply(notime).then(msg => {
          msg.react('✅') // Check
          msg.react('❌') // X
 
@@ -221,7 +221,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '✅') { // Sim
                msg.delete()
-               message.channel.send(embeddetail)
+               message.inlineReply(embeddetail)
             }
             if (reaction.emoji.name === '❌') { // Não
                msg.delete()
@@ -232,7 +232,7 @@ exports.run = async (client, message, args) => {
       const limitover = new Discord.MessageEmbed()
          .setColor('#FF0000')
          .setTitle('O tempo não pode passar de 4 digitos.')
-      return message.channel.send(limitover)
+      return message.inlineReply(limitover)
    }
 
    let reason = args.slice(2).join(" ")
@@ -292,7 +292,7 @@ exports.run = async (client, message, args) => {
          .setColor('BLUE')
          .setTitle(`Esta pessoa já está mutada. Deseja mutar ${member.user.username} novamente?`)
 
-      message.channel.send(unbannable).then(msg => {
+      message.inlineReply(unbannable).then(msg => {
          msg.react('✅') // Check
          msg.react('❌') // X
 
@@ -316,10 +316,10 @@ exports.run = async (client, message, args) => {
 
                setTimeout(function () {
                   client.channels.cache.get(logchannel).send(muteembed).catch(err => {
-                     message.channel.send(err)
+                     message.inlineReply(err)
                   })
                }, 3500)
-               return message.channel.send(rela)
+               return message.inlineReply(rela)
             }
             if (reaction.emoji.name === '❌') { // MPEmbed
                msg.delete()
@@ -334,7 +334,7 @@ exports.run = async (client, message, args) => {
 
    if (!member.roles.cache.has(role.id)) {
       const logchannel = db.get(`logchannel_${member.guild.id}`)
-      await message.channel.send(muteq).then(msg => {
+      await message.inlineReply(muteq).then(msg => {
          msg.react('✅') // Check
          msg.react('❌') // X
 
@@ -355,7 +355,7 @@ exports.run = async (client, message, args) => {
                   .setTitle(`${member.user.username} foi mutado com sucesso.`)
                   .setDescription(`Mais informações em ${client.channels.cache.get(logchannel)}`)
 
-               message.channel.send(rela)
+               message.inlineReply(rela)
                client.channels.cache.get(logchannel).send(muteembed)
             }
             if (reaction.emoji.name === '❌') { // MPEmbed

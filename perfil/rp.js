@@ -8,16 +8,16 @@ exports.run = async (client, message, args) => {
     let rptimeout = await db.get(`rptimeout_${message.author.id}`)
 
     if (!user) {
-        return message.channel.send('Você se esqueceu do `@user`')
+        return message.inlineReply('Você se esqueceu do `@user`')
     }
 
     if (user.id === message.author.id) {
-        return message.channel.send('Você não pode dar reputação para você mesmo.')
+        return message.inlineReply('Você não pode dar reputação para você mesmo.')
     }
 
     if (rptimeout !== null && timeout - (Date.now() - rptimeout) > 0) {
         let time = ms(timeout - (Date.now() - rptimeout))
-        return message.channel.send(`Você já deu reputação hoje. Volte em ${time.days}d, ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`)
+        return message.inlineReply(`Você já deu reputação hoje. Volte em ${time.days}d, ${time.hours}h, ${time.minutes}m, e ${time.seconds}s`)
     } else {
 
         let rp = db.fetch(`rp_${user.id}`)
@@ -27,6 +27,6 @@ exports.run = async (client, message, args) => {
         db.add(`rp_${user.id}`, amount)
         db.set(`rptimeout_${message.author.id}`, Date.now())
 
-        message.channel.send(`Você deu reputação para ${user}`)
+        message.inlineReply(`Você deu reputação para ${user}`)
     }
 }

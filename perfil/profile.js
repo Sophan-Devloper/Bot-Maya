@@ -78,5 +78,5 @@ exports.run = async (client, message, args) => {
             }
         )
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
-    await message.channel.send(perfil)
+    await message.inlineReply(perfil)
 }

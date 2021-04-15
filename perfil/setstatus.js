@@ -11,14 +11,14 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000') // RED 
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'setstatus Um peixinho nadando no mar azul`')
-        return message.channel.send(embed1)
+        return message.inlineReply(embed1)
     }
 
     if (args[20]) {
         const embed15 = new Discord.MessageEmbed()
             .setColor('RED')
             .setTitle('É permito até 20 palavras no status.')
-        return message.channel.send(embed15)
+        return message.inlineReply(embed15)
     }
 
     const status = args.join(' ')
@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
         const iqualstats = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setDescription('O seu status é igual ao do seu perfil.')
-        return message.channel.send(iqualstats)
+        return message.inlineReply(iqualstats)
     }
 
     const confirm = new Discord.MessageEmbed()
@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
             }
         )
 
-    await message.channel.send(confirm).then(msg => {
+    await message.inlineReply(confirm).then(msg => {
         msg.react('✅') // Check
         msg.react('❌') // X
 
@@ -52,14 +52,14 @@ exports.run = async (client, message, args) => {
                 const embednewstatus = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle('Status alterado com sucesso!')
-                message.channel.send(embednewstatus)
+                message.inlineReply(embednewstatus)
             }
             if (reaction.emoji.name === '❌') { // MPEmbed
                 msg.delete()
                 const cancel = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle('Comando cancelado.')
-                msg.channel.send(cancel)
+                msg.inlineReply(cancel)
             }
         })
     })

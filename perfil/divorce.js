@@ -3,7 +3,7 @@ const db = require("quick.db")
 exports.run = async (client, message, args) => {
 
     if (!db.get(`marry_${message.author.id}`)) {
-        return message.channel.send("Você não esta em um relacionamento.")
+        return message.inlineReply("Você não esta em um relacionamento.")
     }
 
     let prefix = db.get(`prefix_${message.guild.id}`)
@@ -12,15 +12,15 @@ exports.run = async (client, message, args) => {
     var user = message.mentions.members.first()
 
     if (!args[0]) {
-        return message.channel.send('Marque o seu par `' + prefix + 'divorce @SeuPar`')
+        return message.inlineReply('Marque o seu par `' + prefix + 'divorce @SeuPar`')
     }
 
     var par = user.id === db.get(`marry_${message.author.id}`)
     if (!par) {
-        return message.channel.send(`${user} não é a pessoa que você está em um relacionamento.`)
+        return message.inlineReply(`${user} não é a pessoa que você está em um relacionamento.`)
     }
 
     db.delete(`marry_${par}`)
     db.delete(`marry_${message.author.id}`)
-    return message.channel.send(`Você se divorciou! Você não está mais se relacionando com ${user}.`)
+    return message.inlineReply(`Você se divorciou! Você não está mais se relacionando com ${user}.`)
 }

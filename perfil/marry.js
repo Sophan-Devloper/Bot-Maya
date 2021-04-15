@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
 					value: '`' + prefix + 'marry @user`'
 				}
 			)
-		return message.channel.send(noargs)
+		return message.inlineReply(noargs)
 	}
 
 	var level = await db.get(`level_${user.id}`)
@@ -31,23 +31,23 @@ exports.run = async (client, message, args) => {
 		const block = new Discord.MessageEmbed()
 			.setColor('#FF0000')
 			.setTitle('🚫  O casal precisa atingir o level 10')
-		return message.channel.send(block)
+		return message.inlineReply(block)
 	}
 
 	if (db.get(`marry_${message.author.id}`)) {
-		return message.channel.send("Você já está em um relacionamento sério, o que você quer por aqui?")
+		return message.inlineReply("Você já está em um relacionamento sério, o que você quer por aqui?")
 	}
 
 	if (!member) {
-		return message.channel.send('Por favor mencione alguém para se casar.')
+		return message.inlineReply('Por favor mencione alguém para se casar.')
 	}
 
 	if (member.id === '821471191578574888') {
-		return message.channel.send('É... Não sei se meu pai me deixaria casar contigo. Acho melhor a gente ser apenas amigos. :)')
+		return message.inlineReply('É... Não sei se meu pai me deixaria casar contigo. Acho melhor a gente ser apenas amigos. :)')
 	}
 
 	if (member.id === message.author.id) {
-		return message.channel.send('Você não pode se casar com você mesmo.')
+		return message.inlineReply('Você não pode se casar com você mesmo.')
 	}
 
 	let marry = await db.fetch(`marry_${message.author.id}`)
@@ -61,7 +61,7 @@ exports.run = async (client, message, args) => {
 			.setDescription(`${message.author.username} está pedindo a mão de ${member.username} em casamento.\n\n${member}, você aceita se casar com ${message.author}?`)
 			.setThumbnail(gif)
 			.setFooter('Clique no anel para aceitar o pedido de casamento.')
-		message.channel.send(casar).then(msg => {
+		message.inlineReply(casar).then(msg => {
 			msg.react('💍')
 
 			let reactions = (reaction, user) =>
@@ -79,13 +79,13 @@ exports.run = async (client, message, args) => {
 					.setTitle(':heart: Um novo casal acaba de se formar :heart:')
 					.setDescription(`${member} aceitou o pedido de casamento de ${message.author}`)
 				message.delete()
-				message.channel.send(casados)
+				message.inlineReply(casados)
 			})
 		})
 	}
 	if (marry2 === null) {
 		return
 	} else {
-		message.channel.send('Este usuário já está casado.')
+		message.inlineReply('Este usuário já está casado.')
 	}
 }

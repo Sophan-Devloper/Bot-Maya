@@ -21,9 +21,6 @@ exports.run = async (client, message, args) => {
         return message.channel.send('⚠️ Este comando é um comando restrito.').then(msg => msg.delete({ timeout: 5000 }))
     }
 
-    let prefix = db.get(`prefix_${message.guild.id}`)
-    if (prefix === null) { prefix = "-" }
-
     let user = message.mentions.members.first()
 
     if (['banco', 'bank'].includes(args[0])) {

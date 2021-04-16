@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const db = require("quick.db")
 const ms = require('parse-ms')
 
-const slotItems = ["🍇", "🍉", "🍌", "🍎", "🍒"]
+const slotItems = ["💸", "💵", "💶", "💷", "💴"]
 
 exports.run = async (client, message, args) => {
 
@@ -45,9 +45,65 @@ exports.run = async (client, message, args) => {
                     )
                 return message.inlineReply(noargs)
             }
-            
+
             if (['all', 'tudo'].includes(args[0])) {
-                money = db.get(`money_${message.author.id}`)
+                let money = db.get(`money_${message.author.id}`)
+
+                if (args[1]) {
+                    return message.inlineReply('Por favor, não digite nada após o argumento **ALL/TUDO**')
+                }
+
+                if (money === null) {
+                    const nota = new Discord.MessageEmbed()
+                        .setColor('#FF0000')
+                        .setDescription(`${message.author}, você não tem dinheiro para apostar.`)
+                    return message.inlineReply(nota)
+                }
+
+                if (!db.get(`money_${message.author.id}`)) { money = 0 }
+
+                if (money < 0) {
+                    const nota = new Discord.MessageEmbed()
+                        .setColor('#FF0000')
+                        .setDescription(`${message.author}, você não pode jogar com divida.`)
+                    return message.inlineReply(nota)
+                }
+
+                if (money == 0) {
+                    const nota = new Discord.MessageEmbed()
+                        .setColor('#FF0000')
+                        .setDescription(`${message.author}, você não tem dinheiro para apostar.`)
+                    return message.inlineReply(nota)
+                }
+
+                let number = []
+                for (i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length) }
+
+                if (number[0] == number[1] && number[1] == number[2]) {
+                    money *= 2
+                    win = true
+                } else if (number[0] == number[1] || number[0] == number[2] || number[1] == number[2]) {
+                    money *= 3
+                    win = true
+                }
+                if (win) {
+                    let slotsEmbed1 = new Discord.MessageEmbed()
+                        .setColor("GREEN")
+                        .setTitle('🎰 GANHOU')
+                        .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${args[0]} e ganhou ${money} <:estrelinha:831161441847345202>`)
+                    db.add(`money_${message.author.id}`, money)
+                    db.set(`roletatimeout_${message.author.id}`, Date.now())
+                    return message.inlineReply(slotsEmbed1)
+                } else {
+                    let slotsEmbed = new Discord.MessageEmbed()
+                        .setColor("#FF0000")
+                        .setTitle('🎰 PERDEU')
+                        .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${args[0]} e perdeu ${money} <:estrelinha:831161441847345202>`)
+                    db.subtract(`money_${message.author.id}`, money)
+                    db.add(`bank_${client.user.id}`, money)
+                    db.set(`roletatimeout_${message.author.id}`, Date.now())
+                    return message.inlineReply(slotsEmbed)
+                }
             }
 
             if (isNaN(args[0])) {

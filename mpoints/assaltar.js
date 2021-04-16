@@ -61,7 +61,7 @@ exports.run = async (client, message, args) => {
             const nota = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('❌ Comando Negado')
-                .setDescription(`${message.author}, é necessário que você tenho uma **🔫 Arma** para assaltar alguém.`)
+                .setDescription(`${message.author}, é necessário que você tenha uma **🔫 Arma** para assaltar alguém.`)
             return message.inlineReply(nota)
         }
 

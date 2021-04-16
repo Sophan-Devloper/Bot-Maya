@@ -14,6 +14,11 @@ exports.run = async (client, message, args) => {
 	if (member.id === message.author.id)
 		return message.inlineReply('Você quer entrar na sua familia? Não entendi...')
 
+	const bot = member.bot
+	if (bot) {
+		return message.inlineReply('Você não pode convidar um bot pra sua familia.')
+	}
+
 	let family = await db.fetch(`family3_${message.author.id}`)
 	let family2 = await db.fetch(`family3_${member.id}`)
 

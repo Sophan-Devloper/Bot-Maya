@@ -314,7 +314,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!args[1]) {
-                return message.inlineReply('Quantos madeiras você quer vender? `' + prefix + 'vender minerios quantidade`')
+                return message.inlineReply('Quantas madeiras você quer vender? `' + prefix + 'vender madeira quantidade`')
             }
 
             if (madeira < args[1]) {

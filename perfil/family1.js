@@ -5,8 +5,14 @@ exports.run = async (client, message, args) => {
 
 	const member = message.mentions.users.first()
 
-	if (!member)
+	if (!member) {
 		return message.inlineReply('Ei, me fala quem você quer convidar para sua familia.')
+	}
+	
+	const bot = member.bot
+	if (bot) {
+		return message.inlineReply('Você não pode convidar um bot pra sua familia.')
+	}
 
 	if (db.get(`family1_${message.author.id}`)) {
 		return message.inlineReply('Nesta posição, ' + db.get(`family1_${message.author.id}`) + ' é seu familiar.')

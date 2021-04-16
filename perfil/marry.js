@@ -46,6 +46,11 @@ exports.run = async (client, message, args) => {
 		return message.inlineReply('É... Não sei se meu pai me deixaria casar contigo. Acho melhor a gente ser apenas amigos. :)')
 	}
 
+	const bot = member.bot
+	if (bot) {
+		return message.inlineReply('Você não pode se casar com um.')
+	}
+
 	if (member.id === message.author.id) {
 		return message.inlineReply('Você não pode se casar com você mesmo.')
 	}

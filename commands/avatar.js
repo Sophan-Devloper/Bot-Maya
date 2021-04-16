@@ -18,5 +18,24 @@ exports.run = async (client, message, args) => {
     .setDescription(`[Baixar](${linkavatar}) avatar de ${user.username}`)
     .setImage(avatar)
 
-  await message.inlineReply(embed).then(msg => msg.delete({ timeout: 60000 })).catch(err => { return })
+  await message.inlineReply(embed).then(msg => {
+    msg.react('❌')
+    msg.react('📨')
+    msg.delete({ timeout: 30000 })
+
+    msg.awaitReactions((reaction, user) => {
+      if (message.author.id !== user.id) return
+
+      if (reaction.emoji.name === '❌') {
+        msg.delete()
+      }
+
+      if (reaction.emoji.name === '📨') {
+        reaction.users.remove(user)
+        reaction.users.remove()
+        
+        message.author.send(embed)
+      }
+    })
+  })
 }

@@ -70,11 +70,30 @@ exports.run = async (client, message, args) => {
   ]
 
   var saophotos = lista[Math.floor(Math.random() * lista.length)]
-  let user = client.users.cache.get(args[0]);
 
   const SAOEmbed = new Discord.MessageEmbed()
     .setTitle('📺 SAO - Sword Art Online')
     .setColor('BLUE')
     .setImage(saophotos)
-  return message.inlineReply(SAOEmbed)
+
+  await message.inlineReply(SAOEmbed).then(msg => {
+    msg.react('🔄') // 1º Embed
+    msg.react('❌')
+
+    msg.awaitReactions((reaction, user) => {
+      if (message.author.id !== user.id) return;
+
+      if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
+        reaction.users.remove(user)
+        const SAOEmbed1 = new Discord.MessageEmbed()
+          .setTitle('📺 SAO - Sword Art Online')
+          .setColor('BLUE')
+          .setImage(lista[Math.floor(Math.random() * lista.length)])
+        msg.edit(SAOEmbed1)
+      }
+      if (reaction.emoji.name === '❌') {
+        msg.delete()
+      }
+    })
+  })
 }

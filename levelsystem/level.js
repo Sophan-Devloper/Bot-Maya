@@ -25,5 +25,5 @@ exports.run = async (client, message, args) => {
 
   const img = await card.build().catch(err => { message.inlineReply('Um erro foi detectado na execução de CANVACORD' + err) })
 
-  return message.inlineReply("Carregando...").then(m => m.delete({ timeout: 5000 })).then(msg => msg.inlineReply(new Discord.MessageAttachment(img, "rank.png")))
+  return message.inlineReply("Carregando...").then(m => m.delete({ timeout: 5000 })).then(msg => msg.channel.send(new Discord.MessageAttachment(img, "rank.png")))
 }

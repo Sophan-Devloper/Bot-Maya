@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     if (prefix === null) { prefix = "-" }
 
     if (!args[0]) {
-        return message.inlineReply('`' + prefix + 'rank xp`\n' + '`' + prefix + 'rank money`')
+        return message.inlineReply('`' + prefix + 'rank xp/money`')
     }
 
     if (['xp', 'level', 'nivel'].includes(args[0])) {

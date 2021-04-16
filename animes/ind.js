@@ -354,5 +354,26 @@ exports.run = async (client, message, args) => {
         value: `Nome: ${rand}`
       }
     )
-  await message.inlineReply(IndEmbed)
+
+  await message.inlineReply(IndEmbed).then(msg => {
+    msg.react('🔄')// 1º Embed
+    msg.delete({ timeout: 120000 })
+
+    msg.awaitReactions((reaction, user) => {
+      if (message.author.id !== user.id) return
+
+      if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
+        reaction.users.remove(user)
+        const IndEmbed1 = new Discord.MessageEmbed()
+          .setColor('BLUE')
+          .addFields(
+            {
+              name: 'Maya Indica :hearts:',
+              value: `Nome: ${list[Math.floor(Math.random() * list.length)]}`
+            }
+          )
+        msg.edit(IndEmbed1)
+      }
+    })
+  })
 }

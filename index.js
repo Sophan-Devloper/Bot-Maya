@@ -59,14 +59,14 @@ client.on("message", async (message) => {
             const off = new Discord.MessageEmbed()
                 .setColor('#B98823')
                 .setTitle('🔇 AFK Global System')
-                .addField(`${message.mentions.members.first().user.username} está offline no momento.`, '```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)}` + '```')
-            message.inlineReply(off).then(msg => msg.delete({ timeout: 30000 })).catch(err => { return })
+                .setDescription('```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)}` + '```')
+            message.inlineReply(`${message.mentions.members.first().user.username} está offline no momento.`, off).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
         } else if (db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)) { // AFK Sistema Servidor
             const off = new Discord.MessageEmbed()
                 .setColor('#B98823')
                 .setTitle('🔇 AFK Server System')
-                .addField(`${message.mentions.members.first().user.username} está offline no momento.`, '```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)}` + '```')
-            message.inlineReply(off).then(msg => msg.delete({ timeout: 30000 })).catch(err => { return })
+                .setDescription('```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)}` + '```')
+            message.inlineReply(`${message.mentions.members.first().user.username} está offline no momento.`, off).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
         }
     }
 

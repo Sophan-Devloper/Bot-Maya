@@ -30,31 +30,27 @@ exports.run = async (client, message, args) => {
     return message.inlineReply(clearembed).catch(err => { return })
   }
 
-  var membro = message.mentions.members.first()
-  if (args[0] === membro) {
-    let amountToDelete = args[1] + 1
+  if (message.mentions.members.first()) {
+    let amountToDelete = args[1]
 
     if (!args[1]) {
       return message.inlineReply('`clear @user` Quantidade de mensagens para apagar. Máx: 100')
     }
-    if (parseInt(amountToDelete) > 100) return message.channel.send('Me fala um número até 100, ok?')
+
+    if (args[1] > 100) return message.channel.send('Me fala um número até 100, ok?')
     let userMessages = await message.channel.messages.fetch({ limit: parseInt(amountToDelete) })
     let userFilter = userMessages.filter(obj => obj.author.id === message.mentions.users.first().id)
 
     message.channel.bulkDelete(userFilter).catch(err => { return })
-    message.channel.send('Feito. | Mensagens acima de 14 dias não podem ser apagadas. (Limitações do Discord)')
-    return
+    return message.channel.send('Feito. | Mensagens acima de 14 dias não podem ser apagadas. (Limitações do Discord)')
   }
 
   if (['bot', "bots"].includes(args[0])) {
     let awaitBotMessages = await message.channel.messages.fetch({ limit: 100 })
     let botFilter = awaitBotMessages.filter(obj => obj.author.bot)
 
-    message.channel.bulkDelete(botFilter).catch(err => {
-      if (err)
-        return message.channel.send('❌ **#ERROR!** ❌ **#ERROR!** ❌\n \nO Discord permite que eu apague mensagem de até 14 dias.\n \n⚙️ *Developers Error by: console.log*\n\n' + err).then(message => message.delete({ timeout: 60000 })).catch(err => { return })
-    })
-    message.channel.send('Feito.')
+    message.channel.bulkDelete(botFilter).catch(err => { return })
+    message.channel.send('Feito. | Mensagens acima de 14 dias não podem ser apagadas. (Limitações do Discord)')
 
     return
   }
@@ -87,11 +83,9 @@ exports.run = async (client, message, args) => {
       await message.channel.bulkDelete(deleteAble).catch(err => { return })
       messages += deleteAble.size
     }
-  }
-
-  if (typeof (parseInt(args[0])) == "number") {
+  } else if (typeof (parseInt(args[0])) == "number") {
     if (isNaN(args[0])) {
-      return message.channel.send('Hey! Me fala números para que eu possa contar').then(message => message.delete({ timeout: 4000 })).catch(err => { return })
+      return message.channel.send('Hey! Me fala números para que eu possa contar')
     }
     if (parseInt(args[0]) > 100) return message.channel.send('Me fala um número até 100, ok? Se quiser apagar TUDO, use o comando `clear all`').catch(err => { return })
     let messages = await message.channel.messages.fetch({ limit: parseInt(args[0]) })

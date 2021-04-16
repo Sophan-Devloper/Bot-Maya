@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     if (!message.member.hasPermission('ADMINISTRATOR')) {
         const permss = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle('Permissão Necessária: ADMINISTRATOR')
+            .setTitle('Permissão Necessária: ADMINISTRADOR')
         return message.inlineReply(permss)
     }
 

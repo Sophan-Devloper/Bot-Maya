@@ -20,13 +20,13 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: 'Itens Especiais',
-                value: '<:Loli:831571527744356422> Loli\n🔪 Faca\n<:fossil:831859111578173450> Fossil\n🦣 Mamute'
+                value: '<:Loli:831571527744356422> Loli\n🔪 Faca\n<:fossil:831859111578173450> Fossil\n🦣 Mamute\n🛡️ Em breve'
             },
             {
                 name: 'Itens Coletaveis',
                 value: '🍤 `Camarões` - Baú do Tesouro (Pesca)\n🐟 `Peixes` - Baú do Tesouro (Pesca)\n🪵 `Madeira` - Florestamento\n🦴 `Ossos` Mineração\n🪨 `Minérios` - Mineração\n💎 `Diamantes` - Mineração'
             }
         )
-        .setFooter(`${prefix}comprar Item`)
+        .setFooter(`${prefix}buy Item`)
     return message.inlineReply(loja)
 }

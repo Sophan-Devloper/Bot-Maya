@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   const rody = message.author.id === ("451619591320371213")
   if (rody) {
     const sayMessage = args.join(' ')
-    return message.inlineReply(sayMessage)
+    return message.channel.send(sayMessage)
   }
 
   if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {

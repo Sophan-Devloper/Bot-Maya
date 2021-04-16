@@ -5,6 +5,11 @@ exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first() || message.member
 
+    let title = await db.get(`title_${user.id}`)
+    if (title) (title = "🔰 Título Ativado")
+    if (title === null) { title = ":x: Título Desativado" }
+    if (!db.get(`title_${user.id}`)) { title = ":x: Título Desativado" }
+
     let peixes = await db.get(`peixes_${user.id}`)
     if (peixes === null) { peixes = "0" }
     if (!db.get(`peixes_${user.id}`)) { peixes = "0" }
@@ -82,7 +87,7 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setDescription(`📖 **Inventário de ${user.user.username}**`)
         .addField('Itens Obtidos', `${arma}\n${picareta}\n${vara}\n${machado}\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio`)
-        .addField('Itens Especiais', `${faca}\n${loli}\n${fossil}\n${mamute}`)
+        .addField('Itens Especiais', `${title}\n${faca}\n${loli}\n${fossil}\n${mamute}\n🛡️ Em breve`)
         .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.inlineReply(Embed)

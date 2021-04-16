@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: 'Itens Especiais',
-                value: '<:Loli:831571527744356422> Loli\n🔪 Faca\n<:fossil:831859111578173450> Fossil\n🦣 Mamute'
+                value: '<:Loli:831571527744356422> Loli\n🔪 Faca\n<:fossil:831859111578173450> Fossil\n🦣 Mamute\n🛡️ Em breve'
             },
             {
                 name: 'Itens Coletaveis',

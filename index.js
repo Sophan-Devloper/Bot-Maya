@@ -194,7 +194,7 @@ client.on("message", async (message) => {
         return commandFile.run(client, message, args)
     } catch (err) { }
 
-    return message.inlineReply(`Comando desconhecido. Use **${prefix}help** para obter ajuda.`)
+    return message.inlineReply(`Comando desconhecido. Use **${prefix}help** para obter ajuda.`).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
 }) // Fim do Client.on('Message')
 
 client.on("guildMemberRemove", (member) => {
@@ -248,7 +248,7 @@ client.on("message", async (message) => {
     if (message.channel.type == "dm") return
     if (!message.content.startsWith('<')) return
     if (!message.content.endsWith('>')) return
-    if (message.mentions.has(client.user.id)) { return message.inlineReply('Prefixo atual: `' + prefix + '` \n`' + prefix + 'help`') }
+    if (message.mentions.has(client.user.id)) { return message.inlineReply('Prefixo atual: `' + prefix + '` | `' + prefix + 'help`').then(msg => msg.delete({ timeout: 5000 })).catch(err => { return }) }
 })
 
 client.on('guildCreate', guild => {

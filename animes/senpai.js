@@ -12,6 +12,10 @@ exports.run = async (client, message, args) => {
     var list = [
         'https://i.pinimg.com/originals/78/72/6a/78726a6ec74ba506137966e9f9250bd1.gif',
         'https://i.pinimg.com/originals/b1/b8/94/b1b8947fbb9e61d279125f678ff263ab.gif',
+        'https://imgur.com/OT0UPBi.gif',
+        'https://imgur.com/GU8ibL7.gif',
+        'https://imgur.com/I6sD8Lx.gif',
+        'https://imgur.com/enjWiGi.gif',
     ]
 
     var gif = list[Math.floor(Math.random() * list.length)]

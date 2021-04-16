@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
     if (rp === null) rp = 0
 
     let title = await db.get(`titulo_${user.id}`)
-    let titleloja = await db.get(`title_${used.id}`)
+    let titleloja = await db.get(`title_${user.id}`)
     if (titleloja === null) { titulo = "⠀" }
     if (!titleloja) { titulo = "⠀" }
     if (title === null) { titulo = "⠀" }

@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
 
     let user = message.mentions.members.first()
 
-    if (['arma'].includes(args[0])) {
+    if (['arma', 'gun'].includes(args[0])) {
 
         if (!user) {
             return message.inlineReply('`' + prefix + 'give arma @user')
@@ -31,6 +31,16 @@ exports.run = async (client, message, args) => {
 
         db.set(`arma_${user.id}`, "Arma")
         return message.inlineReply(`Uma arma adicionada ao slot de ${user}`)
+    }
+
+    if (['title', 'título', 'titulo'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'give titulo @user')
+        }
+
+        db.set(`title_${user.id}`, "ON")
+        return message.inlineReply(`A permissão de alterar título foi adicionada ao slot de ${user}`)
     }
 
     if (['picareta'].includes(args[0])) {

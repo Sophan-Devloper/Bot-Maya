@@ -133,6 +133,16 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`O family3 de ${user} foi deletado.`)
     }
 
+    if (['title', 'titulo', 'título'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'del título @user`')
+        }
+
+        db.delete(`title_${user.id}`)
+        return message.inlineReply(`A permissão de alterar o título, foi deletada da conta de ${user}.`)
+    }
+
     if (['blacklist'].includes(args[0])) {
 
         if (!user) {

@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
 
     var perm = db.get(`title_${message.author.id}`)
     if (perm === null) {
-        return message.inlineReply(`Você não tem a permissão 🔰 **Título**, compre na **${prefix}loja**`)
+        return message.inlineReply(`Você não tem a permissão 🔰 **Título**. Você pode comprar na **${prefix}loja**`)
     }
 
     if (!args[0]) {
@@ -35,7 +35,7 @@ exports.run = async (client, message, args) => {
     }
 
     const status = args.join(' ')
-    var stat = db.get(`title_${message.author.id}`)
+    var stat = db.get(`titulo_${message.author.id}`)
     if (status === stat) {
         const iqualstats = new Discord.MessageEmbed()
             .setColor('#ff0000')
@@ -61,7 +61,7 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '✅') { // Check
                 msg.delete()
-                db.set(`title_${message.author.id}`, status)
+                db.set(`titulo_${message.author.id}`, status)
                 const embednewstatus = new Discord.MessageEmbed()
                     .setColor("GREEN")
                     .setTitle('Título alterado com sucesso!')

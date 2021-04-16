@@ -1,17 +1,24 @@
 const Discord = require('discord.js')
+const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
+
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) { prefix = "-" }
 
     const embed = new Discord.MessageEmbed()
         .setColor("#DCDCDC")
         .setTitle('💖 Maya Family System')
-        .setDescription('Você pode aumentar a sua familia, graça ao meu sistema interserver, você pode ter uma em vários servidores.')
+        .setDescription('Chame seus amigos mais próximos para sua familia.')
         .addFields(
             {
-                name: 'Comandos',
-                value: '\n`-family1` `-family2` `-family3` `-family4` `-family5` Um para cada vaga no seu perfil.\n \n`-nofamily1` `-nofamily2` `-nofamily3` `-nofamily4` `-nofamily5` Um para cada vaga no perfil.'
+                name: 'Comandos de Convite - *Um para cada vaga no perfil.*',
+                value: '`' + prefix + 'family1 @user`' + '`' + prefix + 'family2 @user`' + '`' + prefix + 'family3 @user`'
+            },
+            {
+                name: 'Comando de Separação',
+                value: '`' + prefix + 'nofamily1 @user`' + '`' + prefix + 'nofamily2 @user`' + '`' + prefix + 'nofamily3 @user`'
             }
         )
-        .setFooter(message.author.tag, message.author.displayAvatarURL())
     return message.inlineReply(embed)
 }

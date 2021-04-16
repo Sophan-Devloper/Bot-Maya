@@ -38,6 +38,16 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`O dinheiro foi removido do banco de ${user}`)
     }
 
+    if (['title', 'titulo', 'título'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'remove título @user`')
+        }
+
+        db.delete(`titulo_${user.id}`)
+        return message.inlineReply(`O título de ${user} foi removido.`)
+    }
+
     if (['iscas', 'isca'].includes(args[0])) {
 
         if (!user) {

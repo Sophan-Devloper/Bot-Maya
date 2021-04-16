@@ -356,7 +356,19 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou a permissão 🔰 `Título`')
-                return message.inlineReply(buyTitle)
+                message.inlineReply(buyTitle)
+                const premium = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('✅ Você liberou uma nossa função')
+                    .setDescription(`${message.author}, você agora consegue escolher um Título que será mostrado no seu perfil.`)
+                    .addFields(
+                        {
+                            name: 'Comando',
+                            value: '`' + prefix + 'titulo Seu Novo Título`'
+                        }
+                    )
+                    .setFooter('O título suporta até 3 palavras.')
+                return message.inlineReply(premium)
             }
         }
 

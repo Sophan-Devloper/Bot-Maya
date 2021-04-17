@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
                 .setColor('BLUE')
                 .setTitle('<:estrelinha:831161441847345202> Sistema de Compras Maya')
                 .setDescription('Aqui você pode comprar os itens da lojinha. É muito simples, basta usar o comando, assim você compra itens e pode usa-lo.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
-                .addField('Comando', '`' + prefix + 'buy Nome do item`')
+                .addField('Comando', '`' + prefix + 'comprar Nome do item`')
                 .addField('Todos os itens', '`' + prefix + 'loja`')
             return message.inlineReply(noargs)
         }
@@ -205,7 +205,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!args[1]) {
-                return message.inlineReply('Quantas águas você quer comprar? `' + prefix + 'buy aguas quantidade`')
+                return message.inlineReply('Quantas águas você quer comprar? `' + prefix + 'comprar aguas quantidade`')
             }
             if (money < args[1] * 10) {
                 const nota = new Discord.MessageEmbed()
@@ -307,7 +307,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['título', 'title', 'titulo'].includes(args[0])) {
+        if (['título', 'title', 'titulo', 'Título', 'TITULO', 'TÍTULO'].includes(args[0])) {
 
             if (db.get(`title_${message.author.id}`)) {
                 return message.inlineReply(`Você já possui a permissão de alterar seu título.`)
@@ -356,7 +356,20 @@ exports.run = async (client, message, args) => {
                     .setColor('GREEN')
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou a permissão 🔰 `Título`')
-                return message.inlineReply(buyTitle)
+                message.inlineReply(buyTitle)
+
+                const premium = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setTitle('✅ Você liberou uma nova função')
+                    .setDescription(`${message.author}, você agora consegue escolher um Título que será mostrado no seu perfil.`)
+                    .addFields(
+                        {
+                            name: 'Comando',
+                            value: '`' + prefix + 'titulo Seu Novo Título`'
+                        }
+                    )
+                    .setFooter('O título suporta até 3 palavras.')
+                return message.inlineReply(premium)
             }
         }
 
@@ -374,7 +387,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (!args[1]) {
-                return message.inlineReply('Quantas iscas você quer comprar? `' + prefix + 'buy iscas quantidade`')
+                return message.inlineReply('Quantas iscas você quer comprar? `' + prefix + 'comprar iscas quantidade`')
             }
             if (money < args[1] * 10) {
                 const nota = new Discord.MessageEmbed()

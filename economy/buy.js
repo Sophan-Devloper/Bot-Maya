@@ -307,7 +307,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['título', 'title', 'titulo'].includes(args[0])) {
+        if (['título', 'title', 'titulo', 'Título', 'TITULO', 'TÍTULO'].includes(args[0])) {
 
             if (db.get(`title_${message.author.id}`)) {
                 return message.inlineReply(`Você já possui a permissão de alterar seu título.`)
@@ -357,9 +357,10 @@ exports.run = async (client, message, args) => {
                     .setTitle('✅ Compra aprovada')
                     .setDescription(`${message.author}` + ', você comprou a permissão 🔰 `Título`')
                 message.inlineReply(buyTitle)
+
                 const premium = new Discord.MessageEmbed()
                     .setColor('GREEN')
-                    .setTitle('✅ Você liberou uma nossa função')
+                    .setTitle('✅ Você liberou uma nova função')
                     .setDescription(`${message.author}, você agora consegue escolher um Título que será mostrado no seu perfil.`)
                     .addFields(
                         {

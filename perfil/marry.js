@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
 
 	const bot = member.bot
 	if (bot) {
-		return message.inlineReply('Você não pode se casar com um.')
+		return message.inlineReply('Você não pode se casar com um bot.')
 	}
 
 	if (member.id === message.author.id) {
@@ -75,6 +75,7 @@ exports.run = async (client, message, args) => {
 			let coletor = msg.createReactionCollector(reactions)
 
 			coletor.on('collect', cp => {
+				msg.delete()
 
 				db.set(`marry_${message.author.id}`, member.id)
 				db.set(`marry_${member.id}`, message.author.id)
@@ -83,8 +84,7 @@ exports.run = async (client, message, args) => {
 					.setColor('BLUE')
 					.setTitle(':heart: Um novo casal acaba de se formar :heart:')
 					.setDescription(`${member} aceitou o pedido de casamento de ${message.author}`)
-				message.delete()
-				message.inlineReply(casados)
+				message.channel.send(casados)
 			})
 		})
 	}

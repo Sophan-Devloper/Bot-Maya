@@ -202,6 +202,24 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`${args[1]} ossos foram adicionadas ao slot de ${user}.`)
     }
 
+    if (['maça', 'apple','maças'].includes(args[0])) {
+        
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'add maça @user Valor`')
+        }
+
+        let amount = args[2]
+        if (!amount) {
+            return message.inlineReply('`' + prefix + 'add maça @user Valor`')
+        }
+        if (isNaN(amount)) {
+            return message.inlineReply(`**${args[2]}** não é um número.`)
+        }
+
+        db.add(`apple_${user.id}`, amount)
+        return message.inlineReply(`${args[1]} maças foram adicionadas ao slot de ${user}.`)
+    }
+
     if (['madeira', 'wood', 'madeiras'].includes(args[0])) {
         
         if (!user) {

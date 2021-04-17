@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
 	if (!member) {
 		return message.inlineReply('Ei, me fala quem você quer convidar para sua familia.')
 	}
-	
+
 	const bot = member.bot
 	if (bot) {
 		return message.inlineReply('Você não pode convidar um bot pra sua familia.')
@@ -22,11 +22,25 @@ exports.run = async (client, message, args) => {
 		return message.inlineReply(member.username + ' já tem um familiar nesta posição.')
 	}
 
-	if (member.id === client.user.id)
+	if (member.id === client.user.id) {
 		return message.inlineReply('É... Não sei se meu pai deixaria eu entrar para sua familia. Acho melhor nós ficarmos apenas na amizade.')
+	}
 
-	if (member.id === message.author.id)
+	if (member.id === message.author.id) {
 		return message.inlineReply('Você quer entrar na sua familia? Não entendi...')
+	}
+
+	if (member.id === db.get(`family1_${message.author.id}`)) {
+		return message.inlineReply(`${member} já está na sua familia`)
+	}
+
+	if (member.id === db.get(`family2_${message.author.id}`)) {
+		return message.inlineReply(`${member} já está na sua familia`)
+	}
+
+	if (member.id === db.get(`family3_${message.author.id}`)) {
+		return message.inlineReply(`${member} já está na sua familia`)
+	}
 
 	let family = await db.fetch(`family1_${message.author.id}`)
 	let family2 = await db.fetch(`family1_${member.id}`)

@@ -47,6 +47,7 @@ exports.run = async (client, message, args) => {
             }
 
             if (['all', 'tudo'].includes(args[0])) {
+                let atual = db.get(`money_${message.author.id}`)
                 let money = db.get(`money_${message.author.id}`)
 
                 if (args[1]) {
@@ -90,7 +91,7 @@ exports.run = async (client, message, args) => {
                     let slotsEmbed1 = new Discord.MessageEmbed()
                         .setColor("GREEN")
                         .setTitle('🎰 GANHOU')
-                        .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${money} e ganhou ${money} <:estrelinha:831161441847345202>`)
+                        .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${atual} e ganhou ${money} <:estrelinha:831161441847345202>`)
                     db.add(`money_${message.author.id}`, money)
                     db.set(`roletatimeout_${message.author.id}`, Date.now())
                     return message.inlineReply(slotsEmbed1)
@@ -98,7 +99,7 @@ exports.run = async (client, message, args) => {
                     let slotsEmbed = new Discord.MessageEmbed()
                         .setColor("#FF0000")
                         .setTitle('🎰 PERDEU')
-                        .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${money} e perdeu ${money} <:estrelinha:831161441847345202>`)
+                        .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\n${message.author} apostou ${atual} e perdeu ${money} <:estrelinha:831161441847345202>`)
                     db.subtract(`money_${message.author.id}`, money)
                     db.add(`bank_${client.user.id}`, money)
                     db.set(`roletatimeout_${message.author.id}`, Date.now())

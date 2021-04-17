@@ -34,7 +34,6 @@ exports.run = async (client, message, args) => {
                         .addField('AFK System - Mensagem', 'Nenhuma razão especificada.')
                         .setFooter('O modo afk será desativado quando você enviar uma mensagem')
                     return message.inlineReply(`Você ativou o modo AFK no Servidor`, embed)
-
                 }
                 if (reaction.emoji.name === '❌') { // Não
                     msg.delete()

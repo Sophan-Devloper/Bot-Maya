@@ -273,5 +273,7 @@ exports.run = async (client, message, args) => {
         db.delete(`procurado_${user.id}`)
         db.delete(`assaltotime_${user.id}`)
         await message.inlineReply(`Todos os Timeouts de ${user} foram removidos.`)
+    } else {
+        return message.inlineReply(`Não achei nada com o nome **${args[0]}** no meu banco de dados.`)
     }
 }

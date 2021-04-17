@@ -7,7 +7,13 @@ exports.run = async (client, message, args) => {
     if (prefix === null) { prefix = "-" }
 
     if (!args[0]) {
-        return message.inlineReply('`' + prefix + 'rank xp/money`')
+        var rank = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('🌐 Ranking Global')
+            .setDescription('Aqui você pode ver os top 10 globais em experiência e dinheiro.')
+            .addField('Ranking XP', '`' + prefix + 'rank xp`')
+            .addField('Ranking Money', '`' + prefix + 'rank money`')
+        return message.inlineReply(rank)
     }
 
     if (['xp', 'level', 'nivel'].includes(args[0])) {

@@ -140,7 +140,7 @@ client.on("message", async (message) => {
     } catch (err) { }
 
     try {
-        const commandFile = require(`./mpoints/${command}.js`)
+        const commandFile = require(`./economy/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }
 

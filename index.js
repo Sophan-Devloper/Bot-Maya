@@ -60,13 +60,13 @@ client.on("message", async (message) => {
                 .setColor('#B98823')
                 .setTitle('🔇 AFK Global System')
                 .setDescription('```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.mentions.members.first().id}`)}` + '```')
-            message.inlineReply(`${message.mentions.members.first().user.username} está offline no momento.`, off).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+            message.inlineReply(`${message.mentions.members.first().user.username} está offline no momento.`, off).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
         } else if (db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)) { // AFK Sistema Servidor
             const off = new Discord.MessageEmbed()
                 .setColor('#B98823')
                 .setTitle('🔇 AFK Server System')
                 .setDescription('```fix\n' + `${db.get(`afk_${message.mentions.members.first().id}+${message.guild.id}`)}` + '```')
-            message.inlineReply(`${message.mentions.members.first().user.username} está offline no momento.`, off).then(msg => msg.delete({ timeout: 10000 })).catch(err => { return })
+            message.inlineReply(`${message.mentions.members.first().user.username} está offline no momento.`, off).then(msg => msg.delete({ timeout: 8000 })).catch(err => { return })
         }
     }
 
@@ -76,7 +76,7 @@ client.on("message", async (message) => {
 
     if (db.get(`blacklist_${message.author.id}`)) {
         message.delete()
-        return message.inlineReply('Você está na blacklist e não tem acesso a nenhum dos meus comandos.').then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+        return message.channel.send(`${message.author}, você está na blacklist e não tem acesso a nenhum dos meus comandos.`).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
     }
 
     function xp(message) {
@@ -101,7 +101,7 @@ client.on("message", async (message) => {
 
     if (db.get(`blockchannel_${message.channel.id}`)) {
         message.delete()
-        return message.inlineReply('Meus comandos foram bloqueados neste canal.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
+        return message.channel.send('Meus comandos foram bloqueados neste canal.').then(msg => msg.delete({ timeout: 4000 })).catch(err => { return })
     }
 
     const cmd = client.commands.get(command) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(command))
@@ -194,7 +194,7 @@ client.on("message", async (message) => {
         return commandFile.run(client, message, args)
     } catch (err) { }
 
-    return message.inlineReply(`Comando desconhecido. Use **${prefix}help** para obter ajuda.`).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
+    return message.inlineReply(`Comando desconhecido.`).then(msg => msg.delete({ timeout: 6000 })).catch(err => { return })
 }) // Fim do Client.on('Message')
 
 client.on("guildMemberRemove", (member) => {
@@ -259,7 +259,7 @@ client.on('guildCreate', guild => {
         .setColor('BLUE')
         .setTitle('Meu prefixo padrão é `-`')
         .setDescription(`:tools: [Lista de comandos](${helpgit}) | Comece com -config`)
-    inlineReply('**Oooopa, chegueeei!**', newguild)
+    channel.send('**Oooopa, chegueeei!**', newguild)
 
     const NewGuildEmbed = new Discord.MessageEmbed()
         .setColor('GREEN')

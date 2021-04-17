@@ -40,19 +40,19 @@ exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle('📢 Maya - AFK Global System')
-      .setDescription('Com o AFK System, eu avisarei as pessoas que te marcarem que você está offline.\nVocê pode deixar uma mensagem pra elas também.')
+      .setDescription('Com o AFK System, eu avisarei as pessoas que te marcarem que você está offline.\nVocê pode deixar uma mensagem pra elas se quiser.')
       .addFields(
         {
-          name: '📴 Servidor',
+          name: '📴 Ative no Servidor',
           value: '`' + prefix + 'afk Almoçando`\nAvisarei a todos que você está almoçando.'
         },
         {
-          name: '🌎 Global',
+          name: '🌎 Ative no Global',
           value: '`' + prefix + 'afk all` ou ' + '`' + prefix + 'afk global`\n' + 'Avisarei em todos os servidores que você está offline.\n \nExemplo: ' + '`' + prefix + 'afk global Estou almoçando, já volto.`'
         }
       )
       .setFooter('O AFK System será desativado quando você mandar uma mensagem.')
-    return message.inlineReply(`Este é um comando novo, se houve algúm bug, use **${prefix}support**`, embed)
+    return message.inlineReply(`Se houver algúm bug, use **${prefix}support**`, embed)
   }
 
   if (['anime', 'animes'].includes(args[0])) {
@@ -184,10 +184,10 @@ exports.run = async (client, message, args) => {
   if (['perfil', 'profile'].includes(args[0])) {
     const embed = new Discord.MessageEmbed()
       .setColor('BLUE')
-      .setTitle('👩‍💻 Perfil Exclusivo')
-      .setDescription('Crie seu perfil aqui comigo :hearts:')
-      .addField('• Comandos Online', '`' + prefix + 'marry`\n' + '`' + prefix + 'divorce`\n' + '`' + prefix + 'family`\n' + '`' + prefix + 'nofamily`\n' + '`' + prefix + 'setstatus`\n' + '`' + prefix + 'rp`')
-      .addField('• Comandos Offline', 'Nenhum')
+      .setTitle('👩‍💻 Monte o seu Perfil')
+      .setDescription('Crie seu perfil aqui comigo :hearts:\nLembrando que alguns comandos, tipo estrela e título, são adquiridos na loja')
+      .addField('• Comandos Online', '`' + prefix + 'marry @user` Se case com alguém\n' + '`' + prefix + 'divorce @user` Se divorcie\n' + '`' + prefix + 'family1/2/3` Chame pessoas pra sua familia\n' + '`' + prefix + 'nofamily1/2/3` Remova pessoas da sua familia\n' + '`' + prefix + 'setstatus` Coloque um status maneiro\n' + '`' + prefix + 'rp` Dê reputação\n' + '`' + prefix + 'setsigno` Escolha seu signo\n' + '`' + prefix + 'settitulo` Escolha seu título')
+      .addField('• Comandos Offline', '`estrela`')
       .addField('• Comandos em construção', 'Comandos no registro: (11)')
       .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
     return message.inlineReply(embed)

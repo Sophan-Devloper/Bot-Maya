@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
 
     let family3 = await `⠀\n3. <@${db.get(`family3_${user.id}`)}>`
 
-    var nofamily = (family === `1. <@null>`) && (family2 === `⠀\n2. <@null>`) && (family3 === `⠀\n3. <@null>`)
+    let nofamily = (family === `1. <@null>`) && (family2 === `⠀\n2. <@null>`) && (family3 === `⠀\n3. <@null>`)
     if (nofamily) { nofamily = "⠀\nNão tem ninguém por aqui" }
     if (!nofamily) { nofamily = "⠀" }
     if (family === `1. <@null>`) family = "⠀"
@@ -44,6 +44,9 @@ exports.run = async (client, message, args) => {
     let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não conhece o comando ${prefix}setstatus.`
 
+    let signo = await db.get(`signo_${message.author.id}`)
+    if (signo === null) { signo = ':x: Sem signo habilitado' }
+
     var estrela = '<:starM:832974891635572787>'
     var noestrela = '<:nostar:832972978009538591>'
 
@@ -54,7 +57,7 @@ exports.run = async (client, message, args) => {
             .addFields(
                 {
                     name: `🔰 Princesa do Discord`,
-                    value: `💍 Itachi Uchiha`
+                    value: `💍 Itachi Uchiha\n♓ Peixes`
                 },
                 {
                     name: '❤️ Familia',
@@ -87,7 +90,7 @@ exports.run = async (client, message, args) => {
         .addFields(
             {
                 name: `${titulo}`,
-                value: `💍 ${marry}`
+                value: `💍 ${marry}\n${signo}`
             },
             {
                 name: `❤️ Familia${nofamily}`,
@@ -111,5 +114,10 @@ exports.run = async (client, message, args) => {
             }
         )
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+        .setFooter(`${prefix}help perfil`)
     await message.inlineReply(perfil)
+
+    if (['help', 'ajuda', 'comandos'].includes(args[0])) {
+        return message.inlineReply('Quase pronto')
+    }
 }

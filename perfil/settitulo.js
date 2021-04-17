@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
         const help = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('🔰 Permissão Título')
-            .setDescription('Escolha um título para seu perfil. Se auto nomeie e mostre a todos o quão grandioso/a você é!')
+            .setDescription('Escolha um título para seu perfil. Se auto nomeie e mostre a todos o quão grandioso/a você é!\n' + 'Exemplo: `' + prefix + 'settitulo Rei do Discord`')
         return message.inlineReply(help)
     }
 
@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
         const embed1 = new Discord.MessageEmbed()
             .setColor('#FF0000') // RED 
             .setTitle('Siga o formato correto')
-            .setDescription('Exemplo: `' + prefix + 'titulo Rei do Discord`')
+            .setDescription('Exemplo: `' + prefix + 'settitulo Rei do Discord`')
         return message.inlineReply(embed1)
     }
 

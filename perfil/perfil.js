@@ -14,22 +14,24 @@ exports.run = async (client, message, args) => {
     let marry = await `<@${db.get(`marry_${user.id}`)}>`
     if (marry === `<@null>`) marry = "Solteiro(a)"
 
-    let family = await `<@${db.get(`family1_${user.id}`)}>`
-    if (family === `<@null>`) family = "Não tem ninguém por aqui"
+    let family = await `1. <@${db.get(`family1_${user.id}`)}>`
 
-    let family2 = await `<@${db.get(`family2_${user.id}`)}>`
-    if (family2) { `\n2. <@${db.get(`family2_${user.id}`)}>` }
-    if (family2 === `<@null>`) family2 = "⠀"
+    let family2 = await `⠀\n2. <@${db.get(`family2_${user.id}`)}>`
 
-    let family3 = await `<@${db.get(`family3_${user.id}`)}>`
-    if (family3) { `\n3. <@${db.get(`family3_${user.id}`)}>` }
-    if (family3 === `<@null>`) family3 = "⠀"
+    let family3 = await `⠀\n3. <@${db.get(`family3_${user.id}`)}>`
+
+    var nofamily = (family === `1. <@null>`) && (family2 === `⠀\n2. <@null>`) && (family3 === `⠀\n3. <@null>`)
+    if (nofamily) { nofamily = "⠀\nNão tem ninguém por aqui" }
+    if (!nofamily) { nofamily = "⠀" }
+    if (family === `1. <@null>`) family = "⠀"
+    if (family2 === `⠀\n2. <@null>`) family2 = "⠀"
+    if (family3 === `⠀\n3. <@null>`) family3 = "⠀"
 
     let level = await db.fetch(`level_${user.id}`)
     if (level === null) level = 0
 
     let rp = await db.fetch(`rp_${user.id}`)
-    if (rp === null) rp = 0
+    if (rp === null) rp = 'Sem reputação'
 
     let title = await db.get(`titulo_${user.id}`)
     let titleloja = await db.get(`title_${user.id}`)
@@ -42,9 +44,12 @@ exports.run = async (client, message, args) => {
     let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não conhece o comando ${prefix}setstatus.`
 
+    var estrela = '<:starM:832974891635572787>'
+    var noestrela = '<:nostar:832972978009538591>'
+
     if (user.id === '821471191578574888') {
         const perfil = new Discord.MessageEmbed()
-            .setTitle(`📃 Perfil Pessoal de ${user.user.username}`)
+            .setDescription(`📃 **Perfil Pessoal de ${user.user.username}** ${estrela}${estrela}${estrela}${estrela}${estrela}`)
             .setColor('#BF3BFC')
             .addFields(
                 {
@@ -69,7 +74,7 @@ exports.run = async (client, message, args) => {
                 },
                 {
                     name: '📝 Status',
-                    value: '`Um dia eu quero ir pra lua`'
+                    value: 'Um dia eu quero ir pra lua'
                 }
             )
             .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
@@ -77,7 +82,7 @@ exports.run = async (client, message, args) => {
     }
 
     const perfil = new Discord.MessageEmbed()
-        .setTitle(`📃 Perfil Pessoal de ${user.user.username}`)
+        .setDescription(`📃 **Perfil Pessoal de ${user.user.username}** ${noestrela}${noestrela}${noestrela}${noestrela}${noestrela}`)
         .setColor('#BF3BFC')
         .addFields(
             {
@@ -85,8 +90,8 @@ exports.run = async (client, message, args) => {
                 value: `💍 ${marry}`
             },
             {
-                name: '❤️ Familia',
-                value: `1. ${family}${family2}${family3}`
+                name: `❤️ Familia${nofamily}`,
+                value: `${family}${family2}${family3}`
             },
             {
                 name: '💸 Dinheiro Total',
@@ -102,7 +107,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: '📝 Status',
-                value: '`' + status + '`'
+                value: status
             }
         )
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))

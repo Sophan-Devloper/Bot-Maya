@@ -6,9 +6,9 @@ exports.run = async (client, message, args) => {
     let user = message.mentions.members.first() || message.member
 
     let title = await db.get(`title_${user.id}`)
-    if (title) (title = "🔰 Título Ativado")
-    if (title === null) { title = ":x: Título Desativado" }
-    if (!db.get(`title_${user.id}`)) { title = ":x: Título Desativado" }
+    if (title) (title = "🔰 Título")
+    if (title === null) { title = "" }
+    if (!db.get(`title_${user.id}`)) { title = "" }
 
     let peixes = await db.get(`peixes_${user.id}`)
     if (peixes === null) { peixes = "0" }
@@ -38,57 +38,70 @@ exports.run = async (client, message, args) => {
     if (ossos === null) { ossos = "0" }
     if (!db.get(`ossos_${user.id}`)) { ossos = "0" }
 
+    let apple = await db.get(`apple_${user.id}`)
+    if (apple === null) { apple = "0" }
+    if (!db.get(`apple_${user.id}`)) { apple = "0" }
+
     let madeira = await db.get(`madeira_${user.id}`)
     if (madeira === null) { madeira = "0" }
     if (!db.get(`madeira_${user.id}`)) { madeira = "0" }
 
     let arma = await db.get(`arma_${user.id}`)
-    if (arma) { arma = "🔫 Arma" }
-    if (arma === null) { arma = "❌ Slot Vazio" }
-    if (!db.get(`arma_${user.id}`)) { arma = "❌ Slot Vazio" }
+    if (arma) { arma = "\n🔫 Arma" }
+    if (arma === null) { arma = "" }
+    if (!db.get(`arma_${user.id}`)) { arma = "" }
 
     var xusos = (db.get(`offpicareta_${user.id}`) + 1)
     let picareta = await db.get(`picareta_${user.id}`)
-    if (picareta) { picareta = `⛏️ Picareta | Uso restante: ${xusos}` }
-    if (picareta === null) { picareta = "❌ Slot Vazio" }
-    if (!db.get(`picareta_${user.id}`)) { picareta = "❌ Slot Vazio" }
+    if (picareta) { picareta = `\n⛏️ Picareta | Uso restante: ${xusos}` }
+    if (picareta === null) { picareta = "" }
+    if (!db.get(`picareta_${user.id}`)) { picareta = "" }
 
     let machado = db.get(`machado_${user.id}`)
-    if (machado) { machado = "🪓 Machado" }
-    if (machado === null) { machado = "❌ Slot Vazio" }
-    if (!db.get(`machado_${user.id}`)) { machado = "❌ Slot Vazio" }
+    if (machado) { machado = "\n🪓 Machado" }
+    if (machado === null) { machado = "" }
+    if (!db.get(`machado_${user.id}`)) { machado = "" }
 
     let vara = db.get(`vara_${user.id}`)
-    if (vara) { vara = "🎣 Vara de pesca" }
-    if (vara === null) { vara = "❌ Slot Vazio" }
-    if (!db.get(`vara_${user.id}`)) { vara = "❌ Slot Vazio" }
+    if (vara) { vara = "\n🎣 Vara de pesca" }
+    if (vara === null) { vara = "" }
+    if (!db.get(`vara_${user.id}`)) { vara = "" }
 
     let faca = db.get(`faca_${user.id}`)
-    if (faca) { faca = "🔪 Faca" }
-    if (faca === null) { faca = "❌ Slot Vazio" }
-    if (!db.get(`faca_${user.id}`)) { faca = "❌ Slot Vazio" }
+    if (faca) { faca = "\n🔪 Faca" }
+    if (faca === null) { faca = "" }
+    if (!db.get(`faca_${user.id}`)) { faca = "" }
 
     let loli = db.get(`loli_${user.id}`)
-    if (loli) { loli = "<:Loli:831571527744356422> Loli" }
-    if (loli === null) { loli = "❌ Slot Vazio" }
-    if (!db.get(`loli_${user.id}`)) { loli = "❌ Slot Vazio" }
+    if (loli) { loli = "\n<:Loli:831571527744356422> Loli" }
+    if (loli === null) { loli = "" }
+    if (!db.get(`loli_${user.id}`)) { loli = "" }
 
     let fossil = db.get(`fossil_${user.id}`)
-    if (fossil) { fossil = "<:fossil:831859111578173450> Fossil" }
-    if (fossil === null) { fossil = "❌ Slot Vazio" }
-    if (!db.get(`fossil_${user.id}`)) { fossil = "❌ Slot Vazio" }
+    if (fossil) { fossil = "\n<:fossil:831859111578173450> Fossil" }
+    if (fossil === null) { fossil = "" }
+    if (!db.get(`fossil_${user.id}`)) { fossil = "" }
 
     let mamute = db.get(`mamute_${user.id}`)
-    if (mamute) { mamute = "🦣 Mamute" }
-    if (mamute === null) { mamute = "❌ Slot Vazio" }
-    if (!db.get(`mamute_${user.id}`)) { mamute = "❌ Slot Vazio" }
+    if (mamute) { mamute = "\n🦣 Mamute" }
+    if (mamute === null) { mamute = "" }
+    if (!db.get(`mamute_${user.id}`)) { mamute = "" }
+
+    var nada = !arma && !picareta && !vara && !machado
+    if (nada) { nada = 'Não há nada aqui' }
+    if (!nada) { nada = '' }
+
+    var nada2 = !title && !faca && !loli && !fossil && !mamute
+    if (nada2) { nada2 = 'Não há nada aqui' }
+    if (!nada2) { nada2 = '' }
 
     const Embed = new Discord.MessageEmbed()
         .setColor('BLUE')
-        .setDescription(`📖 **Inventário de ${user.user.username}**`)
-        .addField('Itens Obtidos', `${arma}\n${picareta}\n${vara}\n${machado}\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio\n❌ Slot Vazio`)
-        .addField('Itens Especiais', `${title}\n${faca}\n${loli}\n${fossil}\n${mamute}\n🛡️ Em breve`)
-        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
+        .setTitle(`📖 **Inventário de ${user.user.username}**`)
+        .setDescription('📊 Bolsa de Valores | Em Breve')
+        .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}`)
+        .addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}`)
+        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🍎 ${apple} Maça\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.inlineReply(Embed)
 }

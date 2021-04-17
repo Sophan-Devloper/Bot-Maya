@@ -38,6 +38,10 @@ exports.run = async (client, message, args) => {
     if (ossos === null) { ossos = "0" }
     if (!db.get(`ossos_${user.id}`)) { ossos = "0" }
 
+    let apple = await db.get(`apple_${user.id}`)
+    if (apple === null) { apple = "0" }
+    if (!db.get(`apple_${user.id}`)) { apple = "0" }
+
     let madeira = await db.get(`madeira_${user.id}`)
     if (madeira === null) { madeira = "0" }
     if (!db.get(`madeira_${user.id}`)) { madeira = "0" }
@@ -95,9 +99,9 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle(`📖 **Inventário de ${user.user.username}**`)
         .setDescription('📊 Bolsa de Valores | Em Breve')
-        .addField('Itens Obtidos', `${nada}${arma}${picareta}${vara}${machado}`)
-        .addField('Itens Especiais', `${nada2}${title}${faca}${loli}${fossil}${mamute}\n🛡️ Em breve`)
-        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
+        .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}`)
+        .addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}`)
+        .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🍎 ${apple} Maça\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 
     await message.inlineReply(Embed)
 }

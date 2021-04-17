@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
         .addFields(
             {
                 name: 'Informações Técinas',
-                value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/03/2021\n💡 Idealizada por: Rody#3756 \n:gear: Criada por: Rody#3756\n🖌️ Design: yma?#5175\n🖊️ Coop: Gowther#9233\n📡 Host: DisCloud\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1\n⌨️ 359 Comandos (287 Liberados)`)
+                value: (`🌐 Servidores: ${client.guilds.cache.size}\n💬 Canais: ${client.channels.cache.size}\n🫂 Usuários: ${client.users.cache.size}\n⏳ Ping Atual: ${Math.round(client.ws.ping)}ms\n🕛 Criada em: 15/03/2021\n💡 Idealizada por: Rody#4191 \n:gear: Criada por: Rody#4191\n🖌️ Design: yma?#5175\n🖊️ Coop: Gowther#9233\n📡 Host: DisCloud\n🇩 Discord.js Version: 12.3.1\n🇯 Linguagem: 100% JavaScript\n💠 Maya Version: 2.1.1\n⌨️ 359 Comandos (287 Liberados)`)
             }
         )
 
@@ -40,7 +40,7 @@ exports.run = async (client, message, args) => {
         .addFields(
             {
                 name: ':gear: Developers :gear:',
-                value: '`Rody#3756` & `Gowther#9233`'
+                value: '`Rody#4191` & `Gowther#9233`'
             },
             {
                 name: ':tools: Coop :tools:',
@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: '🖌️ Designers 🖌️',
-                value: '`Rody#3756` | `Gowther#9233` | `Yma#5175`'
+                value: '`Rody#4191` | `Gowther#9233` | `Yma#5175`'
             },
             {
                 name: ':handshake: Colaboradores :handshake:',
@@ -75,7 +75,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: 'Desenvolvedor',
-                value: 'Rody#3756',
+                value: 'Rody#4191',
                 inline: true
             },
             {

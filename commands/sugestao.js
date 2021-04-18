@@ -62,7 +62,7 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setTitle('💡 Comando Ideia/Sugestão')
       .setDescription('Use este comando para enviar sua ideia ao servidor, para que todos possam votar.\n \nMáximo: 300 letras\nMínimo: 10 letras')
-      .addField('Comando', '`' + prefix + 'ideia Sua ideia em diante`')
+      .addField('Comando', '`' + prefix + 'sugestao Sua ideia em diante`')
     return message.inlineReply(noideia)
   }
 

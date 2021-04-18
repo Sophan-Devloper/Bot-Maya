@@ -5,9 +5,11 @@ exports.run = async (client, message, args) => {
 
     if (!args[0]) {
         const noargs = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Formato suportado')
-            .setDescription('`Adição: 10 + 10`\n`Divisão: 10 / 10`\n`Subtração: 10 - 10`\n`Multiplicação: 10 * 10`')
+            .setColor('BLUE')
+            .setTitle('🛠️ Calculadora -  BETA')
+            .setDescription('Acho que não preciso explicar a função de um calculadora')
+            .addField('Formato suportado', 'Adição: `10 + 10`\nDivisão: `10 / 10`\nSubtração: `10 - 10`\nMultiplicação: `10 * 10`')
+            .setFooter('Comando instável...')
         return message.inlineReply(noargs)
     }
 
@@ -17,14 +19,14 @@ exports.run = async (client, message, args) => {
     } catch (e) {
         const noargs = new Discord.MessageEmbed()
             .setColor('#FF0000')
-            .setTitle('Por favor, diga uma conta válida')
-            .setDescription('Exemplo: 10 + 10\nExemplo: 10 / 10\nExemplo: 10 - 10\nExemplo: 10 * 10')
+            .setTitle('Por favor, siga o formato correto')
+            .setDescription('Adição: `10 + 10`\nDivisão: `10 / 10`\nSubtração: `10 - 10`\nMultiplicação: `10 * 10`')
         return message.inlineReply(noargs)
     }
 
     const embed = new Discord.MessageEmbed()
         .setColor('BLUE')
-        .addField('Conta', `\`\`\`css\n${args.join(' ')}\`\`\``)
-        .addField('Resultado', `\`\`\`css\n${resp}\`\`\``)
+        .addField('📊 Conta', `\`\`\`css\n${args.join(' ')}\`\`\``)
+        .addField('📝 Resultado', `\`\`\`css\n${resp}\`\`\``)
     return message.inlineReply(embed)
 }

@@ -31,6 +31,7 @@ exports.run = async (client, message, args) => {
         const autoroleautal = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('Autorole System está desativado')
+            .setDescription(`Cargo atual: Nenhum`)
             .addFields(
                 {
                     name: 'Ative o autorole',

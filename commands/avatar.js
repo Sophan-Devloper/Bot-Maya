@@ -23,19 +23,18 @@ exports.run = async (client, message, args) => {
     msg.react('📨')
     msg.delete({ timeout: 30000 })
 
-    msg.awaitReactions((reaction, user) => {
-      if (message.author.id !== user.id) return
+    msg.awaitReactions((reaction, member) => {
+
+      if (reaction.emoji.name === '📨') {
+        member.send(embed)
+      }
+
+      if (message.author.id !== member.id) return
 
       if (reaction.emoji.name === '❌') {
         msg.delete()
       }
 
-      if (reaction.emoji.name === '📨') {
-        reaction.users.remove(user)
-        reaction.users.remove()
-        
-        message.author.send(embed)
-      }
     })
   })
 }

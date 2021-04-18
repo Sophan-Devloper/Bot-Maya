@@ -11,16 +11,14 @@ exports.run = async (client, message, args) => {
     let money = await db.get(`money_${user.id}`) + db.get(`bank_${user.id}`)
     if (money === null) money = 0
 
-    let marry = await `<@${db.get(`marry_${user.id}`)}>`
-    if (marry === `<@null>`) marry = "Solteiro(a)"
+    let marry = await `⠀\n💍 <@${db.get(`marry_${user.id}`)}>`
+    if (marry === `⠀\n💍 <@null>`) marry = "💍 Solteiro(a)"
 
     let family = await `1. <@${db.get(`family1_${user.id}`)}>`
-
     let family2 = await `⠀\n2. <@${db.get(`family2_${user.id}`)}>`
-
     let family3 = await `⠀\n3. <@${db.get(`family3_${user.id}`)}>`
 
-    var nofamily = (family === `1. <@null>`) && (family2 === `⠀\n2. <@null>`) && (family3 === `⠀\n3. <@null>`)
+    let nofamily = (family === `1. <@null>`) && (family2 === `⠀\n2. <@null>`) && (family3 === `⠀\n3. <@null>`)
     if (nofamily) { nofamily = "⠀\nNão tem ninguém por aqui" }
     if (!nofamily) { nofamily = "⠀" }
     if (family === `1. <@null>`) family = "⠀"
@@ -44,6 +42,12 @@ exports.run = async (client, message, args) => {
     let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não conhece o comando ${prefix}setstatus.`
 
+    let signo = await `⠀\n${db.get(`signo_${message.author.id}`)}`
+    if (signo === `⠀\nnull`) { signo = "⠀" }
+
+    let niver = await `⠀\n🎉 ${db.get(`aniversario_${message.author.id}`)}`
+    if (niver === `⠀\n🎉 null`) { niver = "⠀" }
+
     var estrela = '<:starM:832974891635572787>'
     var noestrela = '<:nostar:832972978009538591>'
 
@@ -54,7 +58,7 @@ exports.run = async (client, message, args) => {
             .addFields(
                 {
                     name: `🔰 Princesa do Discord`,
-                    value: `💍 Itachi Uchiha`
+                    value: `💍 Itachi Uchiha\n♓ Peixes\n:tada: 15/03/2007`
                 },
                 {
                     name: '❤️ Familia',
@@ -82,13 +86,9 @@ exports.run = async (client, message, args) => {
     }
 
     const perfil = new Discord.MessageEmbed()
-        .setDescription(`📃 **Perfil Pessoal de ${user.user.username}** ${noestrela}${noestrela}${noestrela}${noestrela}${noestrela}`)
         .setColor('#BF3BFC')
+        .setDescription(`📃 **Perfil de ${user.user.username}** ${noestrela}${noestrela}${noestrela}${noestrela}${noestrela}\n \n${titulo}${marry}${signo}${niver}`)
         .addFields(
-            {
-                name: `${titulo}`,
-                value: `💍 ${marry}`
-            },
             {
                 name: `❤️ Familia${nofamily}`,
                 value: `${family}${family2}${family3}`
@@ -111,5 +111,10 @@ exports.run = async (client, message, args) => {
             }
         )
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+        .setFooter(`${prefix}help perfil`)
     await message.inlineReply(perfil)
+
+    if (['help', 'ajuda', 'comandos'].includes(args[0])) {
+        return message.inlineReply('Quase pronto')
+    }
 }

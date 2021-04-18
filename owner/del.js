@@ -151,7 +151,17 @@ exports.run = async (client, message, args) => {
 
         db.delete(`blacklist_${user.id}`, user.id)
         return message.inlineReply(`Você deletou ${user} da blacklist.`)
-    }
+    } //
+
+    if (['niver', 'aniversário', 'aniversario'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'del niver @user`')
+        }
+
+        db.delete(`aniversario_${user.id}`)
+        return message.inlineReply(`Você deletou a data de aniversário de ${user}.`)
+    } 
 
     if (['whitelist'].includes(args[0])) {
 

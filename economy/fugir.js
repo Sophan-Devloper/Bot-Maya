@@ -63,10 +63,10 @@ exports.run = async (client, message, args) => {
 
                         if (result == 'win') {
                             db.delete(`preso_${message.author.id}`)
-                            return message.inlineReply(fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(wins))
+                            return message.channel.send(fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(wins))
                         } else if (result === "lose") {
                             db.set(`pego_${message.author.id}`, Date.now())
-                            return message.inlineReply(fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.inlineReply(lose))
+                            return message.channel.send(fugindo).then(msg => msg.delete({ timeout: 6000 })).then(msg => msg.channel.send(lose))
                         }
                     }
                     if (reaction.emoji.name === '❌') { // Não
@@ -76,7 +76,7 @@ exports.run = async (client, message, args) => {
                 })
             })
         } else {
-            return message.inlineReply(`Você não está preso.`)
+            return message.channel.send(`Você não está preso.`)
         }
     }
 }

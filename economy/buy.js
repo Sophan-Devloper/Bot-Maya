@@ -365,7 +365,7 @@ exports.run = async (client, message, args) => {
                     .addFields(
                         {
                             name: 'Comando',
-                            value: '`' + prefix + 'titulo Seu Novo Título`'
+                            value: '`' + prefix + 'settitulo Seu Novo Título`'
                         }
                     )
                     .setFooter('O título suporta até 3 palavras.')

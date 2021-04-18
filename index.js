@@ -120,6 +120,11 @@ client.on("message", async (message) => {
     } catch (err) { }
 
     try {
+        const commandFile = require(`./personagens/${command}.js`)
+        return commandFile.run(client, message, args)
+    } catch (err) { }
+
+    try {
         const commandFile = require(`./commands/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }

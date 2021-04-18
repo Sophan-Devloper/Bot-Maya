@@ -1,0 +1,49 @@
+const Discord = require('discord.js')
+
+exports.run = async (client, message, args) => {
+
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+        return message.inlineReply(adm)
+    }
+
+    var list = [
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
+    ]
+
+    var gif = list[Math.floor(Math.random() * list.length)]
+
+    const Itachi = new Discord.MessageEmbed()
+        .setColor('BLUE')
+        .setImage(gif)
+    return message.inlineReply(`Coletando gifs para o código... Comando disponivel dentro de 2 dias\nQuer enviar seus gifs? Usa o -help e entra no meu servidor :hearts:`)
+
+    await message.inlineReply(Itachi).then(msg => {
+        msg.react('🔄') // 1º Embed
+        msg.react('❌')
+
+        msg.awaitReactions((reaction, user) => {
+            if (message.author.id !== user.id) return;
+
+            if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
+                reaction.users.remove(user)
+                const Itachi = new Discord.MessageEmbed()
+                    .setColor('BLUE')
+                    .setImage(list[Math.floor(Math.random() * list.length)])
+                msg.edit(Itachi)
+            }
+            if (reaction.emoji.name === '❌') {
+                msg.delete()
+            }
+        })
+    })
+}

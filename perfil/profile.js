@@ -11,17 +11,14 @@ exports.run = async (client, message, args) => {
     let money = await db.get(`money_${user.id}`) + db.get(`bank_${user.id}`)
     if (money === null) money = 0
 
-    let marry = await `⠀\n💍 <@${db.get(`marry_${user.id}`)}>`
-    if (marry === `⠀\n💍 <@null>`) marry = "💍 Solteiro(a)"
-
-    let family = await `1. <@${db.get(`family1_${user.id}`)}>`
+    let family = await `⠀\n1. <@${db.get(`family1_${user.id}`)}>`
     let family2 = await `⠀\n2. <@${db.get(`family2_${user.id}`)}>`
     let family3 = await `⠀\n3. <@${db.get(`family3_${user.id}`)}>`
 
-    let nofamily = (family === `1. <@null>`) && (family2 === `⠀\n2. <@null>`) && (family3 === `⠀\n3. <@null>`)
-    if (nofamily) { nofamily = "⠀\nNão tem ninguém por aqui" }
-    if (!nofamily) { nofamily = "⠀" }
-    if (family === `1. <@null>`) family = "⠀"
+    let marry = await `💍 <@${db.get(`marry_${user.id}`)}>`
+    if (marry === `💍 <@null>`) marry = "💍 Solteiro(a)"
+
+    if (family === `⠀\n1. <@null>`) family = "⠀"
     if (family2 === `⠀\n2. <@null>`) family2 = "⠀"
     if (family3 === `⠀\n3. <@null>`) family3 = "⠀"
 
@@ -33,36 +30,36 @@ exports.run = async (client, message, args) => {
 
     let title = await db.get(`titulo_${user.id}`)
     let titleloja = await db.get(`title_${user.id}`)
-    if (titleloja === null) { titulo = "⠀" }
-    if (!titleloja) { titulo = "⠀" }
-    if (title === null) { titulo = "⠀" }
+    if (titleloja === null) { titulo = `🔰 Não possui título` }
+    if (title === null) { titulo = `🔰 Sem título definido` }
+    if (!titleloja) { titulo = `🔰 Não possui título` }
     if (titleloja && !title) { titulo = `🔰 Sem título definido` }
     if (title && titleloja) { titulo = `🔰 ${db.get(`titulo_${user.id}`)}` }
 
     let status = await db.get(`status_${user.id}`)
     if (status === null) status = `${user.user.username} não conhece o comando ${prefix}setstatus.`
 
-    let signo = await `⠀\n${db.get(`signo_${message.author.id}`)}`
-    if (signo === `⠀\nnull`) { signo = "⠀" }
+    let signo = await `⠀\n${db.get(`signo_${user.id}`)}`
+    if (signo === `⠀\nnull`) { signo = "⠀\n:x: Sem signo definido" }
 
-    let niver = await `⠀\n🎉 ${db.get(`aniversario_${message.author.id}`)}`
-    if (niver === `⠀\n🎉 null`) { niver = "⠀" }
+    let niver = await `⠀\n🎉 ${db.get(`aniversario_${user.id}`)}`
+    if (niver === `⠀\n🎉 null`) { niver = "⠀\n:tada: Sem aniversário definido" }
 
     var estrela = '<:starM:832974891635572787>'
     var noestrela = '<:nostar:832972978009538591>'
 
     if (user.id === '821471191578574888') {
-        const perfil = new Discord.MessageEmbed()
+        var perfil = new Discord.MessageEmbed()
             .setDescription(`📃 **Perfil Pessoal de ${user.user.username}** ${estrela}${estrela}${estrela}${estrela}${estrela}`)
             .setColor('#BF3BFC')
             .addFields(
                 {
-                    name: `🔰 Princesa do Discord`,
-                    value: `💍 Itachi Uchiha\n♓ Peixes\n:tada: 15/03/2007`
+                    name: `👤 Pessoal`,
+                    value: `🔰 Princesa do Discord\n♓ Peixes\n:tada: 15/03/2007`
                 },
                 {
                     name: '❤️ Familia',
-                    value: `O Discord é minha familia`
+                    value: `💍 Itachi Uchiha\nO Discord é minha familia`
                 },
                 {
                     name: '💸 Dinheiro Total',
@@ -85,13 +82,17 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(perfil)
     }
 
-    const perfil = new Discord.MessageEmbed()
+    var perfil = new Discord.MessageEmbed()
         .setColor('#BF3BFC')
-        .setDescription(`📃 **Perfil de ${user.user.username}** ${noestrela}${noestrela}${noestrela}${noestrela}${noestrela}\n \n${titulo}${marry}${signo}${niver}`)
+        .setDescription(`📃 **Perfil de ${user.user.username}** ${noestrela}${noestrela}${noestrela}${noestrela}${noestrela}`)
         .addFields(
             {
-                name: `❤️ Familia${nofamily}`,
-                value: `${family}${family2}${family3}`
+                name: '👤 Pessoal',
+                value: `${titulo}${signo}${niver}`
+            },
+            {
+                name: `❤️ Familia`,
+                value: `${marry}${family}${family2}${family3}`
             },
             {
                 name: '💸 Dinheiro Total',

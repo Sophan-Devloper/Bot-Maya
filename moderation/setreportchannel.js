@@ -3,56 +3,81 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
     if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
-        const adm = new Discord.MessageEmbed()
+        var adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Manusear Canais" para utilizar esta função.')
         return message.inlineReply(adm)
     }
 
     if (!message.member.hasPermission('MANAGE_CHANNELS')) {
-        const perms = new Discord.MessageEmbed()
+        var perms = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Permissão Necessária: Manusear Canais, Manusear Mensagens')
         return message.inlineReply(perms)
-    }
-
-    if (!message.member.hasPermission("MANAGE_MESSAGES")) {
-        const noperms = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Permissão Necessária: Manusear Canais, Manusear Mensagens')
-        return message.inlineReply(noperms)
     }
 
     if (!args[0]) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
 
-        const noargs = new Discord.MessageEmbed()
-            .setColor('#FF0000') // red
-            .setTitle('`' + prefix + 'setreportchannel #Canal`')
+        var noargs = new Discord.MessageEmbed()
+            .setColor('BLUE') // red
+            .setTitle(':loudspeaker: Sistema de Report')
+            .setDescription('Com este comando, você ativará o meu sistema de report. Isso é bastante útil.')
+            .addField('❓ O que é o sistema de report?', 'Com o meu sistema de report, os membros poderão reportar coisas ou outros membros de qualquer canal do servidor, não precisa está indo chamar mod/adm no privado para reportar.')
+            .addField('❓ Como funciona?', 'Simples! o membro só precisa escrever `' + prefix + 'report blá blá blá` e o report será encaminhado para o canal definido. As mensagens serão deletadas na hora do envio, tornando o report anônimo e seguro, os únicos que verão o report, serão as pessoas que tem permissão para ver o canal definido.')
+            .addField('Comando de Ativação', '`' + prefix + 'setreportchannel #Canal`')
+            .addField('Comando de Desativação', '`' + prefix + 'setreportchannel off`')
+            .setFooter('A Maya não se responsabiliza pelo conteúdo enviado atráves deste sistema.')
+        return message.inlineReply(noargs)
+    }
+
+    if (['help', 'ajuda'].includes(args[0])) {
+        var noargs = new Discord.MessageEmbed()
+            .setColor('BLUE') // red
+            .setTitle(':loudspeaker: Sistema de Report')
+            .setDescription('Com este comando, você ativará o meu sistema de report. Isso é bastante útil.')
+            .addField('❓ O que é o sistema de report?', 'Com o meu sistema de report, os membros poderão reportar coisas ou outros membros de qualquer canal do servidor, não precisa está indo chamar mod/adm no privado para reportar.')
+            .addField('❓ Como funciona?', 'Simples! o membro só precisa escrever `' + prefix + 'report blá blá blá` e o report será encaminhado para o canal definido. As mensagens serão deletadas na hora do envio, tornando o report anônimo e seguro, os únicos que verão o report, serão as pessoas que tem permissão para ver o canal definido.')
+            .addField('Comando de Ativação', '`' + prefix + 'setreportchannel #Canal`')
+            .addField('Comando de Desativação', '`' + prefix + 'setreportchannel off`')
+            .setFooter('A Maya não se responsabiliza pelo conteúdo enviado atráves deste sistema.')
         return message.inlineReply(noargs)
     }
 
     if (args[0] === 'off') {
-        let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = "-"
+        var canal = db.get(`reportchannel_${message.guild.id}`)
+        if (canal === null) {
+            var semcanal = new Discord.MessageEmbed()
+                .setColor('BLUE')
+                .setTitle('O Report System já está desativado.')
 
-        const semcanal = new Discord.MessageEmbed()
-            .setColor('#ff0000')
-            .setTitle('O Report Channel não pode ser desativado. (Por enquanto)')
-            .setDescription('Caso queira trocar de canal, use o comando \n`' + prefix + 'setreportchannel #Canal`')
+            return message.inlineReply(semcanal)
+        } else if (canal) {
+            db.delete(`reportchannel_${message.guild.id}`)
+            var desativado = new Discord.MessageEmbed()
+                .setColor('GREEN')
+                .setTitle('Report System desativado.')
 
-        return message.inlineReply(semcanal)
+            var desativando = new Discord.MessageEmbed()
+                .setColor('BLUE')
+                .setDescription('🔄 Desativando Report System...')
+
+            return message.channel.send(desativando).then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.channel.send(desativado))
+        }
     }
 
     var channel = message.mentions.channels.first()
     if (!channel) {
         let prefix = db.get(`prefix_${message.guild.id}`)
         if (prefix === null) prefix = "-"
-        const nochannel = new Discord.MessageEmbed()
+        var nochannel = new Discord.MessageEmbed()
             .setColor('#FF0000') // red
-            .setTitle('' + prefix + 'setreportchannel #Canal')
+            .setDescription('`' + prefix + 'setreportchannel #Canal`')
 
         return message.inlineReply(nochannel)
     }
@@ -60,7 +85,7 @@ exports.run = async (client, message, args) => {
     var atual = db.get(`reportchannel_${message.guild.id}`)
     if (channel.id === atual) {
 
-        const iqual = new Discord.MessageEmbed()
+        var iqual = new Discord.MessageEmbed()
             .setColor('#FF0000') // Red
             .setTitle('Este canal já foi definido como Report Channel!')
 
@@ -68,7 +93,7 @@ exports.run = async (client, message, args) => {
     } else if (args[0] !== atual) {
         db.set(`reportchannel_${message.guild.id}`, channel.id)
 
-        const sucess = new Discord.MessageEmbed()
+        var sucess = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle('Report Channel Definido!')
             .setDescription(`Canal escolhido: ${channel}`)

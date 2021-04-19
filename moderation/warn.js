@@ -137,7 +137,8 @@ exports.run = async (client, message, args) => {
     const newwarn = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle('Alerta de Aviso')
-      .setDescription(`Você recebeu um aviso no servidor ${message.guild.name}\n \nRazão: ${reason}`)
+      .setDescription(`Você recebeu um aviso no servidor **${message.guild.name}**`)
+      .addField('Razão', 'Razão: ${reason}')
     user.send(newwarn).catch(err => { return })
 
     let msg2 = new Discord.MessageEmbed()

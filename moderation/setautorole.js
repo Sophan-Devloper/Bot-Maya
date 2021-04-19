@@ -46,14 +46,14 @@ exports.run = async (client, message, args) => {
             const noauto = new Discord.MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle('O Autorole System já está desativado.')
-            return message.inlineReply(noauto)
+            return message.channel.send(noauto)
         }
 
         var cargo = db.get(`autorole_${message.guild.id}`)
         const confirm1 = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(`Você deseja desligar o sistema de Autorole? O cargo <@&${cargo}> deixará de ser dado a todos os novos membros.`)
-        return message.inlineReply(confirm1).then(msg => {
+        return message.channel.send(confirm1).then(msg => {
             msg.react('✅') // Check
             msg.react('❌') // X
 
@@ -72,10 +72,10 @@ exports.run = async (client, message, args) => {
                         .setTitle('Autorole System foi desativado com sucesso.')
 
                     setTimeout(function desativando() {
-                        message.inlineReply(desativado)
+                        message.channel.send(desativado)
                     }, 3400)
 
-                    return message.inlineReply(semrole)
+                    return message.channel.send(semrole)
                 }
 
                 if (reaction.emoji.name === '❌') { // MPEmbed
@@ -83,7 +83,7 @@ exports.run = async (client, message, args) => {
                     const cancel = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('Comando cancelado')
-                    return message.inlineReply(cancel)
+                    return message.channel.send(cancel)
                 }
             })
         })
@@ -98,7 +98,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Siga o formato correto')
             .setDescription('`' + prefix + 'setautorole @cargo`')
-        return message.inlineReply(norole)
+        return message.channel.send(norole)
     }
 
     if (!role.editable) {
@@ -117,9 +117,9 @@ exports.run = async (client, message, args) => {
             .setTitle('🔄 Um erro foi encontrado. Buscando solução...')
 
         setTimeout(function () {
-            message.inlineReply(soberol)
+            message.channel.send(soberol)
         }, 6000)
-        return message.inlineReply(sobcarg)
+        return message.channel.send(sobcarg)
 
     }
 
@@ -136,7 +136,7 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setDescription(`Você deseja definir o cargo ${role} como autorole?`)
 
-    await message.inlineReply(confirm).then(msg => {
+    await message.channel.send(confirm).then(msg => {
         msg.react('✅') // Check
         msg.react('❌') // X
 
@@ -153,7 +153,7 @@ exports.run = async (client, message, args) => {
                 const timing = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setDescription(`Autenticando o cargo no banco de dados do servidor "${message.guild.name}"...`)
-                return message.inlineReply(timing).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.inlineReply(redefine))
+                return message.channel.send(timing).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.channel.send(redefine))
             }
 
             if (reaction.emoji.name === '❌') { // MPEmbed
@@ -161,7 +161,7 @@ exports.run = async (client, message, args) => {
                 const cancel = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('Comando cancelado')
-                return message.inlineReply(cancel)
+                return message.channel.send(cancel)
             }
         })
     })

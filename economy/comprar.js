@@ -23,14 +23,14 @@ exports.run = async (client, message, args) => {
         if (!args[0]) {
             const noargs = new Discord.MessageEmbed()
                 .setColor('BLUE')
-                .setTitle('<:estrelinha:831161441847345202> Sistema de Compras Maya')
+                .setTitle('<:StarPoint:766794021128765469> Sistema de Compras Maya')
                 .setDescription('Aqui você pode comprar os itens da lojinha. É muito simples, basta usar o comando, assim você compra itens e pode usa-lo.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
                 .addField('Comando', '`' + prefix + 'buy Nome do item`')
                 .addField('Todos os itens', '`' + prefix + 'loja`')
             return message.inlineReply(noargs)
         }
 
-        if (['vara de pesca', 'vara', 'pesca'].includes(args[0])) {
+        if (['vara de pesca', 'vara', 'pesca', 'Vara de Pesca'].includes(args[0])) {
 
             if (db.get(`vara_${message.author.id}`)) {
                 return message.inlineReply(`Você já possui este item.`)
@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['machado'].includes(args[0])) {
+        if (['machado', 'Machado'].includes(args[0])) {
 
             if (db.get(`machado_${message.author.id}`)) {
                 return message.inlineReply(`Você já possui este item.`)
@@ -138,7 +138,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['arma', 'gun'].includes(args[0])) {
+        if (['arma', 'gun', 'Arma'].includes(args[0])) {
 
             if (db.get(`arma_${message.author.id}`)) {
                 return message.inlineReply(`Você já possui este item.`)
@@ -191,7 +191,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['agua', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água', 'copo de agua', 'copos de agua', 'copo de água', 'copos de água'].includes(args[0])) {
+        if (['agua', 'Água', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água', 'copo de agua', 'copos de agua', 'copo de água', 'copos de água'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)
             if (money === null) { money = 0 }
@@ -373,7 +373,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['isca', 'minhoca', 'iscas', 'minhocas'].includes(args[0])) {
+        if (['isca', 'minhoca', 'iscas', 'minhocas', 'Isca', 'Iscas'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)
             if (money === null) { money = 0 }
@@ -424,7 +424,7 @@ exports.run = async (client, message, args) => {
                 return message.inlineReply(nota)
             }
 
-            if (money = 10 || money > 10) {
+            if (money > args[1] * 10) {
                 db.subtract(`money_${message.author.id}`, args[1] * 10)
                 db.add(`bank_${client.user.id}`, args[1] * 10)
                 const buyarma = new Discord.MessageEmbed()
@@ -433,6 +433,77 @@ exports.run = async (client, message, args) => {
                     .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 🪱 `Iscas`')
                 return message.inlineReply(buyarma)
             }
+        }
+
+        if (['Carta', 'carta', 'cartas', 'Cartas', 'letter', 'Letter'].includes(args[0])) {
+
+            var money = db.get(`money_${message.author.id}`)
+            if (money === null) { money = 0 }
+
+            if (money === null) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro para comprar este item.`)
+                return message.inlineReply(nota)
+            }
+
+            if (!args[1]) {
+                return message.inlineReply('Quantas cartas você quer comprar? `' + prefix + 'buy cartas quantidade`')
+            }
+
+            if (money == 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro.`)
+                return message.inlineReply(nota)
+            }
+
+            if (money < 0) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('✅ Compra negada')
+                    .setDescription(`${message.author}, você está com divida.`)
+                return message.inlineReply(nota)
+            }
+
+            if (!money > args[1] * 1000) {
+                const nota = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('❌ Compra negada')
+                    .setDescription(`${message.author}, você não tem dinheiro suficiente para comprar este item.`)
+                return message.inlineReply(nota)
+            }
+
+            db.add(`cartas_${message.author.id}`, args[1])
+
+            var acima = db.get(`cartas_${message.author.id}`)
+            if (acima > 10) {
+                db.subtract(`cartas_${message.author.id}`, args[1])
+                const limit = new Discord.MessageEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('LIMITE DE CARTAS ATINGIDO!')
+                    .setDescription(`${message.author}, você não pode passar de **10 cartas**.`)
+                return message.inlineReply(limit)
+            }
+            
+            db.subtract(`money_${message.author.id}`, args[1] * 1000)
+            db.add(`bank_${client.user.id}`, args[1] * 1000)
+
+            const buycarta = new Discord.MessageEmbed()
+                .setColor('GREEN')
+                .setTitle('✅ Compra aprovada')
+                .setDescription(`${message.author}` + ', ' + 'você comprou ' + `${args[1]}` + ' 💌 `Cartas`')
+            return message.inlineReply(buycarta)
+        }
+
+        if (['Estrelas', 'Estrela', 'Star', 'estrela', 'stars', 'estrelas'].includes(args[0])) {
+            return message.inlineReply('Este item ainda não está a venda.')
+        }
+
+        if (['Escudo', 'escudo', 'shield'].includes(args[0])) {
+            return message.inlineReply('Este item ainda não está a venda.')
         } else {
             return message.inlineReply(`Eu não achei nenhum item com o nome **${args.join(" ")}** na minha loja.`)
         }

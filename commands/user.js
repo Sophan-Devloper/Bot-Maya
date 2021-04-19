@@ -2,7 +2,11 @@ const Discord = require("discord.js")
 
 exports.run = async (client, message, args) => {
 
-  let user = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author
+  let user = message.mentions.users.first() || message.author
 
-  return message.inlineReply(`${user.tag}`)
+  var embed = new Discord.MessageEmbed()
+    .setColor('BLUE')
+    .setTitle(`${user.username}`)
+    .setDescription('📇`' + user.tag + '`')
+  return message.inlineReply(embed)
 }

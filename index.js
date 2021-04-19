@@ -34,10 +34,12 @@ client.on("message", async (message) => {
     }
     xp(message)
 
-    if (db.get(`nolink_${message.guild.id}`)) {
-        if (is_url(message.content) === true) {
-            message.delete()
-            message.channel.send(`${message.author}, você não pode enviar links nesse servidor.`).then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
+    if (!message.member.hasPermission("ADMINISTRATOR")) {
+        if (db.get(`nolink_${message.guild.id}`)) {
+            if (is_url(message.content) === true) {
+                message.delete()
+                message.channel.send(`${message.author}, você não pode enviar links nesse servidor.`).then(msg => msg.delete({ timeout: 3000 })).catch(err => { return })
+            }
         }
     }
 
@@ -116,6 +118,11 @@ client.on("message", async (message) => {
     if (message.content.startsWith(`${prefix}inline`)) { return message.inlineReply("✅ Inline Reply funcionando corretamente") }
     try {
         const commandFile = require(`./afksystem/${command}.js`)
+        return commandFile.run(client, message, args)
+    } catch (err) { }
+
+    try {
+        const commandFile = require(`./registro/${command}.js`)
         return commandFile.run(client, message, args)
     } catch (err) { }
 

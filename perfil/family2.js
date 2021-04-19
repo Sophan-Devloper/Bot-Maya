@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
 	}
 
 	if (db.get(`family2_${message.author.id}`)) {
-		return message.inlineReply('Nesta posição, ' + db.get(`family1_${message.author.id}`) + ' é seu familiar.')
+		return message.inlineReply(`Nesta posição, <@${db.get(`family2_${message.author.id}`)}> é seu familiar.`)
 	}
 
 	if (db.get(`family2_${member.id}`)) {

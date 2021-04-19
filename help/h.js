@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
     return message.inlineReply(adm)
   }
 
-  var helpgit = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
+  var linkgithub = 'https://github.com/rodycouto/MayaCommands/blob/main/README.md'
   var linksupport = 'https://forms.gle/vtJ5qBqFDd9rL5JU8'
   var linkservidor = 'https://discord.gg/YpFWgJuuUV'
   let prefix = db.get(`prefix_${message.guild.id}`)
@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
       .setColor('#CD853F')
       .setTitle('⭐ Centralzinha de Ajuda da Maya ⭐')
       .setDescription(`Heey! Tudo bem ${message.author}?\n \nSe você quiser informações sobre algum comando especifico, use **${prefix}ajuda categoria** ou apenas o comando.\nExemplo: **${prefix}marry** que eu te falo tudo sobre o comando.`)
-      .addField('Acesso direto', `:tools: [Lista de Comandos](${helpgit})\n☎️ [Suporte](${linksupport})\n🧩 [Meu servidor](${linkservidor})\n:heart: [Me adicione](https://discord.com/api/oauth2/authorize?client_id=821471191578574888&permissions=8&scope=bot)`)
+      .addField('Acesso direto', `:tools: [Lista de Comandos](${linkgithub})\n☎️ [Suporte](${linksupport})\n🧩 [Meu servidor](${linkservidor})\n:heart: [Me adicione](https://discord.com/api/oauth2/authorize?client_id=821471191578574888&permissions=8&scope=bot)`)
       .setFooter(`${prefix}ajuda categoria`)
     return message.inlineReply(newhelp)
   }
@@ -105,7 +105,6 @@ exports.run = async (client, message, args) => {
       .setTitle('🎮 Link para acesso rápido a jogos')
       .setDescription('Aqui você pode pegar os links de jogos e ir direto pra eles sem ter que ficar pesquisando no Google')
       .addField('• Comandos Online', '`' + prefix + 'amongus`\n' + '`' + prefix + 'brawl`\n' + '`' + prefix + 'brawlhalla`\n' + '`' + prefix + 'brawlstars`\n' + '`' + prefix + 'clash/clashroyale`\n' + '`' + prefix + 'counterstrike/cs`\n' + '`' + prefix + 'ddtank`\n' + '`' + prefix + 'freefire/ff`\n' + '`' + prefix + 'gartic`\n' + '`' + prefix + 'genshinimpact/genshin`\n' + '`' + prefix + 'gta`\n' + '`' + prefix + 'habbo`\n' + '`' + prefix + 'leagueoflegends/lol`\n' + '`' + prefix + 'mario`\n' + '`' + prefix + 'mobilelegends/mbl`\n' + '`' + prefix + 'minecraft/mine`\n' + '`' + prefix + 'paladins`\n' + '`' + prefix + 'rocketleague`\n' + '`' + prefix + 'summoners`\n' + '`' + prefix + 'sumwar`\n' + '`' + prefix + 'transformice/tfm`\n' + '`' + prefix + 'uno`\n' + '`' + prefix + 'valorant`')
-      .addField('• Comandos Offline (No Status Defined)', ' ')
       .addField('• Comandos em construção', 'Comandos no registro: (2)')
     return message.inlineReply(embed)
   }
@@ -138,7 +137,7 @@ exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setTitle('🌐 Level Global System')
-      .setDescription(`O meu sistema de level é global. Se você não sabe o que quer dizer, você pode [ver aqui](${helpgit}) sobre o que eu estou falando`)
+      .setDescription(`O meu sistema de level é global. Se você não sabe o que quer dizer, você pode [ver aqui](${linkgithub}) sobre o que eu estou falando`)
       .addField('• Comandos Online', '`' + prefix + 'level`\n' + '`' + prefix + 'dailyxp`\n' + '`' + prefix + 'rank`')
       .addField('• Comandos Offline (0)', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (4)')
@@ -164,7 +163,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'addrole`\n' + '`' + prefix + 'autorole`\n' + '`' + prefix + 'ban`\n' + '`' + prefix + 'clear`\n' + '`' + prefix + 'clonechannel`\n' + '`' + prefix + 'config`\n' + '`' + prefix + 'createchannel`\n' + '`' + prefix + 'deletechannel`\n' + '`' + prefix + 'giveaway/sorteio`\n' + '`' + prefix + 'kick`')
       .addField('• Comandos Offline (0)', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (9)')
-      .addField('⠀', `Devido a quantidade de comandos, entre no meu [painel de comandos](${helpgit})`)
+      .addField('⠀', `Devido a quantidade de comandos, entre no meu [painel de comandos](${linkgithub})`)
     return message.inlineReply(embed)
   }
 
@@ -177,7 +176,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Offline (0)', 'Nenhum')
       .addField('• Comandos Moderação', '`' + prefix + 'setpescachannel`\n' + '`' + prefix + 'setminechannel`')
       .addField('• Comandos em construção', 'Comandos no registro: (25)')
-      .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
+      .addField('⠀', `Mais comandos no meu [painel de comandos](${linkgithub})`)
     return message.inlineReply(embed)
   }
 
@@ -186,10 +185,10 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setTitle('👩‍💻 Monte o seu Perfil')
       .setDescription('Crie seu perfil aqui comigo :hearts:\nLembrando que alguns comandos, tipo estrela e título, são adquiridos na loja')
-      .addField('• Comandos Online', '`' + prefix + 'marry @user` Se case com alguém\n' + '`' + prefix + 'divorce @user` Se divorcie\n' + '`' + prefix + 'family1/2/3` Chame pessoas pra sua familia\n' + '`' + prefix + 'nofamily1/2/3` Remova pessoas da sua familia\n' + '`' + prefix + 'setstatus` Coloque um status maneiro\n' + '`' + prefix + 'rp` Dê reputação\n' + '`' + prefix + 'setsigno` Escolha seu signo\n' + '`' + prefix + 'settitulo` Escolha seu título')
+      .addField('• Comandos Online', '`' + prefix + 'marry @user` Se case com alguém\n' + '`' + prefix + 'divorce @user` Se divorcie\n' + '`' + prefix + 'family1/2/3` Chame pessoas pra sua familia\n' + '`' + prefix + 'nofamily1/2/3` Remova pessoas da sua familia\n' + '`' + prefix + 'setstatus` Coloque um status maneiro\n' + '`' + prefix + 'rp` Dê reputação\n' + '`' + prefix + 'setsigno` Escolha seu signo\n' + '`' + prefix + 'settitulo` Escolha seu título\n' + '`' + prefix + 'setniver` Coloque seu aniversário')
       .addField('• Comandos Offline', '`estrela`')
       .addField('• Comandos em construção', 'Comandos no registro: (11)')
-      .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
+      .addField('⠀', `Mais comandos no meu [painel de comandos](${linkgithub})`)
     return message.inlineReply(embed)
   }
 
@@ -201,9 +200,23 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'quiz`\n' + '`' + prefix + 'quiznaruto`')
       .addField('• Comandos Offline', 'Nenhum')
       .addField('• Comandos em construção', 'Comandos no registro: (54)')
-      .addField('⠀', `Mais informações no meu [painel de comandos](${helpgit})`)
+      .addField('⠀', `Mais informações no meu [painel de comandos](${linkgithub})`)
     return message.inlineReply(embed)
   }
+
+  if (['report', 'reporte', 'setreportchannel'].includes(args[0])) {
+    var embed = new Discord.MessageEmbed()
+      .setColor('BLUE') // red
+      .setTitle(':loudspeaker: Sistema de Report')
+      .setDescription('Com este comando, você ativará o meu sistema de report. Isso é bastante útil.')
+      .addField('❓ O que é o sistema de report?', 'Com o meu sistema de report, os membros poderão reportar coisas ou outros membros de qualquer canal do servidor, não precisa está indo chamar mod/adm no privado para reportar.')
+      .addField('❓ Como funciona?', 'Simples! o membro só precisa escrever `' + prefix + 'report blá blá blá` e o report será encaminhado para o canal definido. As mensagens serão deletadas na hora do envio, tornando o report anônimo e seguro, os únicos que verão o report, serão as pessoas que tem permissão para ver o canal definido.')
+      .addField('Comando de Ativação', '`' + prefix + 'setreportchannel #Canal`')
+      .addField('Comando de Desativação', '`' + prefix + 'setreportchannel off`')
+      .setFooter('A Maya não se responsabiliza pelo conteúdo enviado atráves deste sistema.')
+    return message.inlineReply(embed)
+  }
+
 
   if (['random', 'aleatório', 'aleatorio'].includes(args[0])) {
     const embed = new Discord.MessageEmbed()
@@ -213,7 +226,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'advice/conselho`\n' + '`' + prefix + 'ascci`\n' + '`' + prefix + 'boom`\n' + '`' + prefix + 'cat`\n' + '`' + prefix + 'puppy`\n' + '`' + prefix + 'dado/roll`\n' + '`' + prefix + 'feet`\n' + '`' + prefix + 'nota`\n' + '`' + prefix + 'stonks`\n')
       .addField('• Comandos Offline (12)', 'Lista indisponivel')
       .addField('• Comandos em construção', 'Comandos no registro: (154)')
-      .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
+      .addField('⠀', `Mais comandos no meu [painel de comandos](${linkgithub})`)
     return message.inlineReply(embed)
   }
 
@@ -225,7 +238,7 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Online', '`' + prefix + 'clap`\n' + '`' + prefix + 'cry`\n' + '`' + prefix + 'dance`\n' + '`' + prefix + 'die`\n' + '`' + prefix + 'ery`\n' + '`' + prefix + 'facepalm`\n' + '`' + prefix + 'fury`\n' + '`' + prefix + 'glare`\n' + '`' + prefix + 'happy`')
       .addField('• Comandos Offline (17)', 'Processo de tradução')
       .addField('• Comandos em construção', 'Comandos no registro: (81)')
-      .addField('⠀', `Mais comandos no meu [painel de comandos](${helpgit})`)
+      .addField('⠀', `Mais comandos no meu [painel de comandos](${linkgithub})`)
     return message.inlineReply(embed)
   } else {
     return message.inlineReply('Esta categoria não foi encontrada. use `' + prefix + 'help categoria` e veja as categorias disponiveis.')

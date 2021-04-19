@@ -22,24 +22,27 @@ exports.run = async (client, message, args) => {
 
     var gif = list[Math.floor(Math.random() * list.length)]
 
-    const Itachi = new Discord.MessageEmbed()
+    const nezukoo = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
+        .setFooter('Auto delete em 2 minutos.')
     return message.inlineReply(`Coletando gifs para o código... Comando disponivel dentro de 2 dias\nQuer enviar seus gifs? Usa o -help e entra no meu servidor :hearts:`)
 
-    await message.inlineReply(Itachi).then(msg => {
-        msg.react('🔄') // 1º Embed
-        msg.react('❌')
+    await message.inlineReply(nezukoo).then(msg => {
+        msg.react('🔄').catch(err => { return }) // 1º Embed
+        msg.react('❌').catch(err => { return })
+        msg.delete({ timeout: 120000 }).catch(err => { return })
 
         msg.awaitReactions((reaction, user) => {
             if (message.author.id !== user.id) return;
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                const Itachi = new Discord.MessageEmbed()
+                const nezukoo = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
-                msg.edit(Itachi)
+                    .setFooter('Auto delete em 2 minutos.')
+                msg.edit(nezukoo)
             }
             if (reaction.emoji.name === '❌') {
                 msg.delete()

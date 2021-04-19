@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
     const embed = new Discord.MessageEmbed()
         .setThumbnail(client.user.displayAvatarURL())
         .setTitle('📃 Centralzinha de Informações 📃')
-        .setColor('#DCDCDC')
+        .setColor('BLUE')
         .setDescription('Meu nome é Maya. Eu fui criada para ser uma bot de diversão e admnistração. Porém tenho alguns recursos além disso. Sou capaz de substituir vááários bots. Minha missão é ser a bot mais completa de todas.')
         .addFields(
             {
@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
     const embed2 = new Discord.MessageEmbed()
         .setThumbnail(client.user.displayAvatarURL())
         .setTitle('⚙️ Centralzinha Tecnica ⚙️')
-        .setColor("#DCDCDC")
+        .setColor("BLUE")
         .addFields(
             {
                 name: 'Informações Técinas',
@@ -34,7 +34,7 @@ exports.run = async (client, message, args) => {
         )
 
     const Thanks = new Discord.MessageEmbed()
-        .setColor('#DCDCDC')
+        .setColor('BLUE')
         .setThumbnail(client.user.displayAvatarURL())
         .setTitle(':hearts:Eu só digo OBRIGADA a todos que deram suas ideias!:hearts:')
         .addFields(

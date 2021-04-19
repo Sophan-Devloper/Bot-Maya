@@ -66,6 +66,24 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`Iscas removidas do slot de ${user}.`)
     }
 
+    if (['cartas', 'carta'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'remove cartas @user Valor`')
+        }
+
+        let amount = args[2]
+        if (!amount) {
+            return message.inlineReply('`' + prefix + 'remove cartas @user Valor`')
+        }
+        if (isNaN(amount)) {
+            return message.inlineReply(`**${args[2]}** não é um número.`)
+        }
+
+        db.subtract(`cartas_${user.id}`, amount)
+        return message.inlineReply(`Cartas removidas do slot de ${user}.`)
+    }
+
     if (['maça', 'apple', 'maças'].includes(args[0])) {
 
         if (!user) {

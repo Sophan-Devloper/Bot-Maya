@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
         if (!args[0]) {
             const noargs = new Discord.MessageEmbed()
                 .setColor('BLUE')
-                .setTitle('<:estrelinha:831161441847345202> Sistema de Vendas Maya')
+                .setTitle('<:StarPoint:766794021128765469> Sistema de Vendas Maya')
                 .setDescription('Aqui você pode vender seus itens em troca de MPoints. É muito simples, basta usar o comando, assim você pode sell os itens obtidos.\n \nDigite o nome do item com meu prefixo que eu te falo mais informações sobre ele.')
                 .addField('Comando', '`' + prefix + 'sell NomeDoItem Quantidade`')
                 .addField('Todos os itens', '`' + prefix + 'loja`')
@@ -103,7 +103,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 🐟 ${args[1]} peixes e obteve ${args[1] * 7}<:estrelinha:831161441847345202>MPoints`)
+                    .setDescription(`${message.author} vendeu 🐟 ${args[1]} peixes e obteve ${args[1] * 7}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         }
@@ -153,7 +153,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 🦴 ${args[1]} ossos e obteve ${args[1] * 5}<:estrelinha:831161441847345202>MPoints`)
+                    .setDescription(`${message.author} vendeu 🦴 ${args[1]} ossos e obteve ${args[1] * 5}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         }
@@ -203,7 +203,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 🍤 ${args[1]} camarões e obteve ${args[1] * 12}<:estrelinha:831161441847345202>MPoints`)
+                    .setDescription(`${message.author} vendeu 🍤 ${args[1]} camarões e obteve ${args[1] * 12}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         }
@@ -252,7 +252,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 🪨 ${args[1]} minerios e obteve ${args[1] * 15}<:estrelinha:831161441847345202>MPoints`)
+                    .setDescription(`${message.author} vendeu 🪨 ${args[1]} minerios e obteve ${args[1] * 15}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         }
@@ -302,7 +302,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 💎 ${args[1]} diamantes e obteve ${args[1] * 100}<:estrelinha:831161441847345202>MPoints`)
+                    .setDescription(`${message.author} vendeu 💎 ${args[1]} diamantes e obteve ${args[1] * 100}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         }
@@ -352,7 +352,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 🪵 ${args[1]} madeiras e obteve ${args[1] * 15}<:estrelinha:831161441847345202>MPoints`)
+                    .setDescription(`${message.author} vendeu 🪵 ${args[1]} madeiras e obteve ${args[1] * 15}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         }
@@ -402,7 +402,7 @@ exports.run = async (client, message, args) => {
                 const buyarma = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('✅ Venda aprovada')
-                    .setDescription(`${message.author} vendeu 🍎 ${args[1]} maças e obteve ${args[1] * 4}<:estrelinha:831161441847345202>MPoints`)
+                    .setDescription(`${message.author} vendeu 🍎 ${args[1]} maças e obteve ${args[1] * 4}<:StarPoint:766794021128765469>MPoints`)
                 return message.inlineReply(buyarma)
             }
         } else {

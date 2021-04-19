@@ -71,7 +71,7 @@ exports.run = async (client, message, args) => {
                     }
                     if (reaction.emoji.name === '❌') { // Não
                         msg.delete()
-                        msg.inlineReply("Fuga cancelada.")
+                        message.inlineReply("Fuga cancelada.")
                     }
                 })
             })

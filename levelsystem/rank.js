@@ -73,7 +73,7 @@ exports.run = async (client, message, args) => {
             .setDescription("")
             .setColor("YELLOW")
         lb.forEach(d => {
-            embedxp.addField(`${d.rank}. ${d.user.tag}`, `💸 Carteira - ${d.level} <:estrelinha:831161441847345202>MPoints\n🏦 Banco - ${d.xp} <:estrelinha:831161441847345202>MPoints`)
+            embedxp.addField(`${d.rank}. ${d.user.tag}`, `💸 Carteira - ${d.level} <:StarPoint:766794021128765469>MPoints\n🏦 Banco - ${d.xp} <:StarPoint:766794021128765469>MPoints`)
         })
         embedxp.setFooter(`Seu ranking: ${myrank}`)
         return message.channel.send(embedxp)

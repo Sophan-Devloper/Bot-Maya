@@ -98,7 +98,7 @@ exports.run = async (client, message, args) => {
                                         const canceled3 = new Discord.MessageEmbed()
                                             .setColor('GREEN')
                                             .setTitle('Comando cancelado.')
-                                        msg.inlineReply(canceled3)
+                                        message.inlineReply(canceled3)
                                     }
                                 })
                             })
@@ -109,7 +109,7 @@ exports.run = async (client, message, args) => {
                             const canceled2 = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('Comando cancelado.')
-                            msg.inlineReply(canceled2)
+                            message.inlineReply(canceled2)
                         }
                     })
                 })
@@ -119,7 +119,7 @@ exports.run = async (client, message, args) => {
                 const canceled = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setTitle('Comando cancelado.')
-                msg.inlineReply(canceled)
+                message.inlineReply(canceled)
             }
         })
     })

@@ -43,6 +43,16 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(`As iscas de ${user} foram deletadas..`)
     }
 
+    if (['cartas', 'carta'].includes(args[0])) {
+
+        if (!user) {
+            return message.inlineReply('`' + prefix + 'del cartas @user`')
+        }
+
+        db.delete(`cartas_${user.id}`)
+        return message.inlineReply(`As cartas de ${user} foram deletadas..`)
+    }
+
     if (['mp', 'money', 'carteira'].includes(args[0])) {
 
         if (!user) {

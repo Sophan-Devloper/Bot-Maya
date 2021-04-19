@@ -98,7 +98,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('Um erro foi detectado.')
             .setDescription('🔍 Procurando erro')
-          return message.inlineReply(erro).then(msg => msg.delete({ timeout: 5000 })).then(msg => msg.inlineReply(errorembed))
+          return message.inlineReply(erro).then(msg => msg.delete({ timeout: 5000 })).then(msg => message.inlineReply(errorembed))
         }
       }).then(msg => client.channels.cache.get(logchannel).send(UnbanEmbed))
     })

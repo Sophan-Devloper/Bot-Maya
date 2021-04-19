@@ -29,7 +29,7 @@ exports.run = async (client, message, args) => {
             db.add(`money_${message.author.id}`, amount)
             db.set(`worked_${message.author.id}`, Date.now())
 
-            message.inlineReply(`Você trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints`)
+            return message.inlineReply(`Você trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints`)
         }
     }
 }

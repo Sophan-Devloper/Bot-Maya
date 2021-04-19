@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     if (prefix === null) { prefix = "-" }
 
     const embed = new Discord.MessageEmbed()
-        .setColor("#DCDCDC")
+        .setColor("BLUE")
         .setTitle('💖 Maya Family System')
         .setDescription('Chame seus amigos mais próximos para sua familia.')
         .addFields(

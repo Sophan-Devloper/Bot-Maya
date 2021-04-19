@@ -205,6 +205,20 @@ exports.run = async (client, message, args) => {
     return message.inlineReply(embed)
   }
 
+  if (['report', 'reporte', 'setreportchannel'].includes(args[0])) {
+    var embed = new Discord.MessageEmbed()
+      .setColor('BLUE') // red
+      .setTitle(':loudspeaker: Sistema de Report')
+      .setDescription('Com este comando, você ativará o meu sistema de report. Isso é bastante útil.')
+      .addField('❓ O que é o sistema de report?', 'Com o meu sistema de report, os membros poderão reportar coisas ou outros membros de qualquer canal do servidor, não precisa está indo chamar mod/adm no privado para reportar.')
+      .addField('❓ Como funciona?', 'Simples! o membro só precisa escrever `' + prefix + 'report blá blá blá` e o report será encaminhado para o canal definido. As mensagens serão deletadas na hora do envio, tornando o report anônimo e seguro, os únicos que verão o report, serão as pessoas que tem permissão para ver o canal definido.')
+      .addField('Comando de Ativação', '`' + prefix + 'setreportchannel #Canal`')
+      .addField('Comando de Desativação', '`' + prefix + 'setreportchannel off`')
+      .setFooter('A Maya não se responsabiliza pelo conteúdo enviado atráves deste sistema.')
+    return message.inlineReply(embed)
+  }
+
+
   if (['random', 'aleatório', 'aleatorio'].includes(args[0])) {
     const embed = new Discord.MessageEmbed()
       .setColor('BLUE')

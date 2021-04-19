@@ -18,6 +18,11 @@ exports.run = async (client, message, args) => {
     if (iscas === null) { iscas = "0" }
     if (!db.get(`iscas_${user.id}`)) { iscas = "0" }
 
+    let cartas = await db.get(`cartas_${user.id}`)
+    if (cartas) { cartas = `\n💌 Cartas: ${db.get(`cartas_${user.id}`)}` }
+    if (cartas === null) { cartas = "" }
+    if (!db.get(`cartas_${user.id}`)) { cartas = "" }
+
     let agua = await db.get(`agua_${user.id}`)
     if (agua === null) { agua = "0" }
     if (!db.get(`agua_${user.id}`)) { agua = "0" }
@@ -99,7 +104,7 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setTitle(`📖 **Inventário de ${user.user.username}**`)
         .setDescription('📊 Bolsa de Valores | Em Breve')
-        .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}`)
+        .addField('Itens Comprados', `${nada}${arma}${picareta}${vara}${machado}${cartas}`)
         .addField('Itens Obtidos', `${nada2}${title}${faca}${loli}${fossil}${mamute}`)
         .addField('Mantimentos', `🐟 ${peixes} Peixes\n🪱 ${iscas} Iscas\n🥤 ${agua} Água\n🍤 ${camarao} Camarões\n🦴 ${ossos} Ossos\n🪵 ${madeira} Madeiras\n🍎 ${apple} Maça\n🪨 ${minerio} Minérios\n💎 ${diamond} Diamantes`)
 

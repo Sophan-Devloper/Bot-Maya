@@ -80,7 +80,7 @@ exports.run = async (client, message, args) => {
                     const ok = new Discord.MessageEmbed()
                         .setColor('GREEN')
                         .setDescription('Comando cancelado')
-                    msg.inlineReply(ok)
+                    message.inlineReply(ok)
                 }
             })
         })

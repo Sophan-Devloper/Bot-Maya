@@ -14,9 +14,7 @@ exports.run = async (client, message, args) => {
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
-
         return message.inlineReply(presomax)
-
     } else {
 
         let timeout = 600000
@@ -24,14 +22,14 @@ exports.run = async (client, message, args) => {
 
         if (author !== null && timeout - (Date.now() - author) > 0) {
             let time = ms(timeout - (Date.now() - author))
-
+             
             return message.inlineReply(`Você pode trabalhar novamente em ${time.minutes}m e ${time.seconds}s`)
         } else {
             let amount = Math.floor(Math.random() * 800) + 1;
             db.add(`money_${message.author.id}`, amount)
             db.set(`worked_${message.author.id}`, Date.now())
 
-            message.inlineReply(`Você trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints`)
+            return message.inlineReply(`Você trabalhou e ganhou ${amount} <:StarPoint:766794021128765469>MPoints`)
         }
     }
 }

@@ -214,7 +214,6 @@ exports.run = async (client, message, args) => {
     return message.inlineReply(embed)
   }
 
-
   if (['random', 'aleatório', 'aleatorio'].includes(args[0])) {
     var embed = new Discord.MessageEmbed()
       .setColor('BLUE')
@@ -247,6 +246,17 @@ exports.run = async (client, message, args) => {
       .addField('• Comandos Offline: (0)', `:tools: [Lista de Comandos](${linkgithub})`)
       .addField('• Comandos em construção: (21)', 'Teve alguma ideia? `' + prefix + 'ideiamaya`')
       .addField('• Mande Gifs para os comandos de reações', '`' + prefix + 'gif`')
+    return message.inlineReply(embed)
+  }
+
+  if (['autorole', 'setautorole'].includes(args[0])) {
+    var embed = new Discord.MessageEmbed()
+      .setColor('BLUE')
+      .setTitle('🛠️ Autorole System')
+      .setDescription('Antes de começarmos, você sabe o que é Autorole?\n \n❓ **O que é Autorole?**\nAutorole é um sistema automático em que todo membro que entrar no servidor, receberá um cargo de um bot pré definido pela staff do servidor.\n \n❗ **ATENÇÃO**\nPara perfeito funcionamento, o meu cargo DEVE estar ACIMA do cargo definido.')
+      .addField('• Comando de ativação', '`' + prefix + 'setautorole @cargo`', true)
+      .addField('• Comando de desativação', '`' + prefix + 'setautorole off`', true)
+      .addField('• Veja o status', '`' + prefix + 'autorole`')
     return message.inlineReply(embed)
   } else {
     return message.inlineReply('Esta categoria não foi encontrada. use `' + prefix + 'help categoria` e veja as categorias disponiveis.')

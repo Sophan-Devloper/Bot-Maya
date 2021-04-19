@@ -4,6 +4,9 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
+
     if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
         const adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
@@ -23,8 +26,6 @@ exports.run = async (client, message, args) => {
             .setColor('BLUE')
             .setTitle('🔄 Loading...')
 
-        let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = "-"
         const noerl = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setDescription(`O argumento ***${args[0]}*** não existe ou os dados não foram publicados pela OMS (Organização Mundial da Saúde)`)
@@ -34,7 +35,7 @@ exports.run = async (client, message, args) => {
                     value: '`' + prefix + 'covid BR/AR/USA/FR...`'
                 }
             )
-        return message.inlineReply(loading).then(msg => msg.delete({ timeout: 4000 })).then(msg => msg.inlineReply(noerl))
+        return message.inlineReply(loading).then(msg => msg.delete({ timeout: 4000 })).then(msg => message.inlineReply(noerl))
     }
 
     const embed = new Discord.MessageEmbed()
@@ -70,7 +71,7 @@ exports.run = async (client, message, args) => {
                 name: ':broken_heart: Mortes Hoje',
                 value: corona.todayDeaths.toLocaleString()
             })
-        .setFooter(message.author.username, message.author.displayAvatarURL())
+        .setFooter(`${prefix}covid br`)
 
-    await message.inlineReply(`Tenta colocar com a sigla de algúm pais`, embed)
+    await message.inlineReply(embed)
 }

@@ -9,26 +9,26 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(adm)
     }
 
-    let region;
+    let region
     switch (message.guild.region) {
         case "europe":
-            region = '🇪🇺 Europe';
-            break;
+            region = '🇪🇺 Europe'
+            break
         case "us-east":
             region = '🇺🇸 us-east'
-            break;
+            break
         case "us-west":
-            region = '🇺🇸 us-west';
-            break;
+            region = '🇺🇸 us-west'
+            break
         case "us-south":
             region = '🇺🇸 us-south'
-            break;
+            break
         case "us-central":
             region = '🇺🇸 us-central'
-            break;
+            break
         case "brazil":
             region = ':flag_br: Brazil'
-            break;
+            break
     }
 
     const embed = new Discord.MessageEmbed()

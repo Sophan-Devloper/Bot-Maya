@@ -59,7 +59,7 @@ exports.run = async (client, message, args) => {
       msg.awaitReactions((reaction, member) => {
 
         if (reaction.emoji.name === '📨') {
-          member.send(embed)
+          member.send(embed).catch(err => { return })
         }
       })
     })

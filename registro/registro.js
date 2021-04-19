@@ -55,67 +55,56 @@ exports.run = async (client, message, args) => {
     if (["homem", "Homem", "HOMEM"].includes(args[0])) {
         if (message.member.roles.cache.has("759901493591146549")) { return }
         message.member.roles.add(guri).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759901493591146549>`).then(msg => msg.delete({ timeout: 5000 })).catch(err => { return })
     }
 
     if (["mulher", "Mulher", "MULHER"].includes(args[0])) {
         if (message.member.roles.cache.has("759901620875689985")) { return }
         message.member.roles.add(guria).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759901620875689985>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["+18"].includes(args[1])) {
         if (message.member.roles.cache.has("759902317750517760")) { return }
         message.member.roles.add(mais18).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759902317750517760>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["-18"].includes(args[1])) {
         if (message.member.roles.cache.has("759902206085955606")) { return }
         message.member.roles.add(menos18).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759902206085955606>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["sudeste", "Sudeste", "SUDESTE"].includes(args[2])) {
         if (message.member.roles.cache.has("759900199736442890")) { return }
         message.member.roles.add(sudeste).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759900199736442890>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["sul", "Sul", "SUL"].includes(args[2])) {
         if (message.member.roles.cache.has("759900115271549007")) { return }
         message.member.roles.add(sul).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759900115271549007>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["norte", "Norte", "NORTE"].includes(args[2])) {
         if (message.member.roles.cache.has("759900915929972816")) { return }
         message.member.roles.add(norte).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759900915929972816>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["centro", "Centro", "CENTRO"].includes(args[2])) {
         if (message.member.roles.cache.has("759901046428008519")) { return }
         message.member.roles.add(centrooeste).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759901046428008519>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["nordeste", "Nordeste", "NORDESTE"].includes(args[2])) {
         if (message.member.roles.cache.has("759900384377700412")) { return }
         message.member.roles.add(nordeste).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759900384377700412>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["solteiro", "Solteiro", "SOLTEIRO", "solteira", "Solteira", "SOLTEIRA"].includes(args[3])) {
-        if (message.member.roles.cache.has("759899479750344753")) { return message.channel.send(`${message.author}, você já possui o cargo <@&759899479750344753>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return }) }
+        if (message.member.roles.cache.has("759899479750344753")) { return }
         message.member.roles.add(solteiro).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759899479750344753>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (["namorando", "Namorando", "NAMORANDO"].includes(args[3])) {
         if (message.member.roles.cache.has("759899737650102282")) { return }
         message.member.roles.add(namorando).catch(err => { return message.channel.send(`**ERRO:** ${err}`) })
-        message.channel.send(`${message.author}, você recebeu o cargo <@&759899737650102282>`).then(msg => msg.delete({ timeout: 7000 })).catch(err => { return })
     }
 
     if (args[0] && args[1] && args[2] && args[3]) {

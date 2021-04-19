@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => {
         .setDescription('`' + prefix + 'carta @user A sua mensagem em diante`')
 
     let user = message.mentions.members.first()
-    let bot = user.bot
+    let bot = message.mentions.bot
     let comprar = "Você não possui cartas. Mas você pode comprar algumas na `" + prefix + "loja`"
 
     let cartas = db.get(`cartas_${message.author.id}`)

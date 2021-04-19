@@ -30,7 +30,7 @@ exports.run = async (client, message, args) => {
             return message.inlineReply(noargs)
         }
 
-        if (['vara de pesca', 'vara', 'pesca', 'Vara de Pesca'].includes(args[0])) {
+        if (['vara de pesca', 'vara', 'pesca', 'Vara de Pesca'].includes(args.join(" "))) {
 
             if (db.get(`vara_${message.author.id}`)) {
                 return message.inlineReply(`Você já possui este item.`)
@@ -191,7 +191,7 @@ exports.run = async (client, message, args) => {
             }
         }
 
-        if (['agua', 'Água', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água', 'copo de agua', 'copos de agua', 'copo de água', 'copos de água'].includes(args[0])) {
+        if (['agua', 'Água', 'água', 'water', 'águas', 'aguas', 'copo', 'd\água'].includes(args[0])) {
 
             var money = db.get(`money_${message.author.id}`)
             if (money === null) { money = 0 }
@@ -487,7 +487,7 @@ exports.run = async (client, message, args) => {
                     .setDescription(`${message.author}, você não pode passar de **10 cartas**.`)
                 return message.inlineReply(limit)
             }
-            
+
             db.subtract(`money_${message.author.id}`, args[1] * 1000)
             db.add(`bank_${client.user.id}`, args[1] * 1000)
 
@@ -505,7 +505,7 @@ exports.run = async (client, message, args) => {
         if (['Escudo', 'escudo', 'shield'].includes(args[0])) {
             return message.inlineReply('Este item ainda não está a venda.')
         } else {
-            return message.inlineReply(`Eu não achei nenhum item com o nome **${args.join(" ")}** na minha loja.`)
+            return message.inlineReply(`Eu não achei nenhum item com o nome **${args.join(" ")}** na minha loja, tente digitar um único nome, tipo "vara" ou "água".`)
         }
     }
 }

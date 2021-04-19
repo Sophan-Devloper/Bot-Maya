@@ -5,7 +5,7 @@ const ms = require('parse-ms')
 exports.run = async (client, message, args) => {
 
     if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-        const adm = new Discord.MessageEmbed()
+        var adm = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
         return message.inlineReply(adm)
@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     if (author1 !== null && timeout1 - (Date.now() - author1) > 0) {
         let time = ms(timeout1 - (Date.now() - author1))
 
-        const presomax = new Discord.MessageEmbed()
+        var presomax = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🚨 Você está em prisão máxima!')
             .setDescription('`Liberdade em: ' + `${time.minutes}` + 'm e ' + `${time.seconds}` + 's`')
@@ -25,66 +25,66 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(presomax)
     } else {
 
-        user = message.mentions.members.first()
-
-        let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = "-"
-
-        args[0] = user
-        if (!args[0]) {
-            const noamout = new Discord.MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'pay @user Valor`')
-            return message.inlineReply(noamout)
-        }
-
-        if (!args[1]) {
-            const noamout = new Discord.MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Siga o formato correto')
-                .setDescription('`' + prefix + 'pay @user Valor`')
-            return message.inlineReply(noamout)
-        }
-
-        if (user.id == message.author.id) {
-            const noamout = new Discord.MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Você não pode pagar para você mesmo.')
-            return message.inlineReply(noamout)
-        }
+        let user = message.mentions.members.first()
+        let bot = user.bot
+        let nomoney = 'Dinheiro insuficiente.'
 
         let money = db.get(`money_${message.author.id}`)
         if (money === null) money = '0'
 
-        if (money < args[1]) {
-            const not = new Discord.MessageEmbed()
-                .setColor('#FF0000')
-                .setDescription(`Você precisa ter ${args[1]}<:StarPoint:766794021128765469> na carteira para poder pagar ${user.user.username}.`)
-            return message.inlineReply(not)
-        }
+        let prefix = db.get(`prefix_${message.guild.id}`)
+        if (prefix === null) prefix = "-"
 
-        if (args[1] < 0) {
-            const nota = new Discord.MessageEmbed()
-                .setColor('#FF0000')
-                .setTitle('Diga um valor maior que 0')
-            return message.inlineReply(nota)
-        }
+        var noargs = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('💸 Sistema de Pagamento')
+            .setDescription('Page a galera, é simples e rápido!\n \n*MPoints perdidos não serão recuperados. Cuidado para não ser enganado*')
+            .addField('Comando', '`' + prefix + 'pay @user quantia`\n' + '`' + prefix + 'pay @user all/tudo`')
+            .setFooter('Apenas o dinheiro na carteira será válido para pagamentos.')
 
-        if (isNaN(args[1])) {
-            const notnumber = new Discord.MessageEmbed()
-                .setColor('#FF0000')
-                .setTitle('Valor não reconhecido')
-                .setDescription('O valor que você digitou não é um número.')
-            return message.inlineReply(notnumber)
-        }
+        var formato = new Discord.MessageEmbed()
+            .setColor('#ff0000')
+            .setTitle('Siga o formato correto')
+            .setDescription('`' + prefix + 'pay @user Valor`')
 
-        db.add(`money_${user.id}`, args[1])
-        db.subtract(`money_${message.author.id}`, args[1])
+        if (!args[0]) { return message.inlineReply(noargs) }
+        if (!args[1]) { return message.inlineReply(formato) }
+        if (user.id === message.author.id) { return message.inlineReply('Você não pode pagar você mesmo.') }
+        if (bot) { return message.inlineReply('Você não pode pagar bots.') }
+        if (money < args[1]) { return message.inlineReply(`Você precisa ter ${args[1]}<:StarPoint:766794021128765469> na carteira para poder pagar ${user.user.username}.`) }
+        if (args[1] < 0) { return message.inlineReply(nomoney) }
+        if (isNaN(args[1])) { return message.inlineReply('Valor digitado não é um número.') }
 
-        const embed = new Discord.MessageEmbed()
-            .setColor('#efff00')
-            .setDescription(`${message.author} pagou ${args[1]}<:StarPoint:766794021128765469> para ${user.user.username}.`)
-        return message.inlineReply(embed)
+        var confirm = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('Você confirma os dados a baixo?')
+            .setDescription('O dinheiro pago não retornará para você a menos que te devolvam.')
+            .addField('Informações', `Pagar **${args[1]}<:StarPoint:766794021128765469>MPoints** para ${user} ?`)
+            .setFooter('Auto delete em 30 segundos.')
+
+        await message.inlineReply('A Maya não se responsabiliza por dinheiro perdido.', confirm).then(msg => {
+            msg.react('✅').catch(err => { return }) // Check
+            msg.react('❌').catch(err => { return }) // X
+            msg.delete({ timeout: 30000 }).catch(err => { return })
+
+            msg.awaitReactions((reaction, user) => {
+                if (message.author.id !== user.id) return
+
+                if (reaction.emoji.name === '✅') { // Sim
+                    msg.delete().catch(err => { return })
+                    db.add(`money_${message.mentions.members.first().id}`, args[1])
+                    db.subtract(`money_${message.author.id}`, args[1])
+
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#efff00')
+                        .setDescription(`${message.author} pagou ${args[1]}<:StarPoint:766794021128765469> para ${user}`)
+                    return message.inlineReply(embed)
+                }
+                if (reaction.emoji.name === '❌') { // Não
+                    msg.delete()
+                    message.inlineReply("Pagamento cancelado.")
+                }
+            })
+        })
     }
 }

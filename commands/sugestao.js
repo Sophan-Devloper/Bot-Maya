@@ -23,17 +23,19 @@ exports.run = async (client, message, args) => {
     if (prefix === null) prefix = "-"
 
     const nochannel = new Discord.MessageEmbed()
-      .setColor('#FF0000')
+      .setColor('BLUE')
       .setTitle('❌ Nenhum canal de ideias/sugestões definido.')
       .setDescription('Graças ao sistema de organização da Maya, este é um dos comandos que requer um canal especifico para funcionamento.\n \nAs ideias e sugestões dos membros ficará em um canal para serem votadas pelos os outros membros. Bem... Se a administração do servidor quiser é claro.')
       .addFields(
         {
           name: 'Comando de Ativação',
-          value: '`' + prefix + 'setideiachannel #canal`'
+          value: '`' + prefix + 'setideiachannel #canal`',
+          inline: true
         },
         {
           name: 'Comando de Desativação',
-          value: '`' + prefix + 'setideiachannel off`'
+          value: '`' + prefix + 'setideiachannel off`',
+          inline: true
         }
       )
     return message.inlineReply(nochannel)
@@ -62,7 +64,7 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setTitle('💡 Comando Ideia/Sugestão')
       .setDescription('Use este comando para enviar sua ideia ao servidor, para que todos possam votar.\n \nMáximo: 300 letras\nMínimo: 10 letras')
-      .addField('Comando', '`' + prefix + 'sugestao Sua ideia em diante`')
+      .addField('Comando', '`' + prefix + 'ideia Sua ideia em diante`')
     return message.inlineReply(noideia)
   }
 

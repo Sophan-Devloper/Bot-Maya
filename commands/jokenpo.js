@@ -3,79 +3,130 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
-    if (!args[0]) {
-        let prefix = db.get(`prefix_${message.guild.id}`)
-        if (prefix === null) prefix = "-"
+    let prefix = db.get(`prefix_${message.guild.id}`)
+    if (prefix === null) prefix = "-"
 
-        const noargs = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('Siga o formato correto')
-            .setDescription('`' + prefix + 'jokenpo <papel> <pedra> <tesoura>`')
+    if (!args[0]) {
+        var noargs = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('👊 ✋ ✌️ Jokempo')
+            .setDescription('Você pode jogar jokempo e ganhar ou perder 10<:StarPoint:766794021128765469>MPoints')
+            .addField('Comando', '`' + prefix + 'j <pedra> <papel> <tesoura>`')
         return message.inlineReply(noargs)
     }
 
-    const Options = ["pedra", "papel", "tesoura"]
-    if (!Options.includes(args[0]))
-        return message.inlineReply(":x: Opção Incorreta!")
+    let money = db.get(`money_${message.author.id}`)
+    if (money === null) money = 0
 
-    if (args[0] === "pedra") {
+    if (!money) {
+        return message.inlineReply('Você precisa ter pelo menos 10<:StarPoint:766794021128765469>MPoints na carteira')
+    }
 
-        const lose = new Discord.MessageEmbed()
+    if (money < 10) {
+        return message.inlineReply('Você precisa ter pelo menos 10<:StarPoint:766794021128765469>MPoints na carteira')
+    }
+
+    let Options = ["pedra", "papel", "tesoura"]
+
+    if (!Options.includes(args[0])) {
+        return message.inlineReply(':x: Opção Incorreta!\n`' + prefix + 'j <pedra> <papel> <tesoura>`')
+    }
+
+    let random = ['win', 'lose', 'draw']
+    var result = random[Math.floor(Math.random() * random.length)]
+
+    if (['pedra', 'rock'].includes(args[0])) {
+
+        var lose = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😭 | Eu Perdiiii')
-            .setDescription('Você 👊 x ✌️ Maya')
+            .setDescription('Você 👊 x ✌️ Maya\nVocê ganhou 10<:StarPoint:766794021128765469>MPoints')
 
-        const win = new Discord.MessageEmbed()
+        var win = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😌 | Eu Ganheeei')
-            .setDescription('Você 👊 x ✋ Maya')
+            .setDescription('Você 👊 x ✋ Maya\nVocê perdeu 10<:StarPoint:766794021128765469>MPoints')
 
-        const draw = new Discord.MessageEmbed()
+        var draw = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😕 | Deu empate')
-            .setDescription('Você 👊 x 👊 Maya')
+            .setDescription('Você 👊 x 👊 Maya\nNinguém ganhou nada que pena')
 
-        const random1 = [win, lose, draw]
-        message.inlineReply(random1[Math.floor(Math.random() * random1.length)])
 
-    } else if (args[0] === "papel") {
+        if (result === 'win') {
+            db.subtract(`money_${message.author.id}`, 10)
+            return message.inlineReply(win)
+        }
 
-        const lose = new Discord.MessageEmbed()
+        if (result === 'lose') {
+            db.add(`money_${message.author.id}`, 10)
+            return message.inlineReply(lose)
+        }
+
+        if (result === 'draw') {
+            return message.inlineReply(draw)
+        }
+
+    } else if (['papel', 'paper'].includes(args[0])) {
+
+        var lose = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😭 | Eu Perdiiii')
-            .setDescription('Você ✋ x 👊 Maya')
+            .setDescription('Você ✋ x 👊 Maya\nVocê ganhou 10<:StarPoint:766794021128765469>MPoints')
 
-        const win = new Discord.MessageEmbed()
+        var win = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😌 | Eu Ganheeei')
-            .setDescription('Você ✋ x ✌️ Maya')
+            .setDescription('Você ✋ x ✌️ Maya\nVocê perdeu 10<:StarPoint:766794021128765469>MPoints')
 
-        const draw = new Discord.MessageEmbed()
+        var draw = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😕 | Deu empate')
-            .setDescription('Você ✋ x ✋ Maya')
+            .setDescription('Você ✋ x ✋ Maya\nNinguém ganhou nada que pena')
 
-        let random2 = [lose, win, draw]
-        message.inlineReply(random2[Math.floor(Math.random() * random2.length)])
+        if (result === 'win') {
+            db.subtract(`money_${message.author.id}`, 10)
+            return message.inlineReply(win)
+        }
 
-    } else if (args[0] === "tesoura") {
+        if (result === 'lose') {
+            db.add(`money_${message.author.id}`, 10)
+            return message.inlineReply(lose)
+        }
 
-        const lose = new Discord.MessageEmbed()
+        if (result === 'draw') {
+            return message.inlineReply(draw)
+        }
+
+    } else if (['tesoura', 'sissors'].includes(args[0])) {
+
+        var lose = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😭 | Eu Perdiiii')
-            .setDescription('Você ✌️ x ✋ Maya')
+            .setDescription('Você ✌️ x ✋ Maya\nVocê ganhou 10<:StarPoint:766794021128765469>MPoints')
 
-        const win = new Discord.MessageEmbed()
+        var win = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😌 | Eu Ganheeei')
-            .setDescription('Você ✌️ x 👊 Maya')
+            .setDescription('Você ✌️ x 👊 Maya\nVocê perdeu 10<:StarPoint:766794021128765469>MPoints')
 
-        const draw = new Discord.MessageEmbed()
+        var draw = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setTitle('😕 | Deu empate')
-            .setDescription('Você ✌️ x ✌️ Maya')
+            .setDescription('Você ✌️ x ✌️ Maya\nNinguém ganhou nada que pena')
 
-        let random3 = [lose, win, draw]
-        message.inlineReply(random3[Math.floor(Math.random() * random3.length)])
+        if (result === 'win') {
+            db.subtract(`money_${message.author.id}`, 10)
+            return message.inlineReply(win)
+        }
+
+        if (result === 'lose') {
+            db.add(`money_${message.author.id}`, 10)
+            return message.inlineReply(lose)
+        }
+
+        if (result === 'draw') {
+            return message.inlineReply(draw)
+        }
     }
 }

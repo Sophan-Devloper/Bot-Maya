@@ -60,6 +60,14 @@ exports.run = async (client, message, args) => {
         return message.inlineReply(noargs)
     }
 
+    if (commandResponse.length > 30) {
+        const toname = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('A resposta do comando não pode ultrapassar 30 letras')
+            .setFooter('Meu banco de dados também sente dor sabia?')
+        return message.inlineReply(toname)
+    }
+
     let database = db.get(`guildConfigurations_${message.guild.id}.commands`)
     if (database && database.find(x => x.name === commandName.toLowerCase())) {
         const existe = new Discord.MessageEmbed()

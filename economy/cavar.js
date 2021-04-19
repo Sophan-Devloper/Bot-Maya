@@ -126,7 +126,7 @@ exports.run = async (client, message, args) => {
                             const pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⭐ Você adquiriu um item de Classe Especial')
-                                .addField('Classe Especial: <:fossil:831859111578173450> Fossil', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
+                                .addField('Classe Especial: <:fossil:831859111578173450> Fossil', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
                             return message.inlineReply(pescaembed)
                         } else if (!db.get(`fossil_${message.author.id}`)) {
                             var dinh = Math.floor(Math.random() * 500) + 1
@@ -142,7 +142,7 @@ exports.run = async (client, message, args) => {
                             const pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⭐ Você adquiriu um item de Classe Especial')
-                                .addField('Classe Especial: <:fossil:831859111578173450> Fossil', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
+                                .addField('Classe Especial: <:fossil:831859111578173450> Fossil', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
                             return message.inlineReply(pescaembed)
                         } else {
 
@@ -158,7 +158,7 @@ exports.run = async (client, message, args) => {
                             const pescaembed = new Discord.MessageEmbed()
                                 .setColor('GREEN')
                                 .setTitle('⛏️ Você cavou itens valiosos!')
-                                .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou novos itens! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
+                                .addField('<:StarPoint:766794021128765469> <:StarPoint:766794021128765469> Você achou novos itens! <:StarPoint:766794021128765469> <:StarPoint:766794021128765469>', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
                             return message.inlineReply(pescaembed)
 
                         }
@@ -178,7 +178,7 @@ exports.run = async (client, message, args) => {
                         const pescaembed = new Discord.MessageEmbed()
                             .setColor('GREEN')
                             .setTitle('⛏️ Você cavou itens valiosos!')
-                            .addField('<:estrelinha:831161441847345202> <:estrelinha:831161441847345202> Você achou novos itens! <:estrelinha:831161441847345202> <:estrelinha:831161441847345202>', `Você obteve: ${dinh}<:estrelinha:831161441847345202>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
+                            .addField('<:StarPoint:766794021128765469> <:StarPoint:766794021128765469> Você achou novos itens! <:StarPoint:766794021128765469> <:StarPoint:766794021128765469>', `Você obteve: ${dinh}<:StarPoint:766794021128765469>MPoints, ${minerios} 🪨 Minerios, ${ossos} 🦴 Ossos e ${diamantes} 💎 Diamantes`)
                         return message.inlineReply(pescaembed)
                     }
 

@@ -18,8 +18,20 @@ exports.run = async (client, message, args) => {
     'Mantenha seu dinheiro no banco',
     'Sabia que você pode roubar o dinheiro de outras pessoas?',
     'Já jogou blackjack hoje?',
-    'O banco é impossivel de roubar.'
+    'O banco é impossivel de roubar.',
+    'A bolsa de valores é um bom lugar para investir',
+    'Jogares com arma podem pegar todo dinheiro da carteira',
+    'Tem vários meio de se obter dinheiro',
+    'Na loja tem vários itens legais para se comprar',
+    'Os melhores players tem mais estrelas no perfil',
+    'Já viu o ranking hoje?',
+    'Você pode dobrar seu dinheiro no blackjack',
+    'A roleta é uma boa forma de ganhar e perder dinheiro',
+    'Já pescou hoje?',
+    'Já minerou hoje?',
+    'A rifa é um bom lugar para os sortudos'
   ]
+
   var frase = list[Math.floor(Math.random() * list.length)]
 
   const embed = new Discord.MessageEmbed()

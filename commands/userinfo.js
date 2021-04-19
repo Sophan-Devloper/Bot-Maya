@@ -3,12 +3,12 @@ const moment = require('moment')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
-    return message.inlineReply(adm)
-  }
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+        const adm = new Discord.MessageEmbed()
+            .setColor('#FF0000')
+            .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
+        return message.inlineReply(adm)
+    }
 
     let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
 
@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
     const userFlags = user.user.flags.toArray()
 
     const embed = new Discord.MessageEmbed()
-        .setTitle(`Informações sobre ${user.user.username}`)
+        .setTitle(`📝 Informações sobre ${user.user.username}`)
         .setColor(`#f3f3f3`)
         .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
         .addField('Usuário', [

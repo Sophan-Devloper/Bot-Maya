@@ -34,7 +34,6 @@ exports.run = async (client, message, args) => {
                 .setTitle('Comando Assaltar')
                 .setDescription('O comando assaltar te garante 100% do dinheiro que o @user tem na carteira.\n \nCaso a pessoa que você assaltar também tenha uma arma, você tem a chance de ser assaltado de volta.')
                 .addField('Item Obrigatório', '🔫 Arma')
-                .setFooter(prefix + 'loja')
             return message.inlineReply(noargs)
         }
 

@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
             },
             {
                 name: '🌎 Global',
-                value: '`' + prefix + 'afk all` ou ' + '`' + prefix + 'afk global`\n' +  'Avisarei em todos os servidores que você está offline.\n \nExemplo: ' + '`' + prefix + 'afk global Estou almoçando, já volto.`'
+                value: '`' + prefix + 'afk all` ou ' + '`' + prefix + 'afk global`\n' + 'Avisarei em todos os servidores que você está offline.\n \nExemplo: ' + '`' + prefix + 'afk global Estou almoçando, já volto.`'
             }
         )
         .setFooter('O AFK System será desativado quando você mandar uma mensagem.')

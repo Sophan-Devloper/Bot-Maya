@@ -77,7 +77,7 @@ exports.run = async (client, message, args) => {
 
                     var embed = new Discord.MessageEmbed()
                         .setColor('#efff00')
-                        .setDescription(`${message.author} pagou ${args[1]}<:StarPoint:766794021128765469> para ${user}`)
+                        .setDescription(`${message.author} pagou ${args[1]}<:StarPoint:766794021128765469>MPoints para ${message.mentions.members.first()}`)
                     return message.inlineReply(embed)
                 }
                 if (reaction.emoji.name === '❌') { // Não

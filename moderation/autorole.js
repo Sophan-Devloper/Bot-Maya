@@ -24,6 +24,7 @@ exports.run = async (client, message, args) => {
                     inline: true
                 }
             )
+            .setFooter(`${prefix}help autorole`)
         return message.inlineReply(autoroleautal)
     }
 
@@ -39,6 +40,7 @@ exports.run = async (client, message, args) => {
                     inline: true
                 }
             )
+            .setFooter(`${prefix}help autorole`)
         return message.inlineReply(autoroleautal)
     }
 

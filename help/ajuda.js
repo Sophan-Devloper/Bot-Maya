@@ -61,8 +61,9 @@ exports.run = async (client, message, args) => {
       .setColor('BLUE')
       .setTitle('📺 Anime Place')
       .setDescription('Os comandos de animes da Maya ainda está sendo produzidos.')
-      .addField('• Comandos Online: (3)', '`' + prefix + 'ind` Indicações de Animes\n' + '`' + prefix + 'sao` Meu anime favorito\n' + '`' + prefix + 'senpai` Meu senpai', true)
+      .addField('• Comandos Online: (3)', '`' + prefix + 'ind` Indicações de Animes\n' + '`' + prefix + 'sao` Meu anime favorito\n' + '`' + prefix + 'kimetsu` no yaibaaaaa\n' + '`' + prefix + 'senpai` Meu senpai', true)
       .addField('• Comandos Offline: (1)', `\n:tools: [Lista de Comandos](${linkgithub})`, true)
+      .addField('• Mande Gifs para os comandos', '`' + prefix + 'gif`', true)
       .setFooter('Comandos em construção: (62)')
     return message.inlineReply(embed)
   }

@@ -10,33 +10,34 @@ exports.run = async (client, message, args) => {
     }
 
     var list = [
-        'https://imgur.com/sedJ6yn.gif',
-        'https://imgur.com/jsODka2.gif',
-        'https://imgur.com/lTnwOaZ.gif',
-        'https://imgur.com/s9KWRGj.gif',
-        'https://imgur.com/5YLolvz.gif',
-        'https://imgur.com/zgnTM8U.gif',
-        'https://imgur.com/4hX6zUS.gif',
-        'https://imgur.com/yhsV01c.gif',
-        'https://imgur.com/YVdAVa7.gif',
-        'https://imgur.com/fMivb4s.gif',
-        'https://imgur.com/czbbuCW.gif',
-        'https://imgur.com/at3YiaM.gif',
-        'https://imgur.com/eUuHIvr.gif',
-        'https://imgur.com/qj15h5p.gif',
-        'https://imgur.com/E9UruBw.gif',
-        'https://imgur.com/GAR8YlZ.gif',
-        'https://imgur.com/P0yIRRd.gif'
+        'https://imgur.com/aXAIvkS.gif',
+        'https://imgur.com/MZjgryh.gif',
+        'https://imgur.com/7KtfCMh.gif',
+        'https://imgur.com/0kQwpIV.gif',
+        'https://imgur.com/6hAIcLU.gif',
+        'https://imgur.com/lagU5oh.gif',
+        'https://imgur.com/RJyI598.gif',
+        'https://imgur.com/arkqlmx.gif',
+        'https://imgur.com/1Hhsqfu.gif',
+        'https://imgur.com/lz8sDpa.gif',
+        'https://imgur.com/YunLbJH.gif',
+        'https://imgur.com/ZtXf8kn.gif',
+        'https://imgur.com/sFA0dBn.gif',
+        'https://imgur.com/mDq46Pc.gif',
+        'https://imgur.com/Xa7OnQ4.gif',
+        'https://imgur.com/TkKuLOq.gif',
+        'https://imgur.com/2MtziTG.gif',
+        'https://imgur.com/akmnXUc.gif'
     ]
 
     var gif = list[Math.floor(Math.random() * list.length)]
 
-    const naruto = new Discord.MessageEmbed()
+    const kimetsu = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
-        .setFooter('Auto delete em 2 minutos. -gif')
+        .setFooter('Auto delete em 2 minutos.')
 
-    await message.inlineReply(naruto).then(msg => {
+    await message.inlineReply(kimetsu).then(msg => {
         msg.react('🔄').catch(err => { return }) // 1º Embed
         msg.react('❌').catch(err => { return })
         msg.delete({ timeout: 120000 }).catch(err => { return })
@@ -46,11 +47,11 @@ exports.run = async (client, message, args) => {
 
             if (reaction.emoji.name === '🔄') { // 1º Embed - Principal
                 reaction.users.remove(user)
-                const naruto = new Discord.MessageEmbed()
+                const kimetsu = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
                     .setFooter('Auto delete em 2 minutos.')
-                msg.edit(naruto)
+                msg.edit(kimetsu)
             }
             if (reaction.emoji.name === '❌') {
                 msg.delete()

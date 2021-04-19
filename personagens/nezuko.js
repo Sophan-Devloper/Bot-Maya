@@ -10,14 +10,12 @@ exports.run = async (client, message, args) => {
     }
 
     var list = [
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        ''
+        'https://imgur.com/aXAIvkS.gif',
+        'https://imgur.com/MZjgryh.gif',
+        'https://imgur.com/7KtfCMh.gif',
+        'https://imgur.com/0kQwpIV.gif',
+        'https://imgur.com/6hAIcLU.gif',
+        'https://imgur.com/lagU5oh.gif',
     ]
 
     var gif = list[Math.floor(Math.random() * list.length)]
@@ -26,7 +24,6 @@ exports.run = async (client, message, args) => {
         .setColor('BLUE')
         .setImage(gif)
         .setFooter('Auto delete em 2 minutos.')
-    return message.inlineReply(`Coletando gifs para o código... Comando disponivel dentro de 2 dias\nQuer enviar seus gifs? Usa o -help e entra no meu servidor :hearts:`)
 
     await message.inlineReply(nezukoo).then(msg => {
         msg.react('🔄').catch(err => { return }) // 1º Embed

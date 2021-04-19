@@ -267,11 +267,22 @@ exports.run = async (client, message, args) => {
     if (['whitelist'].includes(args[0])) {
 
         if (!user) {
-            return message.inlineReply('`' + prefix + 'remove whitelist @user Valor`')
+            return message.inlineReply('`' + prefix + 'remove whitelist @user`')
         }
 
         db.delete(`whitelist_${user.id}`, user.id)
         return message.inlineReply(`Você removeu ${user} da whitelist.`)
+    }
+
+    if (['whitelistid'].includes(args[0])) {
+
+        var id = args[1]
+        if (!id) {
+            return message.inlineReply('`' + prefix + 'remove whitelist ID`')
+        }
+
+        db.delete(`whitelist_${id}`, id)
+        return message.inlineReply(`Você removeu <@${user}> da whitelist.`)
     }
 
     if (['timeout', 'tempo', 'cooldown'].includes(args[0])) {

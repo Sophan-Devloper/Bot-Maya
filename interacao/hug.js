@@ -3,8 +3,8 @@ const db = require('quick.db')
 
 exports.run = async (client, message, args) => {
 
- if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-    const adm = new Discord.MessageEmbed()
+  if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+    var adm = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Eu preciso da permissão "Gerenciar Mensagens" para utilizar esta função.')
     return message.inlineReply(adm)
@@ -25,7 +25,14 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/hpddahS.gif',
     'https://imgur.com/LHBOVKM.gif',
     'https://imgur.com/Fkchj2G.gif',
-    'https://imgur.com/ao4wesH.gif'
+    'https://imgur.com/ao4wesH.gif',
+    'https://imgur.com/Np86qdf.gif',
+    'https://imgur.com/0N1XzB1.gif',
+    'https://imgur.com/DrUzqCx.gif',
+    'https://imgur.com/wVKnj9O.gif',
+    'https://imgur.com/LDFs9nu.gif',
+    'https://imgur.com/4yKZQ8B.gif',
+    'https://imgur.com/koFG06W.gif'
   ]
 
   var list1 = [
@@ -43,7 +50,14 @@ exports.run = async (client, message, args) => {
     'https://imgur.com/hpddahS.gif',
     'https://imgur.com/LHBOVKM.gif',
     'https://imgur.com/Fkchj2G.gif',
-    'https://imgur.com/ao4wesH.gif'
+    'https://imgur.com/ao4wesH.gif',
+    'https://imgur.com/Np86qdf.gif',
+    'https://imgur.com/0N1XzB1.gif',
+    'https://imgur.com/DrUzqCx.gif',
+    'https://imgur.com/wVKnj9O.gif',
+    'https://imgur.com/LDFs9nu.gif',
+    'https://imgur.com/4yKZQ8B.gif',
+    'https://imgur.com/koFG06W.gif'
   ]
 
   var rand = list[Math.floor(Math.random() * list.length)]
@@ -54,7 +68,7 @@ exports.run = async (client, message, args) => {
     let prefix = db.get(`prefix_${message.guild.id}`)
     if (prefix === null) prefix = "-"
 
-    const nouser = new Discord.MessageEmbed()
+    var nouser = new Discord.MessageEmbed()
       .setColor('#FF0000')
       .setTitle('Erroooou')
       .setDescription('`' + prefix + 'hug @user`')
@@ -63,7 +77,7 @@ exports.run = async (client, message, args) => {
 
   if (user.id === '821471191578574888') {
     let avatar = message.author.displayAvatarURL({ format: 'png' })
-    const embed1 = new Discord.MessageEmbed()
+    var embed1 = new Discord.MessageEmbed()
       .setColor('BLUE')
       .setAuthor(message.author.username + ` está abraçando ${user.username}`, avatar)
       .setImage(rand)
@@ -78,20 +92,22 @@ exports.run = async (client, message, args) => {
   let avatar = message.author.displayAvatarURL({ format: 'png' })
   let avatar1 = user.displayAvatarURL({ format: 'png' })
 
-  const embed = new Discord.MessageEmbed()
+  var embed = new Discord.MessageEmbed()
     .setColor('BLUE')
-    .setAuthor(message.author.username + ` está abraçando ${user.username}`, avatar)
+    .setAuthor(message.author.username + ` está abraçando `, avatar)
     .setImage(rand)
     .setFooter('Clique em 🔁 para retribuir')
 
 
-  const embed2 = new Discord.MessageEmbed()
+  var embed2 = new Discord.MessageEmbed()
     .setColor('BLUE')
-    .setAuthor(message.author.username + ` retribuiu o abraço de ${user.username}`, avatar1)
+    .setAuthor(user.username + ` retribuiu o abraço de ${message.author.username}`, avatar1)
     .setImage(rand1)
 
   await message.inlineReply(embed).then(msg => {
     msg.react('🔁')
+    setTimeout(function () { msg.reactions.removeAll() }, 30000)
+
     msg.awaitReactions((reaction, user) => {
       if (message.mentions.users.first().id !== user.id) return
 

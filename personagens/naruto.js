@@ -34,12 +34,11 @@ exports.run = async (client, message, args) => {
     const naruto = new Discord.MessageEmbed()
         .setColor('BLUE')
         .setImage(gif)
-        .setFooter('Auto delete em 2 minutos. -gif')
 
     await message.inlineReply(naruto).then(msg => {
         msg.react('🔄').catch(err => { return }) // 1º Embed
         msg.react('❌').catch(err => { return })
-        msg.delete({ timeout: 120000 }).catch(err => { return })
+        setTimeout(function () { msg.reactions.removeAll() }, 30000)
 
         msg.awaitReactions((reaction, user) => {
             if (message.author.id !== user.id) return;
@@ -49,7 +48,6 @@ exports.run = async (client, message, args) => {
                 const naruto = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setImage(list[Math.floor(Math.random() * list.length)])
-                    .setFooter('Auto delete em 2 minutos.')
                 msg.edit(naruto)
             }
             if (reaction.emoji.name === '❌') {

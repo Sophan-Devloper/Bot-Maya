@@ -54,7 +54,7 @@ exports.run = async (client, message, args) => {
 
     await message.inlineReply(embed).then(msg => {
       msg.react('📨')
-      setTimeout(function () { msg.reactions.removeAll() }, 120000)
+      setTimeout(function () { msg.reactions.removeAll() }, 30000)
 
       msg.awaitReactions((reaction, member) => {
 

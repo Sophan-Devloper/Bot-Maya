@@ -28,6 +28,7 @@ exports.run = async (client, message, args) => {
   await message.inlineReply(Itachi).then(msg => {
     msg.react('🔄') // 1º Embed
     msg.react('❌')
+    setTimeout(function () { msg.reactions.removeAll() }, 30000)
 
     msg.awaitReactions((reaction, user) => {
       if (message.author.id !== user.id) return;

@@ -26,6 +26,7 @@ exports.run = async (client, message, args) => {
         .setDescription('Por causa de tantos comandos e TANTOS gifs, ficou ruim para apenas uma pessoa pegar todos os gifs, então, este comando foi feito.\n \nEnvie gifs pra Maya! Só seguir os requisitos.')
         .addField('Requisitos', '**NADA** pornografico ou de cunho criminoso.\nLink do imigur\nFale para qual tema você quer que eu coloque seu gif')
         .addField('Comando exemplo', '`' + prefix + 'gif Naruto https://imgur.com/D5KT1S`')
+        .setImage('https://imgur.com/F1nJKHZ.gif')
         .setFooter('O Gif será enviado para o meu servidor, você pode encontra-lo no comando ' + prefix + 'help')
 
     var formato = new Discord.MessageEmbed()
